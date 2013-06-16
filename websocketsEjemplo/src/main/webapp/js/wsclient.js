@@ -209,7 +209,7 @@ var wsclient = (function() {
     
     var from=document.getElementById("userName").value;
     var to=document.getElementById("user2").value;
-    var msg="Estoy moviendo "+data+" hacia "+ev.target;
+    var msg="Estoy moviendo "+data+" hacia "+ev.target.id;
     
     var conversationId = cleanWhitespaces(to) + 'conversation';
     toChat(from, to, msg);
