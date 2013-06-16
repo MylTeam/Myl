@@ -182,6 +182,7 @@ var wsclient = (function() {
         var link = $(document.createElement('a'));
         link.html(userName);
         link.click(function(){
+        	document.getElementById("user2").value=userName;
             showConversation(userName);
         });
         var li = $(document.createElement('li'));
@@ -204,7 +205,16 @@ var wsclient = (function() {
     {
     ev.preventDefault();
     var data=ev.dataTransfer.getData("Text");
-    ev.target.appendChild(document.getElementById(data));             
+    ev.target.appendChild(document.getElementById(data));
+    
+    var from=document.getElementById("userName").value;
+    var to=document.getElementById("user2").value;
+    var msg="Estoy moviendo "+data+" hacia "+ev.target;
+    
+    var conversationId = cleanWhitespaces(to) + 'conversation';
+    toChat(from, to, msg);
+    addMessage(from, msg, conversationId);
+    document.getElementById(conversationId+'message').value = '';
     }
     
     
