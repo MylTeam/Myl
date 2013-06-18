@@ -1,11 +1,14 @@
 package com.myl.util;
 
 import com.myl.messages.*;
+import com.myl.modelo.Tema;
 import com.google.gson.Gson;
 import org.apache.catalina.websocket.MessageInbound;
 import org.apache.catalina.websocket.StreamInbound;
 import org.apache.catalina.websocket.WebSocketServlet;
 import org.apache.catalina.websocket.WsOutbound;
+import org.apache.struts2.rest.DefaultHttpHeaders;
+import org.apache.struts2.rest.HttpHeaders;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,13 +20,13 @@ import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.util.*;
 
-
+@WebServlet(urlPatterns = "/chat")
 public class WebSocketCharServlet extends WebSocketServlet {
 
     private static final Logger log = LoggerFactory.getLogger(WebSocketCharServlet.class);
 
-    private static final Map<String, ChatConnection> connections = new HashMap<String, ChatConnection>();
-
+    private static final Map<String, ChatConnection> connections = new HashMap<String, ChatConnection>();       
+    
     @Override
     protected boolean verifyOrigin(String origin) {
         return true;
