@@ -20,7 +20,7 @@ import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.util.*;
 
-@WebServlet(urlPatterns = "/chat")
+//@WebServlet(urlPatterns = "/chat")
 public class WebSocketCharServlet extends WebSocketServlet {
 
     private static final Logger log = LoggerFactory.getLogger(WebSocketCharServlet.class);

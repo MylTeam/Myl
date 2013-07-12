@@ -84,7 +84,8 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>wsChat</servlet-name>
-        <url-pattern>/chat</url-pattern>
+        <url-pattern>/chatws</url-pattern>
+        <load-on-startup>1</load-on-startup>
     </servlet-mapping>
     
 	<!-- Welcome file lists -->

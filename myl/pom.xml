@@ -265,8 +265,6 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-beans</artifactId>
 			<version>3.0.5.RELEASE</version>
-			<type>jar</type>
-			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.struts</groupId>
