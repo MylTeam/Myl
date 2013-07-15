@@ -36,7 +36,9 @@
 		</property>
 		<property name="annotatedClasses">
 			<list>				
-				<value>com.myl.modelo.Tema</value>										 		 				 		
+				<value>com.myl.modelo.Tema</value>
+				<value>com.myl.modelo.Edicion</value>
+				<value>com.myl.modelo.Carta</value>										 		 				 		
 			</list>
 		</property>
 		<property name="dataSource">

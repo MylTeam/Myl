@@ -7,14 +7,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link type="text/css" href="Estilos/default.css?123" rel="stylesheet" />
-<link type="text/css" href="Estilos/smoothness/jquery-ui-1.8.22.custom.css"
+<link type="text/css" href="${pageContext.request.contextPath}/Estilos/default.css?123" rel="stylesheet" />
+<link type="text/css" href="${pageContext.request.contextPath}/Estilos/smoothness/jquery-ui-1.8.22.custom.css"
 	rel="stylesheet" />
 <jsp:text>
 	<![CDATA[ 
 			<script src="${pageContext.request.contextPath}/scripts/wsclient.js?2032" type="text/javascript"></script>
 			<script src="${pageContext.request.contextPath}/scripts/jquery-1.7.2.min.js" type="text/javascript"></script>
-			<script src="${pageContext.request.contextPath}/scripts/scripts/jquery-ui-1.8.22.custom.min.js" type="text/javascript"></script>		
+			<script src="${pageContext.request.contextPath}/scripts/jquery-ui-1.8.22.custom.min.js" type="text/javascript"></script>		
 		 ]]>
 </jsp:text>
 <title>Autentia - Chat con Websockets y Tomcat 7</title>
@@ -33,10 +33,8 @@
 </style>
 
 </head>
-<body>
-	<a href="http://www.autentia.com" target="_blank"><img
-		src="img/autentia.png" alt="Autentia" /></a>
-	<h1>EJEMPLO DE WEBSOCKETS CON TOMCAT 7</h1>
+<body>	
+	<h1>WEBSOCKETS CON TOMCAT 7</h1>
 	<table>
 		<tr>
 			<td>
@@ -70,11 +68,11 @@
 			<td>
 			<p>Drag the W3Schools image into the rectangle:</p>
 
-<img id="drag1" src="images/1.jpeg" draggable="true" ondragstart="wsclient.drag(event)" height="70px" width="40px"></img>
-<img id="drag2" src="images/2.jpeg" draggable="true" ondragstart="wsclient.drag(event)" height="70px" width="40px"></img>
-<img id="drag3" src="images/3.jpeg" draggable="true" ondragstart="wsclient.drag(event)" height="70px" width="40px"></img>
-<img id="drag4" src="images/4.jpeg" draggable="true" ondragstart="wsclient.drag(event)" height="70px" width="40px"></img>
-<img id="drag5" src="images/5.jpeg" draggable="true" ondragstart="wsclient.drag(event)" height="70px" width="40px"></img>
+<img id="drag1" src="${pageContext.request.contextPath}/images/1.jpeg" draggable="true" ondragstart="wsclient.drag(event)" height="70px" width="40px"></img>
+<img id="drag2" src="${pageContext.request.contextPath}/images/2.jpeg" draggable="true" ondragstart="wsclient.drag(event)" height="70px" width="40px"></img>
+<img id="drag3" src="${pageContext.request.contextPath}/images/3.jpeg" draggable="true" ondragstart="wsclient.drag(event)" height="70px" width="40px"></img>
+<img id="drag4" src="${pageContext.request.contextPath}/images/4.jpeg" draggable="true" ondragstart="wsclient.drag(event)" height="70px" width="40px"></img>
+<img id="drag5" src="${pageContext.request.contextPath}/images/5.jpeg" draggable="true" ondragstart="wsclient.drag(event)" height="70px" width="40px"></img>
 
 <table>
 <tr><td>

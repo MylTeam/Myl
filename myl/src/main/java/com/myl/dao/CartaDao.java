@@ -1,0 +1,38 @@
+package com.myl.dao;
+
+import java.util.List;
+
+import javax.inject.Named;
+import javax.inject.Singleton;
+import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import com.myl.modelo.Carta;
+
+@Singleton
+@Named("cartaDao")
+public class CartaDao extends HibernateDaoSupport {
+	public List<Carta> findAll() {		
+		return getHibernateTemplate().loadAll(Carta.class);
+	}
+
+	public Carta findById(Integer id) {
+		return getHibernateTemplate().get(Carta.class, id);
+	}
+
+	public Carta save(Carta entity) {
+		if (entity.getId() != null) {
+			entity = getHibernateTemplate().merge(entity);
+		}
+		getSession().saveOrUpdate(entity);
+		return entity;
+	}
+
+	public void delete(Carta entity) {
+		getHibernateTemplate().refresh(entity);
+		getSession().delete(entity);
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Carta> findByExample(Carta Carta) { 
+		return getHibernateTemplate().findByExample(Carta);
+	}
+}

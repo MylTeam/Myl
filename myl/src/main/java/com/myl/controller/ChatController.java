@@ -33,9 +33,6 @@ public class ChatController extends ActionSupport {
 		
 		return new DefaultHttpHeaders("index").disableCaching();
 	}
-
-
-	
 	
 
 	public Integer getIdSel() {
