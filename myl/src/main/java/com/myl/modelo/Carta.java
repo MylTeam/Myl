@@ -24,7 +24,7 @@ public class Carta {
 	private String Frecuencia;
 	private Integer Coste;
 	private Integer Fuerza;
-	private Integer idExposicion;
+	private Integer idEdicion;
 		
 	private Edicion edicion;
 	
@@ -102,11 +102,11 @@ public class Carta {
 		Fuerza = fuerza;
 	}		
 	@Column(name = "EdicionId")
-	public Integer getIdExposicion() {
-		return idExposicion;
+	public Integer getIdEdicion() {
+		return idEdicion;
 	}
-	public void setIdExposicion(Integer idExposicion) {
-		this.idExposicion = idExposicion;
+	public void setIdEdicion(Integer idEdicion) {
+		this.idEdicion = idEdicion;
 	}
 	
 	@ManyToOne
