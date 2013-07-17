@@ -32,7 +32,7 @@ public class CartaDao extends HibernateDaoSupport {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Carta> findByExample(Carta Carta) { 
-		return getHibernateTemplate().findByExample(Carta);
+	public List<Carta> findByExample(Carta carta) { 
+		return getHibernateTemplate().findByExample(carta);
 	}
 }

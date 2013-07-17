@@ -1,10 +1,6 @@
 package com.myl.controller;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Named;
@@ -16,26 +12,42 @@ import org.apache.struts2.rest.DefaultHttpHeaders;
 import org.apache.struts2.rest.HttpHeaders;
 
 import com.myl.modelo.Carta;
-import com.myl.modelo.Tema;
+import com.myl.modelo.Deck;
+import com.myl.modelo.DeckCartaId;
 import com.myl.negocio.CartaNegocio;
-import com.myl.negocio.TemaNegocio;
-import com.myl.util.Spoiler;
+import com.myl.negocio.DeckNegocio;
 import com.opensymphony.xwork2.ActionSupport;
-import com.opensymphony.xwork2.ModelDriven;
-import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
-import com.opensymphony.xwork2.validator.annotations.Validations;
-import com.opensymphony.xwork2.validator.annotations.ValidatorType;
 
 @Named
 @Results({ @Result(name = "success", type = "redirectAction", params = {
 		"actionName", "chat" }) })
 public class ChatController extends ActionSupport {
 
+	private static final long serialVersionUID = 8585016072024421730L;
 	private Integer idSel;
-	private CartaNegocio cartaNegocio;
+	
+	private Deck deck;
+	private DeckNegocio deckNegocio;
 
+	private List<Carta> deck1;
+	
+	
 	@SkipValidation
 	public HttpHeaders index() {
+		
+		deck=deckNegocio.findById(1);
+		deck1=new ArrayList<Carta>();
+				
+		int count=0;
+		for(Carta carta:deck.getCartas()){									
+						
+			for(int i=0;i<deck.getDeckCartas().get(count).getCartaQt();i++){
+				Carta aux=(Carta) carta.clone();
+				aux.setIdTemp(i);			
+				deck1.add(aux);
+			}
+			count++;
+		}
 
 		return new DefaultHttpHeaders("index").disableCaching();
 	}
@@ -48,12 +60,29 @@ public class ChatController extends ActionSupport {
 		this.idSel = idSel;
 	}
 
-	public CartaNegocio getCartaNegocio() {
-		return cartaNegocio;
+	public Deck getDeck() {
+		return deck;
 	}
 
-	public void setCartaNegocio(CartaNegocio cartaNegocio) {
-		this.cartaNegocio = cartaNegocio;
+	public void setDeck(Deck deck) {
+		this.deck = deck;
 	}
+
+	public DeckNegocio getDeckNegocio() {
+		return deckNegocio;
+	}
+
+	public void setDeckNegocio(DeckNegocio deckNegocio) {
+		this.deckNegocio = deckNegocio;
+	}
+
+	public List<Carta> getDeck1() {
+		return deck1;
+	}
+
+	public void setDeck1(List<Carta> deck1) {
+		this.deck1 = deck1;
+	}
+	
 
 }

@@ -13,9 +13,7 @@ button, textarea {
     font-family: comic sans ms, sans-serif;
 }
 
-div#container {
-    width: 600px;
-}
+
 
 span#status {
     padding: 0 0 0 20px;
@@ -28,11 +26,11 @@ div#onLineUsersPanel {
 }
 
 span.disconnected {
-    background: url('../img/disconnected.png') no-repeat left;
+    background: url('../images/disconnected.png') no-repeat left;
 }
 
 span.connected {
-    background: url('../img/connected.png') no-repeat left;
+    background: url('../images/connected.png') no-repeat left;
 }
 
 div#conversations {

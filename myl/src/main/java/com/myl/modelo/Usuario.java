@@ -1,10 +1,13 @@
 package com.myl.modelo;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -14,12 +17,12 @@ public class Usuario {
 	private Integer idUsuario;
 	private String login;
 	private String password;
-	private String nombre;
-	private String apellidos;
+	
+	private List<Deck> decks;
 	
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
-	@Column(name = "id_usuario")
+	@Column(name = "UsuarioId")
 	public Integer getIdUsuario() {
 		return idUsuario;
 	}
@@ -27,7 +30,7 @@ public class Usuario {
 		this.idUsuario = idUsuario;
 	}
 	
-	@Column(name = "login")
+	@Column(name = "UsuarioNb")
 	public String getLogin() {
 		return login;
 	}
@@ -35,7 +38,7 @@ public class Usuario {
 		this.login = login;
 	}
 	
-	@Column(name = "password")
+	@Column(name = "UsuarioPs")
 	public String getPassword() {
 		return password;
 	}
@@ -43,21 +46,14 @@ public class Usuario {
 		this.password = password;
 	}
 	
-	@Column(name = "nb_usuario")
-	public String getNombre() {
-		return nombre;
+	@OneToMany(mappedBy = "usuario")
+	public List<Deck> getDecks() {
+		return decks;
 	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setDecks(List<Deck> decks) {
+		this.decks = decks;
 	}
-	
-	@Column(name = "ap_usuario")
-	public String getApellidos() {
-		return apellidos;
-	}
-	public void setApellidos(String apellidos) {
-		this.apellidos = apellidos;
-	}
+		
 	
 	
 }

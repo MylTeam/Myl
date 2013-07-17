@@ -205,6 +205,10 @@ var wsclient = (function() {
     {
     ev.preventDefault();
     var data=ev.dataTransfer.getData("Text");
+    
+    
+    
+    if(ev.target=="[object HTMLDivElement]"){    
     ev.target.appendChild(document.getElementById(data));
     
     var from=document.getElementById("userName").value;
@@ -215,6 +219,7 @@ var wsclient = (function() {
     toChat(from, to, msg);
     addMessage(from, msg, conversationId);
     document.getElementById(conversationId+'message').value = '';
+    }
     }
     
     

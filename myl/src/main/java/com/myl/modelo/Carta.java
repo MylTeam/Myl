@@ -1,5 +1,7 @@
 package com.myl.modelo;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,12 +9,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "Carta")
-public class Carta {
+public class Carta implements Cloneable{
 		
 	private Integer id;
 	private String nombre;
@@ -25,8 +31,14 @@ public class Carta {
 	private Integer Coste;
 	private Integer Fuerza;
 	private Integer idEdicion;
+	
+	private Integer idTemp;
 		
 	private Edicion edicion;
+	
+	private List<Deck> decks;
+	private List<DeckCarta> deckCartas;
+			
 	
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
@@ -118,6 +130,43 @@ public class Carta {
 		this.edicion = edicion;
 	}
 	
+	@ManyToMany
+	@JoinTable(name = "DeckCarta", joinColumns = { @JoinColumn(name = "CartaId") }, inverseJoinColumns = { @JoinColumn(name = "DeckId") })
+	public List<Deck> getDecks() {
+		return decks;
+	}
+	public void setDecks(List<Deck> decks) {
+		this.decks = decks;
+	}
+	
+	@OneToMany(mappedBy = "carta")
+	public List<DeckCarta> getDeckCartas() {
+		return deckCartas;
+	}
+	public void setDeckCartas(List<DeckCarta> deckCartas) {
+		this.deckCartas = deckCartas;
+	}
+	
+	@Transient
+	public Integer getIdTemp() {
+		return idTemp;
+	}
+	public void setIdTemp(Integer idTemp) {
+		this.idTemp = idTemp;
+	}
+	
+	public Object clone()
+    {
+        Object clone = null;
+        try
+        {
+            clone = super.clone();
+        } 
+        catch(CloneNotSupportedException e)
+        {
+        }
+        return clone;
+    }
 	
 		
 }

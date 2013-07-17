@@ -48,6 +48,7 @@
 
 				</table>
 			</center>
+			
 	</form>
 	<center>
 		<a href="${pageContext.request.contextPath}/catalogo-tema/new.action"><input
