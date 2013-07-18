@@ -1,5 +1,6 @@
 package com.myl.modelo;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -15,11 +16,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @Table(name = "Carta")
 public class Carta implements Cloneable{
-		
+			
 	private Integer id;
 	private String nombre;
 	private String efecto;
@@ -32,7 +34,7 @@ public class Carta implements Cloneable{
 	private Integer Fuerza;
 	private Integer idEdicion;
 	
-	private Integer idTemp;
+	private String idTemp;
 		
 	private Edicion edicion;
 	
@@ -148,12 +150,13 @@ public class Carta implements Cloneable{
 	}
 	
 	@Transient
-	public Integer getIdTemp() {
+	public String getIdTemp() {
 		return idTemp;
 	}
-	public void setIdTemp(Integer idTemp) {
+	public void setIdTemp(String idTemp) {
 		this.idTemp = idTemp;
 	}
+	
 	
 	public Object clone()
     {
@@ -167,6 +170,5 @@ public class Carta implements Cloneable{
         }
         return clone;
     }
-	
 		
 }

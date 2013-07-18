@@ -12,34 +12,64 @@
 	<![CDATA[ 
 			<script src="${pageContext.request.contextPath}/scripts/wsclient.js?2032" type="text/javascript"></script>
 			<script src="${pageContext.request.contextPath}/scripts/jquery-1.7.2.min.js" type="text/javascript"></script>
-			<script src="${pageContext.request.contextPath}/scripts/jquery-ui-1.8.22.custom.min.js" type="text/javascript"></script>		
+			<script src="${pageContext.request.contextPath}/scripts/jquery-ui-1.8.22.custom.min.js" type="text/javascript"></script>
+					
 		 ]]>
 </jsp:text>
  
 <title>Autentia - Chat con Websockets y Tomcat 7</title>
- 
-<script type="text/javascript">
+ <script type="text/javascript">
+var deck1;
+
 	$(function() {
 		$('#conversations').tabs();
 		
-	});
-	
-</script>
-
+		var context=$('#hidden').val();
+		$.ajax({
+			  url: context+"/chat!prueba",
+			  type: "POST",
+				       error: function(){  
+				           alert('Error');
+				       },
+				       success: function(data){				    	   				        
+				    	   deck1=data.deck1;				        
+				        drawHand(deck1,context);
+				       }
+				   });			  
+	});	
+	</script>	
 <style type="text/css">
-#mano1 {width:700px;height:100%;padding:10px;border:1px solid #aaaaaa;}
-#mano2 {width:700px;height:100%;padding:10px;border:1px solid #aaaaaa;}
-#apoyo1 {width:700px;height:100%;padding:10px;border:1px solid #aaaaaa;}
-#apoyo2 {width:700px;height:100%;padding:10px;border:1px solid #aaaaaa;}
-#defensa1 {width:700px;height:100%;padding:10px;border:1px solid #aaaaaa;}
-#defensa2 {width:700px;height:100%;padding:10px;border:1px solid #aaaaaa;}
-#ataque1 {width:700px;height:100%;padding:10px;border:1px solid #aaaaaa;}
-#ataque2 {width:700px;height:100%;padding:10px;border:1px solid #aaaaaa;}
+#mano1 {width:100%;height:100%;padding:5px;border:1px solid #aaaaaa;overflow:auto;}
+#mano2 {width:100%;height:100%;padding:5px;border:1px solid #aaaaaa;overflow:auto;}
+#apoyo1 {width:100%;height:100%;padding:5px;border:1px solid #aaaaaa;overflow:auto;}
+#apoyo2 {width:100%;height:100%;padding:5px;border:1px solid #aaaaaa;overflow:auto;}
+#defensa1 {width:100%;height:100%;padding:5px;border:1px solid #aaaaaa;overflow:auto;}
+#defensa2 {width:100%;height:100%;padding:5px;border:1px solid #aaaaaa;overflow:auto;}
+#ataque1 {width:100%;height:100%;padding:5px;border:1px solid #aaaaaa;overflow:auto;}
+#ataque2 {width:100%;height:100%;padding:5px;border:1px solid #aaaaaa;overflow:auto;}
+
+#oropagado2 {width:100%;height:100%;padding:5px;border:1px solid #aaaaaa;overflow:auto;}
+#remocion2 {width:100%;height:100%;padding:5px;border:1px solid #aaaaaa;overflow:auto;}
+#castillo2 {width:100%;height:100%;padding:5px;border:1px solid #aaaaaa;overflow:auto;}
+#cementerio2 {width:100%;height:100%;padding:5px;border:1px solid #aaaaaa;overflow:auto;}
+#reserva2 {width:100%;height:100%;padding:5px;border:1px solid #aaaaaa;overflow:auto;}
+#destierro2 {width:100%;height:100%;padding:5px;border:1px solid #aaaaaa;overflow:auto;}
+
+#oropagado1 {width:100%;height:100%;padding:5px;border:1px solid #aaaaaa;overflow:auto;}
+#remocion1 {width:100%;height:100%;padding:5px;border:1px solid #aaaaaa;overflow:auto;}
+#castillo1 {width:100%;height:100%;padding:5px;border:1px solid #aaaaaa;overflow:auto;}
+#cementerio1 {width:100%;height:100%;padding:5px;border:1px solid #aaaaaa;overflow:auto;}
+#reserva1 {width:100%;height:100%;padding:5px;border:1px solid #aaaaaa;overflow:auto;}
+#destierro1 {width:100%;height:100%;padding:5px;border:1px solid #aaaaaa;overflow:auto;}
+
 </style>
 
 </head>
 <body>	
 	<!--  <h1>WEBSOCKETS CON TOMCAT 7</h1>-->
+
+	
+	<input type="hidden" name="hidden" id="hidden" value="${pageContext.request.contextPath}"/>
 	
 <table id="Table1" class="Table" style="HEIGHT: 100%; WIDTH: 100%">
   <tbody>
@@ -48,23 +78,23 @@
         <table id="Ctrl1" class="Table" style="HEIGHT: 100%; WIDTH: 100%">
           <tbody>
             <tr>
-              <td></td>
-              <td></td>
+              <td style="WIDTH: 50%"><div id="oropagado1" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
+              <td style="WIDTH: 50%"><div id="remocion1" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
             </tr>
             <tr>
-              <td></td>
-              <td></td>
+              <td><div id="castillo1" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
+              <td><div id="cementerio1" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
             </tr>
             <tr>
-              <td></td>
-              <td></td>
+              <td><div id="reserva1" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
+              <td><div id="destierro1" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
             </tr>
           </tbody>
         </table></td>
       <td style="WIDTH: 50%;">
         <table id="P1" class="Table" style="HEIGHT: 100%; WIDTH: 100%">
           <tbody>
-            <tr>
+            <tr style="HEIGHT: 70px;">
               <td><div id="mano1" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
             </tr>
             <tr>
@@ -123,13 +153,9 @@
             <tr>
               <td><div id="apoyo2" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
             </tr>
-            <tr>
+            <tr style="HEIGHT: 70px;">
               <td><div id="mano2" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)">
-              
-              <s:iterator value="deck1">
-				<img id="d${idTemp}${edicion.siglas}${numero}" src="${pageContext.request.contextPath}/images/myl/esp/${numero}.jpg" draggable="true" ondragstart="wsclient.drag(event)" height="70px" width="40px"/>
-				</s:iterator>
-              
+                            
               </div></td>
             </tr>
           </tbody>
@@ -138,16 +164,16 @@
         <table id="Ctrl2" class="Table" style="HEIGHT: 100%; WIDTH: 100%">
           <tbody>
             <tr>
-              <td></td>
-              <td></td>
+              <td style="WIDTH: 50%"><div id="oropagado2" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
+              <td style="WIDTH: 50%"><div id="remocion2" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
             </tr>
             <tr>
-              <td></td>
-              <td></td>
+              <td><div id="castillo2" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
+              <td><div id="cementerio2" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
             </tr>
             <tr>
-              <td></td>
-              <td></td>
+              <td><div id="reserva2" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
+              <td><div id="destierro2" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
             </tr>
           </tbody>
         </table></td>
@@ -156,45 +182,6 @@
 </table>
 	
 
-<!-- 	
-	<table>
-		<tr>
-			<td>
-
-			</td>
-			<td>
-			<p>Drag the W3Schools image into the rectangle:</p>
-
-<s:iterator value="deck1">
-	<img id="drag${numero}" src="${pageContext.request.contextPath}/images/myl/esp/${numero}.jpg" draggable="true" ondragstart="wsclient.drag(event)" height="70px" width="40px"/>
-</s:iterator>
-
-<table>
-<tr><td>
-<div id="div1" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div>
-</td></tr><tr><td>
-<div id="div2" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div>
-</td></tr><tr><td>
-<div id="div3" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div>
-</td></tr><tr><td>
-<div id="div4" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div>
-</td></tr><tr><td>
-<div id="div5" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div>
-</td></tr><tr><td>
-<div id="div6" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div>
-</td></tr><tr><td>
-<div id="div7" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div>
-</td></tr><tr><td>
-<div id="div8" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div>
-</td></tr>
-</table>
-
-				
-			
-			</td>
-		</tr>		
-	</table>
-	 -->
 	 <input type="hidden" name="user2" id="user2" value=""/>
 </body>
 </html>

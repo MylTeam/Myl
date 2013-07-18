@@ -1,9 +1,5 @@
 package com.myl.interceptor;
 
-
-import org.apache.log4j.Logger;
-//import org.directwebremoting.WebContextFactory;
-
 import com.myl.util.NombreObjetosSesion;
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionContext;

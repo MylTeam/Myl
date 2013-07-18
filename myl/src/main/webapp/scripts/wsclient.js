@@ -238,3 +238,20 @@ var wsclient = (function() {
     //Otra prueba
 
 })();
+
+function drawHand(deck1,context){
+	 var divMano=document.getElementById("mano2");
+        var c=0;
+		do{				        
+        var img=document.createElement('img');
+        img.id=deck1[c].idTemp;
+        img.src=context+"/images/myl/esp/"+deck1[c].numero+".jpg";
+        img.draggable="true";
+        img.addEventListener('dragstart', function drag(ev){ev.dataTransfer.setData("Text",ev.target.id);}, false);        
+        img.height="70";
+        img.width="40";				        
+        
+        divMano.appendChild(img);
+        c++;
+		}while(c<8);
+}

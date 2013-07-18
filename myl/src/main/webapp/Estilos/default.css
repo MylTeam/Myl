@@ -34,8 +34,8 @@ span.connected {
 }
 
 div#conversations {
-    width: 360px;
-    height: 530px;
+    width: 50%;
+    height: 100%;
     font: 1.1em comic sans ms, sans-serif;
     visibility: hidden;
     float: right;
