@@ -188,13 +188,14 @@
 <div id="div8" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div>
 </td></tr>
 </table>
-<input type="hidden" name="user2" id="user2" value=""/>
+
 				
 			
 			</td>
 		</tr>		
 	</table>
 	 -->
+	 <input type="hidden" name="user2" id="user2" value=""/>
 </body>
 </html>
 </jsp:root>

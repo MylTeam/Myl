@@ -1,7 +1,6 @@
 package com.myl.util;
 
 import com.myl.messages.*;
-import com.myl.modelo.Tema;
 import com.google.gson.Gson;
 import org.apache.catalina.websocket.MessageInbound;
 import org.apache.catalina.websocket.StreamInbound;
