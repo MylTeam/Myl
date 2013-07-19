@@ -9,33 +9,19 @@
 <link type="text/css" href="${pageContext.request.contextPath}/Estilos/default.css?123" rel="stylesheet" />
 <link type="text/css" href="${pageContext.request.contextPath}/Estilos/smoothness/jquery-ui-1.8.22.custom.css" rel="stylesheet" />
 <jsp:text>
-	<![CDATA[ 
-			<script src="${pageContext.request.contextPath}/scripts/wsclient.js?2032" type="text/javascript"></script>
+	<![CDATA[ 			
 			<script src="${pageContext.request.contextPath}/scripts/jquery-1.7.2.min.js" type="text/javascript"></script>
 			<script src="${pageContext.request.contextPath}/scripts/jquery-ui-1.8.22.custom.min.js" type="text/javascript"></script>
+			<script src="${pageContext.request.contextPath}/scripts/wsclient.js?2032" type="text/javascript"></script>
+			<script src="${pageContext.request.contextPath}/scripts/game.js" type="text/javascript"></script>
 					
 		 ]]>
 </jsp:text>
  
-<title>Autentia - Chat con Websockets y Tomcat 7</title>
+<title>Duel Room</title>
  <script type="text/javascript">
-var deck1;
-
 	$(function() {
-		$('#conversations').tabs();
-		
-		var context=$('#hidden').val();
-		$.ajax({
-			  url: context+"/chat!prueba",
-			  type: "POST",
-				       error: function(){  
-				           alert('Error');
-				       },
-				       success: function(data){				    	   				        
-				    	   deck1=data.deck1;				        
-				        drawHand(deck1,context);
-				       }
-				   });			  
+		$('#conversations').tabs();					  
 	});	
 	</script>	
 <style type="text/css">
@@ -66,10 +52,8 @@ var deck1;
 
 </head>
 <body>	
-	<!--  <h1>WEBSOCKETS CON TOMCAT 7</h1>-->
 
-	
-	<input type="hidden" name="hidden" id="hidden" value="${pageContext.request.contextPath}"/>
+<input type="hidden" name="hidden" id="hidden" value="${pageContext.request.contextPath}"/>
 	
 <table id="Table1" class="Table" style="HEIGHT: 100%; WIDTH: 100%">
   <tbody>
@@ -95,7 +79,7 @@ var deck1;
         <table id="P1" class="Table" style="HEIGHT: 100%; WIDTH: 100%">
           <tbody>
             <tr style="HEIGHT: 70px;">
-              <td><div id="mano1" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
+              <td><div id="mano1" align="center" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
             </tr>
             <tr>
               <td><div id="apoyo1" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
@@ -108,7 +92,9 @@ var deck1;
             </tr>
           </tbody>
         </table></td>
-      <td id="info" style="WIDTH: 25%;"></td>
+      <td id="info" style="WIDTH: 25%;">
+      <center><img id="viewCard" src="" draggable="true" height="100%"/></center>
+      </td>
     </tr>
     <tr style="HEIGHT: 50%;">
       <td id="chat" style="WIDTH: 25%;">
@@ -154,7 +140,7 @@ var deck1;
               <td><div id="apoyo2" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
             </tr>
             <tr style="HEIGHT: 70px;">
-              <td><div id="mano2" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)">
+              <td><div id="mano2" align="center" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)">
                             
               </div></td>
             </tr>
@@ -168,7 +154,9 @@ var deck1;
               <td style="WIDTH: 50%"><div id="remocion2" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
             </tr>
             <tr>
-              <td><div id="castillo2" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
+              <td><div id="castillo2" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)">
+              <img id="myldeck1" name="myldeck1" src="${pageContext.request.contextPath}/images/myl/myldeck.jpg" draggable="true" height="70" ondragstart="wsclient.drag(event)"/>
+              </div></td>
               <td><div id="cementerio2" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
             </tr>
             <tr>
