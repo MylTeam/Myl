@@ -197,32 +197,13 @@ var wsclient = (function() {
     }
 
     function drag(ev)
-    {
-    ev.dataTransfer.setData("Text",ev.target.id);
+    {    	
+    ev.dataTransfer.setData("Text",ev.target.id);    
     }
        
     function drop(ev)
-    {    	
-    	ev.preventDefault();
-    	var context=$('#hidden').val();
-    	var data=ev.dataTransfer.getData("Text");
-
-    
-    if(ev.target=="[object HTMLDivElement]" || ev.target.id=="myldeck1"){
-    	
-    	if(data!="myldeck1"){
-    		if(ev.target.id!="myldeck1"){
-    			ev.target.appendChild(document.getElementById(data));
-    		}else{
-//    			deck1.unshift();
-    		}
-    	}else{    		
-    		var img=createCard(0,context);
-    		deck1.splice(0,1);
-    		ev.target.appendChild(img);
-    	}
-    
-    
+    {   
+    	dropCard(ev);
     
 //    var from=document.getElementById("userName").value;
 //    var to=document.getElementById("user2").value;
@@ -232,7 +213,7 @@ var wsclient = (function() {
 //    toChat(from, to, msg);
 //    addMessage(from, msg, conversationId);
 //    document.getElementById(conversationId+'message').value = '';
-    }
+    
     }
     
     
