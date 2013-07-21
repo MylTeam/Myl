@@ -155,7 +155,7 @@
             </tr>
             <tr>
               <td><div id="castillo1" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)">
-              <img id="myldeck1" name="myldeck1" src="${pageContext.request.contextPath}/images/myl/myldeck.jpg" draggable="true" height="70" ondragstart="wsclient.drag(event)"/>
+              <img id="myldeck1" name="myldeck1" src="${pageContext.request.contextPath}/images/myl/myldeck.jpg" ondblclick="drawCard()" draggable="true" height="70" ondragstart="wsclient.drag(event)"/>
               </div></td>
               <td><div id="cementerio1" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
             </tr>

@@ -1,7 +1,7 @@
 var origen;
 var destino;
 
-var obj={deck1:[],mano1:[],apoyo1:[],defensa1:[],ataque1:[]};
+var obj={deck1:[],mano1:[],apoyo1:[],defensa1:[],ataque1:[],reserva1:[]};
 
 $(document).ready(function() {
 	var context = $('#hidden').val();
@@ -23,14 +23,18 @@ $(document).ready(function() {
 });
 
 function drawHand(context) {
-	var divMano = document.getElementById("mano1");
-	var c = 0;
+	var divMano = document.getElementById("mano1");	
 	for ( var c = 0; c < 8; c++) {
-		var img = createCard(0, context);
-
-		divMano.appendChild(img);
-		obj["mano1"].unshift(obj["deck1"].splice(0, 1)[0]);
+		drawCard();
 	}
+}
+
+function drawCard(){
+	var context = $('#hidden').val();
+	var divMano = document.getElementById("mano1");
+	var img = createCard(0, context);
+	divMano.appendChild(img);
+	obj["mano1"].unshift(obj["deck1"].splice(0, 1)[0]);
 }
 
 function createCard(c, context) {
