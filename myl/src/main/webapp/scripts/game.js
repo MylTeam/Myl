@@ -1,7 +1,17 @@
 var origen;
 var destino;
 
-var obj={deck1:[],mano1:[],apoyo1:[],defensa1:[],ataque1:[],reserva1:[]};
+var obj = {
+	deck1 : [],
+	mano1 : [],
+	apoyo1 : [],
+	defensa1 : [],
+	ataque1 : [],
+	reserva1 : [],
+	cementerio1 : [],
+	destierro1 : [],
+	remocion1 : []
+};
 
 $(document).ready(function() {
 	var context = $('#hidden').val();
@@ -23,30 +33,30 @@ $(document).ready(function() {
 });
 
 function drawHand(context) {
-	var divMano = document.getElementById("mano1");	
+	var divMano = document.getElementById("mano1");
 	for ( var c = 0; c < 8; c++) {
 		drawCard();
 	}
 }
 
-function drawCard(){
+function drawCard() {
 	var context = $('#hidden').val();
 	var divMano = document.getElementById("mano1");
-	var img = createCard(0, context);
+	var img = createCard(0, context, "deck1");
 	divMano.appendChild(img);
 	obj["mano1"].unshift(obj["deck1"].splice(0, 1)[0]);
 }
 
-function createCard(c, context) {
+function createCard(c, context, origenPila) {
 	var img = document.createElement('img');
-	img.id = obj["deck1"][c].idTemp;
-	img.name = obj["deck1"][c].numero;
-	img.src = context + "/images/myl/esp/" + obj["deck1"][c].numero + ".jpg";
+	img.id = obj[origenPila][c].idTemp;
+	img.name = obj[origenPila][c].numero;
+	img.src = context + "/images/myl/esp/" + obj[origenPila][c].numero + ".jpg";
 	img.draggable = "true";
 	img.height = "70";
 	img.width = "40";
 	img.addEventListener('dragstart', function drag(ev) {
-		origen=ev.target.parentNode.id		
+		origen = ev.target.parentNode.id
 		ev.dataTransfer.setData("Text", ev.target.id);
 	}, false);
 	img.onmouseover = function showImage(ev) {
@@ -61,43 +71,62 @@ function dropCard(ev) {
 	var context = $('#hidden').val();
 	var data = ev.dataTransfer.getData("Text");
 
-	// Verifica si la carta se esta moviendo hacia un div o hacia el deck
-	if (ev.target == "[object HTMLDivElement]" || ev.target.id == "myldeck1") {
-		
-		// si la carta arrastrada no es el deck relocaliza la carta		
-		if (data != "myldeck1") {
-			if (ev.target.id != "myldeck1") {
-				ev.target.appendChild(document.getElementById(data));				
-				destino= ev.target.id;
+	// Verifica si la carta se esta moviendo hacia un div o hacia el deck, cementerio, destierro o remocion
+	if (ev.target == "[object HTMLDivElement]" || ev.target.id == "myldeck1"
+			|| ev.target.id == "cementerio1" || ev.target.id == "destierro1"
+			|| ev.target.id == "remocion1") {
+
+		// si la carta arrastrada no es el deck relocaliza la carta
+		if (data != "myldeck1" && data != "cementerio1" && data != "destierro1" && data != "remocion1") {
+			if (ev.target.id != "myldeck1" && ev.target.id != "cementerio1" && ev.target.id != "destierro1" && ev.target.id != "remocion1") {
+				ev.target.appendChild(document.getElementById(data));
+				destino = ev.target.id;
 				changeZone(obj[origen], obj[destino], data);
-				
-			} else if (ev.target.id == "myldeck1") {				
+
+			} else if (ev.target.id == "myldeck1") {
 				move(obj[origen], obj["deck1"], data);
+			} else {
+				move(obj[origen], obj[ev.target.id], data);
+				var c = document.getElementById(ev.target.id);
+				c.src = context + "/images/myl/esp/"+ obj[ev.target.id][0].numero + ".jpg";
 			}
-		} else {
-			// si se arrastra desde el deck se crea una carta en la zonaseleccionada
-			var img = createCard(0, context);
-			destino=ev.target.id;
-			
-			obj[destino].unshift(obj["deck1"].splice(0,1)[0]);			
+		} else if (data == "myldeck1") {
+			// si se arrastra desde el deck se crea una carta en la zona seleccionada
+			var img = createCard(0, context, "deck1");
+			destino = ev.target.id;
+			obj[destino].unshift(obj["deck1"].splice(0, 1)[0]);
 			ev.target.appendChild(img);
+		} else {
+			// si se arrastra desde el cementerio, destierro o remocion
+			if (obj[data].length != 0) {
+				var img = createCard(0, context, data);
+				var c = document.getElementById(data);
+				destino = ev.target.id;
+				obj[destino].unshift(obj[data].splice(0, 1)[0]);
+				ev.target.appendChild(img);				
+				if (obj[data].length != 0) {
+					c.src = context + "/images/myl/esp/"+ obj[data][0].numero + ".jpg";
+				} else {
+					c.src = context + "/images/myl/"+data+".jpg";
+				}
+			}
 		}
 	}
 }
 
-function move(arrayAux,arrayDest,data){
-	for(var c=0;c<arrayAux.length;c++){
-		if(arrayAux[c].idTemp==data){
-			arrayDest.unshift(arrayAux.splice(c,1)[0]);
-			$('#'+data).remove();
+function move(arrayAux, arrayDest, data) {
+	for ( var c = 0; c < arrayAux.length; c++) {
+		if (arrayAux[c].idTemp == data) {
+			arrayDest.unshift(arrayAux.splice(c, 1)[0]);
+			$('#' + data).remove();
 		}
 	}
 }
 
-function changeZone(arrayAux,arrayDest,data){
-	for(var c=0;c<arrayAux.length;c++){
-		if(arrayAux[c].idTemp==data){
-			arrayDest.unshift(arrayAux.splice(c,1)[0]);
+function changeZone(arrayAux, arrayDest, data) {
+	for ( var c = 0; c < arrayAux.length; c++) {
+		if (arrayAux[c].idTemp == data) {
+			arrayDest.unshift(arrayAux.splice(c, 1)[0]);
 		}
 	}
 }

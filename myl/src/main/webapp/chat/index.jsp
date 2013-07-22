@@ -42,11 +42,11 @@
 #destierro2 {width:100%;height:100%;padding:5px;border:1px solid #aaaaaa;overflow:auto;}
 
 #oropagado1 {width:100%;height:100%;padding:5px;border:1px solid #aaaaaa;overflow:auto;}
-#remocion1 {width:100%;height:100%;padding:5px;border:1px solid #aaaaaa;overflow:auto;}
-#castillo1 {width:100%;height:100%;padding:5px;border:1px solid #aaaaaa;overflow:auto;}
-#cementerio1 {width:100%;height:100%;padding:5px;border:1px solid #aaaaaa;overflow:auto;}
 #reserva1 {width:100%;height:100%;padding:5px;border:1px solid #aaaaaa;overflow:auto;}
-#destierro1 {width:100%;height:100%;padding:5px;border:1px solid #aaaaaa;overflow:auto;}
+#remocion1d {width:100%;height:100%;padding:0px;border:1px solid #aaaaaa;overflow:hidden;}
+#castillo1 {width:100%;height:100%;padding:0px;border:1px solid #aaaaaa;overflow:hidden;}
+#cementerio1d {width:100%;height:100%;padding:0px;border:1px solid #aaaaaa;overflow:hidden;}
+#destierro1d {width:100%;height:100%;padding:0px;border:1px solid #aaaaaa;overflow:hidden;}
 
 </style>
 
@@ -150,18 +150,24 @@
         <table id="Ctrl2" class="Table" style="HEIGHT: 100%; WIDTH: 100%">
           <tbody>
             <tr>
-              <td style="WIDTH: 50%"><div id="oropagado1" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
-              <td style="WIDTH: 50%"><div id="remocion1" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
+              <td colspan="4"><div id="oropagado1" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>              
             </tr>
-            <tr>
-              <td><div id="castillo1" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)">
-              <img id="myldeck1" name="myldeck1" src="${pageContext.request.contextPath}/images/myl/myldeck.jpg" ondblclick="drawCard()" draggable="true" height="70" ondragstart="wsclient.drag(event)"/>
+            <tr style="height: 34%">
+              <td style="WIDTH: 25%"><div id="castillo1" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)">
+              <img id="myldeck1" name="myldeck1" src="${pageContext.request.contextPath}/images/myl/myldeck.jpg" ondblclick="drawCard()" draggable="true" width="100%" ondragstart="wsclient.drag(event)"/>
               </div></td>
-              <td><div id="cementerio1" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
+              <td style="WIDTH: 25%"><div id="cementerio1d" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)">
+              <img id="cementerio1" name="cementerio1" src="${pageContext.request.contextPath}/images/myl/cementerio1.jpg" draggable="true" width="100%" ondragstart="wsclient.drag(event)"/>
+              </div></td>
+              <td style="WIDTH: 25%"><div id="destierro1d" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)">
+              <img id="destierro1" name="destierro1" src="${pageContext.request.contextPath}/images/myl/destierro1.jpg" draggable="true" width="100%" ondragstart="wsclient.drag(event)"/>
+              </div></td>
+              <td style="WIDTH: 25%"><div id="remocion1d" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)">
+              <img id="remocion1" name="remocion1" src="${pageContext.request.contextPath}/images/myl/remocion1.jpg" draggable="true" width="100%" ondragstart="wsclient.drag(event)"/>
+              </div></td>
             </tr>
             <tr>
-              <td><div id="reserva1" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
-              <td><div id="destierro1" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
+              <td colspan="4"><div id="reserva1" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>              
             </tr>
           </tbody>
         </table></td>
