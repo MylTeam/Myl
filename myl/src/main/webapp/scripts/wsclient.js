@@ -202,7 +202,7 @@ var wsclient = (function() {
     }
        
     function drop(ev)
-    {   
+    {       	
     	dropCard(ev);
     
 //    var from=document.getElementById("userName").value;
