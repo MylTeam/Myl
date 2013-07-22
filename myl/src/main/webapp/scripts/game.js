@@ -51,13 +51,17 @@ function drawCard() {
 function createCard(c, context, origenPila) {
 	var img = document.createElement('img');
 	img.id = obj[origenPila][c].idTemp;
-	img.name = obj[origenPila][c].numero;
+	img.name = obj[origenPila][c].numero;	
 	img.src = context + "/images/myl/esp/" + obj[origenPila][c].numero + ".jpg";
+	img.className=obj[origenPila][c].tipo;
 	img.draggable = "true";
 	img.height = "70";
 	img.width = "40";
-	img.addEventListener('dragstart', function drag(ev) {
+	img.addEventListener('dragstart', function drag(ev) {		
 		origen = ev.target.parentNode.id
+		if(origen=="dialog"){
+			origen=origenPila;
+		}
 		ev.dataTransfer.setData("Text", ev.target.id);
 	}, false);
 	img.onmouseover = function showImage(ev) {
@@ -72,6 +76,8 @@ function dropCard(ev) {
 	var context = $('#hidden').val();
 	var data = ev.dataTransfer.getData("Text");
 	
+	
+	
 	/**
 	 * Verifica si la carta se esta moviendo hacia un div o hacia el deck, cementerio, destierro o remocion	
 	 */
@@ -82,8 +88,7 @@ function dropCard(ev) {
 		/**
 		 * si la carta arrastrada no es el deck relocaliza la carta
 		 */ 
-		if (data != "deck1" && data != "cementerio1" && data != "destierro1"
-				&& data != "remocion1") {
+		if (data != "deck1" && data != "cementerio1" && data != "destierro1" && data != "remocion1") {
 			if (ev.target.id != "deck1" && ev.target.id != "cementerio1"
 					&& ev.target.id != "destierro1"
 					&& ev.target.id != "remocion1") {
@@ -97,9 +102,10 @@ function dropCard(ev) {
 			} else {
 				move(obj[origen], obj[ev.target.id], data);
 				var c = document.getElementById(ev.target.id);
-				c.src = context + "/images/myl/esp/"
-						+ obj[ev.target.id][0].numero + ".jpg";
+				c.src = context + "/images/myl/esp/"+ obj[ev.target.id][0].numero + ".jpg";
 			}
+			
+			
 		} else if (data == "deck1") {
 			destino = ev.target.id;
 			/**
@@ -149,7 +155,7 @@ function dropCard(ev) {
 				}
 			}
 		}
-	}
+	}	
 }
 
 function move(arrayAux, arrayDest, data) {
@@ -167,4 +173,15 @@ function changeZone(arrayAux, arrayDest, data) {
 			arrayDest.unshift(arrayAux.splice(c, 1)[0]);
 		}
 	}
+}
+
+function view(lista,context){
+	$('#dialog').empty();
+	var dialog=document.getElementById("dialog");
+	dialog.title=lista	
+	for(var c=0;c<obj[lista].length;c++){		
+		var img = createCard(c, context, lista);			
+		dialog.appendChild(img);
+	}
+	
 }

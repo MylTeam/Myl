@@ -2,21 +2,81 @@ $(function(){
     $.contextMenu({
         selector: '.deck', 
         callback: function(key, options) {
-            var m = "clicked: " + key;
-            window.console && console.log(m) || alert(m); 
+        	
+            switch(key){
+            case "draw":
+            	drawCard();
+            	break;            
+            case "view":
+            	view("deck1",$('#hidden').val());
+            	$( "#dialog" ).dialog();
+            	break;            
+            case "drop":
+            	break;
+            }
         },
         items: {
-            "edit": {name: "Edit", icon: "edit"},
-            "cut": {name: "Cut", icon: "cut"},
-            "copy": {name: "Copy", icon: "copy"},
-            "paste": {name: "Paste", icon: "paste"},
-            "delete": {name: "Delete", icon: "delete"},
-            "sep1": "---------",
-            "quit": {name: "Quit", icon: "quit"}
+            "draw": {name: "Robar carta"},            
+            "view": {name: "Ver castillo"},
+            "drop": {name: "Botar"}            
         }
     });
     
-    $('.deck').on('click', function(e){
-        console.log('clicked', this);
-    })
+//    $('.deck').on('click', function(e){    	
+//    })       
 });
+
+$(function(){
+    $.contextMenu({
+        selector: '.cementerio', 
+        callback: function(key, options) {
+        	
+            switch(key){            
+            case "view":
+            	view("cementerio1",$('#hidden').val());
+            	$( "#dialog" ).dialog();
+            	break;
+            }
+        },
+        items: {                       
+            "view": {name: "Ver cementerio"}            
+        }
+    });              
+});
+
+$(function(){
+    $.contextMenu({
+        selector: '.destierro', 
+        callback: function(key, options) {
+        	
+            switch(key){            
+            case "view":
+            	view("destierro1",$('#hidden').val());
+            	$( "#dialog" ).dialog();
+            	break;
+            }
+        },
+        items: {                       
+            "view": {name: "Ver destierro"}            
+        }
+    });              
+});
+
+$(function(){
+    $.contextMenu({
+        selector: '.remocion', 
+        callback: function(key, options) {
+        	
+            switch(key){            
+            case "view":
+            	view("remocion1",$('#hidden').val());
+            	$( "#dialog" ).dialog();
+            	break;
+            }
+        },
+        items: {                       
+            "view": {name: "Ver cartas removidas"}            
+        }
+    });              
+});
+

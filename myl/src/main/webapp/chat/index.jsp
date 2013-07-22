@@ -8,13 +8,15 @@
 
 <link type="text/css" href="${pageContext.request.contextPath}/Estilos/default.css?123" rel="stylesheet" />
 <link type="text/css" href="${pageContext.request.contextPath}/Estilos/smoothness/jquery-ui-1.8.22.custom.css" rel="stylesheet" />
+<link type="text/css" href="${pageContext.request.contextPath}/scripts/jquery.contextMenu.css" rel="stylesheet" />
 <jsp:text>
-	<![CDATA[ 			
+	<![CDATA[			 		
 			<script src="${pageContext.request.contextPath}/scripts/jquery-1.7.2.min.js" type="text/javascript"></script>
 			<script src="${pageContext.request.contextPath}/scripts/jquery-ui-1.8.22.custom.min.js" type="text/javascript"></script>
+			<script src="${pageContext.request.contextPath}/scripts/jquery.contextMenu.js" type="text/javascript"></script>
 			<script src="${pageContext.request.contextPath}/scripts/wsclient.js?2032" type="text/javascript"></script>
 			<script src="${pageContext.request.contextPath}/scripts/game.js" type="text/javascript"></script>
-			<script src="${pageContext.request.contextPath}/scripts/menu.js" type="text/javascript"></script>
+			<script src="${pageContext.request.contextPath}/scripts/menu.js" type="text/javascript"></script>			
 					
 		 ]]>
 </jsp:text>
@@ -167,13 +169,13 @@
               <img id="deck1" name="deck1" class="deck" src="${pageContext.request.contextPath}/images/myl/myldeck.jpg" ondblclick="drawCard()" draggable="true" width="100%" ondragstart="wsclient.drag(event)"/>
               </div></td>
               <td style="WIDTH: 25%"><div id="cementerio1d" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)">
-              <img id="cementerio1" name="cementerio1" src="${pageContext.request.contextPath}/images/myl/cementerio1.jpg" draggable="true" width="100%" ondragstart="wsclient.drag(event)"/>
+              <img id="cementerio1" name="cementerio1" class="cementerio" src="${pageContext.request.contextPath}/images/myl/cementerio1.jpg" draggable="true" width="100%" ondragstart="wsclient.drag(event)"/>
               </div></td>
               <td style="WIDTH: 25%"><div id="destierro1d" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)">
-              <img id="destierro1" name="destierro1" src="${pageContext.request.contextPath}/images/myl/destierro1.jpg" draggable="true" width="100%" ondragstart="wsclient.drag(event)"/>
+              <img id="destierro1" name="destierro1" class="destierro" src="${pageContext.request.contextPath}/images/myl/destierro1.jpg" draggable="true" width="100%" ondragstart="wsclient.drag(event)"/>
               </div></td>
               <td style="WIDTH: 25%"><div id="remocion1d" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)">
-              <img id="remocion1" name="remocion1" src="${pageContext.request.contextPath}/images/myl/remocion1.jpg" draggable="true" width="100%" ondragstart="wsclient.drag(event)"/>
+              <img id="remocion1" name="remocion1" class="remocion" src="${pageContext.request.contextPath}/images/myl/remocion1.jpg" draggable="true" width="100%" ondragstart="wsclient.drag(event)"/>
               </div></td>
             </tr>
             <tr>
@@ -191,11 +193,11 @@
 
 	 <input type="hidden" name="user2" id="user2" value=""/>
 	 
-	 <!-- 
-	 <div id="dialog" title="Basic dialog">
-  <img id="d1" name="d1" src="${pageContext.request.contextPath}/images/myl/esp/1.jpg" draggable="true" height="70" ondragstart="wsclient.drag(event)"/>
-</div>
- -->
+	 <div style="display:none;">
+	 <div id="dialog">
+	</div>
+	</div>
+ 
 </body>
 </html>
 </jsp:root>
