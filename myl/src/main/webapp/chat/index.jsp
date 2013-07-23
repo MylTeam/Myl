@@ -25,31 +25,27 @@
  <script type="text/javascript">
 	$(function() {
 		$('#conversations').tabs();					  
-	});	
-	
-	// $(function() {
-	//	    $( "#dialog" ).dialog();
-	//	  });
+	});		
 	</script>	
 <style type="text/css">
-#mano1 {width:100%;height:100%;padding:5px;border:1px solid #aaaaaa;overflow:auto;}
-#mano2 {width:100%;height:100%;padding:5px;border:1px solid #aaaaaa;overflow:auto;}
-#apoyo1 {width:100%;height:100%;padding:5px;border:1px solid #aaaaaa;overflow:auto;}
-#apoyo2 {width:100%;height:100%;padding:5px;border:1px solid #aaaaaa;overflow:auto;}
-#defensa1 {width:100%;height:100%;padding:5px;border:1px solid #aaaaaa;overflow:auto;}
-#defensa2 {width:100%;height:100%;padding:5px;border:1px solid #aaaaaa;overflow:auto;}
-#ataque1 {width:100%;height:100%;padding:5px;border:1px solid #aaaaaa;overflow:auto;}
-#ataque2 {width:100%;height:100%;padding:5px;border:1px solid #aaaaaa;overflow:auto;}
+#mano1 {width:100%;height:100%;padding:0px;border:1px solid #aaaaaa;overflow:auto;}
+#mano2 {width:100%;height:100%;padding:0px;border:1px solid #aaaaaa;overflow:auto;}
+#apoyo1 {width:100%;height:100%;padding:0px;border:1px solid #aaaaaa;overflow:auto;}
+#apoyo2 {width:100%;height:100%;padding:0px;border:1px solid #aaaaaa;overflow:auto;}
+#defensa1 {width:100%;height:100%;padding:0px;border:1px solid #aaaaaa;overflow:auto;}
+#defensa2 {width:100%;height:100%;padding:0px;border:1px solid #aaaaaa;overflow:auto;}
+#ataque1 {width:100%;height:100%;padding:0px;border:1px solid #aaaaaa;overflow:auto;}
+#ataque2 {width:100%;height:100%;padding:0px;border:1px solid #aaaaaa;overflow:auto;}
 
-#oropagado2 {width:100%;height:100%;padding:5px;border:1px solid #aaaaaa;overflow:auto;}
-#reserva2 {width:100%;height:100%;padding:5px;border:1px solid #aaaaaa;overflow:auto;}
+#oropagado2 {width:100%;height:100%;padding:0px;border:1px solid #aaaaaa;overflow:auto;}
+#reserva2 {width:100%;height:100%;padding:0px;border:1px solid #aaaaaa;overflow:auto;}
 #remocion2d {width:100%;height:100%;padding:0px;border:1px solid #aaaaaa;overflow:hidden;}
 #castillo2 {width:100%;height:100%;padding:0px;border:1px solid #aaaaaa;overflow:hidden;}
 #cementerio2d {width:100%;height:100%;padding:0px;border:1px solid #aaaaaa;overflow:hidden;}
 #destierro2d {width:100%;height:100%;padding:0px;border:1px solid #aaaaaa;overflow:hidden;}
 
-#oropagado1 {width:100%;height:100%;padding:5px;border:1px solid #aaaaaa;overflow:auto;}
-#reserva1 {width:100%;height:100%;padding:5px;border:1px solid #aaaaaa;overflow:auto;}
+#oropagado1 {width:100%;height:100%;padding:0px;border:1px solid #aaaaaa;overflow:auto;}
+#reserva1 {width:100%;height:100%;padding:0px;border:1px solid #aaaaaa;overflow:auto;}
 #remocion1d {width:100%;height:100%;padding:0px;border:1px solid #aaaaaa;overflow:hidden;}
 #castillo1 {width:100%;height:100%;padding:0px;border:1px solid #aaaaaa;overflow:hidden;}
 #cementerio1d {width:100%;height:100%;padding:0px;border:1px solid #aaaaaa;overflow:hidden;}
@@ -141,6 +137,7 @@
 						<ul>
 						</ul>
 					</div></td></tr></table>
+					 
       </td>
       <td style="WIDTH: 50%;">
         <table id="P2" class="Table" style="HEIGHT: 100%; WIDTH: 100%">
@@ -194,7 +191,7 @@
 	 <input type="hidden" name="user2" id="user2" value=""/>
 	 
 	 <div style="display:none;">
-	 <div id="dialog">
+	 <div id="dialog" >
 	</div>
 	</div>
  

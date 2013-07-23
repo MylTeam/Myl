@@ -9,7 +9,9 @@ $(function(){
             	break;            
             case "view":
             	view("deck1",$('#hidden').val());
-            	$( "#dialog" ).dialog();
+            	$( "#dialog" ).dialog({ 
+            		width: 500,
+            		title: "Castillo" });
             	break;            
             case "drop":
             	break;
@@ -34,7 +36,9 @@ $(function(){
             switch(key){            
             case "view":
             	view("cementerio1",$('#hidden').val());
-            	$( "#dialog" ).dialog();
+            	$( "#dialog" ).dialog({ 
+            		width: 500,
+            		title: "Cementerio" });
             	break;
             }
         },
@@ -52,7 +56,9 @@ $(function(){
             switch(key){            
             case "view":
             	view("destierro1",$('#hidden').val());
-            	$( "#dialog" ).dialog();
+            	$( "#dialog" ).dialog({ 
+            		width: 500,
+            		title: "Destierro" });
             	break;
             }
         },
@@ -70,7 +76,9 @@ $(function(){
             switch(key){            
             case "view":
             	view("remocion1",$('#hidden').val());
-            	$( "#dialog" ).dialog();
+            	$( "#dialog" ).dialog({ 
+            		width: 500,
+            		title: "Cartas removidas" });
             	break;
             }
         },

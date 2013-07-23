@@ -67,7 +67,8 @@ public class ChatController extends ActionSupport {
 				aux.setTipo(carta.getTipo());
 				aux.setFrecuencia(carta.getFrecuencia());
 				aux.setCoste(carta.getCoste());
-				aux.setFuerza(carta.getFuerza());				
+				aux.setFuerza(carta.getFuerza());
+				aux.setSiglas(carta.getEdicion().getSiglas());
 				deck1.add(aux);
 			}
 			count++;

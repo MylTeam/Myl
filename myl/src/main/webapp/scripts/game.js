@@ -1,5 +1,6 @@
 var origen;
 var destino;
+var origenP;
 
 var obj = {
 	deck1 : [],
@@ -52,21 +53,24 @@ function createCard(c, context, origenPila) {
 	var img = document.createElement('img');
 	img.id = obj[origenPila][c].idTemp;
 	img.name = obj[origenPila][c].numero;	
-	img.src = context + "/images/myl/esp/" + obj[origenPila][c].numero + ".jpg";
+	img.src = context + "/images/myl/"+obj[origenPila][c].siglas+"/" + obj[origenPila][c].numero + ".jpg";
 	img.className=obj[origenPila][c].tipo;
 	img.draggable = "true";
 	img.height = "70";
-	img.width = "40";
+//	img.width = "40";
 	img.addEventListener('dragstart', function drag(ev) {		
 		origen = ev.target.parentNode.id
 		if(origen=="dialog"){
 			origen=origenPila;
+			origenP="dialog";
+		}else{
+			origenP="";
 		}
 		ev.dataTransfer.setData("Text", ev.target.id);
 	}, false);
 	img.onmouseover = function showImage(ev) {
 		var viewCard = document.getElementById("viewCard");
-		viewCard.src = context + "/images/myl/esp/" + ev.target.name + ".jpg";
+		viewCard.src = context + "/images/myl/"+obj[origenPila][c].siglas+"/" + ev.target.name + ".jpg";
 	}
 	return img;
 }
@@ -75,9 +79,7 @@ function dropCard(ev) {
 	ev.preventDefault();
 	var context = $('#hidden').val();
 	var data = ev.dataTransfer.getData("Text");
-	
-	
-	
+			
 	/**
 	 * Verifica si la carta se esta moviendo hacia un div o hacia el deck, cementerio, destierro o remocion	
 	 */
@@ -97,14 +99,22 @@ function dropCard(ev) {
 				changeZone(obj[origen], obj[destino], data);
 
 			} else if (ev.target.id == "deck1") {
-				move(obj[origen], obj["deck1"], data);
-				var d;
+				move(obj[origen], obj["deck1"], data);				
 			} else {
 				move(obj[origen], obj[ev.target.id], data);
 				var c = document.getElementById(ev.target.id);
-				c.src = context + "/images/myl/esp/"+ obj[ev.target.id][0].numero + ".jpg";
+				c.src = context + "/images/myl/"+obj[ev.target.id][0].siglas+"/"+ obj[ev.target.id][0].numero + ".jpg";
 			}
 			
+			if(origenP=="dialog"){
+				var c = document.getElementById(origen);
+				if (obj[origen].length != 0) {					
+					c.src = context + "/images/myl/"+obj[origen][0].siglas+"/" + obj[origen][0].numero+ ".jpg";
+					var d;
+				} else {
+					c.src = context + "/images/myl/" + origen + ".jpg";
+				}
+			}			
 			
 		} else if (data == "deck1") {
 			destino = ev.target.id;
@@ -117,7 +127,7 @@ function dropCard(ev) {
 				ev.target.appendChild(img);
 			} else {
 				var dest = document.getElementById(destino);
-				dest.src = context + "/images/myl/esp/"+ obj["deck1"][0].numero + ".jpg";
+				dest.src = context + "/images/myl/"+obj["deck1"][0].siglas+"/"+ obj["deck1"][0].numero + ".jpg";
 			}
 			obj[destino].unshift(obj["deck1"].splice(0, 1)[0]);
 
@@ -140,7 +150,7 @@ function dropCard(ev) {
 					ev.target.appendChild(img);
 				} else if (destino == "cementerio1" || destino == "destierro1" || destino == "remocion1") {
 					var d = document.getElementById(destino);
-					d.src = c.src = context + "/images/myl/esp/"+ obj[data][0].numero + ".jpg";
+					d.src = c.src = context + "/images/myl/"+obj[data][0].siglas+"/"+ obj[data][0].numero + ".jpg";
 				}
 
 				obj[destino].unshift(obj[data].splice(0, 1)[0]);
@@ -149,7 +159,7 @@ function dropCard(ev) {
 				 * actualiza la imagen a la primera carta, si está vacía coloca por default
 				 */
 				if (obj[data].length != 0) {
-					c.src = context + "/images/myl/esp/" + obj[data][0].numero+ ".jpg";
+					c.src = context + "/images/myl/"+obj[data][0].siglas+"/" + obj[data][0].numero+ ".jpg";
 				} else {
 					c.src = context + "/images/myl/" + data + ".jpg";
 				}
@@ -177,8 +187,7 @@ function changeZone(arrayAux, arrayDest, data) {
 
 function view(lista,context){
 	$('#dialog').empty();
-	var dialog=document.getElementById("dialog");
-	dialog.title=lista	
+	var dialog=document.getElementById("dialog");	
 	for(var c=0;c<obj[lista].length;c++){		
 		var img = createCard(c, context, lista);			
 		dialog.appendChild(img);

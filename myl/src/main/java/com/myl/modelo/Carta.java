@@ -35,7 +35,8 @@ public class Carta implements Cloneable{
 	private Integer idEdicion;
 	
 	private String idTemp;
-		
+	private String siglas;
+	
 	private Edicion edicion;
 	
 	private List<Deck> decks;
@@ -156,6 +157,13 @@ public class Carta implements Cloneable{
 	public void setIdTemp(String idTemp) {
 		this.idTemp = idTemp;
 	}
+	@Transient
+	public String getSiglas() {
+		return siglas;
+	}
+	public void setSiglas(String siglas) {
+		this.siglas = siglas;
+	}
 	
 	
 	public Object clone()
@@ -169,6 +177,6 @@ public class Carta implements Cloneable{
         {
         }
         return clone;
-    }
+    }	
 		
 }
