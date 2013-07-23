@@ -2,6 +2,12 @@ var origen;
 var destino;
 var origenP;
 
+var movedCard={
+		carta:"",
+		origen: "",
+		destino: "",		
+};
+
 var obj = {
 	deck1 : [],
 	mano1 : [],
@@ -15,7 +21,20 @@ var obj = {
 	remocion1 : []
 };
 
-$(document).ready(function() {
+var objOp={
+		mano1:"",
+		apoyo1 : [],
+		defensa1 : [],
+		ataque1 : [],
+		reserva1 : [],
+		oropagado1 : [],
+		cementerio1 : [],
+		destierro1 : [],
+		remocion1 : []		
+};
+
+$(document).ready(function() {	
+	
 	var context = $('#hidden').val();
 	$.ajax({
 		url : context + "/chat!prueba",
@@ -28,7 +47,7 @@ $(document).ready(function() {
 			obj["deck1"].sort(function() {
 				return Math.random() - 0.5
 			});
-			drawHand(context);
+//			drawHand(context);
 		}
 	});
 
@@ -39,6 +58,8 @@ function drawHand(context) {
 	for ( var c = 0; c < 8; c++) {
 		drawCard();
 	}
+	
+//	alert(divMano.childNodes.length);
 }
 
 function drawCard() {
@@ -47,6 +68,13 @@ function drawCard() {
 	var img = createCard(0, context, "deck1");
 	divMano.appendChild(img);
 	obj["mano1"].unshift(obj["deck1"].splice(0, 1)[0]);
+	
+//	var from=document.getElementById("userName").value;
+//    var to=document.getElementById("user2").value;    
+//    var msg="Robando carta";  
+//    movedCard["origen"]="deck1";
+//    movedCard["destino"]="mano1";
+//    toChatCard(from, to, msg, null, movedCard["origen"], movedCard["destino"] );
 }
 
 function createCard(c, context, origenPila) {
@@ -57,7 +85,6 @@ function createCard(c, context, origenPila) {
 	img.className=obj[origenPila][c].tipo;
 	img.draggable = "true";
 	img.height = "70";
-//	img.width = "40";
 	img.addEventListener('dragstart', function drag(ev) {		
 		origen = ev.target.parentNode.id
 		if(origen=="dialog"){
@@ -71,6 +98,21 @@ function createCard(c, context, origenPila) {
 	img.onmouseover = function showImage(ev) {
 		var viewCard = document.getElementById("viewCard");
 		viewCard.src = context + "/images/myl/"+obj[origenPila][c].siglas+"/" + ev.target.name + ".jpg";
+	}
+	return img;
+}
+
+function createCardOp(c, context, origenPila) {
+	var img = document.createElement('img');
+	img.id = objOp[origenPila][c].idTemp;
+	img.name = objOp[origenPila][c].numero;	
+	img.src = context + "/images/myl/"+objOp[origenPila][c].siglas+"/" + objOp[origenPila][c].numero + ".jpg";
+	img.className=objOp[origenPila][c].tipo;	
+	img.height = "70";
+//	img.width = "40";
+	img.onmouseover = function showImage(ev) {
+		var viewCard = document.getElementById("viewCard");
+		viewCard.src = context + "/images/myl/"+objOp[origenPila][c].siglas+"/" + ev.target.name + ".jpg";
 	}
 	return img;
 }
@@ -90,20 +132,22 @@ function dropCard(ev) {
 		/**
 		 * si la carta arrastrada no es el deck relocaliza la carta
 		 */ 
+		destino = ev.target.id;
 		if (data != "deck1" && data != "cementerio1" && data != "destierro1" && data != "remocion1") {
 			if (ev.target.id != "deck1" && ev.target.id != "cementerio1"
 					&& ev.target.id != "destierro1"
 					&& ev.target.id != "remocion1") {
 				ev.target.appendChild(document.getElementById(data));
-				destino = ev.target.id;
 				changeZone(obj[origen], obj[destino], data);
-
+				movedCard["carta"]=obj[destino][0];//
 			} else if (ev.target.id == "deck1") {
-				move(obj[origen], obj["deck1"], data);				
+				move(obj[origen], obj[destino], data);
+				movedCard["carta"]=obj[destino][0];//
 			} else {
-				move(obj[origen], obj[ev.target.id], data);
+				move(obj[origen], obj[destino], data);
 				var c = document.getElementById(ev.target.id);
-				c.src = context + "/images/myl/"+obj[ev.target.id][0].siglas+"/"+ obj[ev.target.id][0].numero + ".jpg";
+				c.src = context + "/images/myl/"+obj[destino][0].siglas+"/"+ obj[destino][0].numero + ".jpg";
+				movedCard["carta"]=obj[destino][0];//
 			}
 			
 			if(origenP=="dialog"){
@@ -117,7 +161,6 @@ function dropCard(ev) {
 			}			
 			
 		} else if (data == "deck1") {
-			destino = ev.target.id;
 			/**
 			 * si se arrastra desde el deck se crea una carta en la zona seleccionada
 			 * en caso de cementerio, destierro o remocion coloca la imagen en la zona correspondiente
@@ -130,7 +173,7 @@ function dropCard(ev) {
 				dest.src = context + "/images/myl/"+obj["deck1"][0].siglas+"/"+ obj["deck1"][0].numero + ".jpg";
 			}
 			obj[destino].unshift(obj["deck1"].splice(0, 1)[0]);
-
+			movedCard["carta"]=obj[destino][0];//
 		} else {
 			/**
 			 * si se arrastra desde el cementerio, destierro o remocion
@@ -154,7 +197,7 @@ function dropCard(ev) {
 				}
 
 				obj[destino].unshift(obj[data].splice(0, 1)[0]);
-				
+				movedCard["carta"]=obj[destino][0];//
 				/**
 				 * actualiza la imagen a la primera carta, si está vacía coloca por default
 				 */
@@ -165,7 +208,12 @@ function dropCard(ev) {
 				}
 			}
 		}
-	}	
+	}
+	
+		
+		movedCard["origen"]=origen;
+		movedCard["destino"]=destino;
+		return movedCard;	
 }
 
 function move(arrayAux, arrayDest, data) {

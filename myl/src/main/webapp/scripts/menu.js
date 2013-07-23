@@ -6,7 +6,10 @@ $(function(){
             switch(key){
             case "draw":
             	drawCard();
-            	break;            
+            	break;
+            case "drawHand":
+            	drawHand($("#hidden").val());
+            	break;
             case "view":
             	view("deck1",$('#hidden').val());
             	$( "#dialog" ).dialog({ 
@@ -18,7 +21,8 @@ $(function(){
             }
         },
         items: {
-            "draw": {name: "Robar carta"},            
+            "draw": {name: "Robar carta"},
+            "drawHand": {name: "Robar mano"},
             "view": {name: "Ver castillo"},
             "drop": {name: "Botar"}            
         }

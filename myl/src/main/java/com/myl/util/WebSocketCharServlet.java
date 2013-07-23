@@ -72,16 +72,30 @@ public class WebSocketCharServlet extends WebSocketServlet {
 
         @Override
         protected void onTextMessage(CharBuffer charBuffer) throws IOException {
-            final MessageInfoMessage message = jsonProcessor.fromJson(charBuffer.toString(), MessageInfoMessage.class);
+        	System.out.println(charBuffer.toString());
+        	if(charBuffer.toString().contains("messageInfo")){
+        		final MessageInfoMessage message = jsonProcessor.fromJson(charBuffer.toString(), MessageInfoMessage.class);
+        		final ChatConnection destinationConnection = getDestinationUserConnection(message.getMessageInfo().getTo());
+                if (destinationConnection != null) {
+                    final CharBuffer jsonMessage = CharBuffer.wrap(jsonProcessor.toJson(message));
+                    destinationConnection.getWsOutbound().writeTextMessage(jsonMessage);
+                } else {
+                	System.out.println("Se está intentando enviar un mensaje a un usuario no conectado");
+                    log.warn("Se está intentando enviar un mensaje a un usuario no conectado");
+                }
+        	}else if(charBuffer.toString().contains("cardInfo")){
+        		final CardInfoMessage message = jsonProcessor.fromJson(charBuffer.toString(), CardInfoMessage.class);
+        		final ChatConnection destinationConnection = getDestinationUserConnection(message.getCardInfo().getTo());
+                if (destinationConnection != null) {
+                    final CharBuffer jsonMessage = CharBuffer.wrap(jsonProcessor.toJson(message));
+                    destinationConnection.getWsOutbound().writeTextMessage(jsonMessage);
+                } else {
+                	System.out.println("Se está intentando enviar un mensaje a un usuario no conectado");
+                }
+        	}
+            
                         
-            final ChatConnection destinationConnection = getDestinationUserConnection(message.getMessageInfo().getTo());
-            if (destinationConnection != null) {
-                final CharBuffer jsonMessage = CharBuffer.wrap(jsonProcessor.toJson(message));
-                destinationConnection.getWsOutbound().writeTextMessage(jsonMessage);
-            } else {
-            	System.out.println("Se está intentando enviar un mensaje a un usuario no conectado");
-                log.warn("Se está intentando enviar un mensaje a un usuario no conectado");
-            }
+            
         }
 
         public String getUserName() {

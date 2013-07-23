@@ -34,8 +34,8 @@ span.connected {
 }
 
 div#conversations {
-    width: 50%;
-    height: 100%;
+    width: 100%;
+    height: 50%;
     font: 1.1em comic sans ms, sans-serif;
     visibility: hidden;
     float: right;
@@ -46,7 +46,7 @@ div#conversations div.conversation {
 }
 
 p.messages {
-    height: 350px;
+    height: 50%;
     overflow-y: auto;
 }
 
@@ -67,7 +67,7 @@ p.messages div.message p {
 }
 
 div.conversation textarea {
-    width: 330px;
+    width: 100%;
     height: 60px;
 }
 
@@ -82,7 +82,7 @@ ul#onlineUsers {
 }
 
 ul#onlineUsers li a {
-    width: 190px;
+    width: 50%;
     cursor: pointer;
     display: block;
     padding: 3px;

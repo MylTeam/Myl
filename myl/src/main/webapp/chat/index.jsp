@@ -24,7 +24,8 @@
 <title>Duel Room</title>
  <script type="text/javascript">
 	$(function() {
-		$('#conversations').tabs();					  
+		$('#conversations').tabs();
+		$('#user2').val("");		
 	});		
 	</script>	
 <style type="text/css">
@@ -116,7 +117,7 @@
 						<div class="userInfo">
 							<span class="disconnected" id="status">Desconectado</span>
 							Nombre: <input type="text" id="userName" /><span
-								class="onLineUserName"></span>
+								class="onLineUserName" ></span>
 						</div>
 						<div>
 							<button id="connect"
@@ -131,8 +132,7 @@
 							</ul>
 						</div>
 					</div>
-					</div>
-					</td><td>
+					</div>					
 					<div id="conversations">
 						<ul>
 						</ul>

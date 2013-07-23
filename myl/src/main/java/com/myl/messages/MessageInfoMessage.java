@@ -15,9 +15,7 @@ public class MessageInfoMessage {
     public class MessageInfo {
 
         private final String from;
-
         private final String to;
-
         private final String message;
 
         public MessageInfo(String from, String to, String message) {
