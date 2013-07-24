@@ -212,7 +212,8 @@ var wsclient = (function() {
     function drop(ev)
     {       	
     var card=dropCard(ev);
-    	
+
+    if(card!=null){
     var from=document.getElementById("userName").value;
     var to=document.getElementById("user2").value;
 //    var msg="Estoy moviendo "+data+" hacia "+ev.target.id;
@@ -223,7 +224,7 @@ var wsclient = (function() {
     toChatCard(from, to, msg, card["carta"], card["origen"], card["destino"] );
 //    addMessage(from, msg, conversationId);
 //    document.getElementById(conversationId+'message').value = '';
-    	
+    }
     	
     }
     
@@ -233,6 +234,7 @@ var wsclient = (function() {
         connect : connect,
         disconnect : disconnect,
         toChat: toChat,
+        toChatCard: toChatCard,
         addMessage: addMessage,
         allowDrop : allowDrop,
         drag : drag,
@@ -271,7 +273,9 @@ function processCard(from,message,card,origen,destino){
 				d.src = context + "/images/myl/" + origen + ".jpg";
 			}
 		}else if(origen=="mano1"){
-			
+			var divMano=document.getElementById(origen.replace("1","2"));
+			var n=divMano.childNodes.length-1;
+			$("#card"+n).remove();
 		}
 		
 		objOp[destino].unshift(card);
@@ -301,7 +305,9 @@ function processCard(from,message,card,origen,destino){
 				ori.src = context + "/images/myl/" + origen + ".jpg";
 			}
 		}else if(origen=="mano1"){
-			
+			var divMano=document.getElementById(origen.replace("1","2"));
+			var n=divMano.childNodes.length-1;
+			$("#card"+n).remove();
 		}
 		
 		objOp[destino].unshift(card);
@@ -311,11 +317,32 @@ function processCard(from,message,card,origen,destino){
 		
 	}else if(destino=="mano1"){
 		if(origen!="mano1" && origen!="deck1" && origen!="cementerio1" && origen!="destierro1" && origen!="remocion1"){
+			for(var c=0;c<objOp[origen].length;c++){
+				if(objOp[origen][c].idTemp=card.idTemp){
+					objOp[origen].splice(c,1);					
+				}
+			}
+			$("#"+card.idTemp).remove();
+			var divMano=document.getElementById(destino.replace("1","2"));
+			divMano.appendChild(createReverseCard(divMano.childNodes.length,context));
 			
 		}else if(origen=="cementerio1" || origen=="destierro1" || origen=="remocion1"){
-			
+			for(var c=0;c<objOp[origen].length;c++){
+				if(objOp[origen][c].idTemp==card.idTemp){					
+					objOp[origen].splice(c,1);					
+				}
+			}
+			var ori = document.getElementById(origen.replace("1","2"));
+			if (objOp[origen].length != 0) {
+				ori.src = context + "/images/myl/"+objOp[origen][0].siglas+"/" + objOp[origen][0].numero+ ".jpg";
+			} else {
+				ori.src = context + "/images/myl/" + origen + ".jpg";
+			}
+			var divMano=document.getElementById(destino.replace("1","2"));
+			divMano.appendChild(createReverseCard(divMano.childNodes.length,context));
 		}else if(origen=="deck1"){
-			
+			var divMano=document.getElementById(destino.replace("1","2"));
+			divMano.appendChild(createReverseCard(divMano.childNodes.length,context));
 		}
 		
 		
@@ -340,7 +367,9 @@ function processCard(from,message,card,origen,destino){
 				ori.src = context + "/images/myl/" + origen + ".jpg";
 			}			
 		}else if(origen=="mano1"){
-			
+			var divMano=document.getElementById(origen.replace("1","2"));
+			var n=divMano.childNodes.length-1;
+			$("#card"+n).remove();
 		}				
 	}
 }

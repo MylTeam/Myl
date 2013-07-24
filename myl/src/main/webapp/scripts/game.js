@@ -69,12 +69,12 @@ function drawCard() {
 	divMano.appendChild(img);
 	obj["mano1"].unshift(obj["deck1"].splice(0, 1)[0]);
 	
-//	var from=document.getElementById("userName").value;
-//    var to=document.getElementById("user2").value;    
-//    var msg="Robando carta";  
-//    movedCard["origen"]="deck1";
-//    movedCard["destino"]="mano1";
-//    toChatCard(from, to, msg, null, movedCard["origen"], movedCard["destino"] );
+	var from=document.getElementById("userName").value;
+    var to=document.getElementById("user2").value;    
+    var msg="Robando carta";  
+    movedCard["origen"]="deck1";
+    movedCard["destino"]="mano1";
+    wsclient.toChatCard(from, to, msg, null, movedCard["origen"], movedCard["destino"] );
 }
 
 function createCard(c, context, origenPila) {
@@ -109,11 +109,20 @@ function createCardOp(c, context, origenPila) {
 	img.src = context + "/images/myl/"+objOp[origenPila][c].siglas+"/" + objOp[origenPila][c].numero + ".jpg";
 	img.className=objOp[origenPila][c].tipo;	
 	img.height = "70";
-//	img.width = "40";
 	img.onmouseover = function showImage(ev) {
 		var viewCard = document.getElementById("viewCard");
 		viewCard.src = context + "/images/myl/"+objOp[origenPila][c].siglas+"/" + ev.target.name + ".jpg";
 	}
+	return img;
+}
+
+function createReverseCard(c, context) {
+	var img = document.createElement('img');
+	img.id = "card"+c;
+	img.name = "card"+c;	
+	img.src = context + "/images/myl/myldeck.jpg";
+	img.className="reverse";	
+	img.height = "70";	
 	return img;
 }
 
@@ -208,12 +217,12 @@ function dropCard(ev) {
 				}
 			}
 		}
-	}
-	
-		
 		movedCard["origen"]=origen;
 		movedCard["destino"]=destino;
-		return movedCard;	
+		return movedCard;
+	}else{		
+		return null;
+	}
 }
 
 function move(arrayAux, arrayDest, data) {
