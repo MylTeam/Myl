@@ -20,6 +20,7 @@ import javax.persistence.Table;
 public class Deck {			
 		
 	private Integer deckId;
+	private String deckNombre;
 	private Integer usuarioId;
 	
 	private Usuario usuario;
@@ -34,6 +35,14 @@ public class Deck {
 	}
 	public void setDeckId(Integer deckId) {
 		this.deckId = deckId;
+	}
+	
+	@Column(name = "DeckNombre")		
+	public String getDeckNombre() {
+		return deckNombre;
+	}
+	public void setDeckNombre(String deckNombre) {
+		this.deckNombre = deckNombre;
 	}
 	
 	@Column(name = "UsuarioId")

@@ -33,13 +33,14 @@ var wsclient = (function() {
         function processMessage(message) {
             if (message.messageInfo) {
                 showConversation(message.messageInfo.from);
-                if(message.messageInfo.message!="gameready" && message.messageInfo.message!="gamereadyok"){
-                	addMessage(message.messageInfo.from, message.messageInfo.message, cleanWhitespaces(message.messageInfo.from) + 'conversation');
-                }else if(message.messageInfo.message=="gameready"){
-                	toChat(document.getElementById("user1").value, document.getElementById("user2").value, "gamereadyok");
-                	showConversation(document.getElementById("user2").value);
-                }else if(message.messageInfo.message=="gamereadyok"){
-                	showConversation(document.getElementById("user2").value);
+                if(message.messageInfo.message!="plduelojsp" && message.messageInfo.message!="plduelojspresp"){
+                addMessage(message.messageInfo.from, message.messageInfo.message, cleanWhitespaces(message.messageInfo.from) + 'conversation');
+                }else if(message.messageInfo.message=="plduelojsp"){
+                	addMessageButton(message.messageInfo.from, message.messageInfo.message, cleanWhitespaces(message.messageInfo.from) + 'conversation');
+                }else if(message.messageInfo.message=="plduelojspresp"){
+                	var user = document.getElementById('userName').value;
+                	var url="http://"+location.host+$("#hidden").val()+"/chat?user1="+user+"&user2="+message.messageInfo.from;
+                	window.location=url;
                 }
             } else if (message.statusInfo) {
                 if (message.statusInfo.status == 'CONNECTED') {
@@ -67,8 +68,8 @@ var wsclient = (function() {
     }
 
     function setConnected(connected) {
-//        document.getElementById('connect').disabled = connected;
-//        document.getElementById('disconnect').disabled = !connected;
+        document.getElementById('connect').disabled = connected;
+        document.getElementById('disconnect').disabled = !connected;
         cleanConnectedUsers();
         if (connected) {
             updateUserConnected();
@@ -86,9 +87,6 @@ var wsclient = (function() {
         $('#status').html('Conectado');
         $('#status').attr({class : 'connected'});
         $('#onLineUsersPanel').css({visibility:'visible'});
-        
-        toChat(document.getElementById("user1").value, document.getElementById("user2").value, "gameready");
-//        showConversation(document.getElementById("user2").value);
     }
 
     function updateUserDisconnected() {
@@ -127,11 +125,13 @@ var wsclient = (function() {
         var conversationId = cleanWhitespaces(name) + 'conversation';
         var conversationPanel = $(document.createElement('div'));
         conversationPanel.attr({id : conversationId, class : 'conversation'});
-        $('<p class="messages"></p><textarea id="' + conversationId + 'message" rows="3"></textarea>').appendTo(conversationPanel);
+        $('<p class="messages"></p><textarea id="' + conversationId + 'message"></textarea>').appendTo(conversationPanel);
         var sendButton = createSendButton(name);
         sendButton.appendTo(conversationPanel);
-//        var closeButton = createCloseButton(cleanWhitespaces(name));
-//        closeButton.appendTo(conversationPanel);
+        var closeButton = createCloseButton(cleanWhitespaces(name));
+        closeButton.appendTo(conversationPanel);
+        var playButton = createPlayButton(cleanWhitespaces(name));
+        playButton.appendTo(conversationPanel);
         conversationPanel.appendTo($('#conversations'));      
     }
 
@@ -140,7 +140,7 @@ var wsclient = (function() {
         var button = $(document.createElement('button'));
         button.html('Enviar');
         button.click(function () {
-            var from = document.getElementById('user1').value;
+            var from = document.getElementById('userName').value;
             var message = document.getElementById(conversationId+'message').value;
             toChat(from, name, message);
             addMessage(from, message, conversationId);
@@ -164,10 +164,43 @@ var wsclient = (function() {
         });
         return button;
     }
+    
+    function createPlayButton(name) {
+    	var conversationId = cleanWhitespaces(name) + 'conversation';    	
+        var button = $(document.createElement('button'));
+        button.html('Duelo');
+        button.click(function () {
+        	
+        	var from = document.getElementById('userName').value;
+            var message = from+" quiere jugar.";
+            toChat(from, name, message);
+            addMessage(from, message, conversationId);            
+            document.getElementById(conversationId+'message').value = '';
+            message = "plduelojsp";
+            toChat(from, name, message);
+        });
+        return button;
+    }
 
     function addMessage (from, message, conversationPanelId) {
         var messages = $('#' + conversationPanelId + ' .messages');
         $('<div class="message"><span><b>' + from + '</b> dice:</span><p>' + $('<p/>').text(message).html() + '</p></div>').appendTo(messages);
+        messages.scrollTop(messages[0].scrollHeight);
+        $('#'+conversationPanelId+' textarea').focus();
+    }
+    
+    function addMessageButton (from, message, conversationPanelId) {
+        var messages = $('#' + conversationPanelId + ' .messages');
+        var btn=$(document.createElement('button'));
+        btn.html('Aceptar');
+        btn.click(function () { 
+        	var user = document.getElementById('userName').value;
+        	var url="http://"+location.host+$("#hidden").val()+"/chat?user1="+user+"&user2="+from;
+        	var message = "plduelojspresp";
+            toChat(user, from, message);
+        	window.location=url;
+        });
+        btn.appendTo(messages);
         messages.scrollTop(messages[0].scrollHeight);
         $('#'+conversationPanelId+' textarea').focus();
     }
@@ -198,7 +231,6 @@ var wsclient = (function() {
         var link = $(document.createElement('a'));
         link.html(userName);
         link.click(function(){
-        	document.getElementById("user2").value=userName;
             showConversation(userName);
             
         });
@@ -224,17 +256,12 @@ var wsclient = (function() {
     var card=dropCard(ev);
 
     if(card!=null){
-//    var from=document.getElementById("userName").value;
-    var from=document.getElementById("user1").value;
+    var from=document.getElementById("userName").value;
     var to=document.getElementById("user2").value;
-//    var msg="Estoy moviendo "+data+" hacia "+ev.target.id;
     var data = ev.dataTransfer.getData("Text");
     var msg="Estoy moviendo "+data+" hacia "+ev.target.id;
     
-//    var conversationId = cleanWhitespaces(to) + 'conversation';
     toChatCard(from, to, msg, card["carta"], card["origen"], card["destino"] );
-//    addMessage(from, msg, conversationId);
-//    document.getElementById(conversationId+'message').value = '';
     }
     	
     }

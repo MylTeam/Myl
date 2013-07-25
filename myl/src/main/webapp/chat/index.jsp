@@ -25,7 +25,9 @@
  <script type="text/javascript">
 	$(function() {
 		$('#conversations').tabs();
-		$('#user2').val("");		
+		//$('#user2').val("");
+		$('#userName').val(document.getElementById("user1").value);
+		wsclient.connect(document.getElementById("user1").value);
 	});		
 	</script>	
 <style type="text/css">
@@ -58,6 +60,7 @@
 <body>	
 
 <input type="hidden" name="hidden" id="hidden" value="${pageContext.request.contextPath}"/>
+
 	
 <table id="Table1" class="Table" style="HEIGHT: 100%; WIDTH: 100%">
   <tbody>
@@ -65,24 +68,24 @@
       <td style="WIDTH: 25%;">
         <table id="Ctrl1" class="Table" style="HEIGHT: 100%; WIDTH: 100%">
           <tbody>
-          	<tr>
+          	<tr style="height: 33%">
               <td colspan="4"><div id="reserva2" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>              
             </tr>
-            <tr>
+            <tr style="height: 33%">
               <td colspan="4"><div id="oropagado2" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>              
             </tr>
-            <tr style="height: 34%">
+            <tr>
               <td style="WIDTH: 25%"><div id="remocion2d" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)">
-              <img id="remocion2" name="remocion2" src="${pageContext.request.contextPath}/images/myl/remocion1.jpg" draggable="true" width="100%" ondragstart="wsclient.drag(event)"/>
+              <img id="remocion2" name="remocion2" src="${pageContext.request.contextPath}/images/myl/remocion1.jpg" draggable="true" width="100%"  ondragstart="wsclient.drag(event)"/>
               </div></td>
               <td style="WIDTH: 25%"><div id="destierro2d" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)">
-              <img id="destierro2" name="destierro2" src="${pageContext.request.contextPath}/images/myl/destierro1.jpg" draggable="true" width="100%" ondragstart="wsclient.drag(event)"/>
+              <img id="destierro2" name="destierro2" src="${pageContext.request.contextPath}/images/myl/destierro1.jpg" draggable="true" width="100%"  ondragstart="wsclient.drag(event)"/>
               </div></td>
               <td style="WIDTH: 25%"><div id="cementerio2d" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)">
-              <img id="cementerio2" name="cementerio2" src="${pageContext.request.contextPath}/images/myl/cementerio1.jpg" draggable="true" width="100%" ondragstart="wsclient.drag(event)"/>
+              <img id="cementerio2" name="cementerio2" src="${pageContext.request.contextPath}/images/myl/cementerio1.jpg" draggable="true" width="100%"  ondragstart="wsclient.drag(event)"/>
               </div></td>
               <td style="WIDTH: 25%"><div id="castillo2" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)">
-              <img id="deck2" name="deck2" src="${pageContext.request.contextPath}/images/myl/myldeck.jpg" ondblclick="drawCard()" draggable="true" width="100%" ondragstart="wsclient.drag(event)"/>
+              <img id="deck2" name="deck2" src="${pageContext.request.contextPath}/images/myl/myldeck.jpg" ondblclick="drawCard()" draggable="true" width="100%"  ondragstart="wsclient.drag(event)"/>
               </div></td>
             </tr>
           </tbody>
@@ -112,31 +115,26 @@
       <td id="chat" style="WIDTH: 25%;">
       	<table>
 			<tr><td>
-				<div id="container">
-					<div class="leftPanel">
-						<div class="userInfo">
+ 				<div id="container">
+					<div class="leftPanel"> 
+						 <div class="userInfo">
 							<span class="disconnected" id="status">Desconectado</span>
-							Nombre: <input type="text" id="userName" /><span
-								class="onLineUserName" ></span>
+							Nombre: <input type="text" id="userName" /><span class="onLineUserName" ></span>
 						</div>
-						<div>
-							<button id="connect"
-								onclick="wsclient.connect(document.getElementById('userName').value);">Conectar</button>
-							<button id="disconnect" disabled="disabled"
-								onclick="wsclient.disconnect();">DesconexiÃ³n</button>
+						<!-- 
+						 <div>
+							<button id="connect" onclick="wsclient.connect(document.getElementById('userName').value);">Conectar</button>
+							<button id="disconnect" disabled="disabled" onclick="wsclient.disconnect();">DesconexiÃ³n</button>
 						</div>
-						<div id="onLineUsersPanel">
-							<h3>Usuarios conectados:</h3>
-							<ul id="onlineUsers">
-
-							</ul>
-						</div>
-					</div>
-					</div>					
+						 --> 
+					 </div>
+										
 					<div id="conversations">
 						<ul>
 						</ul>
-					</div></td></tr></table>
+					</div>
+					 </div>
+					</td></tr></table>
 					 
       </td>
       <td style="WIDTH: 50%;">
@@ -161,7 +159,7 @@
       <td style="WIDTH: 25%;">
         <table id="Ctrl2" class="Table" style="HEIGHT: 100%; WIDTH: 100%">
           <tbody>            
-            <tr style="height: 34%">
+            <tr>
               <td style="WIDTH: 25%"><div id="castillo1" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)">
               <img id="deck1" name="deck1" class="deck" src="${pageContext.request.contextPath}/images/myl/myldeck.jpg" ondblclick="drawCard()" draggable="true" width="100%" ondragstart="wsclient.drag(event)"/>
               </div></td>
@@ -175,10 +173,10 @@
               <img id="remocion1" name="remocion1" class="remocion" src="${pageContext.request.contextPath}/images/myl/remocion1.jpg" draggable="true" width="100%" ondragstart="wsclient.drag(event)"/>
               </div></td>
             </tr>
-            <tr>
+            <tr style="height: 33%">
               <td colspan="4"><div id="oropagado1" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>              
             </tr>
-            <tr>
+            <tr style="height: 33%">
               <td colspan="4"><div id="reserva1" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>              
             </tr>
           </tbody>
@@ -187,9 +185,10 @@
   </tbody>
 </table>
 	
-
-	 <input type="hidden" name="user2" id="user2" value=""/>
 	 
+	 <input type="hidden" name="user1" id="user1" value="${user1}"/>
+	<input type="hidden" name="user2" id="user2" value="${user2}"/>
+
 	 <div style="display:none;">
 	 <div id="dialog" >
 	</div>

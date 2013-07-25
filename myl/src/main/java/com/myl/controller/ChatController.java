@@ -39,6 +39,8 @@ public class ChatController extends ActionSupport {
 
 	private List<Carta> deck1;
 	
+	private String user1;
+	private String user2;
 	
 	@SkipValidation
 	public HttpHeaders index() {
@@ -107,6 +109,26 @@ public class ChatController extends ActionSupport {
 
 	public void setDeck1(List<Carta> deck1) {
 		this.deck1 = deck1;
+	}
+
+
+	public String getUser1() {
+		return user1;
+	}
+
+
+	public void setUser1(String user1) {
+		this.user1 = user1;
+	}
+
+
+	public String getUser2() {
+		return user2;
+	}
+
+
+	public void setUser2(String user2) {
+		this.user2 = user2;
 	}
 	
 
