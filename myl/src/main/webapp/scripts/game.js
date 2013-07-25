@@ -47,7 +47,6 @@ $(document).ready(function() {
 			obj["deck1"].sort(function() {
 				return Math.random() - 0.5
 			});
-//			drawHand(context);
 		}
 	});
 
@@ -58,8 +57,6 @@ function drawHand(context) {
 	for ( var c = 0; c < 8; c++) {
 		drawCard();
 	}
-	
-//	alert(divMano.childNodes.length);
 }
 
 function drawCard() {

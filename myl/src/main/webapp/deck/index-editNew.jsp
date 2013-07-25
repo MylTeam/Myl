@@ -8,7 +8,8 @@
 <title>Nuevo Deck</title>
 <jsp:text>
 	<![CDATA[ 
-			
+			<script src="${pageContext.request.contextPath}/scripts/jquery-1.7.2.min.js" type="text/javascript"></script>
+			<script src="${pageContext.request.contextPath}/scripts/deck.js" type="text/javascript"></script>
 		 ]]>
 
 </jsp:text>
@@ -18,13 +19,27 @@
 	<s:actionerror id="saeMuseo" theme="jquery" />
 	<s:fielderror id="sfeMuseo" theme="jquery" />
 	<s:form action="%{#request.contextPath}/deck" method="post" theme="simple" acceptcharset="UTF-8" cssStyle="border: 0px;">
-
+	<input type="hidden" name="context" id="context" value="${pageContext.request.contextPath}"/>
 
 	<table>
 	<tr>
-	<td></td>
-	<td></td>
-	<td></td>
+	<td style="width: 25%"></td>
+		
+	<td style="width: 30%"><table>
+	<tr><td></td></tr>
+	<tr><td><center><img id="viewCard" src="" height="100%"/></center></td></tr>
+	</table></td>
+	
+	<td style="width: 45%">
+	<table><tr><td>
+	<div id="deck" ondrop="drop(event)" ondragover="wsclient.allowDrop(event)">
+	
+	</div>
+	</td></tr><tr><td>
+	
+	</td></tr>
+	</table>
+	</td>
 	</tr>	
 	</table>
 
