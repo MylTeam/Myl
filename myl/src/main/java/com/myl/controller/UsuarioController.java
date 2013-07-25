@@ -91,7 +91,7 @@ public class UsuarioController extends ActionSupport implements ModelDriven<Usua
 		if (model == null) {
 			model = new Usuario();
 		}
-		return null;
+		return model;
 	}
 
 	public void setModel(Usuario model) {
