@@ -4,6 +4,9 @@ import java.util.List;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
+
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Projections;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import com.myl.modelo.Carta;
 
@@ -34,5 +37,11 @@ public class CartaDao extends HibernateDaoSupport {
 	@SuppressWarnings("unchecked")
 	public List<Carta> findByExample(Carta carta) { 
 		return getHibernateTemplate().findByExample(carta);
+	}
+	
+	public List<String> findByCriteria() { 		
+		DetachedCriteria dCriteria = DetachedCriteria.forClass(Carta.class); ;		
+		dCriteria.setProjection(Projections.distinct(Projections.property("raza")));
+		return getHibernateTemplate().findByCriteria(dCriteria);
 	}
 }

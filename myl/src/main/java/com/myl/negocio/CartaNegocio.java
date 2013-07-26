@@ -5,6 +5,8 @@ import java.util.List;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Projections;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.myl.dao.CartaDao;
@@ -41,6 +43,11 @@ public class CartaNegocio {
 	@Transactional
 	public List<Carta> findByExample(Carta Carta) {
 		return CartaDao.findByExample(Carta);
+	}
+	
+	@Transactional
+	public List<String> findByCriteria() { 		
+		return CartaDao.findByCriteria();
 	}
 	   
 	public CartaDao getCartaDao() {
