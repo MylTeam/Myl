@@ -7,6 +7,9 @@ import org.apache.struts2.interceptor.validation.SkipValidation;
 import org.apache.struts2.rest.DefaultHttpHeaders;
 import org.apache.struts2.rest.HttpHeaders;
 
+import com.myl.modelo.Usuario;
+import com.myl.util.NombreObjetosSesion;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 @Named
@@ -16,11 +19,13 @@ public class LobbyController extends ActionSupport {
 
 	private static final long serialVersionUID = 8585016072024421730L;
 	private Integer idSel;
-	
-	
+	private Usuario usuario;
+	private String username;
+		
 	@SkipValidation
 	public HttpHeaders index() {
-		
+		usuario=(Usuario) ActionContext.getContext().getSession().get(NombreObjetosSesion.USUARIO);
+		setUsername(usuario.getLogin());
 		
 		return new DefaultHttpHeaders("index").disableCaching();
 	}
@@ -32,6 +37,29 @@ public class LobbyController extends ActionSupport {
 
 	public void setIdSel(Integer idSel) {
 		this.idSel = idSel;
-	}	
+	}
+
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+
+	public String getUsername() {
+		return username;
+	}
+
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+
+		
 
 }

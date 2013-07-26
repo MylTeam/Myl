@@ -107,18 +107,22 @@
 	<tr style="height: 80%">
 	<td>
 	<div id="deck1" ondrop="drop(event)" ondragover="allowDrop(event)">
-	
+	<LABEL style="display: none;">m</LABEL>
 	</div>
 	</td>
 	</tr>
 	
 	<tr style="height: 20%">
 	<td>
-	<s:hidden id="lista" name="lista" value="" />
-	<label>Nombre:</label>
-	<s:textfield id="Nombre" name="model.deckNombre" maxlength="50" />
-	<input type="button" id="btnEnviar" onclick="enviar()" value="Aceptar"/>
-		
+
+	<s:hidden id="lista" name="lista" value="" />	
+	<table>
+	<tr>	
+	<td><s:textfield id="Nombre" name="model.deckNombre" maxlength="50" label="Nombre" /></td>
+	<td><s:submit type="button" id="btnEnviar" onclick="enviar()" value="Aceptar"/></td>
+	</tr>
+	</table>	
+	
 	</td>
 	</tr>
 	</table>

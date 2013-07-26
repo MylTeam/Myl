@@ -25,7 +25,6 @@
  <script type="text/javascript">
 	$(function() {
 		$('#conversations').tabs();
-		//$('#user2').val("");
 		$('#userName').val(document.getElementById("user1").value);
 		wsclient.connect(document.getElementById("user1").value);
 	});		

@@ -18,10 +18,13 @@ import com.myl.modelo.Carta;
 import com.myl.modelo.Deck;
 import com.myl.modelo.DeckCarta;
 import com.myl.modelo.Edicion;
+import com.myl.modelo.Usuario;
 import com.myl.negocio.CartaNegocio;
 import com.myl.negocio.DeckCartaNegocio;
 import com.myl.negocio.DeckNegocio;
 import com.myl.negocio.EdicionNegocio;
+import com.myl.util.NombreObjetosSesion;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
@@ -35,7 +38,8 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>{
 	private static final long serialVersionUID = 5808033759840689165L;
 	private Integer idSel;
 	private Deck model;
-		
+	private Usuario usuario;
+	
 	private List<Carta> resultado;
 	private List<Edicion> ediciones;
 	
@@ -69,6 +73,8 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>{
 	
 	@SkipValidation
 	public String editNew() {
+		
+		
 		ediciones=edicionNegocio.findAll();		
 		razas=cartaNegocio.findByCriteria();
 		
@@ -84,9 +90,9 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>{
 		
 		Type listType = new TypeToken<List<DeckCarta>>() {}.getType();
 		deckCartas=jsonProcessor.fromJson(lista, listType);
-						
-		model.setUsuarioId(1);		
-		model.setDeckNombre("deck2");		
+		usuario=(Usuario) ActionContext.getContext().getSession().get(NombreObjetosSesion.USUARIO);
+		
+		model.setUsuarioId(usuario.getIdUsuario());			
 		model=deckNegocio.save(model);
 		
 		for(DeckCarta dc:deckCartas){
@@ -346,6 +352,14 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>{
 
 	public void setDeckCom(List<Carta> deckCom) {
 		this.deckCom = deckCom;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	

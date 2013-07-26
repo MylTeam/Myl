@@ -22,7 +22,7 @@ import com.opensymphony.xwork2.ActionSupport;
 @Results({
 		@Result(name = "error", location = "login.jsp"),
 		@Result(name = "acceso", type = "redirectAction", params = {
-				"actionName", "catalogo-museo.action" })
+				"actionName", "usuario" })
 		 }
 
 )

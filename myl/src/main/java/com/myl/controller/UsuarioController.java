@@ -14,6 +14,8 @@ import com.myl.modelo.Usuario;
 import com.myl.modelo.Deck;
 import com.myl.negocio.DeckNegocio;
 import com.myl.negocio.UsuarioNegocio;
+import com.myl.util.NombreObjetosSesion;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
@@ -36,11 +38,11 @@ public class UsuarioController extends ActionSupport implements ModelDriven<Usua
 	@SkipValidation
 	public HttpHeaders index() {
 		
-		usuario=usuarioNegocio.findById(1);
-		idSel=1;
+		usuario=(Usuario) ActionContext.getContext().getSession().get(NombreObjetosSesion.USUARIO);		
+		idSel=usuario.getIdUsuario();
 		
 		Deck deckAux=new Deck();
-		deckAux.setUsuario(usuario);
+		deckAux.setUsuarioId(usuario.getIdUsuario());
 		
 		lista=deckNegocio.findByExample(deckAux);
 		

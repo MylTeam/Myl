@@ -30,16 +30,17 @@
 						<tr>
 							<td>${deckNombre}</td>
 							<td width="90">
-									<a href="${pageContext.request.contextPath}/deck/${deckId}/edit?idUsuarioSel=${idSel}">
+									<a href="${pageContext.request.contextPath}/deck/${deckId}/edit">
 									<img height="40" width="40" src="${pageContext.request.contextPath}/images/buttons/botEditar2.png" title="Modificar deck"/></a>
 							
-									<a href="${pageContext.request.contextPath}/deck/${deckId}/deleteConfirm?idUsuarioSel=${idSel}">
+									<a href="${pageContext.request.contextPath}/deck/${deckId}/deleteConfirm">
 									<img height="40" width="40" src="${pageContext.request.contextPath}/images/buttons/eliminar.png" title="Eliminar deck"/></a>
 							</td>
 						</tr>
 					</s:iterator>
 		</tbody>
 	</table>
+	<a href="${pageContext.request.contextPath}/deck/new"><input type="button" value="Nuevo Deck"></input></a>
 	</form>
 </body>
 	</html>

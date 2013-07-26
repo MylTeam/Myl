@@ -22,8 +22,11 @@
 	<package name="MYL" extends="rest-default,json-default">
 
 		<interceptors>
-			<!--configuro el interceptor -->			
+			<!--configuro el interceptor -->
+			<interceptor name="autenticarInterceptor"
+				class="com.myl.interceptor.AutenticarInterceptor" />			
 			<interceptor-stack name="MYLStack">
+				<interceptor-ref name="autenticarInterceptor" />
 				<interceptor-ref name="exception" />
 				<interceptor-ref name="alias" />
 				<interceptor-ref name="servletConfig" />
@@ -64,7 +67,7 @@
 		<default-interceptor-ref name="MYLStack" />
 		<global-results>
 			<result name="login">/login.jsp</result>
-			<result name="next" type="redirectAction">catalogo-tema</result>
+			<result name="next" type="redirectAction">usuario</result>
 		</global-results>
 
 

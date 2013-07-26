@@ -23,7 +23,8 @@
  <script type="text/javascript">
 	$(function() {
 		$('#conversations').tabs();
-		//$('#user2').val("");		
+		$('#userName').val(document.getElementById("user").value);
+		wsclient.connect(document.getElementById("user").value);		
 	});		
 	</script>	
 
@@ -31,7 +32,7 @@
 <body>	
 
 <input type="hidden" name="hidden" id="hidden" value="${pageContext.request.contextPath}"/>
-	
+<input type="hidden" name="user" id="user" value="${username}"/> 
 
       	<table>
 			<tr><td>

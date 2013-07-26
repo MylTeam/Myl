@@ -17,7 +17,7 @@
 	<center>
 
 		<s:form id="doLoginFrm" name="doLoginFrm"
-			action="%{#request.contextPath}/login.action" method="POST"
+			action="%{#request.contextPath}/login" method="POST"
 			cssStyle="border: 0px;">
 			<s:actionmessage id="algo" theme="jquery" />
 			<table>
