@@ -115,6 +115,8 @@
 	<tr style="height: 20%">
 	<td>
 	<s:hidden id="lista" name="lista" value="" />
+	<label>Nombre:</label>
+	<s:textfield id="Nombre" name="model.deckNombre" maxlength="50" />
 	<input type="button" id="btnEnviar" onclick="enviar()" value="Aceptar"/>
 		
 	</td>

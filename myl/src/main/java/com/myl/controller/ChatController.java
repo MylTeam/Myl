@@ -42,6 +42,8 @@ public class ChatController extends ActionSupport {
 	private String user1;
 	private String user2;
 	
+	private Integer deckId;
+	
 	@SkipValidation
 	public HttpHeaders index() {
 		
@@ -129,6 +131,16 @@ public class ChatController extends ActionSupport {
 
 	public void setUser2(String user2) {
 		this.user2 = user2;
+	}
+
+
+	public Integer getDeckId() {
+		return deckId;
+	}
+
+
+	public void setDeckId(Integer deckId) {
+		this.deckId = deckId;
 	}
 	
 

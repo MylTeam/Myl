@@ -8,6 +8,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
 
 @Entity
 @Table(name = "DeckCarta")
@@ -38,11 +40,11 @@ public class DeckCarta {
 		return EqualsBuilder.reflectionEquals(this, obj, "deck",
 				"carta");
 	}
+	
 	@Column(name = "DeckId", insertable=false, updatable=false)
 	public Integer getDeckId() {
 		return deckId;
-	}
-	
+	}	
 	public void setDeckId(Integer deckId) {
 		this.deckId = deckId;
 	}
@@ -53,6 +55,15 @@ public class DeckCarta {
 	public void setCartaId(Integer cartaId) {
 		this.cartaId = cartaId;
 	}
+	@Column(name = "CartaQt")
+	public Integer getCartaQt() {
+		return cartaQt;
+	}
+	public void setCartaQt(Integer cartaQt) {
+		this.cartaQt = cartaQt;
+	}
+		
+	
 	@EmbeddedId
 	public DeckCartaId getDeckCartaId() {
 		return deckCartaId;
@@ -78,15 +89,5 @@ public class DeckCarta {
 	public void setCarta(Carta carta) {
 		this.carta = carta;
 	}
-	
-	@Column(name = "CartaQt")
-	public Integer getCartaQt() {
-		return cartaQt;
-	}
-	public void setCartaQt(Integer cartaQt) {
-		this.cartaQt = cartaQt;
-	}
-	
-	
-		
+			
 }

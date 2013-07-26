@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Named;
+
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 import org.apache.struts2.interceptor.validation.SkipValidation;
@@ -13,49 +14,56 @@ import org.apache.struts2.rest.HttpHeaders;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.myl.messages.MessageInfoMessage;
 import com.myl.modelo.Carta;
 import com.myl.modelo.Deck;
 import com.myl.modelo.DeckCarta;
 import com.myl.modelo.Edicion;
-import com.myl.modelo.Usuario;
 import com.myl.negocio.CartaNegocio;
 import com.myl.negocio.DeckCartaNegocio;
 import com.myl.negocio.DeckNegocio;
 import com.myl.negocio.EdicionNegocio;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
-import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
-import com.opensymphony.xwork2.validator.annotations.Validations;
-import com.opensymphony.xwork2.validator.annotations.ValidatorType;
 
 @Named
 @Results({ @Result(name = "success", type = "redirectAction", params = {"actionName", "usuario" })
 ,@Result(name="res", type="json", params={"includeProperties","resultado.*"})
+,@Result(name="decks", type="json", params={"includeProperties","deckCompleto.*"})
 })
 public class DeckController extends ActionSupport implements ModelDriven<Deck>{
 	
+	private static final long serialVersionUID = 5808033759840689165L;
 	private Integer idSel;
 	private Deck model;
-	
+		
 	private List<Carta> resultado;
 	private List<Edicion> ediciones;
+	
 	private EdicionNegocio edicionNegocio;
 	private CartaNegocio cartaNegocio;
 	private DeckNegocio deckNegocio;
 	private DeckCartaNegocio deckCartaNegocio;
 
 	private List<String> razas;
-	private List<DeckCarta> deckCartas;
-	
+	private List<DeckCarta> deckCartas;	
 	private String lista;
 	private String criterioJson;
 	
 	private Gson jsonProcessor;
+	private List<Deck> decks;
+	
+	private Deck deckAux;
+	private List<DeckCarta> deck;
+	private List<Carta> deckCompleto;
+	
+	private List<Carta> deckCom;
 	
 	@SkipValidation
 	public HttpHeaders index() {
-				
+		
+		decks=deckNegocio.findAll();
+		
+		
 		return new DefaultHttpHeaders("index").disableCaching();
 	}
 	
@@ -76,29 +84,23 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>{
 		
 		Type listType = new TypeToken<List<DeckCarta>>() {}.getType();
 		deckCartas=jsonProcessor.fromJson(lista, listType);
-				
-		
+						
 		model.setUsuarioId(1);		
-		model.setDeckNombre("deck2");
-//		for(DeckCarta dc:deckCartas){
-//			dc.setDeck(model);					
-//		}
-//		model.setDeckCartas(deckCartas);
+		model.setDeckNombre("deck2");		
 		model=deckNegocio.save(model);
 		
-		
-//		for(DeckCarta dc:deckCartas){
-//			dc.setDeckId(model.getDeckId());
-//			deckCartaNegocio.save(dc);			
-//		}
-		
-		
+		for(DeckCarta dc:deckCartas){
+			deckCartaNegocio.insertCard(model.getDeckId(),dc.getCartaId() , dc.getCartaQt());
+		}
 		
 		return new DefaultHttpHeaders("success").setLocationId(model.getDeckId());
 	}
 	
 	@SkipValidation
 	public String edit() {
+		ediciones=edicionNegocio.findAll();		
+		razas=cartaNegocio.findByCriteria();		
+		
 		
 		return "edit";
 	}
@@ -109,7 +111,18 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>{
 		
 	@SkipValidation
 	public String update() {
-				
+		jsonProcessor = new Gson();				
+		Type listType = new TypeToken<List<DeckCarta>>() {}.getType();
+		deckCartas=jsonProcessor.fromJson(lista, listType);
+								
+		model=deckNegocio.save(model);
+		
+		deckCartaNegocio.deleteCardsFromDeck(model.getDeckId());
+		
+		for(DeckCarta dc:deckCartas){
+			deckCartaNegocio.insertCard(model.getDeckId(),dc.getCartaId() , dc.getCartaQt());
+		}
+		
 		return "success";
 	}
 
@@ -157,12 +170,40 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>{
 		return "res";
 	}
 	
+	public String buscarDecks(){
+		deckAux=deckNegocio.findById(idSel);
+		deckCompleto=new ArrayList<Carta>();
+		deck=new ArrayList<DeckCarta>();
+		
+		int c=0;
+		for(Carta carta:deckAux.getCartas()){															
+				Carta aux=new Carta();				
+				aux.setId(carta.getId());
+				aux.setCantidad(deckAux.getDeckCartas().get(c).getCartaQt());
+				aux.setNombre(carta.getNombre());
+				aux.setNumero(carta.getNumero());
+				aux.setEfecto(carta.getEfecto());				
+				aux.setTipo(carta.getTipo());
+				aux.setFrecuencia(carta.getFrecuencia());
+				aux.setCoste(carta.getCoste());
+				aux.setFuerza(carta.getFuerza());
+				aux.setSiglas(carta.getEdicion().getSiglas());
+				deckCompleto.add(aux);
+				c++;
+		}
+				
+		return "decks";
+	}
+	
 	public Integer getIdSel() {
 		return idSel;
 	}
 
 	public void setIdSel(Integer idSel) {
 		this.idSel = idSel;
+		if (idSel != null) {
+			model = deckNegocio.findById(idSel);
+		}
 	}
 
 
@@ -177,6 +218,15 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>{
 	public void setModel(Deck model) {
 		this.model = model;
 	}
+	
+
+	public Deck getDeckAux() {
+		return deckAux;
+	}
+
+	public void setDeckAux(Deck deckAux) {
+		this.deckAux = deckAux;
+	}
 
 	public List<Carta> getResultado() {
 		return resultado;
@@ -184,6 +234,14 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>{
 
 	public void setResultado(List<Carta> resultado) {
 		this.resultado = resultado;
+	}
+
+	public List<Edicion> getEdiciones() {
+		return ediciones;
+	}
+
+	public void setEdiciones(List<Edicion> ediciones) {
+		this.ediciones = ediciones;
 	}
 
 	public EdicionNegocio getEdicionNegocio() {
@@ -202,12 +260,20 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>{
 		this.cartaNegocio = cartaNegocio;
 	}
 
-	public List<Edicion> getEdiciones() {
-		return ediciones;
+	public DeckNegocio getDeckNegocio() {
+		return deckNegocio;
 	}
 
-	public void setEdiciones(List<Edicion> ediciones) {
-		this.ediciones = ediciones;
+	public void setDeckNegocio(DeckNegocio deckNegocio) {
+		this.deckNegocio = deckNegocio;
+	}
+
+	public DeckCartaNegocio getDeckCartaNegocio() {
+		return deckCartaNegocio;
+	}
+
+	public void setDeckCartaNegocio(DeckCartaNegocio deckCartaNegocio) {
+		this.deckCartaNegocio = deckCartaNegocio;
 	}
 
 	public List<String> getRazas() {
@@ -216,6 +282,30 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>{
 
 	public void setRazas(List<String> razas) {
 		this.razas = razas;
+	}
+
+	public List<DeckCarta> getDeckCartas() {
+		return deckCartas;
+	}
+
+	public void setDeckCartas(List<DeckCarta> deckCartas) {
+		this.deckCartas = deckCartas;
+	}
+
+	public List<DeckCarta> getDeck() {
+		return deck;
+	}
+
+	public void setDeck(List<DeckCarta> deck) {
+		this.deck = deck;
+	}
+
+	public String getLista() {
+		return lista;
+	}
+
+	public void setLista(String lista) {
+		this.lista = lista;
 	}
 
 	public String getCriterioJson() {
@@ -234,35 +324,31 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>{
 		this.jsonProcessor = jsonProcessor;
 	}
 
-	public String getLista() {
-		return lista;
+	public List<Deck> getDecks() {
+		return decks;
 	}
 
-	public void setLista(String lista) {
-		this.lista = lista;
+	public void setDecks(List<Deck> decks) {
+		this.decks = decks;
 	}	
-	public DeckNegocio getDeckNegocio() {
-		return deckNegocio;
+
+	public List<Carta> getDeckCompleto() {
+		return deckCompleto;
 	}
 
-	public void setDeckNegocio(DeckNegocio deckNegocio) {
-		this.deckNegocio = deckNegocio;
+	public void setDeckCompleto(List<Carta> deckCompleto) {
+		this.deckCompleto = deckCompleto;
 	}
 
-	public DeckCartaNegocio getDeckCartaNegocio() {
-		return deckCartaNegocio;
+	public List<Carta> getDeckCom() {
+		return deckCom;
 	}
 
-	public void setDeckCartaNegocio(DeckCartaNegocio deckCartaNegocio) {
-		this.deckCartaNegocio = deckCartaNegocio;
+	public void setDeckCom(List<Carta> deckCom) {
+		this.deckCom = deckCom;
 	}
 
-	public List<DeckCarta> getDeckCartas() {
-		return deckCartas;
-	}
-
-	public void setDeckCartas(List<DeckCarta> deckCartas) {
-		this.deckCartas = deckCartas;
-	}
+	
 
 }
+

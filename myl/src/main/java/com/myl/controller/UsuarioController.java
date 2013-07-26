@@ -22,14 +22,16 @@ import com.opensymphony.xwork2.ModelDriven;
 })
 public class UsuarioController extends ActionSupport implements ModelDriven<Usuario> {
 
-	private static final long serialVersionUID = 8585016072024421730L;
+	private static final long serialVersionUID = 1L;
+
 	private Integer idSel;
 	
 	private Usuario model=null;
 	private Usuario usuario;
 	private UsuarioNegocio usuarioNegocio;
 	private DeckNegocio deckNegocio;
-	private List<Deck> decks;
+	private List<Deck> lista;
+	private Deck deck;
 	
 	@SkipValidation
 	public HttpHeaders index() {
@@ -40,8 +42,7 @@ public class UsuarioController extends ActionSupport implements ModelDriven<Usua
 		Deck deckAux=new Deck();
 		deckAux.setUsuario(usuario);
 		
-		decks=deckNegocio.findByExample(deckAux);
-		
+		lista=deckNegocio.findByExample(deckAux);
 		
 		return new DefaultHttpHeaders("index").disableCaching();
 	}
@@ -66,14 +67,6 @@ public class UsuarioController extends ActionSupport implements ModelDriven<Usua
 	}
 
 
-	public List<Deck> getDecks() {
-		return decks;
-	}
-
-
-	public void setDecks(List<Deck> decks) {
-		this.decks = decks;
-	}
 
 
 	public DeckNegocio getDeckNegocio() {
@@ -105,6 +98,26 @@ public class UsuarioController extends ActionSupport implements ModelDriven<Usua
 
 	public void setUsuarioNegocio(UsuarioNegocio usuarioNegocio) {
 		this.usuarioNegocio = usuarioNegocio;
+	}
+
+
+	public List<Deck> getLista() {
+		return lista;
+	}
+
+
+	public void setLista(List<Deck> lista) {
+		this.lista = lista;
+	}
+
+
+	public Deck getDeck() {
+		return deck;
+	}
+
+
+	public void setDeck(Deck deck) {
+		this.deck = deck;
 	}
 
 

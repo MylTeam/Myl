@@ -38,7 +38,5 @@ public class DeckCartaId implements java.io.Serializable {
 	public void setCartaId(Integer cartaId) {
 		this.cartaId = cartaId;
 	}
-	
-	
-		
+
 }

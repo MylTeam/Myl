@@ -42,7 +42,17 @@ public class DeckCartaNegocio {
 	public List<DeckCarta> findByExample(DeckCarta deckCarta) {
 		return deckCartaDao.findByExample(deckCarta);
 	}
-	   
+	 
+	@Transactional
+	public void insertCard(Integer deckId,Integer CartaId,Integer CartaQt){
+		deckCartaDao.insertCard(deckId, CartaId, CartaQt);
+	}
+	
+	@Transactional
+	public void deleteCardsFromDeck(Integer deckId){
+		deckCartaDao.deleteCardsFromDeck(deckId);
+	}
+	
 	public DeckCartaDao getDeckCartaDao() {
 		return deckCartaDao;
 	}
