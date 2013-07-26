@@ -17,7 +17,6 @@
 #collection {width:100%;height:100%;padding:0px;border:1px solid #aaaaaa;overflow:auto;}
 #img {width:100%;height:100%;padding:0px;border:1px solid #aaaaaa;overflow:auto;}
 #deck1 {width:100%;height:100%;padding:0px;border:1px solid #aaaaaa;overflow:auto;}
-#trashdiv {width:20%;height:100%;padding:0px;border:1px solid #aaaaaa;overflow:auto;}
 
 </style>
 </head>
@@ -25,7 +24,7 @@
 	<s:url id="urlCancelar" value="/usuario" includeContext="true" />
 	<s:actionerror id="saeMuseo" theme="jquery" />
 	<s:fielderror id="sfeMuseo" theme="jquery" />
-	<s:form action="%{#request.contextPath}/deck" method="post" acceptcharset="UTF-8" cssStyle="border: 0px;height:98%;">
+	<s:form action="%{#request.contextPath}/deck" method="post" id="frmDeck" acceptcharset="UTF-8" cssStyle="border: 0px;height:98%;">
 	<input type="hidden" name="context" id="context" value="${pageContext.request.contextPath}"/>
 
 	<table style="height: 100%;width: 100%;">
@@ -92,7 +91,7 @@
 	<table style="height: 100%;width: 100%;">
 	<tr style="height: 100%">
 	<td>
-	<div id="collection" >
+	<div id="collection" ondrop="drop(event)" ondragover="allowDrop(event)">
 	 <LABEL style="display: none;">m</LABEL>
 	</div>
 	</td>
@@ -115,9 +114,9 @@
 	
 	<tr style="height: 20%">
 	<td>
-	<div id="trashdiv">
-	<img id="trash" name="trash" src="${pageContext.request.contextPath}/images/trash.png" width="90%"/>
-	</div>
+	<s:hidden id="lista" name="lista" value="" />
+	<input type="button" id="btnEnviar" onclick="enviar()" value="Aceptar"/>
+		
 	</td>
 	</tr>
 	</table>

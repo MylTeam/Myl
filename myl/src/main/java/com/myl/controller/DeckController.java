@@ -1,5 +1,6 @@
 package com.myl.controller;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,12 +12,16 @@ import org.apache.struts2.rest.DefaultHttpHeaders;
 import org.apache.struts2.rest.HttpHeaders;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.myl.messages.MessageInfoMessage;
 import com.myl.modelo.Carta;
 import com.myl.modelo.Deck;
+import com.myl.modelo.DeckCarta;
 import com.myl.modelo.Edicion;
 import com.myl.modelo.Usuario;
 import com.myl.negocio.CartaNegocio;
+import com.myl.negocio.DeckCartaNegocio;
+import com.myl.negocio.DeckNegocio;
 import com.myl.negocio.EdicionNegocio;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
@@ -25,7 +30,7 @@ import com.opensymphony.xwork2.validator.annotations.Validations;
 import com.opensymphony.xwork2.validator.annotations.ValidatorType;
 
 @Named
-@Results({ @Result(name = "success", type = "redirectAction", params = {"actionName", "deck" })
+@Results({ @Result(name = "success", type = "redirectAction", params = {"actionName", "usuario" })
 ,@Result(name="res", type="json", params={"includeProperties","resultado.*"})
 })
 public class DeckController extends ActionSupport implements ModelDriven<Deck>{
@@ -37,8 +42,13 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>{
 	private List<Edicion> ediciones;
 	private EdicionNegocio edicionNegocio;
 	private CartaNegocio cartaNegocio;
+	private DeckNegocio deckNegocio;
+	private DeckCartaNegocio deckCartaNegocio;
+
 	private List<String> razas;
+	private List<DeckCarta> deckCartas;
 	
+	private String lista;
 	private String criterioJson;
 	
 	private Gson jsonProcessor;
@@ -62,6 +72,27 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>{
 	}
 	
 	public HttpHeaders create() {
+		jsonProcessor = new Gson();		
+		
+		Type listType = new TypeToken<List<DeckCarta>>() {}.getType();
+		deckCartas=jsonProcessor.fromJson(lista, listType);
+				
+		
+		model.setUsuarioId(1);		
+		model.setDeckNombre("deck2");
+//		for(DeckCarta dc:deckCartas){
+//			dc.setDeck(model);					
+//		}
+//		model.setDeckCartas(deckCartas);
+		model=deckNegocio.save(model);
+		
+		
+//		for(DeckCarta dc:deckCartas){
+//			dc.setDeckId(model.getDeckId());
+//			deckCartaNegocio.save(dc);			
+//		}
+		
+		
 		
 		return new DefaultHttpHeaders("success").setLocationId(model.getDeckId());
 	}
@@ -201,6 +232,37 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>{
 
 	public void setJsonProcessor(Gson jsonProcessor) {
 		this.jsonProcessor = jsonProcessor;
+	}
+
+	public String getLista() {
+		return lista;
+	}
+
+	public void setLista(String lista) {
+		this.lista = lista;
 	}	
+	public DeckNegocio getDeckNegocio() {
+		return deckNegocio;
+	}
+
+	public void setDeckNegocio(DeckNegocio deckNegocio) {
+		this.deckNegocio = deckNegocio;
+	}
+
+	public DeckCartaNegocio getDeckCartaNegocio() {
+		return deckCartaNegocio;
+	}
+
+	public void setDeckCartaNegocio(DeckCartaNegocio deckCartaNegocio) {
+		this.deckCartaNegocio = deckCartaNegocio;
+	}
+
+	public List<DeckCarta> getDeckCartas() {
+		return deckCartas;
+	}
+
+	public void setDeckCartas(List<DeckCarta> deckCartas) {
+		this.deckCartas = deckCartas;
+	}
 
 }
