@@ -32,6 +32,7 @@
 					<td><s:submit value="Aceptar" /></td>
 				</tr>
 			</table>
+			<a href="${pageContext.request.contextPath}/registro/new">Registro</a>
 			<s:fielderror />
 			<s:actionerror />
 		</s:form>

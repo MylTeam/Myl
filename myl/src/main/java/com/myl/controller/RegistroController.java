@@ -24,10 +24,9 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
 @Named
-@Results({ 
-	@Result(name = "success", type = "redirectAction", params = {"actionName", "usuario" })	
+@Results({@Result(name = "registered", type = "redirectAction", params = {"actionName", "login" })
 })
-public class UsuarioController extends ActionSupport implements ModelDriven<Usuario> {
+public class RegistroController extends ActionSupport implements ModelDriven<Usuario> {
 
 	private static final long serialVersionUID = 1L;
 
@@ -42,52 +41,27 @@ public class UsuarioController extends ActionSupport implements ModelDriven<Usua
 	
 	private String confirmPass;
 	
-	@SkipValidation
-	public HttpHeaders index() {
-		
-		usuario=(Usuario) ActionContext.getContext().getSession().get(NombreObjetosSesion.USUARIO);		
-		idSel=usuario.getIdUsuario();
-		
-		Deck deckAux=new Deck();
-		deckAux.setUsuarioId(usuario.getIdUsuario());
-		
-		lista=deckNegocio.findByExample(deckAux);
-		
-		return new DefaultHttpHeaders("index").disableCaching();
-	}
-	
 	
 	@SkipValidation
-	public String edit() {
+	public String editNew() {
+		System.out.println("en editnew");		
 		
-		
-		return "edit";
+		return "editNew";
 	}
 	
-	public void validateUpdate(){
-		
+	public void validateCreate() {
+		System.out.println("en validate create");
+		if(!model.getPassword().equals(confirmPass)){
+			System.out.println("model "+model.getPassword()+" conf "+confirmPass);
+			addActionError("Las contraseñas no son iguales");
+		}
 	}
-		
-	@SkipValidation
-	public String update() {
 	
-		return "success";
-	}
-
-	@SkipValidation
-	public String deleteConfirm() {
-		return "deleteConfirm";
-	}
-
-	public void validateDestroy() {
-
-	}
-
-	
-	@SkipValidation
-	public String destroy() {
+	public HttpHeaders create() {
+		System.out.println("en create");
+		model=usuarioNegocio.save(model);
 		
-		return "success";
+		return new DefaultHttpHeaders("registered").setLocationId(model.getIdUsuario());
 	}
 	
 	

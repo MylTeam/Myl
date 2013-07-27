@@ -53,8 +53,7 @@ public class LoginController extends ActionSupport implements
 
 			else {
 				clearActionErrors();
-				ActionContext.getContext().getSession()
-				.put(NombreObjetosSesion.USUARIO, usuarios.get(0));
+				ActionContext.getContext().getSession().put(NombreObjetosSesion.USUARIO, usuarios.get(0));
 				return "next";
 			}
 
@@ -81,9 +80,8 @@ public class LoginController extends ActionSupport implements
 	}
 
 	public String index() throws Exception {
-		usuarioSel = (Usuario) ActionContext.getContext().getSession()
-				.get("usuario");
-		return create();
+		usuarioSel = (Usuario) ActionContext.getContext().getSession().get(NombreObjetosSesion.USUARIO);
+		return "index";
 	}
 
 	public String getUserId() {

@@ -5,36 +5,40 @@
 		contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" />
 	<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>Nuevo Tema</title>
+<title>Registro</title>
 <jsp:text>
-	<![CDATA[ 
-			<script src="${pageContext.request.contextPath}/scripts/Administrador.js" type="text/javascript"></script>
+	<![CDATA[ 			
 		 ]]>
 
 </jsp:text>
 </head>
 <body>
 
-	<s:url id="urlCancelar" value="/catalogo-tema.action" includeContext="true" />
+	<s:url id="urlCancelar" value="/login" includeContext="true" />
 	<s:actionerror id="saeMuseo" theme="jquery" />
 	<s:fielderror id="sfeMuseo" theme="jquery" />
 
 
-	<s:form action="%{#request.contextPath}/catalogo-tema.action" method="post"
+	<s:form action="%{#request.contextPath}/registro" method="post"
 		theme="simple" acceptcharset="UTF-8" cssStyle="border: 0px;">
 		
-		<center><h1>Agregar Tema</h1></center>
+		<center><h1>Registro</h1></center>
 		<table>
 			<tr>
-				<td><label>Nombre:</label></td>
-				<td><s:textfield id="Nombre" name="model.nombre" maxlength="50" /></td>
+				<td><label>Nombre de usuario:</label></td>
+				<td><s:textfield id="Nombre" name="model.login" maxlength="50" /></td>
 			</tr>
 			<tr>
-				<td colspan="2"><label>Descripción:</label></td>
+				<td colspan="2"><label>Contraseña:</label></td>
 			</tr>
 			<tr>
-				<td colspan="2"><s:textarea rows="5" cols="50" id="Descripcion"
-						name="model.descripcion" maxlength="200" /></td>
+				<td colspan="2"><s:textfield id="password" name="model.password" maxlength="50" /></td>
+			</tr>
+			<tr>
+				<td colspan="2"><label>Confirmar contraseña:</label></td>
+			</tr>
+			<tr>
+				<td colspan="2"><s:textfield id="confirmPass" name="confirmPass" maxlength="50" /></td>
 			</tr>
 			<tr>
 				<td colspan="2" style="text-align: center;"><sj:submit id="btnAceptar" value="Aceptar"
