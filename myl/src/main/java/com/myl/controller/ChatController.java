@@ -19,7 +19,10 @@ import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import com.myl.modelo.Carta;
 import com.myl.modelo.Deck;
+import com.myl.modelo.Usuario;
 import com.myl.negocio.DeckNegocio;
+import com.myl.util.NombreObjetosSesion;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 @Named
@@ -54,8 +57,9 @@ public class ChatController extends ActionSupport {
 	
 	public String prueba(){
 		String aux2="cual";
+		Usuario usuario=(Usuario) ActionContext.getContext().getSession().get(NombreObjetosSesion.USUARIO);
 		
-		deck=deckNegocio.findById(1);
+		deck=deckNegocio.findById(usuario.getDeckPred());
 		deck1=new ArrayList<Carta>();
 		
 		int count=0;				

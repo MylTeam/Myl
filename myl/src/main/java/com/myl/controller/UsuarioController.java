@@ -41,6 +41,8 @@ public class UsuarioController extends ActionSupport implements ModelDriven<Usua
 	private Deck deck;
 	
 	private String confirmPass;
+	private Integer deckId;
+	
 	
 	@SkipValidation
 	public HttpHeaders index() {
@@ -52,6 +54,8 @@ public class UsuarioController extends ActionSupport implements ModelDriven<Usua
 		deckAux.setUsuarioId(usuario.getIdUsuario());
 		
 		lista=deckNegocio.findByExample(deckAux);
+		
+		
 		
 		return new DefaultHttpHeaders("index").disableCaching();
 	}
@@ -88,6 +92,16 @@ public class UsuarioController extends ActionSupport implements ModelDriven<Usua
 	public String destroy() {
 		
 		return "success";
+	}
+	
+	
+	public void setDeckPredeterminado(){
+		usuario=(Usuario) ActionContext.getContext().getSession().get(NombreObjetosSesion.USUARIO);
+		
+		usuario.setDeckPred(deckId);
+		
+		usuarioNegocio.save(usuario);
+		
 	}
 	
 	
@@ -174,6 +188,16 @@ public class UsuarioController extends ActionSupport implements ModelDriven<Usua
 
 	public void setConfirmPass(String confirmPass) {
 		this.confirmPass = confirmPass;
+	}
+
+
+	public Integer getDeckId() {
+		return deckId;
+	}
+
+
+	public void setDeckId(Integer deckId) {
+		this.deckId = deckId;
 	}
 
 

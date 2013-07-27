@@ -43,22 +43,19 @@ public class RegistroController extends ActionSupport implements ModelDriven<Usu
 	
 	
 	@SkipValidation
-	public String editNew() {
-		System.out.println("en editnew");		
+	public String editNew() {		
 		
 		return "editNew";
 	}
 	
 	public void validateCreate() {
-		System.out.println("en validate create");
 		if(!model.getPassword().equals(confirmPass)){
-			System.out.println("model "+model.getPassword()+" conf "+confirmPass);
 			addActionError("Las contraseñas no son iguales");
 		}
 	}
 	
 	public HttpHeaders create() {
-		System.out.println("en create");
+		model.setDeckPred(0);
 		model=usuarioNegocio.save(model);
 		
 		return new DefaultHttpHeaders("registered").setLocationId(model.getIdUsuario());

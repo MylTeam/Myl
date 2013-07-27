@@ -1,0 +1,18 @@
+LOBBY
+-Quitar del lobby a los usuarios que esten jugando
+
+JUEGO
+-ordenar cartas
+-botar
+-tomar control
+-doble click de las cartas
+-menu contextual de las cartas
+
+DECK
+
+USUARIO
+-Establecer deck predeterminado 
+
+ADMINISTRACION
+-gestión de usuarios
+-gestion de decks

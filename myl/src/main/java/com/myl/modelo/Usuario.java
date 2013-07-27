@@ -17,6 +17,7 @@ public class Usuario {
 	private Integer idUsuario;
 	private String login;
 	private String password;
+	private Integer deckPred;
 	
 	private List<Deck> decks;
 	
@@ -46,6 +47,14 @@ public class Usuario {
 		this.password = password;
 	}
 	
+	@Column(name = "UsuarioDk")
+	public Integer getDeckPred() {
+		return deckPred;
+	}
+	public void setDeckPred(Integer deckPred) {
+		this.deckPred = deckPred;
+	}
+	
 	@OneToMany(mappedBy = "usuario")
 	public List<Deck> getDecks() {
 		return decks;
@@ -53,6 +62,7 @@ public class Usuario {
 	public void setDecks(List<Deck> decks) {
 		this.decks = decks;
 	}
+	
 		
 	
 	

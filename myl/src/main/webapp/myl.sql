@@ -142,6 +142,7 @@ CREATE TABLE `usuario` (
   `UsuarioId` mediumint(9) NOT NULL AUTO_INCREMENT,
   `UsuarioNb` varchar(100) NOT NULL,
   `UsuarioPs` varchar(50) NOT NULL,
+  `UsuarioDk` int NOT NULL,
   PRIMARY KEY (`UsuarioId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -152,7 +153,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1,'carlos','carlos');
+INSERT INTO `usuario` VALUES (1,'carlos','carlos',0);
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

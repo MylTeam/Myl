@@ -9,26 +9,40 @@
 <title>Perfil</title>
 <jsp:text>
 	<![CDATA[			 		
-							
+			<script src="${pageContext.request.contextPath}/scripts/jquery-1.7.2.min.js" type="text/javascript"></script>
+			<script src="${pageContext.request.contextPath}/scripts/deckselected.js" type="text/javascript"></script>				
 		 ]]>
 </jsp:text>
 </head>
 <body>
 <form style="width: 80%; border: 0px">
-	<input type="hidden" name="hidden" id="hidden" value="${pageContext.request.contextPath}" />
+	<input type="hidden" name="context" id="context" value="${pageContext.request.contextPath}" />
 	${usuario.login}
 	
 	<table>
+	<tr>
+	<td>Deck predeterminado:</td>
+	<td>
+	<input type="hidden" name="deck" id="deck" value="${usuario.deckPred}" />
+	<input type="text" id="result" disabled="disabled"/></td>
+	</tr>
+	</table>
+	
+	<table>
 		<thead>
-			<tr>
+			<tr>				
 				<th>Nombre</th>
+				<th>Predeterminado</th>
 				<th>Acciones</th>
 			</tr>
 		</thead>
 		<tbody>
 					<s:iterator value="lista">
 						<tr>
-							<td>${deckNombre}</td>
+							<td>${deckNombre}
+							<input type="hidden" id="h${deckId}" value="${deckNombre}"/>
+							</td>
+							<td><input type="radio" name="deckpred" onclick="setSelection(this.value)" value="${deckId}"/></td>
 							<td width="90">
 									<a href="${pageContext.request.contextPath}/deck/${deckId}/edit">
 									<img height="40" width="40" src="${pageContext.request.contextPath}/images/buttons/botEditar2.png" title="Modificar deck"/></a>
