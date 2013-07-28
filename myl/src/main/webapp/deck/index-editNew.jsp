@@ -25,7 +25,7 @@
 	<s:actionerror id="saeMuseo" theme="jquery" />
 	<s:fielderror id="sfeMuseo" theme="jquery" />
 	<s:form action="%{#request.contextPath}/deck/" method="post" 
-	id="frmDeck" acceptcharset="UTF-8" cssStyle="border: 0px;height:98%;">
+	id="frmDeck" acceptcharset="UTF-8" theme="simple" cssStyle="border: 0px;height:98%;">
 	<input type="hidden" name="context" id="context" value="${pageContext.request.contextPath}"/>
 
 	<table style="height: 100%;width: 100%;">
@@ -78,9 +78,10 @@
 	</table></td></tr>	
 	<tr style="height: 60%">
 	<td>
-	<div id="img">
-	<img id="viewCard" src="" height="50%"/>
-	</div>
+	<img id="viewCard" height="80%"/>
+	<!-- <div id="img">
+	
+	</div> -->
 	</td>
 	</tr>
 	</table>
@@ -118,7 +119,8 @@
 
 	<s:hidden id="lista" name="lista" value="" />	
 	<table>
-	<tr>	
+	<tr>
+	<td>Nombre:</td>	
 	<td><s:textfield id="Nombre" name="model.deckNombre" maxlength="50" label="Nombre" /></td>
 	<td><s:submit type="button" id="btnEnviar" onclick="enviar()" value="Aceptar"/></td>
 	</tr>

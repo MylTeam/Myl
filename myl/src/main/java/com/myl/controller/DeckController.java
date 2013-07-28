@@ -72,9 +72,7 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>{
 	}
 	
 	@SkipValidation
-	public String editNew() {
-		System.out.println("en edit new");
-		
+	public String editNew() {		
 		ediciones=edicionNegocio.findAll();		
 		razas=cartaNegocio.findByCriteria();
 		
@@ -82,11 +80,9 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>{
 	}
 	
 	public void validateCreate() {
-		System.out.println("en validate");
 	}
 	
 	public HttpHeaders create() {
-		System.out.println("en create");
 		jsonProcessor = new Gson();		
 		
 		Type listType = new TypeToken<List<DeckCarta>>() {}.getType();

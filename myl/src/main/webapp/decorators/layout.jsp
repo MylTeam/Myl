@@ -16,26 +16,22 @@
 	<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<sj:head debug="true" jqueryui="true" jquerytheme="dot-luv" locale="es" />
-<link type="text/css" rel="stylesheet"
-	href="${pageContext.request.contextPath}/scripts/dataTables/media/css/demo_page.css" />
-<link type="text/css" rel="stylesheet"
-	href="${pageContext.request.contextPath}/scripts/dataTables/media/css/demo_table.css" />
-<link type="text/css" rel="stylesheet"
-	href="${pageContext.request.contextPath}/scripts/dataTables/media/css/demo_table_jui.css" />
+<sj:head debug="true" jqueryui="true" jquerytheme="ui-darkness" locale="es" />
+<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/scripts/dataTables/media/css/demo_page.css" />
+<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/scripts/dataTables/media/css/demo_table.css" />
+<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/scripts/dataTables/media/css/demo_table_jui.css" />
 
-<link type="text/css" rel="stylesheet"
-	href="${pageContext.request.contextPath}/Estilos/print.css" />
-<link type="text/css" rel="stylesheet"
-	href="${pageContext.request.contextPath}/Estilos/main.css" />
+<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/Estilos/print.css" />
+<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/Estilos/main.css" />
+<link type="text/css" href="${pageContext.request.contextPath}/Estilos/default.css?123" rel="stylesheet" />
+
 
 <jsp:text>
-	<![CDATA[ 						
-	
-			<script src="${pageContext.request.contextPath}/struts/js/plugins/jquery.jqGrid.js" type="text/javascript"></script>
+	<![CDATA[						
+			
 			<script src="${pageContext.request.contextPath}/struts/js/plugins/jquery.form.min.js" type="text/javascript"></script>
 			<script src="${pageContext.request.contextPath}/scripts/dataTables/media/js/jquery.dataTables.js" type="text/javascript"></script>
-			<script src="${pageContext.request.contextPath}/scripts/jquery.blockUI.js" type="text/javascript"></script>
+			
 			<script src="${pageContext.request.contextPath}/scripts/jquery.feedback.js" type="text/javascript"></script>			
 			<script src="${pageContext.request.contextPath}/scripts/cdt-util.js" type="text/javascript"></script>
 		]]>
@@ -47,6 +43,8 @@
 <body>
 	<div id="pageHeader">
 		<div class="banner">
+		<img src="${pageContext.request.contextPath}/images/myl/myl.gif"/>
+			
 			<label style="font-size: 15px;"></label>
 		</div>
 	</div>
@@ -58,29 +56,31 @@
 			<table style="margin-top: 0px;">
 				<tr>
 					<td><a class="selected"
-						href="${pageContext.request.contextPath}/catalogo-museo.action">
-							<h3 style="width: 300px">Museos</h3>
+						href="${pageContext.request.contextPath}/usuario">
+							<h3 style="width: 300px">Perfil</h3>
 					</a></td>
 					<td><a class="selected"
-						href="${pageContext.request.contextPath}/catalogo-tema.action">
-							<h3 style="width: 300px">Temas</h3>
+						href="${pageContext.request.contextPath}/lobby">
+							<h3 style="width: 300px">Jugar</h3>
 					</a></td>
 					<td><a class="selected"
-						href="${pageContext.request.contextPath}/catalogo-subtema.action"><h3
-								style="width: 300px">Subtemas</h3></a></td>
+						href="${pageContext.request.contextPath}/estadisticas"><h3
+								style="width: 300px">Estadisticas</h3></a></td>
 					<td><a class="selected"
-						href="${pageContext.request.contextPath}/logout.action"><h3
+						href="${pageContext.request.contextPath}/logout"><h3
 								style="width: 300px">Cerrar Sesión</h3></a></td>
 				</tr>
 			</table>
 		</center>
-	</div>
+	</div>	
 	<div id="pageContent">
 
 		<decorator:body />
 	</div>
+	
 	<!-- <div id="pageMain">		
 	</div> -->
+	<!-- 
 	<div id="pageFooter">
 		<h2>Escuela Superior de Cómputo.</h2>
 		<p>Av. Juan de Dios Bátiz s/n esquina Miguel Othón de Mendizabal.
@@ -89,6 +89,7 @@
 		E-mail: <a href="mailto:csantiagoalva@gmail.com">csantiagoalva@gmail.com</a>
 
 	</div>
+	 -->
 </body>
 	</html>
 </jsp:root>

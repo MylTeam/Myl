@@ -6,7 +6,7 @@ form{
 	margin: 5px;
 	border: 1px solid;
 	border-color: #ADA #574 #574 #ADA;
-	background: white;
+	background: none;
 }
 
 form table *{text-align:left}

@@ -7,7 +7,8 @@
 <head>
 <title>Registro</title>
 <jsp:text>
-	<![CDATA[ 			
+	<![CDATA[
+	<script src="${pageContext.request.contextPath}/scripts/login.js" type="text/javascript"></script> 			
 		 ]]>
 
 </jsp:text>
@@ -19,7 +20,7 @@
 	<s:fielderror id="sfeMuseo" theme="jquery" />
 
 
-	<s:form action="%{#request.contextPath}/registro" method="post"
+	<s:form action="%{#request.contextPath}/registro/" method="post"
 		theme="simple" acceptcharset="UTF-8" cssStyle="border: 0px;">
 		
 		<center><h1>Registro</h1></center>

@@ -6,7 +6,9 @@ body {
 	margin-left: auto;
 	margin-right: auto;
 	/* background-image: url("images/fondo.png"); */
-	background-image: url("images/fondo2.png");	
+	/* background-image: url("images/fondo2.png");*/	
+	background-image: url("images/barco.jpg");
+	
 	background-repeat: repeat;
 	font-family: Helvetica;
 }
@@ -28,8 +30,10 @@ h1 {
 	padding: 0px;
 	font-weight: bold;
 	font-size: 11px;		
-	background-color: white;
-	background-image: url("images/banner/header_bg.png");
+	/*background-color: white;*/
+	/*background-image: url("images/banner/header_bg.png");*/
+	
+	background-image: url("images/barco.jpg");	
 	background-repeat: repeat-x;	
 	min-height: 100px;
 	max-height: 100px;
@@ -47,7 +51,7 @@ h1 {
 .banner {	
 	background-position: center;
 	text-align: center;
-	background-image: url("images/banner/ars.png");
+	
 	margin: 0px;
 	padding: 0px;
 	border: 0px;
@@ -58,6 +62,7 @@ h1 {
 }
 
 #pageMain {
+	
 	height: 450px;
 	min-height: 400px;
 	min-width: 1014px;
@@ -77,7 +82,7 @@ pageHMenu {
 	top: 100px;
 	vertical-align: top;
 	text-align: left;		
-	background: url("images/ui-bg_diagonals-thick_15_0b3e6f_40x40.png") repeat scroll 50% 50% #0B3E6F;	
+	background: url("images/ui-bg_diagonals-thick_15_0b3e6f_40x40.png") repeat scroll 50% 50% black;	
 	color: #def;
 	padding: 0px;	
 	border-color: #8ad;
@@ -137,16 +142,14 @@ pageHMenu {
 }
 
 #pageContent {
-	background-color: white;
+	background-color: black;
 	padding: 0px;
 	text-align: center;
 	width: 100%;
-	min-width: 1024px;
-	background-image: url("images/rule.png");
-	background-position: bottom left;
-	background-repeat: repeat-x;
-	min-height: 200px;	
+	min-width: 1024px;	
+	min-height: 500px;	
     top: 200px;
+    height: 100%;    
 }
 
 #pageSession {
@@ -227,12 +230,12 @@ pageHMenu {
 
 form {
 	text-align: left;
-	padding: 5px;
+	padding: 0px;
 }
 
 form label,form select,form input {
-	margin-top: 5px;
-	margin-bottom: 5px;
+	margin-top: 0px;
+	margin-bottom: 0px;
 }
 
 form label {

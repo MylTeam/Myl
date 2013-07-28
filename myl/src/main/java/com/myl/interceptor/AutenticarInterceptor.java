@@ -41,7 +41,6 @@ public class AutenticarInterceptor implements Interceptor {
 					ActionContext.getContext().getSession().put("prevAction", null);
 					return "next";
 				} else
-					System.out.println(actionInvocation.getProxy().getActionName());
 					return actionInvocation.invoke();
 			}
 		}

@@ -3,7 +3,8 @@
 	<excludes>
 		<pattern>/Estilos/*</pattern>
 		<pattern>/scripts/*</pattern>
-		<pattern>/images/*</pattern>		
+		<pattern>/images/*</pattern>
+		<pattern>/chat/*</pattern>		
 
 	</excludes>
 - 	<decorator name="layout" page="layout.jsp">

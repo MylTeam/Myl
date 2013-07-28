@@ -149,8 +149,8 @@ table.display thead th {
  
 table
 {
-	margin-top:5px;
-	margin-botton:10px;
+	margin-top:0px;
+	margin-botton:0px;
 	clear: both;
 	/*float: left;*/
 }
@@ -251,7 +251,7 @@ tr.odd {
 }
 
 tr.even {
-	background-color: white;
+	background-color: black;
 }
 
 
@@ -354,7 +354,7 @@ tr.odd td.sorting_3 {
 }
 
 tr.even td.sorting_1 {
-	background-color: #EAEBFF;
+	background-color: black;
 }
 
 tr.even td.sorting_2 {

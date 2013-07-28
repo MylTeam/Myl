@@ -98,9 +98,10 @@
 	</table></td></tr>	
 	<tr style="height: 60%">
 	<td>
-	<div id="img">
-	<img id="viewCard" src="" height="50%"/>
-	</div>
+	
+	<img id="viewCard" src="" height="80%"/>
+	<!-- <div id="img">
+	</div> -->
 	</td>
 	</tr>
 	</table>
