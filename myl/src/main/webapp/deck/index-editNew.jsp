@@ -24,7 +24,8 @@
 	<s:url id="urlCancelar" value="/usuario" includeContext="true" />
 	<s:actionerror id="saeMuseo" theme="jquery" />
 	<s:fielderror id="sfeMuseo" theme="jquery" />
-	<s:form action="%{#request.contextPath}/deck" method="post" id="frmDeck" acceptcharset="UTF-8" cssStyle="border: 0px;height:98%;">
+	<s:form action="%{#request.contextPath}/deck/" method="post" 
+	id="frmDeck" acceptcharset="UTF-8" cssStyle="border: 0px;height:98%;">
 	<input type="hidden" name="context" id="context" value="${pageContext.request.contextPath}"/>
 
 	<table style="height: 100%;width: 100%;">

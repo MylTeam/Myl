@@ -35,7 +35,7 @@ import com.opensymphony.xwork2.ModelDriven;
 })
 public class DeckController extends ActionSupport implements ModelDriven<Deck>{
 	
-	private static final long serialVersionUID = 5808033759840689165L;
+	
 	private Integer idSel;
 	private Deck model;
 	private Usuario usuario;
@@ -73,7 +73,7 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>{
 	
 	@SkipValidation
 	public String editNew() {
-		
+		System.out.println("en edit new");
 		
 		ediciones=edicionNegocio.findAll();		
 		razas=cartaNegocio.findByCriteria();
@@ -82,10 +82,11 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>{
 	}
 	
 	public void validateCreate() {
-		
+		System.out.println("en validate");
 	}
 	
 	public HttpHeaders create() {
+		System.out.println("en create");
 		jsonProcessor = new Gson();		
 		
 		Type listType = new TypeToken<List<DeckCarta>>() {}.getType();

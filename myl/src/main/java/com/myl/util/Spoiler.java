@@ -96,8 +96,10 @@ public class Spoiler {
 
 		}
 		
-		public static void loadData(){
-			File f = new File("C:/Users/Mariana/Documents/prueba/spoilers/");
+		public static void loadData(CartaNegocio cartaNegocio){
+//			File f = new File("C:/Users/Mariana/Documents/prueba/spoilers/");
+			File f = new File("C:/Users/cdt/Documents/spoilers/");
+			
 			Carta carta;
 
 			for (File file : f.listFiles()) {
@@ -106,7 +108,7 @@ public class Spoiler {
 
 					try {
 						BufferedReader in = new BufferedReader(new FileReader(
-								"C:/Users/Mariana/Documents/prueba/spoilers/"
+								"C:/Users/cdt/Documents/spoilers/"
 										+ filename));
 
 						String str = filename.replaceAll("\\D+", "");
@@ -122,7 +124,10 @@ public class Spoiler {
 								// System.out.println(cad);
 								for (int i = 0; i < 9; i++) {
 									String cad = s.substring(s.indexOf(":") + 2);
+									cad=new String(cad.getBytes("UTF-8"));
 									System.out.println(cad);
+									
+									
 									if (s.contains("Nombre:")) {
 										carta.setNombre(cad);
 									} else if (s.contains("Efecto:")) {
