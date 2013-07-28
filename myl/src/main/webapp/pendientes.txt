@@ -7,12 +7,16 @@ JUEGO
 -tomar control
 -doble click de las cartas
 -menu contextual de las cartas
+-seleccionar cartas de la mano del oponente
 
 DECK
+-mostrar datos de cartas
+
 
 USUARIO
--Establecer deck predeterminado 
+ 
 
 ADMINISTRACION
 -gestión de usuarios
 -gestion de decks
+-layout

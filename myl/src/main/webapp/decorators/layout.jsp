@@ -36,9 +36,7 @@
 			<script src="${pageContext.request.contextPath}/struts/js/plugins/jquery.form.min.js" type="text/javascript"></script>
 			<script src="${pageContext.request.contextPath}/scripts/dataTables/media/js/jquery.dataTables.js" type="text/javascript"></script>
 			<script src="${pageContext.request.contextPath}/scripts/jquery.blockUI.js" type="text/javascript"></script>
-			<script src="${pageContext.request.contextPath}/scripts/jquery.feedback.js" type="text/javascript"></script>
-			<script src='${pageContext.request.contextPath}/dwr/engine.js' type='text/javascript'></script>
-			<script src='${pageContext.request.contextPath}/dwr/util.js' type='text/javascript'></script>
+			<script src="${pageContext.request.contextPath}/scripts/jquery.feedback.js" type="text/javascript"></script>			
 			<script src="${pageContext.request.contextPath}/scripts/cdt-util.js" type="text/javascript"></script>
 		]]>
 </jsp:text>

@@ -3,11 +3,10 @@
 	<excludes>
 		<pattern>/Estilos/*</pattern>
 		<pattern>/scripts/*</pattern>
-		<pattern>/images/*</pattern>
-		
+		<pattern>/images/*</pattern>		
 
 	</excludes>
-<!-- 	<decorator name="layout" page="layout.jsp">
+- 	<decorator name="layout" page="layout.jsp">
 		<pattern>/*</pattern>
-	</decorator> -->
+	</decorator> 
 </decorators>
