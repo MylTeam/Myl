@@ -33,8 +33,8 @@
 <body>	
 <input type="hidden" name="hidden" id="hidden" value="${pageContext.request.contextPath}"/>
 <input type="hidden" name="user" id="user" value="${username}"/> 
-
-      	<table>
+<center>
+      	<table style="width: 90%;">
 			<tr><td>
 				<div id="container">
 					<div class="leftPanel">
@@ -43,25 +43,29 @@
 							Nombre: <input type="text" id="userName" /><span
 								class="onLineUserName" ></span>
 						</div>
+						<!--
 						<div>
-							<button id="connect"
-								onclick="wsclient.connect(document.getElementById('userName').value);">Conectar</button>
-							<button id="disconnect" disabled="disabled"
-								onclick="wsclient.disconnect();">DesconexiÃ³n</button>
-						</div>
-						<div id="onLineUsersPanel">
-							<h3>Usuarios conectados:</h3>
+							<button id="connect" onclick="wsclient.connect(document.getElementById('userName').value);">Conectar</button>
+							<button id="disconnect" disabled="disabled" onclick="wsclient.disconnect();">DesconexiÃ³n</button>
+						</div>-->
+						
+					</div>
+					</div>
+					</td>
+					<td style="width: 30%">
+					<h3>Usuarios conectados:</h3>
+					<div id="onLineUsersPanel" style="overflow: scroll;height: 350px">							
 							<ul id="onlineUsers">
 
 							</ul>
 						</div>
-					</div>
-					</div>					
+					</td>
+					<td style="width: 50%">					
 					<div id="conversations">
 						<ul>
 						</ul>
-					</div></td></tr></table>	
-
+					</div></td></tr></table>
+</center>
 	 <!-- <input type="hidden" name="user2" id="user2" value=""/>  -->
 	 
 	 <div style="display:none;">

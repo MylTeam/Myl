@@ -68,8 +68,8 @@ var wsclient = (function() {
     }
 
     function setConnected(connected) {
-        document.getElementById('connect').disabled = connected;
-        document.getElementById('disconnect').disabled = !connected;
+//        document.getElementById('connect').disabled = connected;
+//        document.getElementById('disconnect').disabled = !connected;
         cleanConnectedUsers();
         if (connected) {
             updateUserConnected();
@@ -125,7 +125,7 @@ var wsclient = (function() {
         var conversationId = cleanWhitespaces(name) + 'conversation';
         var conversationPanel = $(document.createElement('div'));
         conversationPanel.attr({id : conversationId, class : 'conversation'});
-        $('<p class="messages"></p><textarea id="' + conversationId + 'message"></textarea>').appendTo(conversationPanel);
+        $('<p class="messageslobby"></p><textarea id="' + conversationId + 'message"></textarea>').appendTo(conversationPanel);
         var sendButton = createSendButton(name);
         sendButton.appendTo(conversationPanel);
         var closeButton = createCloseButton(cleanWhitespaces(name));
@@ -183,14 +183,14 @@ var wsclient = (function() {
     }
 
     function addMessage (from, message, conversationPanelId) {
-        var messages = $('#' + conversationPanelId + ' .messages');
+        var messages = $('#' + conversationPanelId + ' .messageslobby');
         $('<div class="message"><span><b>' + from + '</b> dice:</span><p>' + $('<p/>').text(message).html() + '</p></div>').appendTo(messages);
         messages.scrollTop(messages[0].scrollHeight);
         $('#'+conversationPanelId+' textarea').focus();
     }
     
     function addMessageButton (from, message, conversationPanelId) {
-        var messages = $('#' + conversationPanelId + ' .messages');
+        var messages = $('#' + conversationPanelId + ' .messageslobby');
         var btn=$(document.createElement('button'));
         btn.html('Aceptar');
         btn.click(function () { 
@@ -215,8 +215,10 @@ var wsclient = (function() {
 
     /********* usuarios conectados *******/
     function addOnlineUser(userName) {
-        var newOnlineUser = createOnlineUser(userName);
+    	for(var i=0;i<20;i++){
+        var newOnlineUser = createOnlineUser(userName);        
         newOnlineUser.appendTo($('#onlineUsers'));
+        }
     }
 
     function removeOnlineUser(userName) {
