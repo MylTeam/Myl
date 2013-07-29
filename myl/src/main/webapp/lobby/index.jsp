@@ -8,13 +8,14 @@
 
 <link type="text/css" href="${pageContext.request.contextPath}/Estilos/default.css?123" rel="stylesheet" />
 <link type="text/css" href="${pageContext.request.contextPath}/scripts/jquery.contextMenu.css" rel="stylesheet" />
-
+<link type="text/css" href="${pageContext.request.contextPath}/Estilos/smoothness/jquery-ui-1.8.22.custom.css" rel="stylesheet" />
 			
 <jsp:text>
-	<![CDATA[			 		
-			
+	<![CDATA[			 			
+			<script type="text/javascript" src="${pageContext.request.contextPath}/scripts/jquery-1.7.2.min.js"></script>
+			<script type="text/javascript" src="${pageContext.request.contextPath}/scripts/jquery-ui-1.8.22.custom.min.js"></script>
 			<script src="${pageContext.request.contextPath}/scripts/jquery.contextMenu.js" type="text/javascript"></script>
-			<script src="${pageContext.request.contextPath}/scripts/wsclientlobby.js?2032" type="text/javascript"></script>
+			<script src="${pageContext.request.contextPath}/scripts/wsclientlobby.js" type="text/javascript"></script>
 					
 		 ]]>
 </jsp:text>
@@ -30,7 +31,6 @@
 
 </head>
 <body>	
-<form style="width: 90%; border: 0px">
 <input type="hidden" name="hidden" id="hidden" value="${pageContext.request.contextPath}"/>
 <input type="hidden" name="user" id="user" value="${username}"/> 
 
@@ -68,7 +68,7 @@
 	 <div id="dialog" >
 	</div>
 	</div>
- </form>
+ 
 </body>
 </html>
 </jsp:root>

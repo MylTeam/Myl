@@ -21,9 +21,9 @@
 			cssStyle="border: 0px;">
 			<s:actionmessage id="algo" theme="jquery" />
 			<table>
-				<div class="title">Acceso al sistema</div>
+				<div class="title">Iniciar sesión</div>
 				<tr>
-					<td><s:textfield name="userId" label="Nombre de usuario" /></td>
+					<td><s:textfield name="userId" label="Usuario" /></td>
 				</tr>
 				<tr>
 					<td><s:password name="password" label="Contraseña" /></td>

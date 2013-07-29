@@ -7,7 +7,7 @@
 		<pattern>/chat/*</pattern>		
 
 	</excludes>
-- 	<decorator name="layout" page="layout.jsp">
+ 	<decorator name="layout" page="layout.jsp">
 		<pattern>/*</pattern>
 	</decorator> 
 </decorators>

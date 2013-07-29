@@ -17,7 +17,8 @@
 	<constant name="struts.mapper.idParameterName" value="idSel" />
 	<constant name="struts.convention.result.path" value="/" />
 	<constant name="struts.multipart.maxSize" value="20000000" />		
-	<constant name="struts.action.excludePattern" value="/chatws"/>		
+	<constant name="struts.action.excludePattern" value="/chatws,/lobbyws"/>
+		
 
 	<package name="MYL" extends="rest-default,json-default">
 

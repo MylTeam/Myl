@@ -121,7 +121,16 @@
 		<servlet-name>wsChat</servlet-name>
 		<url-pattern>/chatws</url-pattern>
 	</servlet-mapping>
-
+	
+	<servlet>
+		<servlet-name>wsLobby</servlet-name>
+		<servlet-class>com.myl.util.WebSocketLobbyServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>wsLobby</servlet-name>
+		<url-pattern>/lobbyws</url-pattern>
+	</servlet-mapping>
+	
 	<!-- Welcome file lists -->
 	<welcome-file-list>
 		<welcome-file>/login.jsp</welcome-file>

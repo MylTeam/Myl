@@ -1,7 +1,7 @@
 var wsclient = (function() {
 
     var ws = null;
-    var wsURI = 'ws://' + location.host  + '/myl/chatws';
+    var wsURI = 'ws://' + location.host  + '/myl/lobbyws';
     function connect(userName) {    	
     	
         if(!userName || userName == '') {
