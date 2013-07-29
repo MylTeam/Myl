@@ -215,10 +215,8 @@ var wsclient = (function() {
 
     /********* usuarios conectados *******/
     function addOnlineUser(userName) {
-    	for(var i=0;i<20;i++){
         var newOnlineUser = createOnlineUser(userName);        
-        newOnlineUser.appendTo($('#onlineUsers'));
-        }
+        newOnlineUser.appendTo($('#onlineUsers'));        
     }
 
     function removeOnlineUser(userName) {

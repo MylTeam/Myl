@@ -259,6 +259,9 @@ var wsclient = (function() {
 
 function processCard(from,message,card,origen,destino){
 	var context=$('#hidden').val();
+	if(origen!="deck1" && destino!="mano1"){
+		card.idTemp="op"+card.idTemp;
+	}
 	
 	//si el destino es el campo
 	if(destino!="deck1" && destino!="mano1" && destino!="cementerio1" && destino!="destierro1" && destino!="remocion1"){
@@ -288,6 +291,7 @@ function processCard(from,message,card,origen,destino){
 			var n=divMano.childNodes.length-1;
 			$("#card"+n).remove();
 		}
+		
 		
 		objOp[destino].unshift(card);
 		var img=createCardOp(0,context,destino);
