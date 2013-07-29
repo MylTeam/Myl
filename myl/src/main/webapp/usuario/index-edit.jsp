@@ -13,7 +13,7 @@
 	<s:fielderror id="sfeTema" theme="jquery" />
 
 	<s:form action="%{#request.contextPath}/catalogo-tema/%{idTema}.action"
-		method="post" theme="simple" acceptcharset="UTF-8" cssStyle="border: 0px;">
+		method="post" theme="simple" acceptcharset="UTF-8" cssStyle="border: 0px;width:90%">
 		<center>
 			<h1>Modificar Tema</h1>
 		</center>

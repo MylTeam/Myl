@@ -16,6 +16,7 @@
 			<script src="${pageContext.request.contextPath}/scripts/jquery.contextMenu.js" type="text/javascript"></script>
 			<script src="${pageContext.request.contextPath}/scripts/wsclient.js?2032" type="text/javascript"></script>
 			<script src="${pageContext.request.contextPath}/scripts/game.js" type="text/javascript"></script>
+			<script src="${pageContext.request.contextPath}/scripts/castillo.js" type="text/javascript"></script>
 			<script src="${pageContext.request.contextPath}/scripts/menu.js" type="text/javascript"></script>			
 					
 		 ]]>
@@ -75,16 +76,16 @@
             </tr>
             <tr>
               <td style="WIDTH: 25%"><div id="remocion2d" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)">
-              <img id="remocion2" name="remocion2" src="${pageContext.request.contextPath}/images/myl/remocion1.jpg" draggable="true" width="100%"  ondragstart="wsclient.drag(event)"/>
+              <img id="remocion2" name="remocion2" class="opremocion" src="${pageContext.request.contextPath}/images/myl/remocion1.jpg" width="100%" />
               </div></td>
               <td style="WIDTH: 25%"><div id="destierro2d" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)">
-              <img id="destierro2" name="destierro2" src="${pageContext.request.contextPath}/images/myl/destierro1.jpg" draggable="true" width="100%"  ondragstart="wsclient.drag(event)"/>
+              <img id="destierro2" name="destierro2" class="opdestierro" src="${pageContext.request.contextPath}/images/myl/destierro1.jpg" width="100%" />
               </div></td>
               <td style="WIDTH: 25%"><div id="cementerio2d" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)">
-              <img id="cementerio2" name="cementerio2" src="${pageContext.request.contextPath}/images/myl/cementerio1.jpg" draggable="true" width="100%"  ondragstart="wsclient.drag(event)"/>
+              <img id="cementerio2" name="cementerio2" class="opcementerio" src="${pageContext.request.contextPath}/images/myl/cementerio1.jpg" width="100%"/>
               </div></td>
               <td style="WIDTH: 25%"><div id="castillo2" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)">
-              <img id="deck2" name="deck2" src="${pageContext.request.contextPath}/images/myl/myldeck.jpg" ondblclick="drawCard()" draggable="true" width="100%"  ondragstart="wsclient.drag(event)"/>
+              <img id="deck2" name="deck2" src="${pageContext.request.contextPath}/images/myl/myldeck.jpg" width="100%"/>
               </div></td>
             </tr>
           </tbody>
@@ -193,6 +194,12 @@
 	</div>
 	</div>
  
+ 	<div style="display:none;">
+	 <div id="dialog-cant" >
+	 	<input type="text" name="cantidad" id="cantidad" />
+	</div>
+	</div>
+	
 </body>
 </html>
 </jsp:root>

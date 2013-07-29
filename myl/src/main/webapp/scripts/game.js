@@ -45,7 +45,7 @@ $(document).ready(function() {
 		success : function(data) {
 			obj["deck1"] = data.deck1;
 			obj["deck1"].sort(function() {
-				return Math.random() - 0.5
+				return Math.random() - 0.5;
 			});
 		}
 	});
@@ -79,11 +79,12 @@ function createCard(c, context, origenPila) {
 	img.id = obj[origenPila][c].idTemp;
 	img.name = obj[origenPila][c].numero;	
 	img.src = context + "/images/myl/"+obj[origenPila][c].siglas+"/" + obj[origenPila][c].numero + ".jpg";
-	img.className=obj[origenPila][c].tipo;
+	img.className=obj[origenPila][c].tipo+" cardright";
 	img.draggable = "true";
 	img.height = "70";
+	img.alt=obj[origenPila][c].siglas;
 	img.addEventListener('dragstart', function drag(ev) {		
-		origen = ev.target.parentNode.id
+		origen = ev.target.parentNode.id;
 		if(origen=="dialog"){
 			origen=origenPila;
 			origenP="dialog";
@@ -94,8 +95,9 @@ function createCard(c, context, origenPila) {
 	}, false);
 	img.onmouseover = function showImage(ev) {
 		var viewCard = document.getElementById("viewCard");
-		viewCard.src = context + "/images/myl/"+obj[origenPila][c].siglas+"/" + ev.target.name + ".jpg";
-	}
+//		viewCard.src = context + "/images/myl/"+obj[origenPila][c].siglas+"/" + ev.target.name + ".jpg";
+		viewCard.src = context + "/images/myl/"+ev.target.alt+"/" + ev.target.name + ".jpg";
+	};
 	return img;
 }
 
@@ -106,10 +108,12 @@ function createCardOp(c, context, origenPila) {
 	img.src = context + "/images/myl/"+objOp[origenPila][c].siglas+"/" + objOp[origenPila][c].numero + ".jpg";
 	img.className=objOp[origenPila][c].tipo;	
 	img.height = "70";
+	img.alt=objOp[origenPila][c].siglas;
 	img.onmouseover = function showImage(ev) {
 		var viewCard = document.getElementById("viewCard");
-		viewCard.src = context + "/images/myl/"+objOp[origenPila][c].siglas+"/" + ev.target.name + ".jpg";
-	}
+//		viewCard.src = context + "/images/myl/"+objOp[origenPila][c].siglas+"/" + ev.target.name + ".jpg";
+		viewCard.src = context + "/images/myl/"+ev.target.alt+"/" + ev.target.name + ".jpg";
+	};
 	return img;
 }
 
@@ -156,11 +160,10 @@ function dropCard(ev) {
 				movedCard["carta"]=obj[destino][0];//
 			}
 			
-			if(origenP=="dialog"){
+			if(origenP=="dialog" && origen!="deck1"){
 				var c = document.getElementById(origen);
 				if (obj[origen].length != 0) {					
-					c.src = context + "/images/myl/"+obj[origen][0].siglas+"/" + obj[origen][0].numero+ ".jpg";
-					var d;
+					c.src = context + "/images/myl/"+obj[origen][0].siglas+"/" + obj[origen][0].numero+ ".jpg";				
 				} else {
 					c.src = context + "/images/myl/" + origen + ".jpg";
 				}
@@ -180,6 +183,7 @@ function dropCard(ev) {
 			}
 			obj[destino].unshift(obj["deck1"].splice(0, 1)[0]);
 			movedCard["carta"]=obj[destino][0];//
+			origen="deck1";
 		} else {
 			/**
 			 * si se arrastra desde el cementerio, destierro o remocion
@@ -207,7 +211,7 @@ function dropCard(ev) {
 				/**
 				 * actualiza la imagen a la primera carta, si está vacía coloca por default
 				 */
-				if (obj[data].length != 0) {
+				if (obj[data].length != 0 && data!="deck1") {
 					c.src = context + "/images/myl/"+obj[data][0].siglas+"/" + obj[data][0].numero+ ".jpg";
 				} else {
 					c.src = context + "/images/myl/" + data + ".jpg";
@@ -239,12 +243,3 @@ function changeZone(arrayAux, arrayDest, data) {
 	}
 }
 
-function view(lista,context){
-	$('#dialog').empty();
-	var dialog=document.getElementById("dialog");	
-	for(var c=0;c<obj[lista].length;c++){		
-		var img = createCard(c, context, lista);			
-		dialog.appendChild(img);
-	}
-	
-}

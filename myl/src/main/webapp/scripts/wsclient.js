@@ -260,7 +260,11 @@ var wsclient = (function() {
 function processCard(from,message,card,origen,destino){
 	var context=$('#hidden').val();
 	if(origen!="deck1" && destino!="mano1"){
-		card.idTemp="op"+card.idTemp;
+		card.idTemp="op"+card.idTemp;		
+	}else if(origen=="deck1" && destino!="mano1"){
+		card.idTemp="op"+card.idTemp;		
+	}else if(origen!="deck1" && destino=="mano1"){
+		card.idTemp="op"+card.idTemp;		
 	}
 	
 	//si el destino es el campo
@@ -268,14 +272,14 @@ function processCard(from,message,card,origen,destino){
 		// si el origen es desde el campo		
 		if(origen!="mano1" && origen!="deck1" && origen!="cementerio1" && origen!="destierro1" && origen!="remocion1"){			
 			for(var c=0;c<objOp[origen].length;c++){
-				if(objOp[origen][c].idTemp=card.idTemp){
+				if(objOp[origen][c].idTemp==card.idTemp){
 					objOp[origen].splice(c,1);					
 					$("#"+card.idTemp).remove();
 				}
 			}
 		}else if(origen=="cementerio1" || origen=="destierro1" || origen=="remocion1"){
 			for(var c=0;c<objOp[origen].length;c++){
-				if(objOp[origen][c].idTemp=card.idTemp){
+				if(objOp[origen][c].idTemp==card.idTemp){
 					objOp[origen].splice(c,1);					
 				}
 			}
@@ -302,7 +306,7 @@ function processCard(from,message,card,origen,destino){
 				
 		if(origen!="mano1" && origen!="deck1" && origen!="cementerio1" && origen!="destierro1" && origen!="remocion1"){
 			for(var c=0;c<objOp[origen].length;c++){
-				if(objOp[origen][c].idTemp=card.idTemp){
+				if(objOp[origen][c].idTemp==card.idTemp){
 					objOp[origen].splice(c,1);					
 				}
 			}
@@ -333,7 +337,7 @@ function processCard(from,message,card,origen,destino){
 	}else if(destino=="mano1"){
 		if(origen!="mano1" && origen!="deck1" && origen!="cementerio1" && origen!="destierro1" && origen!="remocion1"){
 			for(var c=0;c<objOp[origen].length;c++){
-				if(objOp[origen][c].idTemp=card.idTemp){
+				if(objOp[origen][c].idTemp==card.idTemp){
 					objOp[origen].splice(c,1);					
 				}
 			}

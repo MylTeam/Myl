@@ -31,7 +31,7 @@
 	<s:actionerror id="saeMuseo" theme="jquery" />
 	<s:fielderror id="sfeMuseo" theme="jquery" />
 	<s:form action="%{#request.contextPath}/deck/%{deckId}"
-		method="post" theme="simple" id="frmDeck" acceptcharset="UTF-8" cssStyle="border: 0px;">		
+		method="post" theme="simple" id="frmDeck" acceptcharset="UTF-8" cssStyle="border: 0px;width:90%">		
 		<s:hidden id="hdnMethod" name="_method" value="put" />
 		
 	<input type="hidden" name="context" id="context" value="${pageContext.request.contextPath}"/>
@@ -94,14 +94,33 @@
 	</select>
 	</td></tr>
 	
-	<tr><td><input type="button" id="btnSearch" onclick="search()" value="Buscar"/></td></tr>
+	<tr><td><input type="button" id="btnSearch" onclick="search()" value="Buscar" class="ui-button ui-widget ui-state-default ui-corner-all"/></td></tr>
 	</table></td></tr>	
 	<tr style="height: 60%">
 	<td>
+	<!-- inicio de tabla de información -->
+	<table><tr><td style="width: 40%;vertical-align: top">
 	
-	<img id="viewCard" src="" height="80%"/>
-	<!-- <div id="img">
-	</div> -->
+	<table style="width: 100%">
+	<tr><td style="width: 100%;">
+	<img id="viewCard" height="100%"/>
+	</td></tr>
+	</table>
+	
+	</td><td style="width: 60%">
+	
+	<table>
+	<tr><td style="width: 10px;height: 50px">Nombre:</td><td><span id="spnb"></span></td></tr>
+	<tr><td>Tipo:</td><td><span id="sptp"></span></td></tr>
+	<tr><td>Frecuencia:</td><td><span id="spfr"></span></td></tr>
+	<tr><td>Coste:</td><td><span id="spct"></span></td></tr>
+	<tr><td>Fuerza:</td><td><span id="spfz"></span></td></tr>
+	<tr><td>Raza:</td><td><span id="sprz"></span></td></tr>
+	<tr><td colspan="2" style="height: 150px;font-size: 11px;vertical-align: top"><span id="sphb"></span></td></tr>
+	</table>
+	
+	</td></tr></table>
+	<!-- fin de tabla de información -->
 	</td>
 	</tr>
 	</table>
@@ -139,8 +158,8 @@
 	<s:hidden id="lista" name="lista" value="" />
 	<label>Nombre:</label>
 	<s:textfield id="Nombre" name="model.deckNombre" maxlength="50" />
-	<input type="button" id="btnEnviar" onclick="enviar()" value="Aceptar"/>
-		
+	
+	<input type="button" id="btnEnviar" onclick="enviar()" value="Guardar" class="ui-button ui-widget ui-state-default ui-corner-all"/>
 	</td>
 	</tr>
 	</table>

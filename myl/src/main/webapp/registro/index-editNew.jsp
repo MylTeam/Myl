@@ -20,8 +20,7 @@
 	<s:fielderror id="sfeMuseo" theme="jquery" />
 
 
-	<s:form action="%{#request.contextPath}/registro/" method="post"
-		theme="simple" acceptcharset="UTF-8" cssStyle="border: 0px;">
+	<s:form action="%{#request.contextPath}/registro/" method="post" theme="simple" acceptcharset="UTF-8" cssStyle="border: 0px;">
 		
 		<center><h1>Registro</h1></center>
 		<table>
@@ -30,16 +29,12 @@
 				<td><s:textfield id="Nombre" name="model.login" maxlength="50" /></td>
 			</tr>
 			<tr>
-				<td colspan="2"><label>Contraseña:</label></td>
+				<td><label>Contraseña:</label></td>			
+				<td><s:password id="password" name="model.password" maxlength="50" /></td>
 			</tr>
 			<tr>
-				<td colspan="2"><s:textfield id="password" name="model.password" maxlength="50" /></td>
-			</tr>
-			<tr>
-				<td colspan="2"><label>Confirmar contraseña:</label></td>
-			</tr>
-			<tr>
-				<td colspan="2"><s:textfield id="confirmPass" name="confirmPass" maxlength="50" /></td>
+				<td><label>Confirmar contraseña:</label></td>			
+				<td><s:password id="confirmPass" name="confirmPass" maxlength="50" /></td>
 			</tr>
 			<tr>
 				<td colspan="2" style="text-align: center;"><sj:submit id="btnAceptar" value="Aceptar"

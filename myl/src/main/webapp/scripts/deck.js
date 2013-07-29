@@ -23,6 +23,14 @@ function createCard(c, context, origenPila) {
 	img.onmouseover = function showImage(ev) {
 		var viewCard = document.getElementById("viewCard");
 		viewCard.src = context + "/images/myl/" + obj[origenPila][c].siglas + "/" + ev.target.name + ".jpg";
+		
+		$("#spnb").text(obj[origenPila][c].nombre);
+		$("#sptp").text(obj[origenPila][c].tipo);
+		$("#spfr").text(obj[origenPila][c].frecuencia);
+		$("#spct").text(obj[origenPila][c].coste);
+		$("#spfz").text(obj[origenPila][c].fuerza);
+		$("#sprz").text(obj[origenPila][c].raza);
+		$("#sphb").text(obj[origenPila][c].efecto);		
 	}
 	return img;
 }
@@ -194,4 +202,19 @@ function drawDeck(context){
 		}
 	}
 }
+
+$(document).ready(function() {
+	$("#btnSearch").hover(
+			function(){
+				$("#btnSearch").addClass("ui-state-hover")},
+			function(){
+				$("#btnSearch").removeClass("ui-state-hover")}
+	);
+	$("#btnEnviar").hover(
+			function(){
+				$("#btnEnviar").addClass("ui-state-hover")},
+			function(){
+				$("#btnEnviar").removeClass("ui-state-hover")}
+	);
+});
 

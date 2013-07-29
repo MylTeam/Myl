@@ -159,7 +159,8 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>{
 				aux.setIdTemp(carta.getNumero()+carta.getEdicion().getSiglas());
 				aux.setNombre(carta.getNombre());
 				aux.setNumero(carta.getNumero());
-				aux.setEfecto(carta.getEfecto());				
+				aux.setEfecto(carta.getEfecto());
+				aux.setRaza(carta.getRaza());
 				aux.setTipo(carta.getTipo());
 				aux.setFrecuencia(carta.getFrecuencia());
 				aux.setCoste(carta.getCoste());
@@ -187,6 +188,7 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>{
 				aux.setNumero(carta.getNumero());
 				aux.setEfecto(carta.getEfecto());				
 				aux.setTipo(carta.getTipo());
+				aux.setRaza(carta.getRaza());
 				aux.setFrecuencia(carta.getFrecuencia());
 				aux.setCoste(carta.getCoste());
 				aux.setFuerza(carta.getFuerza());

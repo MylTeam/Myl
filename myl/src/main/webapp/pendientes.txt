@@ -1,16 +1,20 @@
 LOBBY
--Quitar del lobby a los usuarios que esten jugando
+
 
 JUEGO
--ordenar cartas
--botar
--tomar control
--doble click de las cartas
--menu contextual de las cartas
--seleccionar cartas de la mano del oponente
 
-DECK
+-seleccionar cartas de la mano del oponente
+-tomar/ceder control
+
+
+-notificar derrota y victoria
+-Estilo
 -mostrar datos de cartas
+-logs
+-doble click de las cartas
+
+-incidencias
+DECK
 
 
 USUARIO
@@ -19,4 +23,3 @@ USUARIO
 ADMINISTRACION
 -gestión de usuarios
 -gestion de decks
--layout

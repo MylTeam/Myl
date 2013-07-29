@@ -71,7 +71,8 @@ public class ChatController extends ActionSupport {
 				aux.setIdTemp(i+carta.getNumero()+carta.getEdicion().getSiglas());
 				aux.setNombre(carta.getNombre());
 				aux.setNumero(carta.getNumero());
-				aux.setEfecto(carta.getEfecto());				
+				aux.setEfecto(carta.getEfecto());	
+				aux.setRaza(carta.getRaza());
 				aux.setTipo(carta.getTipo());
 				aux.setFrecuencia(carta.getFrecuencia());
 				aux.setCoste(carta.getCoste());
