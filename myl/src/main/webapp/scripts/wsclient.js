@@ -270,7 +270,7 @@ function processCard(from,message,card,origen,destino){
 	//si el destino es el campo
 	if(destino!="deck1" && destino!="mano1" && destino!="cementerio1" && destino!="destierro1" && destino!="remocion1"){
 		// si el origen es desde el campo		
-		if(origen!="mano1" && origen!="deck1" && origen!="cementerio1" && origen!="destierro1" && origen!="remocion1"){			
+		if(origen!="mano1" && origen!="deck1" && origen!="cementerio1" && origen!="destierro1" && origen!="remocion1" && origen.indexOf(2)==-1){			
 			for(var c=0;c<objOp[origen].length;c++){
 				if(objOp[origen][c].idTemp==card.idTemp){
 					objOp[origen].splice(c,1);					
@@ -294,6 +294,26 @@ function processCard(from,message,card,origen,destino){
 			var divMano=document.getElementById(origen.replace("1","2"));
 			var n=divMano.childNodes.length-1;
 			$("#card"+n).remove();
+		}else if(origen.indexOf("2")!=-1){
+			/**
+			 * cambia la carta de propietario
+			 */
+			for(var c=0;c<obj[origen.replace("2","1")].length;c++){
+				if(obj[origen.replace("2","1")][c].idTemp==card.idTemp.substring(2)){
+					obj[origen.replace("2","1")].splice(c,1);
+					$("#"+card.idTemp.substring(2)).remove();
+				}
+			}
+			
+			if(origen=="cementerio2" || origen=="destierro2" || origen=="remocion2"){
+				origen=origen.replace("2","1");
+				var d = document.getElementById(origen);
+				if (obj[origen].length != 0) {
+					d.src = context + "/images/myl/"+obj[origen][0].siglas+"/" + obj[origen][0].numero+ ".jpg";
+				} else {
+					d.src = context + "/images/myl/" + origen + ".jpg";
+				}
+			}
 		}
 		
 		

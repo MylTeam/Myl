@@ -106,7 +106,7 @@ function createCardOp(c, context, origenPila) {
 	img.id = objOp[origenPila][c].idTemp;
 	img.name = objOp[origenPila][c].numero;	
 	img.src = context + "/images/myl/"+objOp[origenPila][c].siglas+"/" + objOp[origenPila][c].numero + ".jpg";
-	img.className=objOp[origenPila][c].tipo;	
+	img.className=objOp[origenPila][c].tipo+" oponentcard";	
 	img.height = "70";
 	img.alt=objOp[origenPila][c].siglas;
 	img.onmouseover = function showImage(ev) {
@@ -224,6 +224,31 @@ function dropCard(ev) {
 	}else{		
 		return null;
 	}
+}
+
+function randomCard(length){
+	var sel=Math.floor((Math.random()*length));
+	var context = $('#hidden').val();
+		
+	
+	
+	var divDef = document.getElementById("defensa1");
+	var img = createCard(sel, context, "mano1");
+	
+	var discard=obj["mano1"].splice(sel, 1)[0];
+	$("#"+discard.idTemp).remove();
+	
+	divDef.appendChild(img);
+
+	obj["defensa1"].unshift(discard);
+	
+	
+	var from=document.getElementById("userName").value;
+    var to=document.getElementById("user2").value;    
+    var msg="carta al azar";  
+    movedCard["origen"]="mano1";
+    movedCard["destino"]="defensa1";
+    wsclient.toChatCard(from, to, msg, discard, movedCard["origen"], movedCard["destino"] );
 }
 
 function move(arrayAux, arrayDest, data) {

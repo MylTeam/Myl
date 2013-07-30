@@ -17,7 +17,8 @@
 			<script src="${pageContext.request.contextPath}/scripts/wsclient.js?2032" type="text/javascript"></script>
 			<script src="${pageContext.request.contextPath}/scripts/game.js" type="text/javascript"></script>
 			<script src="${pageContext.request.contextPath}/scripts/castillo.js" type="text/javascript"></script>
-			<script src="${pageContext.request.contextPath}/scripts/menu.js" type="text/javascript"></script>			
+			<script src="${pageContext.request.contextPath}/scripts/menu.js" type="text/javascript"></script>
+			<script src="${pageContext.request.contextPath}/scripts/oponente.js" type="text/javascript"></script>			
 					
 		 ]]>
 </jsp:text>

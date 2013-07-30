@@ -158,7 +158,8 @@ $(function(){
         selector: '.opcementerio', 
         callback: function(key, options) {        
             switch(key){            
-            case "view":            	
+            case "view": 
+            	$("#dialog").attr("name","cementerio2");
             	viewop("cementerio1",$('#hidden').val());
             	$( "#dialog" ).dialog({ 
             		width: 500,
@@ -176,7 +177,8 @@ $(function(){
         selector: '.opdestierro', 
         callback: function(key, options) {        
             switch(key){            
-            case "view":            	
+            case "view":      
+            	$("#dialog").attr("name","destierro2");
             	viewop("destierro1",$('#hidden').val());
             	$( "#dialog" ).dialog({ 
             		width: 500,
@@ -194,7 +196,8 @@ $(function(){
         selector: '.opremocion', 
         callback: function(key, options) {        
             switch(key){            
-            case "view":            	
+            case "view": 
+            	$("#dialog").attr("name","remocion2");
             	viewop("remocion1",$('#hidden').val());
             	$( "#dialog" ).dialog({ 
             		width: 500,
@@ -204,6 +207,41 @@ $(function(){
         },
         items: {                       
             "view": {name: "Ver cartas removidas"}            
+        }
+    });              
+});
+
+$(function(){
+    $.contextMenu({
+        selector: '.oponentcard', 
+        callback: function(key, options) {        
+            switch(key){            
+            case "control":
+            	var card=$("#"+options.$trigger.context.id);
+
+            	takecontrol(options.$trigger.context.id);
+            	break;
+            }
+        },
+        items: {                       
+            "control": {name: "Tomar control"}            
+        }
+    });              
+});
+
+$(function(){
+    $.contextMenu({
+        selector: '#mano1', 
+        callback: function(key, options) {        
+            switch(key){            
+            case "cartaazar":
+            		var length=document.getElementById("mano1").childNodes.length;
+            		randomCard(length);
+            	break;
+            }
+        },
+        items: {                       
+            "cartaazar": {name: "Seleccionar carta al azar"}            
         }
     });              
 });

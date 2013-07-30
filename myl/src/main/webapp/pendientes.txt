@@ -3,8 +3,7 @@ LOBBY
 
 JUEGO
 
--seleccionar cartas de la mano del oponente
--tomar/ceder control
+-jugar con el tope revelado
 
 
 -notificar derrota y victoria
