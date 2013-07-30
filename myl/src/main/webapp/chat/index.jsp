@@ -6,11 +6,11 @@
 	<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 
-<link type="text/css" href="${pageContext.request.contextPath}/Estilos/default.css?123" rel="stylesheet" />
+<link type="text/css" href="${pageContext.request.contextPath}/Estilos/defaultchat.css?123" rel="stylesheet" />
 <link type="text/css" href="${pageContext.request.contextPath}/scripts/jquery.contextMenu.css" rel="stylesheet" />
 <link type="text/css" href="${pageContext.request.contextPath}/Estilos/smoothness/jquery-ui-1.8.22.custom.css" rel="stylesheet" />
 <jsp:text>
-	<![CDATA[			 					
+	<![CDATA[
 			<script type="text/javascript" src="${pageContext.request.contextPath}/scripts/jquery-1.7.2.min.js"></script>
 			<script type="text/javascript" src="${pageContext.request.contextPath}/scripts/jquery-ui-1.8.22.custom.min.js"></script>
 			<script src="${pageContext.request.contextPath}/scripts/jquery.contextMenu.js" type="text/javascript"></script>
@@ -18,8 +18,7 @@
 			<script src="${pageContext.request.contextPath}/scripts/game.js" type="text/javascript"></script>
 			<script src="${pageContext.request.contextPath}/scripts/castillo.js" type="text/javascript"></script>
 			<script src="${pageContext.request.contextPath}/scripts/menu.js" type="text/javascript"></script>
-			<script src="${pageContext.request.contextPath}/scripts/oponente.js" type="text/javascript"></script>			
-					
+			<script src="${pageContext.request.contextPath}/scripts/oponente.js" type="text/javascript"></script>
 		 ]]>
 </jsp:text>
  
@@ -57,6 +56,7 @@
 #cementerio1d {width:100%;height:100%;padding:0px;border:1px solid #aaaaaa;overflow:hidden;}
 #destierro1d {width:100%;height:100%;padding:0px;border:1px solid #aaaaaa;overflow:hidden;}
 
+.campo{height: 25%}
 </style>
 
 </head>
@@ -100,13 +100,13 @@
             <td style="width: 20%"><div id="aux2" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
               <td style="width: 80%"><div id="mano2" align="center" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>              
             </tr>
-            <tr>
+            <tr class="campo">
               <td colspan="2"><div id="apoyo2" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
             </tr>
-            <tr>
+            <tr class="campo">
               <td colspan="2"><div id="defensa2" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
             </tr>
-            <tr>
+            <tr class="campo">
               <td colspan="2"><div id="ataque2" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
             </tr>
           </tbody>
@@ -144,13 +144,13 @@
       <td style="WIDTH: 50%;">
         <table id="P2" class="Table" style="HEIGHT: 100%; WIDTH: 100%">
           <tbody>
-            <tr>
+            <tr class="campo">
               <td colspan="2"><div id="ataque1" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>              
             </tr>
-            <tr>
+            <tr class="campo">
               <td colspan="2"><div id="defensa1" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
             </tr>
-            <tr>
+            <tr class="campo">
               <td colspan="2"><div id="apoyo1" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
             </tr>
             <tr style="HEIGHT: 70px;">

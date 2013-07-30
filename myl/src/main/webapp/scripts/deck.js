@@ -7,6 +7,10 @@ var obj = {
 	resultado : []
 };
 
+$(document).ready(function() {	
+	$("#collection").height(window.innerHeight-170);
+});
+
 function createCard(c, context, origenPila) {
 	var img = document.createElement('img');
 	img.alt = c;

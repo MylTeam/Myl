@@ -131,7 +131,7 @@
 	<td style="width: 30%;">
 	<table style="height: 100%;width: 100%;">
 	<tr style="height: 100%">
-	<td>
+	<td style="vertical-align: top;">
 	<div id="collection" ondrop="drop(event)" ondragover="allowDrop(event)">
 	 <LABEL style="display: none;">m</LABEL>
 	</div>

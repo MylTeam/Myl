@@ -37,6 +37,9 @@ var objOp={
 
 $(document).ready(function() {	
 	
+	
+//	$("#collection").height(window.innerHeight-170);
+	
 	var context = $('#hidden').val();
 	$.ajax({
 		url : context + "/chat!prueba",

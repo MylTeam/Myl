@@ -3,14 +3,16 @@ LOBBY
 
 JUEGO
 
-
--notificar derrota y victoria
 -Estilo
 -mostrar datos de cartas
+
+-notificar derrota y victoria
 -logs
+-incidencias
+
 -doble click de las cartas
 
--incidencias
+
 DECK
 
 
