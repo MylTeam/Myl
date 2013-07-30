@@ -18,7 +18,8 @@ var obj = {
 	oropagado1 : [],
 	cementerio1 : [],
 	destierro1 : [],
-	remocion1 : []
+	remocion1 : [],
+	aux1:[]
 };
 
 var objOp={
@@ -30,7 +31,8 @@ var objOp={
 		oropagado1 : [],
 		cementerio1 : [],
 		destierro1 : [],
-		remocion1 : []		
+		remocion1 : [],
+		aux1:[]
 };
 
 $(document).ready(function() {	
@@ -232,7 +234,7 @@ function randomCard(length){
 		
 	
 	
-	var divDef = document.getElementById("defensa1");
+	var divDef = document.getElementById("aux1");
 	var img = createCard(sel, context, "mano1");
 	
 	var discard=obj["mano1"].splice(sel, 1)[0];
@@ -240,14 +242,14 @@ function randomCard(length){
 	
 	divDef.appendChild(img);
 
-	obj["defensa1"].unshift(discard);
+	obj["aux1"].unshift(discard);
 	
 	
 	var from=document.getElementById("userName").value;
     var to=document.getElementById("user2").value;    
     var msg="carta al azar";  
     movedCard["origen"]="mano1";
-    movedCard["destino"]="defensa1";
+    movedCard["destino"]="aux1";
     wsclient.toChatCard(from, to, msg, discard, movedCard["origen"], movedCard["destino"] );
 }
 

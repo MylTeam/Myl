@@ -32,6 +32,8 @@
 	});		
 	</script>	
 <style type="text/css">
+#aux1 {width:100%;height:100%;padding:0px;border:1px solid #aaaaaa;overflow:auto;}
+#aux2 {width:100%;height:100%;padding:0px;border:1px solid #aaaaaa;overflow:auto;}
 #mano1 {width:100%;height:100%;padding:0px;border:1px solid #aaaaaa;overflow:auto;}
 #mano2 {width:100%;height:100%;padding:0px;border:1px solid #aaaaaa;overflow:auto;}
 #apoyo1 {width:100%;height:100%;padding:0px;border:1px solid #aaaaaa;overflow:auto;}
@@ -95,16 +97,17 @@
         <table id="P1" class="Table" style="HEIGHT: 100%; WIDTH: 100%">
           <tbody>
             <tr style="HEIGHT: 70px;">
-              <td><div id="mano2" align="center" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
+            <td style="width: 20%"><div id="aux2" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
+              <td style="width: 80%"><div id="mano2" align="center" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>              
             </tr>
             <tr>
-              <td><div id="apoyo2" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
+              <td colspan="2"><div id="apoyo2" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
             </tr>
             <tr>
-              <td><div id="defensa2" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
+              <td colspan="2"><div id="defensa2" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
             </tr>
             <tr>
-              <td><div id="ataque2" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
+              <td colspan="2"><div id="ataque2" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
             </tr>
           </tbody>
         </table></td>
@@ -142,17 +145,17 @@
         <table id="P2" class="Table" style="HEIGHT: 100%; WIDTH: 100%">
           <tbody>
             <tr>
-              <td><div id="ataque1" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
+              <td colspan="2"><div id="ataque1" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>              
             </tr>
             <tr>
-              <td><div id="defensa1" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
+              <td colspan="2"><div id="defensa1" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
             </tr>
             <tr>
-              <td><div id="apoyo1" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
+              <td colspan="2"><div id="apoyo1" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
             </tr>
             <tr style="HEIGHT: 70px;">
-              <td><div id="mano1" align="center" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)">
-                            
+              <td style="width: 80%"><div id="mano1" align="center" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)">
+				<td style="width: 20%"><div id="aux1" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
               </div></td>
             </tr>
           </tbody>

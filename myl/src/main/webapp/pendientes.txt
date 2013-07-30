@@ -3,8 +3,6 @@ LOBBY
 
 JUEGO
 
--jugar con el tope revelado
-
 
 -notificar derrota y victoria
 -Estilo
