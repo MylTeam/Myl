@@ -2,9 +2,14 @@ LOBBY
 
 
 JUEGO
+-buscar en el mazo oponente
+
+-logs:
+	Viendo castillo
+	Ordenando cartas
+	
 
 -notificar derrota y victoria
--logs
 -incidencias
 
 -doble click de las cartas

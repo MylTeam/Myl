@@ -170,6 +170,10 @@ function enviar() {
 	$("#frmDeck").submit();
 }
 
+function eliminar() {
+	$("#frmDeck").submit();
+}
+
 function getDeck(){
 	var context = $('#context').val();
 	$.ajax({

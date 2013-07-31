@@ -35,10 +35,7 @@ var objOp={
 		aux1:[]
 };
 
-$(document).ready(function() {	
-	
-	
-//	$("#collection").height(window.innerHeight-170);
+$(document).ready(function() {			
 	
 	var context = $('#hidden').val();
 	$.ajax({
@@ -285,7 +282,7 @@ function randomCard(length){
 	
 	var from=document.getElementById("userName").value;
     var to=document.getElementById("user2").value;    
-    var msg="carta al azar";  
+    var msg="Selección de carta al azar";  
     movedCard["origen"]="mano1";
     movedCard["destino"]="aux1";
     wsclient.toChatCard(from, to, msg, discard, movedCard["origen"], movedCard["destino"] );

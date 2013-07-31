@@ -20,7 +20,7 @@
 	<constant name="struts.action.excludePattern" value="/chatws,/lobbyws"/>
 		
 
-	<package name="MYL" extends="rest-default,json-default">
+	<package name="MYL" extends="struts-default,rest-default,json-default">
 
 		<interceptors>
 			<!--configuro el interceptor -->
@@ -59,8 +59,8 @@
 				</interceptor-ref>
 				<interceptor-ref name="jsonValidation" />
 				<interceptor-ref name="restWorkflow">
-					<param name="excludeMethods">input,back,cancel,browse,index,show,edit,editNew</param>
-				</interceptor-ref>
+					<param name="excludeMethods">input,back,cancel,browse,index,show,edit,editNew</param>					
+				</interceptor-ref>				
 
 			</interceptor-stack>
 		</interceptors>

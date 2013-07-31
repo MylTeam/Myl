@@ -17,6 +17,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 @Named
 @Results({ @Result(name = "success", type = "redirectAction", params = {"actionName", "lobby" })
+,@Result(name = "nodeck", type = "redirectAction", params = {"actionName", "usuario" })
 })
 public class LobbyController extends ActionSupport {
 
@@ -34,7 +35,11 @@ public class LobbyController extends ActionSupport {
 		
 		
 //		Spoiler.loadData(cartaNegocio);
-		return new DefaultHttpHeaders("index").disableCaching();
+		if(usuario.getDeckPred()==0){					
+			return new DefaultHttpHeaders("nodeck").disableCaching();
+		}else{
+			return new DefaultHttpHeaders("index").disableCaching();
+		}
 	}
 	
 	

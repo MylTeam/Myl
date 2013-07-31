@@ -22,6 +22,9 @@ import com.myl.util.NombreObjetosSesion;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
+import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
+import com.opensymphony.xwork2.validator.annotations.Validations;
+import com.opensymphony.xwork2.validator.annotations.ValidatorType;
 
 @Named
 @Results({@Result(name = "registered", type = "redirectAction", params = {"actionName", "login" })
@@ -52,8 +55,18 @@ public class RegistroController extends ActionSupport implements ModelDriven<Usu
 		if(!model.getPassword().equals(confirmPass)){
 			addActionError("Las contraseñas no son iguales");
 		}
+		
+		Usuario aux=new Usuario();
+		aux.setLogin(model.getLogin());
+		
+		if(!usuarioNegocio.findByExample(aux).isEmpty()){
+			addActionError("Nombre de usuario no disponible");
+		}
 	}
 	
+	@Validations(requiredStrings = { @RequiredStringValidator(fieldName = "model.login", type = ValidatorType.FIELD, key = "Introduce un nombre de usuario"),
+			@RequiredStringValidator(fieldName = "model.password", type = ValidatorType.FIELD, key = "Introduce la contraseña"),
+			@RequiredStringValidator(fieldName = "confirmPass", type = ValidatorType.FIELD, key = "Confirma la contraseña")})
 	public HttpHeaders create() {
 		model.setDeckPred(0);
 		model=usuarioNegocio.save(model);

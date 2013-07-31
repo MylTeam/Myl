@@ -36,16 +36,6 @@
 		
 	<input type="hidden" name="context" id="context" value="${pageContext.request.contextPath}"/>
 	<input type="hidden" name="idSel" id="idSel" value="${idSel}"/>
-	
-	<!-- 
-	<s:iterator value="model.deckCartas">
-		<script type="text/javascript">
-			var carta={cartaId:0,cartaQt:0};
-			carta.cartaId=${cartaId};
-			carta.cartaQt=${cartaQt};
-			obj.deck.push(carta);
-		</script>
-	</s:iterator> -->
 		
 	
 	<table style="height: 100%;width: 100%;">

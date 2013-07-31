@@ -13,9 +13,7 @@
 </jsp:text>
 </head>
 <body>
-
 	<center>
-
 		<s:form id="doLoginFrm" name="doLoginFrm"
 			action="%{#request.contextPath}/login" method="POST"
 			cssStyle="border: 0px;">

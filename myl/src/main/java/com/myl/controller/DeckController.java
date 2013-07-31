@@ -23,19 +23,23 @@ import com.myl.negocio.CartaNegocio;
 import com.myl.negocio.DeckCartaNegocio;
 import com.myl.negocio.DeckNegocio;
 import com.myl.negocio.EdicionNegocio;
+import com.myl.negocio.UsuarioNegocio;
 import com.myl.util.NombreObjetosSesion;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
+import com.opensymphony.xwork2.Preparable;
+import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
+import com.opensymphony.xwork2.validator.annotations.Validations;
+import com.opensymphony.xwork2.validator.annotations.ValidatorType;
 
 @Named
 @Results({ @Result(name = "success", type = "redirectAction", params = {"actionName", "usuario" })
+,@Result(name = "input", type = "redirectAction", params = {"actionName", "usuario" })
 ,@Result(name="res", type="json", params={"includeProperties","resultado.*"})
 ,@Result(name="decks", type="json", params={"includeProperties","deckCompleto.*"})
 })
-public class DeckController extends ActionSupport implements ModelDriven<Deck>{
-	
-	
+public class DeckController extends ActionSupport implements ModelDriven<Deck>,Preparable{		
 	private Integer idSel;
 	private Deck model;
 	private Usuario usuario;
@@ -47,7 +51,8 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>{
 	private CartaNegocio cartaNegocio;
 	private DeckNegocio deckNegocio;
 	private DeckCartaNegocio deckCartaNegocio;
-
+	private UsuarioNegocio usuarioNegocio;
+	
 	private List<String> razas;
 	private List<DeckCarta> deckCartas;	
 	private String lista;
@@ -63,11 +68,9 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>{
 	private List<Carta> deckCom;
 	
 	@SkipValidation
-	public HttpHeaders index() {
-		
+	public HttpHeaders index() {		
 		decks=deckNegocio.findAll();
-		
-		
+
 		return new DefaultHttpHeaders("index").disableCaching();
 	}
 	
@@ -79,14 +82,21 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>{
 		return "editNew";
 	}
 	
-	public void validateCreate() {
-	}
-	
-	public HttpHeaders create() {
-		jsonProcessor = new Gson();		
+	public void validateCreate() {			
+		jsonProcessor = new Gson();				
+		Type listType = new TypeToken<List<DeckCarta>>() {}.getType();
+		deckCartas=jsonProcessor.fromJson(lista, listType);		
 		
+		if(deckCartas.size()==0){
+			addActionError("El mazo está vacío");
+		}
+	}	
+		
+	public HttpHeaders create() {
+		jsonProcessor = new Gson();				
 		Type listType = new TypeToken<List<DeckCarta>>() {}.getType();
 		deckCartas=jsonProcessor.fromJson(lista, listType);
+		
 		usuario=(Usuario) ActionContext.getContext().getSession().get(NombreObjetosSesion.USUARIO);
 		
 		model.setUsuarioId(usuario.getIdUsuario());			
@@ -103,21 +113,25 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>{
 	public String edit() {
 		ediciones=edicionNegocio.findAll();		
 		razas=cartaNegocio.findByCriteria();		
-		
-		
+				
 		return "edit";
 	}
 	
 	public void validateUpdate(){
+		jsonProcessor = new Gson();				
+		Type listType = new TypeToken<List<DeckCarta>>() {}.getType();
+		deckCartas=jsonProcessor.fromJson(lista, listType);
 		
+		if(deckCartas.size()==0){
+			addActionError("El mazo está vacío");
+		}
 	}
-		
-	@SkipValidation
+	
 	public String update() {
 		jsonProcessor = new Gson();				
 		Type listType = new TypeToken<List<DeckCarta>>() {}.getType();
 		deckCartas=jsonProcessor.fromJson(lista, listType);
-								
+		
 		model=deckNegocio.save(model);
 		
 		deckCartaNegocio.deleteCardsFromDeck(model.getDeckId());
@@ -135,13 +149,14 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>{
 	}
 
 	public void validateDestroy() {
-
 	}
-
-	
-	@SkipValidation
-	public String destroy() {
 		
+	public String destroy() {
+		usuario=(Usuario) ActionContext.getContext().getSession().get(NombreObjetosSesion.USUARIO);
+		usuario.setDeckPred(0);
+		
+		usuarioNegocio.save(usuario);
+		deckNegocio.delete(model);
 		return "success";
 	}
 	
@@ -242,11 +257,12 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>{
 	}
 
 	public List<Edicion> getEdiciones() {
+		ediciones=edicionNegocio.findAll();
 		return ediciones;
 	}
 
 	public void setEdiciones(List<Edicion> ediciones) {
-		this.ediciones = ediciones;
+		this.ediciones = ediciones;						
 	}
 
 	public EdicionNegocio getEdicionNegocio() {
@@ -282,11 +298,12 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>{
 	}
 
 	public List<String> getRazas() {
+		razas=cartaNegocio.findByCriteria();
 		return razas;
 	}
 
 	public void setRazas(List<String> razas) {
-		this.razas = razas;
+		this.razas = razas;		
 	}
 
 	public List<DeckCarta> getDeckCartas() {
@@ -359,6 +376,19 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>{
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}
+
+	
+	public void prepare() throws Exception {
+		   clearErrorsAndMessages();
+		}
+
+	public UsuarioNegocio getUsuarioNegocio() {
+		return usuarioNegocio;
+	}
+
+	public void setUsuarioNegocio(UsuarioNegocio usuarioNegocio) {
+		this.usuarioNegocio = usuarioNegocio;
 	}
 
 	

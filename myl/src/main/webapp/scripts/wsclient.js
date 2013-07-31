@@ -53,6 +53,7 @@ var wsclient = (function() {
                     addOnlineUser(activeUsers[i]);
                 }
             } else if (message.cardInfo){
+            	addMessageCard(message.cardInfo.from, message.cardInfo.message, cleanWhitespaces(message.cardInfo.from) + 'conversation');
             	processCard(message.cardInfo.from, message.cardInfo.message, message.cardInfo.carta,message.cardInfo.origen,message.cardInfo.destino);
             }
         }
@@ -171,12 +172,21 @@ var wsclient = (function() {
         messages.scrollTop(messages[0].scrollHeight);
         $('#'+conversationPanelId+' textarea').focus();
     }
+    
+    function addMessageCard(from, message, conversationPanelId) {
+        var messages = $('#' + conversationPanelId + ' .messages');
+        $('<div class="message">'+from+" :"+message+'</div>').appendTo(messages);
+        messages.scrollTop(messages[0].scrollHeight);
+        $('#'+conversationPanelId+' textarea').focus();
+    }
 
-    function toChat(sender, receiver, message) {
+    function toChat(sender, receiver, message) {    	
         ws.send(JSON.stringify({messageInfo : {from : sender, to : receiver, message : message}}));
     }
     
     function toChatCard(sender, receiver, message, card, origen, destino) {
+    	var conversationId = cleanWhitespaces(receiver) + 'conversation';
+    	addMessageCard(sender, message, conversationId);
         ws.send(JSON.stringify({cardInfo : {from : sender, to : receiver, message : message, carta : card, origen: origen, destino : destino}}));
     }
 
@@ -229,7 +239,7 @@ var wsclient = (function() {
     var to=document.getElementById("user2").value;
 //    var msg="Estoy moviendo "+data+" hacia "+ev.target.id;
     var data = ev.dataTransfer.getData("Text");
-    var msg="Estoy moviendo "+data+" hacia "+ev.target.id;
+    var msg="Moviendo carta hacia "+ev.target.id.replace("1","");
     
 //    var conversationId = cleanWhitespaces(to) + 'conversation';
     toChatCard(from, to, msg, card["carta"], card["origen"], card["destino"] );

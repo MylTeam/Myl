@@ -16,7 +16,6 @@ function takecontrol(id){
 			objOp[newparent][c].idTemp=newid;			
 			obj["defensa1"].unshift(objOp[newparent].splice(c,1)[0]);
 			var img=createCard(0, context, "defensa1");
-//			img.className+=" oponent";
 			
 			$("#defensa1").append($(img));
 			$("#"+id).remove();
@@ -32,7 +31,7 @@ function takecontrol(id){
 		
 			var from=document.getElementById("userName").value;
 		    var to=document.getElementById("user2").value;    
-		    var msg="tomando control de "+id;  
+		    var msg="Tomando control de carta";  
 		    movedCard["origen"]=parent;
 		    movedCard["destino"]="defensa1";
 		    wsclient.toChatCard(from, to, msg, obj["defensa1"][0], movedCard["origen"], movedCard["destino"]);

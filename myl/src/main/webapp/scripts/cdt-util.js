@@ -220,3 +220,7 @@ function distanciaEntreFechas(feuno, fedos) {
 
 	return distancia;
 };
+
+$(document).ready(function() {	
+	$(".ui-state-error").css("margin-top","0px");
+});
