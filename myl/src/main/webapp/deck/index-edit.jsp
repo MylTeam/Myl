@@ -41,7 +41,7 @@
 	<table style="height: 100%;width: 100%;">
 	<tr>
 	<!-- inicia la primer columna -->	
-	<td style="width: 25%">
+	<td style="width: 30%">
 	<table style="height: 100%; width: 100%">
 	<tr style="height: 200px"><td>
 	<table>
