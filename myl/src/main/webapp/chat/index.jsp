@@ -113,7 +113,32 @@
           </tbody>
         </table></td>
       <td id="info" style="WIDTH: 25%;">
-      <center><img id="viewCard" src="" draggable="true" height="100%"/></center>
+      
+      <!-- inicio de tabla de información -->
+	<table><tr><td style="width: 40%;vertical-align: top">
+	
+	<table style="width: 100%">
+	<tr><td style="width: 100%;">
+	<img id="viewCard" height="100%"/>
+	</td></tr>
+	</table>
+	
+	</td><td style="width: 60%">
+	
+	<table>
+	<tr><td style="width: 10px;height: 50px">Nombre:</td><td><span id="spnb"></span></td></tr>
+	<tr><td>Tipo:</td><td><span id="sptp"></span></td></tr>
+	<tr><td>Frecuencia:</td><td><span id="spfr"></span></td></tr>
+	<tr><td>Coste:</td><td><span id="spct"></span></td></tr>
+	<tr><td>Fuerza:</td><td><span id="spfz"></span></td></tr>
+	<tr><td>Raza:</td><td><span id="sprz"></span></td></tr>
+	<tr><td colspan="2" style="height: 150px;font-size: 11px;vertical-align: top"><span id="sphb"></span></td></tr>
+	</table>
+	
+	</td></tr></table>
+	<!-- fin de tabla de información -->
+	
+      <!-- <center><img id="viewCard" src="" draggable="true" height="100%"/></center> -->
       </td>
     </tr>
     <tr style="HEIGHT: 50%;">

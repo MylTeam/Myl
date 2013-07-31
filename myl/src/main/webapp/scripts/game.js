@@ -102,6 +102,23 @@ function createCard(c, context, origenPila) {
 		var viewCard = document.getElementById("viewCard");
 //		viewCard.src = context + "/images/myl/"+obj[origenPila][c].siglas+"/" + ev.target.name + ".jpg";
 		viewCard.src = context + "/images/myl/"+ev.target.alt+"/" + ev.target.name + ".jpg";
+		
+		var lista=ev.target.parentNode.id;
+		if(lista=="dialog"){
+			lista=$("#dialog").attr("name");
+		}
+		
+		for(var q=0;q<obj[lista].length;q++){
+			if(obj[lista][q].idTemp==ev.target.id){
+				$("#spnb").text(obj[lista][q].nombre);
+				$("#sptp").text(obj[lista][q].tipo);
+				$("#spfr").text(obj[lista][q].frecuencia);
+				$("#spct").text(obj[lista][q].coste);
+				$("#spfz").text(obj[lista][q].fuerza);
+				$("#sprz").text(obj[lista][q].raza);
+				$("#sphb").text(obj[lista][q].efecto);
+			}
+		}
 	};
 	return img;
 }
@@ -118,6 +135,24 @@ function createCardOp(c, context, origenPila) {
 		var viewCard = document.getElementById("viewCard");
 //		viewCard.src = context + "/images/myl/"+objOp[origenPila][c].siglas+"/" + ev.target.name + ".jpg";
 		viewCard.src = context + "/images/myl/"+ev.target.alt+"/" + ev.target.name + ".jpg";
+		
+		var lista=ev.target.parentNode.id;
+		if(lista=="dialog"){
+			lista=$("#dialog").attr("name");			
+		}
+		lista=lista.replace("2","1");
+		
+		for(var q=0;q<objOp[lista].length;q++){
+			if(objOp[lista][q].idTemp==ev.target.id){
+				$("#spnb").text(objOp[lista][q].nombre);
+				$("#sptp").text(objOp[lista][q].tipo);
+				$("#spfr").text(objOp[lista][q].frecuencia);
+				$("#spct").text(objOp[lista][q].coste);
+				$("#spfz").text(objOp[lista][q].fuerza);
+				$("#sprz").text(objOp[lista][q].raza);
+				$("#sphb").text(objOp[lista][q].efecto);
+			}
+		}
 	};
 	return img;
 }

@@ -3,9 +3,6 @@ LOBBY
 
 JUEGO
 
--Estilo
--mostrar datos de cartas
-
 -notificar derrota y victoria
 -logs
 -incidencias

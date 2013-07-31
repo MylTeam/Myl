@@ -131,16 +131,16 @@ function search() {
 		criterioJson['idEdicion'] = edicionC;
 	}
 	if (frecuenciaC != "") {
-		criterioJson['Frecuencia'] = frecuenciaC;
+		criterioJson['frecuencia'] = frecuenciaC;
 	}
 	if (tipoC != "") {
 		criterioJson['tipo'] = tipoC;
 	}
 	if ($("#coste").val() != "") {
-		criterioJson['Coste'] = parseInt($("#coste").val());
+		criterioJson['coste'] = parseInt($("#coste").val());
 	}
 	if ($("#fuerza").val() != "") {
-		criterioJson['Fuerza'] = parseInt($("#fuerza").val());
+		criterioJson['fuerza'] = parseInt($("#fuerza").val());
 	}
 	if (razaC != "") {
 		criterioJson['raza'] = razaC;

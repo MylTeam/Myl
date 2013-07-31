@@ -77,7 +77,7 @@ $(function(){
         callback: function(key, options) {
         	
             switch(key){            
-            case "view":
+            case "view":            	
             	$("#dialog").attr("name","cementerio1");
             	view("cementerio1",$('#hidden').val());
             	$( "#dialog" ).dialog({ 
@@ -98,7 +98,7 @@ $(function(){
         callback: function(key, options) {
         	
             switch(key){            
-            case "view":
+            case "view":            	
             	$("#dialog").attr("name","destierro1");
             	view("destierro1",$('#hidden').val());
             	$( "#dialog" ).dialog({ 

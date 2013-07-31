@@ -1,63 +1,63 @@
 body {
     font: 14px comic sans ms, sans-serif;
-    color: black;
+    color: white;
     background-color: black;
 }
 
 div.divblue{
 background-image: url("field/fieldblue.png");
-background-repeat: repeat-x;
+background-repeat: repeat;
 }
 div.divbluegold{
-background-image: url("field/fieldgold.png"),url("field/fieldblue.png");
-background-repeat: no-repeat,repeat-x;
-background-size: auto 50%,auto auto;
-background-position: center center,left top;
+background-image: url("field/treasure.jpg");
+background-repeat: no-repeat;
+background-size: 100% 100%;
+background-position: center center;
 }
 div.divbluecastle{
 background-image: url("field/fieldcastle.png"),url("field/fieldblue.png");
-background-repeat: no-repeat,repeat-x;
+background-repeat: no-repeat,repeat;
 background-size: auto 100%,auto auto;
 background-position: center top,left top;
 }
 div.divbluesword{
 background-image: url("field/wingedsword.png"),url("field/fieldblue.png");
-background-repeat: no-repeat,repeat-x;
+background-repeat: no-repeat,repeat;
 background-size: auto 100%,auto auto;
 background-position: center top,left top;
 }
 div.divblueshield{
 background-image: url("field/wingedshield.png"),url("field/fieldblue.png");
-background-repeat: no-repeat,repeat-x;
+background-repeat: no-repeat,repeat;
 background-size: auto 100%,auto auto;
 background-position: center top,left top;
 }
 
 div.divred{
 background-image: url("field/fieldred.png");
-background-repeat: repeat-x;
+background-repeat: repeat;
 }
 div.divredgold{
-background-image: url("field/fieldgold.png"),url("field/fieldred.png");
-background-repeat: no-repeat,repeat-x;
-background-size: auto 50%,auto auto;
-background-position: center center,left top;
+background-image: url("field/treasure.jpg");
+background-repeat: no-repeat;
+background-size: 100% 100%;
+background-position: center center;
 }
 div.divredcastle{
 background-image: url("field/fieldcastle.png"),url("field/fieldred.png");
-background-repeat: no-repeat,repeat-x;
+background-repeat: no-repeat,repeat;
 background-size: auto 100%,auto auto;
 background-position: center top,left top;
 }
 div.divredsword{
 background-image: url("field/wingedsword.png"),url("field/fieldred.png");
-background-repeat: no-repeat,repeat-x;
+background-repeat: no-repeat,repeat;
 background-size: auto 100%,auto auto;
 background-position: center top,left top;
 }
 div.divredshield{
 background-image: url("field/wingedshield.png"),url("field/fieldred.png");
-background-repeat: no-repeat,repeat-x;
+background-repeat: no-repeat,repeat;
 background-size: auto 100%,auto auto;
 background-position: center top,left top;
 }

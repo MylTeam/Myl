@@ -21,6 +21,7 @@ import com.myl.modelo.Carta;
 import com.myl.modelo.Deck;
 import com.myl.modelo.Usuario;
 import com.myl.negocio.DeckNegocio;
+import com.myl.negocio.UsuarioNegocio;
 import com.myl.util.NombreObjetosSesion;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -46,6 +47,7 @@ public class ChatController extends ActionSupport {
 	private String user2;
 	
 	private Integer deckId;
+	private UsuarioNegocio usuarioNegocio;
 	
 	@SkipValidation
 	public HttpHeaders index() {
@@ -58,7 +60,8 @@ public class ChatController extends ActionSupport {
 	public String prueba(){
 		String aux2="cual";
 		Usuario usuario=(Usuario) ActionContext.getContext().getSession().get(NombreObjetosSesion.USUARIO);
-		
+
+//		Usuario usuario=usuarioNegocio.findById(1);
 		deck=deckNegocio.findById(usuario.getDeckPred());
 		deck1=new ArrayList<Carta>();
 		
@@ -146,6 +149,16 @@ public class ChatController extends ActionSupport {
 
 	public void setDeckId(Integer deckId) {
 		this.deckId = deckId;
+	}
+
+
+	public UsuarioNegocio getUsuarioNegocio() {
+		return usuarioNegocio;
+	}
+
+
+	public void setUsuarioNegocio(UsuarioNegocio usuarioNegocio) {
+		this.usuarioNegocio = usuarioNegocio;
 	}
 	
 
