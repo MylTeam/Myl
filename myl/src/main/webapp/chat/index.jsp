@@ -31,32 +31,33 @@
 	});		
 	</script>	
 <style type="text/css">
-#aux1 {width:100%;height:100%;padding:0px;border:1px solid #aaaaaa;overflow:auto;}
-#aux2 {width:100%;height:100%;padding:0px;border:1px solid #aaaaaa;overflow:auto;}
-#mano1 {width:100%;height:100%;padding:0px;border:1px solid #aaaaaa;overflow:auto;}
-#mano2 {width:100%;height:100%;padding:0px;border:1px solid #aaaaaa;overflow:auto;}
-#apoyo1 {width:100%;height:100%;padding:0px;border:1px solid #aaaaaa;overflow:auto;}
-#apoyo2 {width:100%;height:100%;padding:0px;border:1px solid #aaaaaa;overflow:auto;}
-#defensa1 {width:100%;height:100%;padding:0px;border:1px solid #aaaaaa;overflow:auto;}
-#defensa2 {width:100%;height:100%;padding:0px;border:1px solid #aaaaaa;overflow:auto;}
-#ataque1 {width:100%;height:100%;padding:0px;border:1px solid #aaaaaa;overflow:auto;}
-#ataque2 {width:100%;height:100%;padding:0px;border:1px solid #aaaaaa;overflow:auto;}
+#aux1 {width:100%;height:100%;padding:0px;border:1px solid black;overflow:auto;}
+#aux2 {width:100%;height:100%;padding:0px;border:1px solid black;overflow:auto;}
+#mano1 {width:100%;height:100%;padding:0px;border:1px solid black;overflow:auto;}
+#mano2 {width:100%;height:100%;padding:0px;border:1px solid black;overflow:auto;}
+#apoyo1 {width:100%;height:100%;padding:0px;border:1px solid black;overflow:auto;}
+#apoyo2 {width:100%;height:100%;padding:0px;border:1px solid black;overflow:auto;}
+#defensa1 {width:100%;height:100%;padding:0px;border:1px solid black;overflow:auto;}
+#defensa2 {width:100%;height:100%;padding:0px;border:1px solid black;overflow:auto;}
+#ataque1 {width:100%;height:100%;padding:0px;border:1px solid black;overflow:auto;}
+#ataque2 {width:100%;height:100%;padding:0px;border:1px solid black;overflow:auto;}
 
-#oropagado2 {width:100%;height:100%;padding:0px;border:1px solid #aaaaaa;overflow:auto;}
-#reserva2 {width:100%;height:100%;padding:0px;border:1px solid #aaaaaa;overflow:auto;}
-#remocion2d {width:100%;height:100%;padding:0px;border:1px solid #aaaaaa;overflow:hidden;}
-#castillo2 {width:100%;height:100%;padding:0px;border:1px solid #aaaaaa;overflow:hidden;}
-#cementerio2d {width:100%;height:100%;padding:0px;border:1px solid #aaaaaa;overflow:hidden;}
-#destierro2d {width:100%;height:100%;padding:0px;border:1px solid #aaaaaa;overflow:hidden;}
+#oropagado2 {width:100%;height:100%;padding:0px;border:1px solid black;overflow:auto;}
+#reserva2 {width:100%;height:100%;padding:0px;border:1px solid black;overflow:auto;}
+#remocion2d {width:100%;height:100%;padding:0px;border:1px solid black;overflow:hidden;}
+#castillo2 {width:100%;height:100%;padding:0px;border:1px solid black;overflow:hidden;}
+#cementerio2d {width:100%;height:100%;padding:0px;border:1px solid black;overflow:hidden;}
+#destierro2d {width:100%;height:100%;padding:0px;border:1px solid black;overflow:hidden;}
 
-#oropagado1 {width:100%;height:100%;padding:0px;border:1px solid #aaaaaa;overflow:auto;}
-#reserva1 {width:100%;height:100%;padding:0px;border:1px solid #aaaaaa;overflow:auto;}
-#remocion1d {width:100%;height:100%;padding:0px;border:1px solid #aaaaaa;overflow:hidden;}
-#castillo1 {width:100%;height:100%;padding:0px;border:1px solid #aaaaaa;overflow:hidden;}
-#cementerio1d {width:100%;height:100%;padding:0px;border:1px solid #aaaaaa;overflow:hidden;}
-#destierro1d {width:100%;height:100%;padding:0px;border:1px solid #aaaaaa;overflow:hidden;}
+#oropagado1 {width:100%;height:100%;padding:0px;border:1px solid black;overflow:auto;}
+#reserva1 {width:100%;height:100%;padding:0px;border:1px solid black;overflow:auto;}
+#remocion1d {width:100%;height:100%;padding:0px;border:1px solid black;overflow:hidden;}
+#castillo1 {width:100%;height:100%;padding:0px;border:1px solid black;overflow:hidden;}
+#cementerio1d {width:100%;height:100%;padding:0px;border:1px solid black;overflow:hidden;}
+#destierro1d {width:100%;height:100%;padding:0px;border:1px solid black;overflow:hidden;}
 
 .campo{height: 25%}
+
 </style>
 
 </head>
@@ -72,10 +73,10 @@
         <table id="Ctrl1" class="Table" style="HEIGHT: 100%; WIDTH: 100%">
           <tbody>
           	<tr style="height: 33%">
-              <td colspan="4"><div id="reserva2" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>              
+              <td colspan="4"><div id="reserva2" class="divredgold" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>              
             </tr>
             <tr style="height: 33%">
-              <td colspan="4"><div id="oropagado2" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>              
+              <td colspan="4"><div id="oropagado2" class="divred" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>              
             </tr>
             <tr>
               <td style="WIDTH: 25%"><div id="remocion2d" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)">
@@ -97,17 +98,17 @@
         <table id="P1" class="Table" style="HEIGHT: 100%; WIDTH: 100%">
           <tbody>
             <tr style="HEIGHT: 70px;">
-            <td style="width: 20%"><div id="aux2" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
-              <td style="width: 80%"><div id="mano2" align="center" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>              
+            <td style="width: 20%"><div id="aux2" class="divred" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
+              <td style="width: 80%"><div id="mano2" align="center" class="divred" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>              
             </tr>
             <tr class="campo">
-              <td colspan="2"><div id="apoyo2" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
+              <td colspan="2"><div id="apoyo2" class="divredcastle" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
             </tr>
             <tr class="campo">
-              <td colspan="2"><div id="defensa2" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
+              <td colspan="2"><div id="defensa2" class="divredshield" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
             </tr>
             <tr class="campo">
-              <td colspan="2"><div id="ataque2" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
+              <td colspan="2"><div id="ataque2" class="divredsword" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
             </tr>
           </tbody>
         </table></td>
@@ -145,17 +146,17 @@
         <table id="P2" class="Table" style="HEIGHT: 100%; WIDTH: 100%">
           <tbody>
             <tr class="campo">
-              <td colspan="2"><div id="ataque1" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>              
+              <td colspan="2"><div id="ataque1" class="divbluesword" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>              
             </tr>
             <tr class="campo">
-              <td colspan="2"><div id="defensa1" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
+              <td colspan="2"><div id="defensa1" class="divblueshield" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
             </tr>
             <tr class="campo">
-              <td colspan="2"><div id="apoyo1" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
+              <td colspan="2"><div id="apoyo1" class="divbluecastle" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
             </tr>
             <tr style="HEIGHT: 70px;">
-              <td style="width: 80%"><div id="mano1" align="center" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)">
-				<td style="width: 20%"><div id="aux1" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
+              <td style="width: 80%"><div id="mano1" class="divblue" align="center" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)">
+				<td style="width: 20%"><div id="aux1" class="divblue" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
               </div></td>
             </tr>
           </tbody>
@@ -178,10 +179,10 @@
               </div></td>
             </tr>
             <tr style="height: 33%">
-              <td colspan="4"><div id="oropagado1" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>              
+              <td colspan="4"><div id="oropagado1" class="divblue" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>              
             </tr>
             <tr style="height: 33%">
-              <td colspan="4"><div id="reserva1" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>              
+              <td colspan="4"><div id="reserva1" class="divbluegold" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>              
             </tr>
           </tbody>
         </table></td>
