@@ -54,7 +54,13 @@ var wsclient = (function() {
                 }
             } else if (message.cardInfo){
             	addMessageCard(message.cardInfo.from, message.cardInfo.message, cleanWhitespaces(message.cardInfo.from) + 'conversation');
-            	processCard(message.cardInfo.from, message.cardInfo.message, message.cardInfo.carta,message.cardInfo.origen,message.cardInfo.destino);
+            	
+            	if(message.cardInfo.origen!=null && message.cardInfo.destino!=null){
+            		processCard(message.cardInfo.from, message.cardInfo.message, message.cardInfo.carta,message.cardInfo.origen,message.cardInfo.destino);
+            	}
+            } else if (message.cardListInfo){
+            	addMessageCard(message.cardListInfo.from, message.cardListInfo.message, cleanWhitespaces(message.cardListInfo.from) + 'conversation');            	
+            	processCards(message.cardListInfo.from, message.cardListInfo.message, message.cardListInfo.cartas,message.cardListInfo.origen);            	
             }
         }
     }
@@ -89,7 +95,6 @@ var wsclient = (function() {
         $('#onLineUsersPanel').css({visibility:'visible'});
         
         toChat(document.getElementById("user1").value, document.getElementById("user2").value, "gameready");
-//        showConversation(document.getElementById("user2").value);
     }
 
     function updateUserDisconnected() {
@@ -131,8 +136,6 @@ var wsclient = (function() {
         $('<p class="messages"></p><textarea id="' + conversationId + 'message" rows="3"></textarea>').appendTo(conversationPanel);
         var sendButton = createSendButton(name);
         sendButton.appendTo(conversationPanel);
-//        var closeButton = createCloseButton(cleanWhitespaces(name));
-//        closeButton.appendTo(conversationPanel);
         conversationPanel.appendTo($('#conversations'));      
     }
 
@@ -189,6 +192,12 @@ var wsclient = (function() {
     	addMessageCard(sender, message, conversationId);
         ws.send(JSON.stringify({cardInfo : {from : sender, to : receiver, message : message, carta : card, origen: origen, destino : destino}}));
     }
+    
+    function toChatCards(sender, receiver, message, cards, origen) {
+    	var conversationId = cleanWhitespaces(receiver) + 'conversation';
+    	addMessageCard(sender, message, conversationId);
+        ws.send(JSON.stringify({cardListInfo : {from : sender, to : receiver, message : message, cartas : cards, origen: origen}}));
+    }
 
     /********* usuarios conectados *******/
     function addOnlineUser(userName) {
@@ -233,18 +242,12 @@ var wsclient = (function() {
     {       	
     var card=dropCard(ev);
 
-    if(card!=null){
-//    var from=document.getElementById("userName").value;
-    var from=document.getElementById("user1").value;
-    var to=document.getElementById("user2").value;
-//    var msg="Estoy moviendo "+data+" hacia "+ev.target.id;
-    var data = ev.dataTransfer.getData("Text");
-    var msg="Moviendo carta hacia "+ev.target.id.replace("1","");
-    
-//    var conversationId = cleanWhitespaces(to) + 'conversation';
-    toChatCard(from, to, msg, card["carta"], card["origen"], card["destino"] );
-//    addMessage(from, msg, conversationId);
-//    document.getElementById(conversationId+'message').value = '';
+    if(card!=null){    	
+    	var from=document.getElementById("user1").value;
+    	var to=document.getElementById("user2").value;
+    	var data = ev.dataTransfer.getData("Text");
+    	var msg="Moviendo carta hacia "+ev.target.id.replace("1","");   
+    	toChatCard(from, to, msg, card["carta"], card["origen"], card["destino"] );
     }
     	
     }
@@ -256,6 +259,7 @@ var wsclient = (function() {
         disconnect : disconnect,
         toChat: toChat,
         toChatCard: toChatCard,
+        toChatCards: toChatCards,
         addMessage: addMessage,
         allowDrop : allowDrop,
         drag : drag,
@@ -421,4 +425,23 @@ function processCard(from,message,card,origen,destino){
 			$("#card"+n).remove();
 		}				
 	}
+}
+
+function processCards(from,message,cards,origen){
+	objOp[origen]=cards;
+
+	for(var c=0;c<objOp[origen].length;c++){
+		objOp[origen][c].idTemp="op"+objOp[origen][c].idTemp;
+	}
+	
+	viewop(origen,$('#hidden').val());
+	$("#dialog").attr("name",origen.replace("1","2"));	
+	$( "#dialog" ).dialog({ 
+		width: 500,
+		title: origen.replace("1","")+" oponente",
+		close: function( event, ui ) {
+			objOp[origen]=[];
+			msgLog("Dejó de ver el mazo castillo oponente");
+		}
+	});	
 }

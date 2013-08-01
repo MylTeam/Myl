@@ -10,7 +10,7 @@ function view(lista,context){
 	for(var c=0;c<obj[lista].length;c++){		
 		var img = createCard(c, context, lista);			
 		dialog.appendChild(img);
-	}
+	}		
 }
 
 function viewop(lista,context){
@@ -19,7 +19,7 @@ function viewop(lista,context){
 	for(var c=0;c<objOp[lista].length;c++){		
 		var img = createCardOp(c, context, lista);			
 		dialog.appendChild(img);
-	}
+	}	
 }
 
 function viewx(lista,context,cant){
@@ -32,7 +32,7 @@ function viewx(lista,context,cant){
 	for(var c=0;c<cant;c++){		
 		var img = createCard(c, context, lista);			
 		dialog.appendChild(img);
-	}
+	}	
 }
 
 function dropxcards(cant){
@@ -52,13 +52,7 @@ function dropxcards(cant){
 		c.src = context + "/images/myl/cementerio1.jpg";
 	}
 	
-		
-	var from=document.getElementById("userName").value;
-    var to=document.getElementById("user2").value;    
-    var msg="Botando "+cant+" cartas";  
-    movedCard["origen"]="deck1";
-    movedCard["destino"]="cementerio1";
-    wsclient.toChatCard(from, to, msg, obj["cementerio1"][0], movedCard["origen"], movedCard["destino"]);
+	msgLogCard(obj["cementerio1"][0], "deck1", "cementerio1", "Botando "+cant+" cartas");	
 }
 
 function tobottom(cardbottom,parent){
@@ -86,10 +80,25 @@ function tobottom(cardbottom,parent){
 		}
 	}
 	
+	msgLogCard(cardAux, parent, "deck1", "Moviendo carta al fondo del castillo");
+}
+
+function show(lista,msg){
 	var from=document.getElementById("userName").value;
-    var to=document.getElementById("user2").value;    
-    var msg="Moviendo carta al fondo del castillo";  
-    movedCard["origen"]=parent;
-    movedCard["destino"]="deck1";
+    var to=document.getElementById("user2").value;
+	wsclient.toChatCards(from, to, msg, obj[lista], lista);
+}
+
+function msgLogCard(cardAux,origen,destino,msg){
+	var from=document.getElementById("userName").value;
+    var to=document.getElementById("user2").value;         
+    movedCard["origen"]=origen;
+    movedCard["destino"]=destino;
     wsclient.toChatCard(from, to, msg, cardAux, movedCard["origen"], movedCard["destino"]);
+}
+
+function msgLog(msg){
+	var from=document.getElementById("userName").value;
+    var to=document.getElementById("user2").value;
+    wsclient.toChatCard(from, to, msg, null, null, null);
 }

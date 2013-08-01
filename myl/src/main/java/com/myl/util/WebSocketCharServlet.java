@@ -90,6 +90,15 @@ public class WebSocketCharServlet extends WebSocketServlet {
                 } else {
                 	System.out.println("Se está intentando enviar un mensaje a un usuario no conectado");
                 }
+        	}else if(charBuffer.toString().contains("cardListInfo")){
+        		final CardListInfoMessage message = jsonProcessor.fromJson(charBuffer.toString(), CardListInfoMessage.class);
+        		final ChatConnection destinationConnection = getDestinationUserConnection(message.getCardListInfo().getTo());
+                if (destinationConnection != null) {
+                    final CharBuffer jsonMessage = CharBuffer.wrap(jsonProcessor.toJson(message));
+                    destinationConnection.getWsOutbound().writeTextMessage(jsonMessage);
+                } else {
+                	System.out.println("Se está intentando enviar un mensaje a un usuario no conectado");
+                }
         	}
             
                         

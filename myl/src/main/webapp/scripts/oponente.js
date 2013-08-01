@@ -27,6 +27,10 @@ function takecontrol(id){
 				} else {
 					d.src = context + "/images/myl/" + newparent + ".jpg";
 				}
+			}else if(newparent=="mano1"){
+				var divMano=document.getElementById(parent);
+				var n=divMano.childNodes.length-1;
+				$("#card"+n).remove();
 			}
 		
 			var from=document.getElementById("userName").value;

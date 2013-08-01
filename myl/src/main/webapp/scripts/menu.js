@@ -15,7 +15,14 @@ $(function(){
             	view("deck1",$('#hidden').val());
             	$( "#dialog" ).dialog({ 
             		width: 500,
-            		title: "Castillo" });
+            		title: "Castillo",
+            		close: function( event, ui ) {
+            			msgLog("Dejó de ver el mazo castillo");
+            		},
+            		open: function(event,ui){
+            			msgLog("Viendo mazo castillo");
+            		}
+            	});
             	break;            
             case "dropx":
             	$("#cantidad").val("0");
@@ -24,8 +31,9 @@ $(function(){
             			title: "Botar",
             			buttons: {
             				"Aceptar":function(){            					
-            					dropxcards($("#cantidad").val());
+            					dropxcards($("#cantidad").val());            					
             					$( this ).dialog( "close" );
+            					msgLog("Botando "+$("#cantidad").val()+" cartas");
             				},
             				"Cancelar":function() {
             			          $( this ).dialog( "close" );
@@ -44,17 +52,28 @@ $(function(){
             					viewx("deck1",$('#hidden').val(),$("#cantidad").val());
             					$( "#dialog" ).dialog({             						
             						width: 500,
-            						title: "Primeras "+$("#cantidad").val()+" cartas." });
+            						title: "Primeras "+$("#cantidad").val()+" cartas",
+            						close: function( event, ui ) {
+                            			msgLog("Dejó de ver el mazo castillo");
+                            		},
+                            		open: function(){
+                            			msgLog("Viendo "+$("#cantidad").val()+" cartas del mazo castillo");
+                            		}});
             				},
             				"Cancelar":function() {
             			          $( this ).dialog( "close" );
             		        }
             			}
+            			
             	});
             	break;
             case "shuffle":
             		shuffle();
+            		msgLog("Barajando el mazo castillo");
             	break;
+            case "show":
+        		show("deck1", "Mostrando deck");
+        	break;
             }
         },
         items: {
@@ -63,7 +82,8 @@ $(function(){
             "view": {name: "Ver castillo"},
             "dropx": {name: "Botar X"},
             "viewx": {name: "Ver X"},
-            "shuffle": {name: "Barajar"}
+            "shuffle": {name: "Barajar"},
+            "show": {name: "Mostrar al oponente"}
         }
     });
     
@@ -238,10 +258,14 @@ $(function(){
             		var length=document.getElementById("mano1").childNodes.length;
             		randomCard(length);
             	break;
+            case "show":
+        		show("mano1", "Mostrando mano");
+        	break;
             }
         },
         items: {                       
-            "cartaazar": {name: "Seleccionar carta al azar"}            
+            "cartaazar": {name: "Seleccionar carta al azar"},
+            "show": {name: "Mostrar mano al oponente"}
         }
     });              
 });

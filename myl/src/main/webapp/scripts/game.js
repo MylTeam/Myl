@@ -23,7 +23,8 @@ var obj = {
 };
 
 var objOp={
-		mano1:"",
+		mano1: [],
+		deck1 : [],
 		apoyo1 : [],
 		defensa1 : [],
 		ataque1 : [],
@@ -68,12 +69,14 @@ function drawCard() {
 	divMano.appendChild(img);
 	obj["mano1"].unshift(obj["deck1"].splice(0, 1)[0]);
 	
-	var from=document.getElementById("userName").value;
-    var to=document.getElementById("user2").value;    
-    var msg="Robando carta";  
-    movedCard["origen"]="deck1";
-    movedCard["destino"]="mano1";
-    wsclient.toChatCard(from, to, msg, null, movedCard["origen"], movedCard["destino"] );
+	
+	msgLogCard(null, "deck1", "mano1", "Robando carta");
+//	var from=document.getElementById("userName").value;
+//    var to=document.getElementById("user2").value;    
+//    var msg="Robando carta";  
+//    movedCard["origen"]="deck1";
+//    movedCard["destino"]="mano1";
+//    wsclient.toChatCard(from, to, msg, null, movedCard["origen"], movedCard["destino"] );
 }
 
 function createCard(c, context, origenPila) {
@@ -136,8 +139,9 @@ function createCardOp(c, context, origenPila) {
 		var lista=ev.target.parentNode.id;
 		if(lista=="dialog"){
 			lista=$("#dialog").attr("name");			
-		}
+		}		
 		lista=lista.replace("2","1");
+		
 		
 		for(var q=0;q<objOp[lista].length;q++){
 			if(objOp[lista][q].idTemp==ev.target.id){
@@ -253,6 +257,8 @@ function dropCard(ev) {
 				} else {
 					c.src = context + "/images/myl/" + data + ".jpg";
 				}
+			}else{
+				return null;
 			}
 		}
 		movedCard["origen"]=origen;
@@ -279,13 +285,13 @@ function randomCard(length){
 
 	obj["aux1"].unshift(discard);
 	
-	
-	var from=document.getElementById("userName").value;
-    var to=document.getElementById("user2").value;    
-    var msg="Selección de carta al azar";  
-    movedCard["origen"]="mano1";
-    movedCard["destino"]="aux1";
-    wsclient.toChatCard(from, to, msg, discard, movedCard["origen"], movedCard["destino"] );
+	msgLogCard(discard, "mano1", "aux1", "Selección de carta al azar");
+//	var from=document.getElementById("userName").value;
+//    var to=document.getElementById("user2").value;    
+//    var msg="Selección de carta al azar";  
+//    movedCard["origen"]="mano1";
+//    movedCard["destino"]="aux1";
+//    wsclient.toChatCard(from, to, msg, discard, movedCard["origen"], movedCard["destino"] );
 }
 
 function move(arrayAux, arrayDest, data) {
