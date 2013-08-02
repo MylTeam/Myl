@@ -36,8 +36,7 @@
 	<table>
 	<tr><td>Nombre:</td><td><input type="text" id="nombre" /></td></tr>
 	<tr><td>Edición:</td><td>
-	<select id="edicion">
-		<option value="">--Seleccione--</option>
+	<select id="edicion">		
 		<s:iterator value="ediciones">		
   			<option value="${id}">${nombre}</option>
 		</s:iterator>
