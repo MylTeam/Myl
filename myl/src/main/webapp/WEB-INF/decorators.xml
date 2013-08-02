@@ -4,7 +4,8 @@
 		<pattern>/Estilos/*</pattern>
 		<pattern>/scripts/*</pattern>
 		<pattern>/images/*</pattern>
-		<pattern>/chat/*</pattern>		
+		<pattern>/chat/*</pattern>
+		<pattern>/help/*</pattern>		
 
 	</excludes>
  	<decorator name="layout" page="layout.jsp">

@@ -66,8 +66,8 @@
 							<h3 style="width: 300px">Jugar</h3>
 					</a></td>
 					<td><a class="selected"
-						href="${pageContext.request.contextPath}/estadisticas"><h3
-								style="width: 300px">Estadisticas</h3></a></td>
+						href="${pageContext.request.contextPath}/help"><h3
+								style="width: 300px">Ayuda y reglas</h3></a></td>
 					<td><a class="selected"
 						href="${pageContext.request.contextPath}/logout"><h3
 								style="width: 300px">Cerrar Sesión</h3></a></td>

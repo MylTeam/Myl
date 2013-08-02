@@ -2,11 +2,7 @@ LOBBY
 
 
 JUEGO
--mostrar mazo al oponente
 
--logs:	
-	viendo mazo oponente
-	ha dejado de ver el mazo oponente
 	
 -ayuda(reglas, campo)
 

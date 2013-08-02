@@ -238,8 +238,7 @@ $(function(){
             switch(key){            
             case "control":
             	var card=$("#"+options.$trigger.context.id);
-
-            	takecontrol(options.$trigger.context.id);
+            	takecontrol(options.$trigger.context.id);            	
             	break;
             }
         },

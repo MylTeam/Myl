@@ -74,8 +74,6 @@ var wsclient = (function() {
     }
 
     function setConnected(connected) {
-//        document.getElementById('connect').disabled = connected;
-//        document.getElementById('disconnect').disabled = !connected;
         cleanConnectedUsers();
         if (connected) {
             updateUserConnected();
@@ -441,7 +439,7 @@ function processCards(from,message,cards,origen){
 		title: origen.replace("1","")+" oponente",
 		close: function( event, ui ) {
 			objOp[origen]=[];
-			msgLog("Dejó de ver el mazo castillo oponente");
+			msgLog("Dejó de ver "+origen.replace("1","")+" oponente");
 		}
 	});	
 }

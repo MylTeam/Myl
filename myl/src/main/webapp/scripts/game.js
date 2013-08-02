@@ -71,12 +71,6 @@ function drawCard() {
 	
 	
 	msgLogCard(null, "deck1", "mano1", "Robando carta");
-//	var from=document.getElementById("userName").value;
-//    var to=document.getElementById("user2").value;    
-//    var msg="Robando carta";  
-//    movedCard["origen"]="deck1";
-//    movedCard["destino"]="mano1";
-//    wsclient.toChatCard(from, to, msg, null, movedCard["origen"], movedCard["destino"] );
 }
 
 function createCard(c, context, origenPila) {
@@ -100,7 +94,6 @@ function createCard(c, context, origenPila) {
 	}, false);
 	img.onmouseover = function showImage(ev) {
 		var viewCard = document.getElementById("viewCard");
-//		viewCard.src = context + "/images/myl/"+obj[origenPila][c].siglas+"/" + ev.target.name + ".jpg";
 		viewCard.src = context + "/images/myl/"+ev.target.alt+"/" + ev.target.name + ".jpg";
 		
 		var lista=ev.target.parentNode.id;
@@ -133,7 +126,6 @@ function createCardOp(c, context, origenPila) {
 	img.alt=objOp[origenPila][c].siglas;
 	img.onmouseover = function showImage(ev) {
 		var viewCard = document.getElementById("viewCard");
-//		viewCard.src = context + "/images/myl/"+objOp[origenPila][c].siglas+"/" + ev.target.name + ".jpg";
 		viewCard.src = context + "/images/myl/"+ev.target.alt+"/" + ev.target.name + ".jpg";
 		
 		var lista=ev.target.parentNode.id;
@@ -272,9 +264,7 @@ function dropCard(ev) {
 function randomCard(length){
 	var sel=Math.floor((Math.random()*length));
 	var context = $('#hidden').val();
-		
-	
-	
+
 	var divDef = document.getElementById("aux1");
 	var img = createCard(sel, context, "mano1");
 	
@@ -282,16 +272,8 @@ function randomCard(length){
 	$("#"+discard.idTemp).remove();
 	
 	divDef.appendChild(img);
-
-	obj["aux1"].unshift(discard);
-	
+	obj["aux1"].unshift(discard);	
 	msgLogCard(discard, "mano1", "aux1", "Selección de carta al azar");
-//	var from=document.getElementById("userName").value;
-//    var to=document.getElementById("user2").value;    
-//    var msg="Selección de carta al azar";  
-//    movedCard["origen"]="mano1";
-//    movedCard["destino"]="aux1";
-//    wsclient.toChatCard(from, to, msg, discard, movedCard["origen"], movedCard["destino"] );
 }
 
 function move(arrayAux, arrayDest, data) {
@@ -309,5 +291,13 @@ function changeZone(arrayAux, arrayDest, data) {
 			arrayDest.unshift(arrayAux.splice(c, 1)[0]);
 		}
 	}
+}
+
+function showHelp(){
+	$( "#dialog-help" ).dialog({ 
+		width: "70%",
+		resizable: false,
+		title: "Reglas",		
+	});
 }
 

@@ -9,10 +9,16 @@ background-image: url("field/fieldblue.png");
 background-repeat: repeat;
 }
 div.divbluegold{
-background-image: url("field/treasure.jpg");
-background-repeat: no-repeat;
-background-size: 100% 100%;
-background-position: center center;
+background-image: url("field/r.gif"),url("field/treasure.jpg");
+background-repeat: no-repeat,no-repeat;
+background-size: 10% 30%,100% 100%;
+background-position: left top,center center;
+}
+div.divbluegoldpayed{
+background-image: url("field/p.gif"),url("field/treasure.jpg");
+background-repeat: no-repeat,no-repeat;
+background-size: 10% 30%,100% 100%;
+background-position: left top,center center;
 }
 div.divbluecastle{
 background-image: url("field/fieldcastle.png"),url("field/fieldblue.png");
@@ -38,10 +44,16 @@ background-image: url("field/fieldred.png");
 background-repeat: repeat;
 }
 div.divredgold{
-background-image: url("field/treasure.jpg");
-background-repeat: no-repeat;
-background-size: 100% 100%;
-background-position: center center;
+background-image: url("field/r.gif"),url("field/treasure.jpg");
+background-repeat: no-repeat,no-repeat;
+background-size: 10% 30%,100% 100%;
+background-position: left top,center center;
+}
+div.divredgoldpayed{
+background-image: url("field/p.gif"),url("field/treasure.jpg");
+background-repeat: no-repeat,no-repeat;
+background-size: 10% 30%,100% 100%;
+background-position: left top,center center;
 }
 div.divredcastle{
 background-image: url("field/fieldcastle.png"),url("field/fieldred.png");
@@ -62,7 +74,10 @@ background-size: auto 100%,auto auto;
 background-position: center top,left top;
 }
 
+#iframe{background-image: url("images/old_paper.jpg");}
+#bar{text-align: right;height: 3%;background-color: #0B3E6F;background-image: url('images/title-bg.png');background-size: auto 100%;}
 
+.ui-widget-header{background-color: #0B3E6F;background-image: url('images/title-bg.png');background-size: auto 100%;}
 
 table{
 	border-spacing: 0px;

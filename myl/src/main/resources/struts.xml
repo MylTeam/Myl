@@ -27,7 +27,7 @@
 			<interceptor name="autenticarInterceptor"
 				class="com.myl.interceptor.AutenticarInterceptor" />			
 			<interceptor-stack name="MYLStack">
-				<interceptor-ref name="autenticarInterceptor" />
+				
 				<interceptor-ref name="exception" />
 				<interceptor-ref name="alias" />
 				<interceptor-ref name="servletConfig" />

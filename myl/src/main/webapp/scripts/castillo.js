@@ -78,9 +78,8 @@ function tobottom(cardbottom,parent){
 				}
 			}
 		}
-	}
-	
-	msgLogCard(cardAux, parent, "deck1", "Moviendo carta al fondo del castillo");
+	}	
+	msgLogCard(cardAux, parent, "deck1", "Moviendo carta al fondo del castillo");	
 }
 
 function show(lista,msg){

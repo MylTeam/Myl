@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0" xmlns:s="/struts-tags">
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0" xmlns:s="/struts-tags" xmlns:sj="/struts-jquery-tags">
 	<jsp:directive.page language="java"
 		contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" />
 
 	<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+<sj:head debug="true" jqueryui="true" jquerytheme="ui-darkness" locale="es" />
 
-<link type="text/css" href="${pageContext.request.contextPath}/Estilos/defaultchat.css?123" rel="stylesheet" />
 <link type="text/css" href="${pageContext.request.contextPath}/scripts/jquery.contextMenu.css" rel="stylesheet" />
 <link type="text/css" href="${pageContext.request.contextPath}/Estilos/smoothness/jquery-ui-1.8.22.custom.css" rel="stylesheet" />
+<link type="text/css" href="${pageContext.request.contextPath}/Estilos/defaultchat.css?123" rel="stylesheet" />
 <jsp:text>
 	<![CDATA[
 			<script type="text/javascript" src="${pageContext.request.contextPath}/scripts/jquery-1.7.2.min.js"></script>
@@ -65,8 +66,10 @@
 
 <input type="hidden" name="hidden" id="hidden" value="${pageContext.request.contextPath}"/>
 
-	
-<table id="Table1" class="Table" style="HEIGHT: 100%; WIDTH: 100%">
+<div id="bar">
+<INPUT type="button" value="Reglas" onclick="showHelp()"/>
+</div>	
+<table id="Table1" class="Table" style="HEIGHT: 97%; WIDTH: 100%">
   <tbody>
     <tr style="HEIGHT: 50%;">
       <td style="WIDTH: 25%;">
@@ -76,7 +79,7 @@
               <td colspan="4"><div id="reserva2" class="divredgold" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>              
             </tr>
             <tr style="height: 33%">
-              <td colspan="4"><div id="oropagado2" class="divred" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>              
+              <td colspan="4"><div id="oropagado2" class="divredgoldpayed" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>              
             </tr>
             <tr>
               <td style="WIDTH: 25%"><div id="remocion2d" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)">
@@ -204,7 +207,7 @@
               </div></td>
             </tr>
             <tr style="height: 33%">
-              <td colspan="4"><div id="oropagado1" class="divblue" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>              
+              <td colspan="4"><div id="oropagado1" class="divbluegoldpayed" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>              
             </tr>
             <tr style="height: 33%">
               <td colspan="4"><div id="reserva1" class="divbluegold" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>              
@@ -229,6 +232,15 @@
 	 	<input type="text" name="cantidad" id="cantidad" />
 	</div>
 	</div>
+	
+	<div style="display:none;">
+	 <div id="dialog-help" >
+	 <center>
+	 	<iframe src="${pageContext.request.contextPath}/help/" width="100%" height="70%" id="iframe"/>
+	 	</center>
+	</div>
+	</div>
+	
 	
 </body>
 </html>
