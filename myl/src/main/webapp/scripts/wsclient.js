@@ -84,23 +84,23 @@ var wsclient = (function() {
 
     function updateUserConnected() {
         var inputUsername = $('#userName');
-        var onLineUserName = $('.onLineUserName');
-        onLineUserName.html(inputUsername.val());
-        inputUsername.css({display:'none'});
-        onLineUserName.css({visibility:'visible'});
-        $('#status').html('Conectado');
-        $('#status').attr({class : 'connected'});
+//        var onLineUserName = $('.onLineUserName');
+//        onLineUserName.html(inputUsername.val());
+//        inputUsername.css({display:'none'});
+//        onLineUserName.css({visibility:'visible'});
+//        $('#status').html('Conectado');
+//        $('#status').attr({class : 'connected'});
         $('#onLineUsersPanel').css({visibility:'visible'});
         
         toChat(document.getElementById("user1").value, document.getElementById("user2").value, "gameready");
     }
 
     function updateUserDisconnected() {
-        $('.onLineUserName').css({visibility:'hidden'});
-        $('#userName').css({display:''});
-        $('#status').html('Desconectado');
-        $('#status').attr({class : 'disconnected'});
-        $('#onLineUsersPanel').css({visibility:'hidden'});
+//        $('.onLineUserName').css({visibility:'hidden'});
+//        $('#userName').css({display:''});
+//        $('#status').html('Desconectado');
+//        $('#status').attr({class : 'disconnected'});
+//        $('#onLineUsersPanel').css({visibility:'hidden'});
     }
 
     function cleanConnectedUsers() {
@@ -134,7 +134,13 @@ var wsclient = (function() {
         $('<p class="messages"></p><textarea id="' + conversationId + 'message" rows="3"></textarea>').appendTo(conversationPanel);
         var sendButton = createSendButton(name);
         sendButton.appendTo(conversationPanel);
-        conversationPanel.appendTo($('#conversations'));      
+        conversationPanel.appendTo($('#conversations'));
+        
+        $("#"+conversationId + "message").keyup(function(event){
+            if(event.keyCode == 13){
+            	sendButton.click();
+            }
+        });
     }
 
     function createSendButton(name) {
@@ -147,7 +153,7 @@ var wsclient = (function() {
             toChat(from, name, message);
             addMessage(from, message, conversationId);
             document.getElementById(conversationId+'message').value = '';
-        });
+        });        
         return button;
     }
 
@@ -176,7 +182,7 @@ var wsclient = (function() {
     
     function addMessageCard(from, message, conversationPanelId) {
         var messages = $('#' + conversationPanelId + ' .messages');
-        $('<div class="message">'+from+" :"+message+'</div>').appendTo(messages);
+        $('<div class="messagepl">'+from+" :"+message+'</div>').appendTo(messages);
         messages.scrollTop(messages[0].scrollHeight);
         $('#'+conversationPanelId+' textarea').focus();
     }

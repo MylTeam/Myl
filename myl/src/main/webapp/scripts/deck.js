@@ -20,8 +20,9 @@ function createCard(c, context, origenPila) {
 	img.className = obj[origenPila][c].tipo;
 	img.draggable = "true";
 	img.height = "70";
+	img.width = "50";
 	img.addEventListener('dragstart', function drag(ev) {
-		origen = ev.target.parentNode.id
+		origen = ev.target.parentNode.id;
 		ev.dataTransfer.setData("Text", ev.target.id);
 	}, false);
 	img.onmouseover = function showImage(ev) {
@@ -85,6 +86,7 @@ function drop(ev) {
 		var img = createCard(imgAux.alt, context, "resultado");
 		img.alt = card.cartaId;
 		img.height = "80";
+		img.width = "57";
 		img.id = ev.target.childNodes.length;
 		ev.target.appendChild(img);
 	} else if (origen == "deck1"
@@ -205,6 +207,7 @@ function drawDeck(context){
 			var img = createCard(c, context, "deckCompleto");
 			img.alt = obj.deck[c].cartaId;
 			img.height = "80";
+			img.width = "57";
 			img.id = divDeck.childNodes.length;
 			divDeck.appendChild(img);
 		}

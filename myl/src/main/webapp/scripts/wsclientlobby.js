@@ -132,7 +132,13 @@ var wsclient = (function() {
         closeButton.appendTo(conversationPanel);
         var playButton = createPlayButton(cleanWhitespaces(name));
         playButton.appendTo(conversationPanel);
-        conversationPanel.appendTo($('#conversations'));      
+        conversationPanel.appendTo($('#conversations'));
+        
+        $("#"+conversationId + "message").keyup(function(event){
+            if(event.keyCode == 13){
+            	sendButton.click();
+            }
+        });
     }
 
     function createSendButton(name) {

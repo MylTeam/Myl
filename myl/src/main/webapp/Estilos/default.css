@@ -13,7 +13,7 @@ button, textarea {
     font-family: comic sans ms, sans-serif;
 }
 
-
+.ui-widget-header{background-color: #0B3E6F;background-image: url('images/title-bg.png');background-size: auto 100%;}
 
 span#status {
     padding: 0 0 0 20px;

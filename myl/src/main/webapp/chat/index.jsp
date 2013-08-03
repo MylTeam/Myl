@@ -122,7 +122,7 @@
 	
 	<table style="width: 100%">
 	<tr><td style="width: 100%;">
-	<img id="viewCard" height="100%"/>
+	<img id="viewCard" height="209" width="150"/>
 	</td></tr>
 	</table>
 	
@@ -146,15 +146,20 @@
     </tr>
     <tr style="HEIGHT: 50%;">
       <td id="chat" style="WIDTH: 25%;">
-      	<table>
+      	<table style="width: 100%">
 			<tr><td>
  				<div id="container">
-					<div class="leftPanel"> 
+					<div class="leftPanel">
+					 
+							
+							<input type="hidden" id="userName" /><span class="onLineUserName" ></span>
+						
+						<!--  
 						 <div class="userInfo">
 							<span class="disconnected" id="status">Desconectado</span>
 							Nombre: <input type="text" id="userName" /><span class="onLineUserName" ></span>
 						</div>
-						<!-- 
+						
 						 <div>
 							<button id="connect" onclick="wsclient.connect(document.getElementById('userName').value);">Conectar</button>
 							<button id="disconnect" disabled="disabled" onclick="wsclient.disconnect();">DesconexiÃ³n</button>
