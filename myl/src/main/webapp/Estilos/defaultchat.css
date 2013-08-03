@@ -79,6 +79,7 @@ background-position: center top,left top;
 
 .ui-widget-header{background-color: #0B3E6F;background-image: url('images/title-bg.png');background-size: auto 100%;}
 
+
 table{
 	border-spacing: 0px;
 }
@@ -92,7 +93,6 @@ input {
 button, textarea {
     font-family: comic sans ms, sans-serif;
 }
-
 
 
 span#status {

@@ -15,8 +15,7 @@ function takecontrol(id){
 			
 			objOp[newparent][c].idTemp=newid;			
 			obj["defensa1"].unshift(objOp[newparent].splice(c,1)[0]);
-			var img=createCard(0, context, "defensa1");
-			
+			var img=createCard(0, context, "defensa1");			
 			$("#defensa1").append($(img));
 			$("#"+id).remove();
 			

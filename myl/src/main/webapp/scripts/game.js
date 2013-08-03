@@ -63,14 +63,16 @@ function drawHand(context) {
 }
 
 function drawCard() {
-	var context = $('#hidden').val();
-	var divMano = document.getElementById("mano1");
-	var img = createCard(0, context, "deck1");
-	divMano.appendChild(img);
-	obj["mano1"].unshift(obj["deck1"].splice(0, 1)[0]);
-	
-	
-	msgLogCard(null, "deck1", "mano1", "Robando carta");
+	if(obj.deck1.length!=0){
+		var context = $('#hidden').val();
+		var divMano = document.getElementById("mano1");
+		var img = createCard(0, context, "deck1");
+		divMano.appendChild(img);
+		obj["mano1"].unshift(obj["deck1"].splice(0, 1)[0]);		
+		msgLogCard(null, "deck1", "mano1", "Robando carta");
+	}else{
+		msgLog("El castillo no tiene mas cartas");
+	}
 }
 
 function createCard(c, context, origenPila) {
@@ -207,16 +209,21 @@ function dropCard(ev) {
 			 * si se arrastra desde el deck se crea una carta en la zona seleccionada
 			 * en caso de cementerio, destierro o remocion coloca la imagen en la zona correspondiente
 			 */
-			if (destino != "cementerio1" && destino != "destierro1" && destino != "remocion1") {
-				var img = createCard(0, context, "deck1");
-				ev.target.appendChild(img);
-			} else {
-				var dest = document.getElementById(destino);
-				dest.src = context + "/images/myl/"+obj["deck1"][0].siglas+"/"+ obj["deck1"][0].numero + ".jpg";
+			if(obj.deck1.length!=0){
+				if (destino != "cementerio1" && destino != "destierro1" && destino != "remocion1") {
+					var img = createCard(0, context, "deck1");
+					ev.target.appendChild(img);
+				} else {
+					var dest = document.getElementById(destino);
+					dest.src = context + "/images/myl/"+obj["deck1"][0].siglas+"/"+ obj["deck1"][0].numero + ".jpg";
+				}
+				obj[destino].unshift(obj["deck1"].splice(0, 1)[0]);
+				movedCard["carta"]=obj[destino][0];//
+				origen="deck1";
+			}else{
+				msgLog("El castillo no tiene mas cartas");
+				return null;				
 			}
-			obj[destino].unshift(obj["deck1"].splice(0, 1)[0]);
-			movedCard["carta"]=obj[destino][0];//
-			origen="deck1";
 		} else {
 			/**
 			 * si se arrastra desde el cementerio, destierro o remocion

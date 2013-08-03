@@ -38,6 +38,8 @@ function viewx(lista,context,cant){
 function dropxcards(cant){
 	var context=$("#hidden").val();
 	cant=parseInt(cant);
+	var cantAux=cant;
+	var deckLength=obj.deck1.length;
 	
 	if(obj["deck1"].length<cant){
 		cant=obj["deck1"].length;
@@ -51,8 +53,10 @@ function dropxcards(cant){
 	} else {
 		c.src = context + "/images/myl/cementerio1.jpg";
 	}
-	
-	msgLogCard(obj["cementerio1"][0], "deck1", "cementerio1", "Botando "+cant+" cartas");	
+	msgLogCard(obj["cementerio1"][0], "deck1", "cementerio1", "Botando "+cant+" cartas");
+	if(deckLength<cantAux){
+		msgLog("El castillo no tiene mas cartas");
+	}
 }
 
 function tobottom(cardbottom,parent){

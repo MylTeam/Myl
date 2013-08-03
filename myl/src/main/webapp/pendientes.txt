@@ -1,22 +1,37 @@
 LOBBY
-
+-mostrar formato
+-no entrar si el deck no tiene 50 cartas
 
 JUEGO
+-reagrupar oros, reagrupar aliados
 
-	
--ayuda(reglas, campo)
+-guardar victoria o derrota
 
--notificar derrota y victoria
+-targets(msg tipo target flip effect)
+
 -incidencias
 
 -doble click de las cartas
 
 
 DECK
+-cantidad de cartas
+-cantidad de oros
+-formato
+	-rangnarok
+	-espiritu
+	-acero
+	-polvora
+	-tercera era
+	-vintage
 
+-reglas: unicas, mercenarios
+
+-score
 
 USUARIO
- 
+ -mas datos
+ -score
 
 ADMINISTRACION
 -gestión de usuarios

@@ -32,8 +32,7 @@ $(function(){
             			buttons: {
             				"Aceptar":function(){            					
             					dropxcards($("#cantidad").val());            					
-            					$( this ).dialog( "close" );
-            					msgLog("Botando "+$("#cantidad").val()+" cartas");
+            					$( this ).dialog( "close" );            					
             				},
             				"Cancelar":function() {
             			          $( this ).dialog( "close" );

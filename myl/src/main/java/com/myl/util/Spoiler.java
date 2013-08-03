@@ -97,8 +97,8 @@ public class Spoiler {
 		}
 		
 		public static void loadData(CartaNegocio cartaNegocio){
-//			File f = new File("C:/Users/Mariana/Documents/prueba/spoilers/");
-			File f = new File("C:/Users/cdt/Documents/spoilers/");
+//			File f = new File("C:/Users/Mariana/Documents/prueba/spoilers/");			
+			File f = new File("C:/Users/cdt/Documents/myl-big/spoilers/");
 			
 			Carta carta;
 
@@ -108,7 +108,7 @@ public class Spoiler {
 
 					try {
 						BufferedReader in = new BufferedReader(new FileReader(
-								"C:/Users/cdt/Documents/spoilers/"
+								"C:/Users/cdt/Documents/myl-big/spoilers/"
 										+ filename));
 
 						String str = filename.replaceAll("\\D+", "");
