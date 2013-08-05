@@ -3,7 +3,6 @@ LOBBY
 -no entrar si el deck no tiene 50 cartas
 
 JUEGO
--reagrupar oros, reagrupar aliados
 
 -guardar victoria o derrota
 

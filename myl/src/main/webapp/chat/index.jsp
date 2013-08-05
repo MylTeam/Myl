@@ -240,9 +240,9 @@
 	
 	<div style="display:none;">
 	 <div id="dialog-help" >
-	 <center>
-	 	<iframe src="${pageContext.request.contextPath}/help/" width="100%" height="70%" id="iframe"/>
-	 	</center>
+	 
+	 	<iframe src="${pageContext.request.contextPath}/help/index.jsp" width="100%" height="70%" id="iframe"/>
+	 	
 	</div>
 	</div>
 	

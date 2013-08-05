@@ -12,23 +12,27 @@
 						
 		 ]]>
 </jsp:text>
-
+<STYLE type="text/css">
+table td{
+vertical-align: top;
+}
+</STYLE>
 
 </head>
 <body>
-<form style="width: 90%; border: 0px;" id="helpform">
+<form style="width: 95%; border: 0px;margin-left: auto; margin-right: auto;" id="helpform">
 	<input type="hidden" name="context" id="context" value="${pageContext.request.contextPath}" />
 	
 	<h1>Mitos y Leyendas</h1>
 	En Mitos y Leyendas adoptas el papel de un señor de la guerra, habitante de un castillo cuyo único propósito es reducir los castillos enemigos a escombros. Para lograr esto se sirve de riquezas que gastara en pagar a poderosos guerreros que se aliaran con el y tecnología que le dará ventaja en el campo de batalla.
 	Todos los componentes de estas batallas épicas se encuentran representados por las cartas que componen la baraja de cada contrincante. Durante el juego los jugadores toman turnos consecutivos y con el transcurso de la partida estas cartas se juegan tanto para asediar el castillo oponente como para defender el propio.
 	<h2>Tipos de cartas</h2>
-	<table><tr><td colspan="4">
+	<table><tr><td colspan="2">
 	<h3>Aliados</h3>
-	</td></tr><tr><td colspan="4">
+	</td></tr><tr><td colspan="2">
 	Son cartas fundamentales en el juego, ya que son las cartas usadas mayoritariamente para atacar al oponente. Se
 	juegan en la línea de defensa y pasan a la línea de ataque al momento de realizar el mismo.</td></tr>
-	<tr><td><IMG alt="Aliado" src="${pageContext.request.contextPath}/images/myl/aliado.jpg" height="300px" /></td><td colspan="3">
+	<tr><td colspan="2"><IMG alt="Aliado" src="${pageContext.request.contextPath}/images/myl/aliado.jpg" height="300px" align="left"/>
 		<h4>Habilidades</h4>
 		
 		<ul>
@@ -57,36 +61,36 @@
   			<li><b>Traición:</b>esta habilidad es un coste que cualquier jugador puede pagar para ganar el control de la carta con traición</li>  			
 		</ul>
 	</td></tr>
-	<tr><td colspan="2" style="width: 50%">
+	<tr><td style="width: 50%">
 	<h3>Talismán</h3></td>
 	<td colspan="2" style="width: 50%">
 	<h3>Armas</h3></td>
 	</tr>
-	<tr><td><IMG alt="Talismán" src="${pageContext.request.contextPath}/images/myl/talisman.jpg" height="300px" /></td><td>
+	<tr><td ><IMG alt="Talismán" src="${pageContext.request.contextPath}/images/myl/talisman.jpg" height="300px" align="left"/>
 	Son cartas de efecto inmediato que al ser jugadas son enviadas al cementerio (excepto por un efecto que no lo permita), estas facilitan el juego dándole más fuerza a tus aliados, destruyendo y desterrando los aliados oponentes,
 	anulándolos, entre muchas cosas más. El efecto que causan los talismanes es, normalmente, hasta la fase final, a menos que la carta lo aclare, diciendo que es de efecto permanente, por cierta cantidad de turnos o hasta que cierto evento ocurra.
 	</td>
-	<td><IMG alt="Arma" src="${pageContext.request.contextPath}/images/myl/arma.jpg" height="300px" /></td><td>
+	<td ><IMG alt="Arma" src="${pageContext.request.contextPath}/images/myl/arma.jpg" height="300px" align="left"/>
 	Cartas que se sitúan bajo las cartas de Aliados dándoles más fuerza u otra habilidad (ejemplo:Guantes de Hierro) o en la Línea de Apoyo en caso de tener la habilidad Maquinaria o Embarcación. Las armas con habilidad
 	Maquinaria necesitan cierta cantidad de Aliados para usar sus habilidades, que aparece junto a la habilidad Tamaño. En caso de no aparecer la habilidad Tamaño, se entiende que tiene Tamaño 1. En el caso en que el arma
 	tenga en su habilidad la palabra Embarcación, puede jugarse en la Línea de Apoyo, sin necesidad de tener aliados.
 	</td>
 	</tr>	
-	<tr><td colspan="2">
+	<tr><td>
 	<h3>Tótem</h3></td>
-	<td colspan="2">
+	<td>
 	<h3>Oro</h3></td>
 	</tr>
-	<tr><td><IMG alt="Tótem" src="${pageContext.request.contextPath}/images/myl/totem.jpg" height="300px" /></td><td>
+	<tr><td><IMG alt="Tótem" src="${pageContext.request.contextPath}/images/myl/totem.jpg" height="300px" align="left"/>
 	Esta carta se pone en la línea de apoyo y tiene habilidades que apoyan o refuerzan las habilidades de otras cartas. Fueron las primeras en obtener la habilidad Orbe(Solo puede ser afectado por cartas que afecten puntualmente a
 	orbes, es decir, si el arma Orbe es un Tótem, no será afectada por cartas que afecten Tótems, o cartas que afecten cualquier otro tipo de cartas, al menos que esta lo aclare). Los más relevantes son: Tótem del Guanaco (La ira del
 	Nahual), Humm-SP y Trípoli-SP, entre otros.
 	</td>
-	<td><IMG alt="Oro" src="${pageContext.request.contextPath}/images/myl/oro.jpg" height="300px" /></td><td>
+	<td ><IMG alt="Oro" src="${pageContext.request.contextPath}/images/myl/oro.jpg" height="300px" align="left"/>
 	Este tipo de carta es fundamental para cualquier castillo y sirve para pagar el coste de oro de las cartas y las habilidades que lo requieran. Existen 3 tipos de oros:
 	<UL>
-		<li><b>Oros sin habilidad o normales:</b> Cartas de Oro que pueden ser usados para pagar costes o habilidades, pueden ser usados como Oro Inicial. Puedes tener más de 3 copias de estos oros en tu castillo.</li>
-		<li><b>Oros con habilidad o especiales:</b> Cartas de Oro que pueden ser usados para pagar costes o habilidades, no pueden ser usados como Oro Inicial a menos que tengan la Habilidad Oro Inicial, esta habilidad salió en Bestiario.</li>
+		<li><b>Oros sin habilidad:</b> Cartas de Oro que pueden ser usados para pagar costes o habilidades, pueden ser usados como Oro Inicial. Puedes tener más de 3 copias de estos oros en tu castillo.</li>
+		<li><b>Oros con habilidad:</b> Cartas de Oro que pueden ser usados para pagar costes o habilidades, no pueden ser usados como Oro Inicial a menos que tengan la Habilidad Oro Inicial, esta habilidad salió en Bestiario.</li>
 		<li><b>Oros virtuales:</b> Oros generados por habilidades de cartas, pueden ser usados para pagar costes o habilidades, no pueden ser usados como Oro Inicial, no pueden ser destruidos, y generalmente duran hasta la Fase Final (fin del turno de un jugador).</li>
 	</UL>
 	</td>

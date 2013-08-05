@@ -5,7 +5,7 @@
 		<pattern>/scripts/*</pattern>
 		<pattern>/images/*</pattern>
 		<pattern>/chat/*</pattern>
-		<pattern>/help/*</pattern>		
+		<pattern>/help/index.jsp</pattern>		
 
 	</excludes>
  	<decorator name="layout" page="layout.jsp">

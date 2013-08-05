@@ -308,3 +308,16 @@ function showHelp(){
 	});
 }
 
+function reagrupar(zonao, zonad){
+	var cant=obj[zonao].length;
+	for(var c=0;c<cant;c++){
+		var cardAux=obj[zonao].splice(0,1)[0];
+		$("#"+cardAux.idTemp).remove();
+		obj[zonad].unshift(cardAux);
+				
+		var divdest=document.getElementById(zonad);
+		var img=createCard(0, $("#hidden").val(), zonad);		
+		divdest.appendChild(img);
+		msgLogCard(obj[zonad][0], zonao, zonad, "Reagrupando carta");
+	}
+}

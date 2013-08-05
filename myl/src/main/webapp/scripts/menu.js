@@ -267,3 +267,36 @@ $(function(){
         }
     });              
 });
+
+$(function(){
+    $.contextMenu({
+        selector: '#oropagado1', 
+        callback: function(key, options) {        
+            switch(key){            
+            case "reagrupar":            	
+            		reagrupar("oropagado1", "reserva1");
+            	break;            
+            }
+        },
+        items: {                       
+            "reagrupar": {name: "Reagrupar oros"}
+        }
+    });              
+});
+
+$(function(){
+    $.contextMenu({
+        selector: '#ataque1', 
+        callback: function(key, options) {        
+            switch(key){            
+            case "reagrupar":            	
+            		reagrupar("ataque1", "defensa1");
+            	break;            
+            }
+        },
+        items: {                       
+            "reagrupar": {name: "Reagrupar aliados"}
+        }
+    });              
+});
+
