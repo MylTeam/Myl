@@ -53,13 +53,11 @@
 	</td></tr>
 	<tr><td>Tipo:</td><td>
 	<select id="tipo">
-	</select>
 		<option value="">--Seleccione--</option>
-		<option value="Aliado">Aliado</option>
-		<option value="Oro">Oro</option>
-		<option value="Talismán">Talismán</option>
-		<option value="Tótem">Tótem</option>
-		<option value="Arma">Arma</option>
+		<s:iterator value="tipos" var="valor">		
+  			<option value="${valor}">${valor}</option>
+		</s:iterator>
+	</select>		
 	</td></tr>
 	<tr><td>Coste:</td><td><input type="text" id="coste" /></td></tr>	
 	<tr><td>Fuerza:</td><td><input type="text" id="fuerza" /></td></tr>

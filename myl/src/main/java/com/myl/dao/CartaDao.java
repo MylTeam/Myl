@@ -44,4 +44,10 @@ public class CartaDao extends HibernateDaoSupport {
 		dCriteria.setProjection(Projections.distinct(Projections.property("raza")));
 		return getHibernateTemplate().findByCriteria(dCriteria);
 	}
+	
+	public List<String> findByCriteriaTipo() { 		
+		DetachedCriteria dCriteria = DetachedCriteria.forClass(Carta.class); ;		
+		dCriteria.setProjection(Projections.distinct(Projections.property("tipo")));
+		return getHibernateTemplate().findByCriteria(dCriteria);
+	}
 }

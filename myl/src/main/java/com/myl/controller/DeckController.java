@@ -54,6 +54,7 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>,P
 	private UsuarioNegocio usuarioNegocio;
 	
 	private List<String> razas;
+	private List<String> tipos;
 	private List<DeckCarta> deckCartas;	
 	private String lista;
 	private String criterioJson;
@@ -78,6 +79,7 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>,P
 	public String editNew() {		
 		ediciones=edicionNegocio.findAll();		
 		razas=cartaNegocio.findByCriteria();
+		tipos=cartaNegocio.findByCriteriaTipo();		
 		
 		return "editNew";
 	}
@@ -113,7 +115,8 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>,P
 	public String edit() {
 		ediciones=edicionNegocio.findAll();		
 		razas=cartaNegocio.findByCriteria();		
-				
+		tipos=cartaNegocio.findByCriteriaTipo();
+		
 		return "edit";
 	}
 	
@@ -389,6 +392,15 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>,P
 
 	public void setUsuarioNegocio(UsuarioNegocio usuarioNegocio) {
 		this.usuarioNegocio = usuarioNegocio;
+	}
+
+	public List<String> getTipos() {
+		tipos=cartaNegocio.findByCriteriaTipo();
+		return tipos;
+	}
+
+	public void setTipos(List<String> tipos) {
+		this.tipos = tipos;
 	}
 
 	
