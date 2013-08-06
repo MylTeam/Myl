@@ -37,7 +37,7 @@ CREATE TABLE `carta` (
   PRIMARY KEY (`CartaId`),
   KEY `ICARTA1` (`EdicionId`),
   CONSTRAINT `ICARTA1` FOREIGN KEY (`EdicionId`) REFERENCES `edicion` (`EdicionId`)
-) ENGINE=InnoDB AUTO_INCREMENT=8437 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -65,7 +65,7 @@ CREATE TABLE `deck` (
   PRIMARY KEY (`DeckId`),
   KEY `IDECK1` (`UsuarioId`),
   CONSTRAINT `IDECK1` FOREIGN KEY (`UsuarioId`) REFERENCES `usuario` (`UsuarioId`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -118,7 +118,7 @@ CREATE TABLE `edicion` (
   `EdicionNb` varchar(40) NOT NULL,
   `EdicionSg` varchar(10) NOT NULL,
   PRIMARY KEY (`EdicionId`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -142,9 +142,9 @@ CREATE TABLE `usuario` (
   `UsuarioId` mediumint(9) NOT NULL AUTO_INCREMENT,
   `UsuarioNb` varchar(100) NOT NULL,
   `UsuarioPs` varchar(50) NOT NULL,
-  `UsuarioDk` int(11) NOT NULL,
+  `UsuarioDk` int(11) NOT NULL,  
   PRIMARY KEY (`UsuarioId`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

@@ -85,8 +85,8 @@ function drop(ev) {
 
 		var img = createCard(imgAux.alt, context, "resultado");
 		img.alt = card.cartaId;
-		img.height = "80";
-		img.width = "57";
+		img.height = "70";
+		img.width = "50";
 		img.id = ev.target.childNodes.length;
 		ev.target.appendChild(img);
 	} else if (origen == "deck1"
@@ -206,8 +206,8 @@ function drawDeck(context){
 		for(var i=0;i<card.cartaQt;i++){
 			var img = createCard(c, context, "deckCompleto");
 			img.alt = obj.deck[c].cartaId;
-			img.height = "80";
-			img.width = "57";
+			img.height = "70";
+			img.width = "50";
 			img.id = divDeck.childNodes.length;
 			divDeck.appendChild(img);
 		}

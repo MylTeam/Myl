@@ -78,7 +78,7 @@
 	<tr style="height: 60%">
 	<td>
 	<!-- inicio de tabla de información -->
-	<table><tr><td style="width: 40%;vertical-align: top">
+	<table><tr><td style="width: 40%;vertical-align: top;">
 	
 	<table style="width: 100%">
 	<tr><td style="width: 100%;">
@@ -121,7 +121,7 @@
 	</td>
 	
 	<!-- inicia la tercer columna -->
-	<td style="width: 45%; overflow: auto;">
+	<td style="width: 39%;">
 	
 	<table style="height: 100%;width: 100%;">
 	<tr style="height: 80%">

@@ -28,8 +28,11 @@
 	<tr>	
 	<td>Deck predeterminado:</td>
 	<td>
+	
 	<input type="hidden" name="deck" id="deck" value="${usuario.deckPred}" />
-	<input type="text" id="result" disabled="disabled"/></td>
+	<b><span id="result"> </span></b>
+	
+	</td>
 	</tr>
 	</table>
 	

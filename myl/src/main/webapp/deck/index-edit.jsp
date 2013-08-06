@@ -5,7 +5,7 @@
 		contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" />
 	<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>Nuevo Deck</title>
+<title>Editar Deck</title>
 <jsp:text>
 	<![CDATA[
 	
@@ -131,7 +131,7 @@
 	</td>
 	
 	<!-- inicia la tercer columna -->
-	<td style="width: 45%; overflow: auto;">
+	<td style="width: 39%;">
 	
 	<table style="height: 100%;width: 100%;">
 	<tr style="height: 80%">
