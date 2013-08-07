@@ -173,7 +173,7 @@ que parte no debe robar carta al final de su primer turno. los pasos a seguir de
 <li><b>Agrupación</b></li>
 <ul>
 Al comienzo de la Agrupación, antes que cualquier acción de juego, el jugador activo agrupa todas las cartas que controle. Los Aliados en su Línea de Ataque pasan a su Línea de Defensa y los Oros 
-en su Zona de Oro Pagado pasan a su Reserva. Luego se pueden usar habilidades que señalen su uso durante esta Fase. Finalmente el jugador activo debe robar una carta.
+en su Zona de Oro Pagado pasan a su Reserva. Luego se pueden usar habilidades que señalen su uso durante esta Fase.
 </ul>
 <li><b>Fase de vigilia</b></li>
 <UL>
