@@ -141,12 +141,20 @@
 	</tr>
 	
 	<tr style="height: 20%">
-	<td>
+	<td valign="top">
 	<s:hidden id="lista" name="lista" value="" />
-	<label>Nombre:</label>
-	<s:textfield id="Nombre" name="model.deckNombre" maxlength="50" />
-	
+	<table>
+	<tr><td>Cartas en mazo: <span id="total"></span></td></tr>
+	<tr><td>Oros: <span id="oros">0</span></td></tr>
+	<tr>
+	<td>Nombre:</td>	
+	<td><s:textfield id="Nombre" name="model.deckNombre" maxlength="50" label="Nombre" /></td>
+	<td>
 	<input type="button" id="btnEnviar" onclick="enviar()" value="Guardar" class="ui-button ui-widget ui-state-default ui-corner-all"/>
+	</td>
+	</tr>
+	</table>
+		
 	</td>
 	</tr>
 	</table>

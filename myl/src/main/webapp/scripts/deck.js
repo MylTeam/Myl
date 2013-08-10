@@ -27,8 +27,8 @@ function createCard(c, context, origenPila) {
 	}, false);
 	img.onmouseover = function showImage(ev) {
 		var viewCard = document.getElementById("viewCard");
-		viewCard.src = context + "/images/myl/" + obj[origenPila][c].siglas + "/" + ev.target.name + ".jpg";
-		
+//		viewCard.src = context + "/images/myl/" + obj[origenPila][c].siglas + "/" + ev.target.name + ".jpg";
+		viewCard.src = ev.target.src;
 		$("#spnb").text(obj[origenPila][c].nombre);
 		$("#sptp").text(obj[origenPila][c].tipo);
 		$("#spfr").text(obj[origenPila][c].frecuencia);
@@ -89,8 +89,12 @@ function drop(ev) {
 		img.width = "50";
 		img.id = ev.target.childNodes.length;
 		ev.target.appendChild(img);
-	} else if (origen == "deck1"
-			&& (ev.target == "[object HTMLDivElement]" || ev.target == "[object HTMLImageElement]")) {
+		totalCartas();
+		
+		if(img.className=="Oro"){
+			totalOros(1);
+		}
+	} else if (origen == "deck1" && (ev.target == "[object HTMLDivElement]" || ev.target == "[object HTMLImageElement]")) {
 
 		for ( var c = 0; c < obj.deck.length; c++) {
 			if (obj.deck[c].cartaId == $("#" + data).attr("alt")) {
@@ -100,7 +104,14 @@ function drop(ev) {
 				}
 			}
 		}
-		$("#" + data).remove();
+
+		totalCartas();
+		if($("#" + data).attr("class")=="Oro"){
+			totalOros(-1);
+		}
+		
+		$("#" + data).remove();		
+		
 	}
 
 }
@@ -210,8 +221,13 @@ function drawDeck(context){
 			img.width = "50";
 			img.id = divDeck.childNodes.length;
 			divDeck.appendChild(img);
+			
+			if(img.className=="Oro"){
+				totalOros(1);
+			}
 		}
 	}
+	totalCartas();	
 }
 
 $(document).ready(function() {
@@ -229,3 +245,19 @@ $(document).ready(function() {
 	);
 });
 
+
+function totalCartas(){
+	var total=0;
+	var oros=0;
+	for(var c=0;c<obj.deck.length;c++){
+		total+=obj.deck[c].cartaQt;		
+	}
+	
+	$("#total").text(total);
+}
+
+function totalOros(number){
+	var oros=parseInt($("#oros").text());
+		
+	$("#oros").text(oros+number);
+}

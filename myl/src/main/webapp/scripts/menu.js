@@ -101,7 +101,10 @@ $(function(){
             	view("cementerio1",$('#hidden').val());
             	$( "#dialog" ).dialog({ 
             		width: 500,
-            		title: "Cementerio" });
+            		title: "Cementerio",
+            		close: function( event, ui ) {},
+            		open:function(){}
+            		});
             	break;
             }
         },
@@ -122,7 +125,10 @@ $(function(){
             	view("destierro1",$('#hidden').val());
             	$( "#dialog" ).dialog({ 
             		width: 500,
-            		title: "Destierro" });
+            		title: "Destierro",
+            		close: function( event, ui ) {},
+            		open:function(){}
+            		});
             	break;
             }
         },
@@ -143,7 +149,10 @@ $(function(){
             	view("remocion1",$('#hidden').val());
             	$( "#dialog" ).dialog({ 
             		width: 500,
-            		title: "Cartas removidas" });
+            		title: "Cartas removidas",
+            		close: function( event, ui ) {},
+            		open:function(){}
+            		});
             	break;
             }
         },
@@ -182,7 +191,10 @@ $(function(){
             	viewop("cementerio1",$('#hidden').val());
             	$( "#dialog" ).dialog({ 
             		width: 500,
-            		title: "Cementerio oponente" });
+            		title: "Cementerio oponente",
+            		close: function( event, ui ) {},
+            		open:function(){}
+            		});
             	break;
             }
         },
@@ -201,7 +213,10 @@ $(function(){
             	viewop("destierro1",$('#hidden').val());
             	$( "#dialog" ).dialog({ 
             		width: 500,
-            		title: "Destierro oponente" });
+            		title: "Destierro oponente",
+            		close: function( event, ui ) {},
+            		open:function(){}
+            		});
             	break;
             }
         },
@@ -220,7 +235,10 @@ $(function(){
             	viewop("remocion1",$('#hidden').val());
             	$( "#dialog" ).dialog({ 
             		width: 500,
-            		title: "Remoción oponente" });
+            		title: "Remoción oponente",
+            		close: function( event, ui ) {},
+            		open:function(){}
+            		});
             	break;
             }
         },

@@ -131,10 +131,11 @@
 	</tr>
 	
 	<tr style="height: 20%">
-	<td>
-
+	<td valign="top">
 	<s:hidden id="lista" name="lista" value="" />	
 	<table>
+	<tr><td>Cartas en mazo: <span id="total"></span></td></tr>
+	<tr><td>Oros: <span id="oros">0</span></td></tr>
 	<tr>
 	<td>Nombre:</td>	
 	<td><s:textfield id="Nombre" name="model.deckNombre" maxlength="50" label="Nombre" /></td>
