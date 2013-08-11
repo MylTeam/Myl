@@ -7,7 +7,9 @@ import javax.inject.Singleton;
 
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+
 import com.myl.modelo.Carta;
 
 @Singleton
@@ -40,14 +42,44 @@ public class CartaDao extends HibernateDaoSupport {
 	}
 	
 	public List<String> findByCriteria() { 		
-		DetachedCriteria dCriteria = DetachedCriteria.forClass(Carta.class); ;		
+		DetachedCriteria dCriteria = DetachedCriteria.forClass(Carta.class);		
 		dCriteria.setProjection(Projections.distinct(Projections.property("raza")));
 		return getHibernateTemplate().findByCriteria(dCriteria);
 	}
 	
 	public List<String> findByCriteriaTipo() { 		
-		DetachedCriteria dCriteria = DetachedCriteria.forClass(Carta.class); ;		
-		dCriteria.setProjection(Projections.distinct(Projections.property("tipo")));
+		DetachedCriteria dCriteria = DetachedCriteria.forClass(Carta.class);		
+		dCriteria.setProjection(Projections.distinct(Projections.property("tipo")));		
 		return getHibernateTemplate().findByCriteria(dCriteria);
 	}
+	
+	public List<Carta> findByCriterioBusqueda(Carta carta) { 		
+		DetachedCriteria dCriteria = DetachedCriteria.forClass(Carta.class);
+		
+		if(carta.getNombre()!=null){
+			dCriteria.add(Restrictions.like("nombre", "%"+carta.getNombre()+"%"));
+		}
+		if(carta.getIdEdicion()!=null){
+			dCriteria.add(Restrictions.eq("idEdicion", carta.getIdEdicion()));
+		}
+		if(carta.getFrecuencia()!=null){
+			dCriteria.add(Restrictions.eq("frecuencia", carta.getFrecuencia()));
+		}
+		if(carta.getTipo()!=null){
+			dCriteria.add(Restrictions.eq("tipo", carta.getTipo()));
+		}
+		if(carta.getCoste()!=null){
+			dCriteria.add(Restrictions.eq("coste", carta.getCoste()));
+		}
+		if(carta.getFuerza()!=null){
+			dCriteria.add(Restrictions.eq("fuerza", carta.getFuerza()));
+		}
+		if(carta.getRaza()!=null){
+			dCriteria.add(Restrictions.eq("raza", carta.getRaza()));
+		}
+		
+		
+		return getHibernateTemplate().findByCriteria(dCriteria);
+	}
+	
 }

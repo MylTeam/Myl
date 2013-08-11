@@ -54,7 +54,12 @@ public class CartaNegocio {
 	public List<String> findByCriteriaTipo() { 		
 		return CartaDao.findByCriteriaTipo();
 	}
-	   
+	
+	@Transactional
+	public List<Carta> findByCriterioBusqueda(Carta carta) { 		
+		return CartaDao.findByCriterioBusqueda(carta);
+	}
+	
 	public CartaDao getCartaDao() {
 		return CartaDao;
 	}

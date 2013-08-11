@@ -167,10 +167,9 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>,P
 	public String search(){
 		jsonProcessor = new Gson();				
 		Carta cartaAux=jsonProcessor.fromJson(criterioJson, Carta.class);		
-		resultado= new ArrayList<Carta>();
+		resultado= new ArrayList<Carta>();			
 		
-		
-		for(Carta carta:cartaNegocio.findByExample(cartaAux)){									
+		for(Carta carta:cartaNegocio.findByCriterioBusqueda(cartaAux)){
 						
 				Carta aux=new Carta();
 				aux.setId(carta.getId());
@@ -186,8 +185,7 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>,P
 				aux.setSiglas(carta.getEdicion().getSiglas());				
 				
 				resultado.add(aux);
-		}
-		
+		}		
 			
 		return "res";
 	}
