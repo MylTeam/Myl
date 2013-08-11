@@ -8,7 +8,7 @@ var obj = {
 };
 
 $(document).ready(function() {	
-	$("#collection").height(window.innerHeight-170);
+	$("#collection").height(window.innerHeight-170);	
 });
 
 function createCard(c, context, origenPila) {
@@ -42,12 +42,16 @@ function createCard(c, context, origenPila) {
 
 function drawResult(context) {
 	$("#collection").empty();
-
+	var imgs=[];
+	
 	for ( var c = 0; c < obj["resultado"].length; c++) {
 		var img = createCard(c, context, "resultado");
-
-		var divCollection = document.getElementById("collection");
-		divCollection.appendChild(img);
+		imgs.push(img);
+	}
+	
+	var divCollection = document.getElementById("collection");
+	for(var c=0;c<imgs.length;c++){		
+		divCollection.appendChild(imgs[c]);
 	}
 }
 
