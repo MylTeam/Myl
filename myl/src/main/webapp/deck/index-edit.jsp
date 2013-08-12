@@ -80,6 +80,9 @@
 		</s:iterator>
 	</select>
 	</td></tr>
+	<tr><td>Efecto:</td><td>
+	<input type="text" style="width: 100%" id="efecto"/>
+	</td></tr>
 	
 	<tr><td><input type="button" id="btnSearch" onclick="search()" value="Buscar" class="ui-button ui-widget ui-state-default ui-corner-all"/></td></tr>
 	</table></td></tr>	

@@ -77,6 +77,9 @@ public class CartaDao extends HibernateDaoSupport {
 		if(carta.getRaza()!=null){
 			dCriteria.add(Restrictions.eq("raza", carta.getRaza()));
 		}
+		if(carta.getEfecto()!=null){
+			dCriteria.add(Restrictions.like("efecto", "%"+carta.getEfecto()+"%"));
+		}
 		
 		
 		return getHibernateTemplate().findByCriteria(dCriteria);

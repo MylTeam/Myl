@@ -162,6 +162,9 @@ function search() {
 	if (razaC != "") {
 		criterioJson['raza'] = razaC;
 	}
+	if ($("#efecto").val() != "") {
+		criterioJson['efecto'] = $("#efecto").val();
+	}
 
 	criterioJson = JSON.stringify(criterioJson);
 
