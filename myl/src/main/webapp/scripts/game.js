@@ -264,7 +264,7 @@ function dropCard(ev) {
 		movedCard["destino"]=destino;
 		return movedCard;
 	}else{
-//		target($("#"+data), $("#"+ev.target.id), $("#"+document.getElementById(data).parentNode.id+"aux"), $("#"+ev.target.parentNode.id+"aux"));
+//		target($("#"+data), $(ev.target), $("#"+document.getElementById(data).parentNode.id+"aux"), $("#"+ev.target.parentNode.id+"aux"));
 		return null;
 	}
 }
@@ -334,15 +334,17 @@ function target(source,target,divauxorigen,divauxdestino){
 //	    $("#aux").empty();
 	    divauxorigen.empty();
 	var imageAux=source.clone();
-	imageAux.attr("id","imageAux");
+	imageAux.attr("id",source.attr("id")+"tar");
+	imageAux.attr("draggable","false");
 	imageAux.appendTo(divauxorigen);
 	    
 	var wrapper=imageAux
 	    .wrap($('<div>').css('position','absolute'))
-	    .parent();
+	    .parent().parent();
 	    
 	wrapper.animate(divauxdestino.offset(), 1000, function() {
-	    wrapper.remove();
+//	    wrapper.remove();
+		divauxorigen.offset(source.offset());
 	});
 
 	}, 1000);

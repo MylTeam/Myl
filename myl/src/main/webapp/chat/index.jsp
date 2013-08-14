@@ -188,9 +188,9 @@
               <td colspan="2"><div id="apoyo1" class="divbluecastle" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"><div id="apoyo1aux" class="target"></div></div></td>
             </tr>
             <tr style="HEIGHT: 70px;">
-              <td style="width: 80%"><div id="mano1" class="divblue" align="center" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)">
+              <td style="width: 80%"><div id="mano1" class="divblue" align="center" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div>
 				<td style="width: 20%"><div id="aux1" class="divblue" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
-              </div></td>
+              </td>
             </tr>
           </tbody>
         </table></td>
