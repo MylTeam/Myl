@@ -76,10 +76,10 @@
         <table id="Ctrl1" class="Table" style="HEIGHT: 100%; WIDTH: 100%">
           <tbody>
           	<tr style="height: 33%">
-              <td colspan="4"><div id="reserva2" class="divredgold" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>              
+              <td colspan="4"><div id="reserva2" class="divredgold" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"><div id="reserva2aux" class="target"></div></div></td>              
             </tr>
             <tr style="height: 33%">
-              <td colspan="4"><div id="oropagado2" class="divredgoldpayed" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>              
+              <td colspan="4"><div id="oropagado2" class="divredgoldpayed" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"><div id="oropagado2aux" class="target"></div></div></td>              
             </tr>
             <tr>
               <td style="WIDTH: 25%"><div id="remocion2d" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)">
@@ -105,13 +105,13 @@
               <td style="width: 80%"><div id="mano2" align="center" class="divred" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>              
             </tr>
             <tr class="campo">
-              <td colspan="2"><div id="apoyo2" class="divredcastle" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
+              <td colspan="2"><div id="apoyo2" class="divredcastle" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"><div id="apoyo2aux" class="target"></div></div></td>
             </tr>
             <tr class="campo">
-              <td colspan="2"><div id="defensa2" class="divredshield" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
+              <td colspan="2"><div id="defensa2" class="divredshield" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"><div id="defensa2aux" class="target"></div></div></td>
             </tr>
             <tr class="campo">
-              <td colspan="2"><div id="ataque2" class="divredsword" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
+              <td colspan="2"><div id="ataque2" class="divredsword" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"><div id="ataque2aux" class="target"></div></div></td>
             </tr>
           </tbody>
         </table></td>
@@ -179,13 +179,13 @@
         <table id="P2" class="Table" style="HEIGHT: 100%; WIDTH: 100%">
           <tbody>
             <tr class="campo">
-              <td colspan="2"><div id="ataque1" class="divbluesword" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>              
+              <td colspan="2"><div id="ataque1" class="divbluesword" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"><div id="ataque1aux" class="target"></div></div></td>              
             </tr>
             <tr class="campo">
-              <td colspan="2"><div id="defensa1" class="divblueshield" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
+              <td colspan="2"><div id="defensa1" class="divblueshield" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"><div id="defensa1aux" class="target"></div></div></td>
             </tr>
             <tr class="campo">
-              <td colspan="2"><div id="apoyo1" class="divbluecastle" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
+              <td colspan="2"><div id="apoyo1" class="divbluecastle" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"><div id="apoyo1aux" class="target"></div></div></td>
             </tr>
             <tr style="HEIGHT: 70px;">
               <td style="width: 80%"><div id="mano1" class="divblue" align="center" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)">
@@ -212,10 +212,10 @@
               </div></td>
             </tr>
             <tr style="height: 33%">
-              <td colspan="4"><div id="oropagado1" class="divbluegoldpayed" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>              
+              <td colspan="4"><div id="oropagado1" class="divbluegoldpayed" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"><div id="oropagado1aux" class="target"></div></div></td>              
             </tr>
             <tr style="height: 33%">
-              <td colspan="4"><div id="reserva1" class="divbluegold" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>              
+              <td colspan="4"><div id="reserva1" class="divbluegold" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"><div id="reserva1aux" class="target"></div></div></td>              
             </tr>
           </tbody>
         </table></td>

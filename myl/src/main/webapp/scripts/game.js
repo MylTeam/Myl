@@ -256,14 +256,15 @@ function dropCard(ev) {
 				} else {
 					c.src = context + "/images/myl/" + data + ".jpg";
 				}
-			}else{
+			}else{								
 				return null;
 			}
 		}
 		movedCard["origen"]=origen;
 		movedCard["destino"]=destino;
 		return movedCard;
-	}else{		
+	}else{
+//		target($("#"+data), $("#"+ev.target.id), $("#"+document.getElementById(data).parentNode.id+"aux"), $("#"+ev.target.parentNode.id+"aux"));
 		return null;
 	}
 }
@@ -320,4 +321,29 @@ function reagrupar(zonao, zonad){
 		divdest.appendChild(img);
 		msgLogCard(obj[zonad][0], zonao, zonad, "Reagrupando carta");
 	}
+}
+
+function target(source,target,divauxorigen,divauxdestino){
+//	var div2 = $('#div2');
+
+//	$("#aux").offset($("#image").offset());
+	divauxorigen.offset(source.offset());
+	divauxdestino.offset(target.offset());
+	
+	var timerId = setInterval(function() {
+//	    $("#aux").empty();
+	    divauxorigen.empty();
+	var imageAux=source.clone();
+	imageAux.attr("id","imageAux");
+	imageAux.appendTo(divauxorigen);
+	    
+	var wrapper=imageAux
+	    .wrap($('<div>').css('position','absolute'))
+	    .parent();
+	    
+	wrapper.animate(divauxdestino.offset(), 1000, function() {
+	    wrapper.remove();
+	});
+
+	}, 1000);
 }
