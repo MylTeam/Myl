@@ -4,9 +4,9 @@ LOBBY
 
 JUEGO
 
--guardar victoria o derrota
+-quitar limpiar objetivo de cartas en mano, dialogs
 
--targets(msg tipo target flip effect)
+-guardar victoria o derrota
 
 -incidencias
 

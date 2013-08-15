@@ -173,10 +173,22 @@ $(function(){
             	var parent=cardbottom.parent().attr("id");            	
             	tobottom(cardbottom, parent);            	            	
             	break;
+            case "clean":
+            	var card=$("#"+options.$trigger.context.id);
+            	card.attr("class",card.attr("class")+" forclear");
+            	var dataAux;    			    			
+    			if(card.attr("id").indexOf("op")!=-1){
+    				dataAux=card.attr("id").substring(2);
+    			}else{
+    				dataAux="op"+card.attr("id");
+    			}
+            	msgTargetClean(dataAux);
+            	break;
             }
         },
         items: {                       
-            "bottom": {name: "Enviar al fondo del castillo."}            
+            "bottom": {name: "Enviar al fondo del castillo."},
+        	"clean": {name: "Limpiar objetivos."}
         }
     });              
 });
@@ -257,10 +269,23 @@ $(function(){
             	var card=$("#"+options.$trigger.context.id);
             	takecontrol(options.$trigger.context.id);            	
             	break;
+            case "clean":
+            	var card=$("#"+options.$trigger.context.id);
+            	card.attr("class",card.attr("class")+" forclear");
+            	
+            	var dataAux;    			    			
+    			if(card.attr("id").indexOf("op")!=-1){
+    				dataAux=card.attr("id").substring(2);
+    			}else{
+    				dataAux="op"+card.attr("id");
+    			}
+            	msgTargetClean(dataAux);
+            	break;
             }
         },
         items: {                       
-            "control": {name: "Tomar control"}            
+            "control": {name: "Tomar control"},
+            "clean": {name: "Limpiar objetivos"}
         }
     });              
 });

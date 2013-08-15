@@ -79,7 +79,7 @@ function createCard(c, context, origenPila) {
 	var img = document.createElement('img');
 	img.id = obj[origenPila][c].idTemp;
 	img.name = obj[origenPila][c].numero;	
-	img.src = context + "/images/myl/"+obj[origenPila][c].siglas+"/" + obj[origenPila][c].numero + ".jpg";
+	img.src = context + "/images/thumbs/"+obj[origenPila][c].siglas+"/" + obj[origenPila][c].numero + ".jpg";
 	img.className=obj[origenPila][c].tipo+" cardright";
 	img.draggable = "true";
 	img.height = "70";
@@ -122,7 +122,7 @@ function createCardOp(c, context, origenPila) {
 	var img = document.createElement('img');
 	img.id = objOp[origenPila][c].idTemp;
 	img.name = objOp[origenPila][c].numero;	
-	img.src = context + "/images/myl/"+objOp[origenPila][c].siglas+"/" + objOp[origenPila][c].numero + ".jpg";
+	img.src = context + "/images/thumbs/"+objOp[origenPila][c].siglas+"/" + objOp[origenPila][c].numero + ".jpg";
 	img.className=objOp[origenPila][c].tipo+" oponentcard";	
 	img.height = "70";
 	img.alt=objOp[origenPila][c].siglas;
@@ -363,9 +363,17 @@ function target(source,target){
 		var orcheck=document.getElementById(source[0].id);
 		var decheck=document.getElementById(target[0].id);
 		
-		if(orcheck==null || decheck==null || orcheck.parentNode.id.indexOf("mano")!=-1 || decheck.parentNode.id.indexOf("mano")!=-1){
+		if(orcheck==null || decheck==null || orcheck.parentNode.id.indexOf("mano")!=-1 || decheck.parentNode.id.indexOf("mano")!=-1 || orcheck.className.indexOf("forclear")!=-1 || decheck.className.indexOf("forclear")!=-1){
+			if(orcheck!=null && orcheck.className.indexOf("forclear")!=-1){
+				$(orcheck).removeClass("forclear");
+			}
+			if(decheck!=null && decheck.className.indexOf("forclear")!=-1){
+				$(decheck).removeClass("forclear");
+			}
 			divauxorigen.remove();
 			divauxdestino.remove();
+			
+			clearInterval(timerId);
 			return null;
 		}
 		

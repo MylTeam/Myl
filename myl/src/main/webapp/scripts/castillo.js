@@ -111,3 +111,9 @@ function msgTarget(origen,destino){
     var to=document.getElementById("user2").value;
     wsclient.toChatTarget(from,to,"",origen,destino);
 }
+
+function msgTargetClean(targetclear){
+	var from=document.getElementById("userName").value;
+    var to=document.getElementById("user2").value;
+    wsclient.toChatTarget(from,to,"clean",targetclear,null);
+}

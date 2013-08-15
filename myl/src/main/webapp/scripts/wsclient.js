@@ -61,8 +61,12 @@ var wsclient = (function() {
             	addMessageCard(message.cardListInfo.from, message.cardListInfo.message, cleanWhitespaces(message.cardListInfo.from) + 'conversation');            	
             	processCards(message.cardListInfo.from, message.cardListInfo.message, message.cardListInfo.cartas,message.cardListInfo.origen);            	
             } else if (message.targetInfo){
-            	
-            	target($("#"+message.targetInfo.origen), $("#"+message.targetInfo.destino));
+            	if(message.targetInfo.message=="clean"){
+            		var card=$("#"+message.targetInfo.origen);
+                	card.attr("class",card.attr("class")+" forclear");
+            	}else{
+            		target($("#"+message.targetInfo.origen), $("#"+message.targetInfo.destino));
+            	}
             }
         }
     }

@@ -16,11 +16,12 @@ function createCard(c, context, origenPila) {
 	img.alt = c;
 	img.id = obj[origenPila][c].idTemp;
 	img.name = obj[origenPila][c].numero;
-	img.src = context + "/images/myl/" + obj[origenPila][c].siglas + "/" + obj[origenPila][c].numero + ".jpg";
+	img.src = context + "/images/thumbs/" + obj[origenPila][c].siglas + "/" + obj[origenPila][c].numero + ".jpg";
 	img.className = obj[origenPila][c].tipo;
 	img.draggable = "true";
 	img.height = "70";
 	img.width = "50";
+	img.title = obj[origenPila][c].siglas;
 	img.addEventListener('dragstart', function drag(ev) {
 		origen = ev.target.parentNode.id;
 		ev.dataTransfer.setData("Text", ev.target.id);
@@ -28,7 +29,7 @@ function createCard(c, context, origenPila) {
 	img.onmouseover = function showImage(ev) {
 		var viewCard = document.getElementById("viewCard");
 //		viewCard.src = context + "/images/myl/" + obj[origenPila][c].siglas + "/" + ev.target.name + ".jpg";
-		viewCard.src = ev.target.src;
+		viewCard.src = context + "/images/myl/"+ev.target.title+"/" + ev.target.name + ".jpg";
 		$("#spnb").text(obj[origenPila][c].nombre);
 		$("#sptp").text(obj[origenPila][c].tipo);
 		$("#spfr").text(obj[origenPila][c].frecuencia);
