@@ -166,11 +166,11 @@ function dropCard(ev) {
 	ev.preventDefault();
 	var context = $('#hidden').val();
 	var data = ev.dataTransfer.getData("Text");
-			
+		
 	/**
 	 * Verifica si la carta se esta moviendo hacia un div o hacia el deck, cementerio, destierro o remocion	
 	 */
-	if (ev.target == "[object HTMLDivElement]" || ev.target.id == "deck1"
+	if ((ev.target == "[object HTMLDivElement]" && ev.target.id.indexOf("2")==-1) || ev.target.id == "deck1"
 			|| ev.target.id == "cementerio1" || ev.target.id == "destierro1"
 			|| ev.target.id == "remocion1") {
 
@@ -264,7 +264,7 @@ function dropCard(ev) {
 		movedCard["destino"]=destino;
 		return movedCard;
 	}else{
-		if(ev.target.id.indexOf("tar")==-1 && ev.target.id!=data){
+		if(ev.target.id.indexOf("tar")==-1 && ev.target.id!=data && ev.target != "[object HTMLDivElement]"){
 			target($("#"+data), $(ev.target));
 			
 			var dataAux;
@@ -363,27 +363,28 @@ function target(source,target){
 		var orcheck=document.getElementById(source[0].id);
 		var decheck=document.getElementById(target[0].id);
 		
-		if(orcheck==null || decheck==null || source[0].parentNode.id.indexOf("mano")!=-1 || target[0].parentNode.id.indexOf("mano")!=-1){
+		if(orcheck==null || decheck==null || orcheck.parentNode.id.indexOf("mano")!=-1 || decheck.parentNode.id.indexOf("mano")!=-1){
 			divauxorigen.remove();
 			divauxdestino.remove();
 			return null;
 		}
 		
-	divauxorigen.offset(source.offset());
-	divauxdestino.offset(target.offset());		
+	divauxorigen.offset($(orcheck).offset());
+	divauxdestino.offset($(decheck).offset());		
 	divauxorigen.empty();
 	
 	var imageAux=source.clone();
-	imageAux.attr("id",source.attr("id")+"tar");
+	imageAux.attr("id",orcheck.id+"tar");
 	imageAux.attr("draggable","false");
+	imageAux.attr("class","animation");
 	imageAux.appendTo(divauxorigen);
 	
 	var wrapper=imageAux
-	    .wrap($('<div>').css('position','absolute'))
+	    .wrap($('<div>').css('position','absolute').css('z-index',0))
 	    .parent().parent();
 	    
 	wrapper.animate(divauxdestino.offset(), 1000, function() {
-		divauxorigen.offset(source.offset());
+		divauxorigen.offset($(orcheck).offset());
 	});
 
 	}, 1000);

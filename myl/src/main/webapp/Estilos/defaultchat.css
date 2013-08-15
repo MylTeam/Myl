@@ -78,6 +78,16 @@ div.target{
     position:absolute;
 }
 
+img.oponentcard{
+	position:relative;
+	z-index: 1;
+}
+
+img.cardright{
+	position:relative;
+	z-index: 1;
+}
+
 #iframe{background-image: url("images/old_paper.jpg");}
 #bar{text-align: right;height: 3%;background-color: #0B3E6F;background-image: url('images/title-bg.png');background-size: auto 100%;}
 
