@@ -105,3 +105,9 @@ function msgLog(msg){
     var to=document.getElementById("user2").value;
     wsclient.toChatCard(from, to, msg, null, null, null);
 }
+
+function msgTarget(origen,destino){
+	var from=document.getElementById("userName").value;
+    var to=document.getElementById("user2").value;
+    wsclient.toChatTarget(from,to,"",origen,destino);
+}

@@ -53,14 +53,16 @@ var wsclient = (function() {
                     addOnlineUser(activeUsers[i]);
                 }
             } else if (message.cardInfo){
-            	addMessageCard(message.cardInfo.from, message.cardInfo.message, cleanWhitespaces(message.cardInfo.from) + 'conversation');
-            	
+            	addMessageCard(message.cardInfo.from, message.cardInfo.message, cleanWhitespaces(message.cardInfo.from) + 'conversation');            	
             	if(message.cardInfo.origen!=null && message.cardInfo.destino!=null){
             		processCard(message.cardInfo.from, message.cardInfo.message, message.cardInfo.carta,message.cardInfo.origen,message.cardInfo.destino);
             	}
             } else if (message.cardListInfo){
             	addMessageCard(message.cardListInfo.from, message.cardListInfo.message, cleanWhitespaces(message.cardListInfo.from) + 'conversation');            	
             	processCards(message.cardListInfo.from, message.cardListInfo.message, message.cardListInfo.cartas,message.cardListInfo.origen);            	
+            } else if (message.targetInfo){
+            	
+            	target($("#"+message.targetInfo.origen), $("#"+message.targetInfo.destino));
             }
         }
     }
@@ -202,6 +204,10 @@ var wsclient = (function() {
     	addMessageCard(sender, message, conversationId);
         ws.send(JSON.stringify({cardListInfo : {from : sender, to : receiver, message : message, cartas : cards, origen: origen}}));
     }
+    
+    function toChatTarget(sender, receiver, message, origen, destino){
+    	ws.send(JSON.stringify({targetInfo : {from : sender, to : receiver, message : message, origen: origen, destino: destino}}));
+    }
 
     /********* usuarios conectados *******/
     function addOnlineUser(userName) {
@@ -264,6 +270,7 @@ var wsclient = (function() {
         toChat: toChat,
         toChatCard: toChatCard,
         toChatCards: toChatCards,
+        toChatTarget: toChatTarget,
         addMessage: addMessage,
         allowDrop : allowDrop,
         drag : drag,
