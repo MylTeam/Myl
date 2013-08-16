@@ -164,7 +164,7 @@ $(function(){
 
 $(function(){
     $.contextMenu({
-        selector: '.cardright', 
+        selector: '.cardright',        
         callback: function(key, options) {
         	
             switch(key){            
@@ -175,21 +175,23 @@ $(function(){
             	break;
             case "clean":
             	var card=$("#"+options.$trigger.context.id);
-            	card.attr("class",card.attr("class")+" forclear");
-            	var dataAux;    			    			
-    			if(card.attr("id").indexOf("op")!=-1){
-    				dataAux=card.attr("id").substring(2);
-    			}else{
-    				dataAux="op"+card.attr("id");
-    			}
-            	msgTargetClean(dataAux);
+            	if(document.getElementById(card.attr("id")+"div")!=null){
+            		card.attr("class",card.attr("class")+" forclear");
+            		var dataAux;    			    			
+            		if(card.attr("id").indexOf("op")!=-1){
+            			dataAux=card.attr("id").substring(2);
+            		}else{
+            			dataAux="op"+card.attr("id");
+            		}
+            		msgTargetClean(dataAux);
+            	}
             	break;
             }
         },
         items: {                       
             "bottom": {name: "Enviar al fondo del castillo."},
         	"clean": {name: "Limpiar objetivos."}
-        }
+        }        
     });              
 });
 
@@ -271,15 +273,17 @@ $(function(){
             	break;
             case "clean":
             	var card=$("#"+options.$trigger.context.id);
-            	card.attr("class",card.attr("class")+" forclear");
+            	if(document.getElementById(card.attr("id")+"div")!=null){
+            		card.attr("class",card.attr("class")+" forclear");
             	
-            	var dataAux;    			    			
-    			if(card.attr("id").indexOf("op")!=-1){
-    				dataAux=card.attr("id").substring(2);
-    			}else{
-    				dataAux="op"+card.attr("id");
-    			}
-            	msgTargetClean(dataAux);
+            		var dataAux;    			    			
+            		if(card.attr("id").indexOf("op")!=-1){
+            			dataAux=card.attr("id").substring(2);
+            		}else{
+            			dataAux="op"+card.attr("id");
+            		}
+            		msgTargetClean(dataAux);
+            	}
             	break;
             }
         },

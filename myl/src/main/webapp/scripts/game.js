@@ -363,7 +363,7 @@ function target(source,target){
 		var orcheck=document.getElementById(source[0].id);
 		var decheck=document.getElementById(target[0].id);
 		
-		if(orcheck==null || decheck==null || orcheck.parentNode.id.indexOf("mano")!=-1 || decheck.parentNode.id.indexOf("mano")!=-1 || orcheck.className.indexOf("forclear")!=-1 || decheck.className.indexOf("forclear")!=-1){
+		if(orcheck==null || decheck==null || orcheck.parentNode.id.indexOf("mano")!=-1 || decheck.parentNode.id.indexOf("mano")!=-1 || orcheck.className.indexOf("forclear")!=-1 || decheck.className.indexOf("forclear")!=-1 || orcheck.parentNode.id.indexOf("dialog")!=-1 || decheck.parentNode.id.indexOf("dialog")!=-1){
 			if(orcheck!=null && orcheck.className.indexOf("forclear")!=-1){
 				$(orcheck).removeClass("forclear");
 			}
