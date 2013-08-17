@@ -11,7 +11,8 @@
 	<![CDATA[			 		
 			
 			<script src="${pageContext.request.contextPath}/scripts/deckselected.js" type="text/javascript"></script>
-			<script src="${pageContext.request.contextPath}/scripts/usuario.js" type="text/javascript"></script>				
+			<script src="${pageContext.request.contextPath}/scripts/usuario.js" type="text/javascript"></script>						
+							
 		 ]]>
 </jsp:text>
 </head>
@@ -55,10 +56,10 @@
 							<td style="text-align: center;"><input type="radio" name="deckpred" onclick="setSelection(this.value)" value="${deckId}"/></td>
 							<td style="text-align: center;">
 									<a href="${pageContext.request.contextPath}/deck/${deckId}/edit">
-									<img height="40" width="40" src="${pageContext.request.contextPath}/images/buttons/botEditar2.png" title="Modificar deck"/></a>
+									<img height="40" width="40" src="${pageContext.request.contextPath}/images/buttons/editfeather.png" title="Modificar deck"/></a>
 							
 									<a href="${pageContext.request.contextPath}/deck/${deckId}/deleteConfirm">
-									<img height="40" width="40" src="${pageContext.request.contextPath}/images/buttons/eliminar.png" title="Eliminar deck"/></a>
+									<img height="40" width="40" src="${pageContext.request.contextPath}/images/buttons/elim.png" title="Eliminar deck"/></a>
 							</td>
 						</tr>
 					</s:iterator>

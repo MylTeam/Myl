@@ -4,25 +4,15 @@ LOBBY
 
 JUEGO
 
--quitar limpiar objetivo de cartas en mano, dialogs
+
+
 
 -guardar victoria o derrota
-
 -incidencias
-
 -doble click de las cartas
 
 
 DECK
--cantidad de cartas
--cantidad de oros
--formato
-	-rangnarok
-	-espiritu
-	-acero
-	-polvora
-	-tercera era
-	-vintage
 
 -reglas: unicas, mercenarios
 
@@ -32,6 +22,11 @@ formatos
 primer episodio: Espada sagrada - Hordas
 segundo episodio: Bestiario - Dominus
 tercer episodio: Inmortales - Vikingos
+ragnarok
+vintage
+imperio(2 bloques)
+bloques
+
 
 USUARIO
  -mas datos

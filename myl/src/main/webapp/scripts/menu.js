@@ -40,6 +40,9 @@ $(function(){
             			}
             	});
             	break;
+            case "drop":
+            	dropxcards(1);
+            	break;
             case "viewx":
             	$("#cantidad").val("0");
             	$("#dialog-cant").dialog({
@@ -68,7 +71,7 @@ $(function(){
             	break;
             case "shuffle":
             		shuffle();
-            		msgLog("Barajando el mazo castillo");
+            		
             	break;
             case "show":
         		show("deck1", "Mostrando deck");
@@ -76,12 +79,13 @@ $(function(){
             }
         },
         items: {
-            "draw": {name: "Robar carta"},
+            "draw": {name: "Robar carta (shift+d)"},
             "drawHand": {name: "Robar mano"},
             "view": {name: "Ver castillo"},
-            "dropx": {name: "Botar X"},
             "viewx": {name: "Ver X"},
-            "shuffle": {name: "Barajar"},
+            "drop": {name: "Botar carta (shift+b)"},
+            "dropx": {name: "Botar X"},
+            "shuffle": {name: "Barajar (shift+s)"},
             "show": {name: "Mostrar al oponente"}
         }
     });

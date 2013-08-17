@@ -17,7 +17,9 @@ public class Main {
 			
 		try {			
 			
-			File f=new File("C:/Users/Mariana/Documents/prueba/");
+//			File f=new File("C:/Users/Mariana/Documents/prueba/");
+			File f=new File("C:/Users/cdt/Documents/myl-big/");
+			
 			
 			for(File file:f.listFiles()){
 				if(file.isFile()){
@@ -25,10 +27,10 @@ public class Main {
 				System.out.println(filename);
 				
 				
-			 BufferedReader in4 = new BufferedReader(new FileReader("C:/Users/Mariana/Documents/prueba/"+filename));			 
-			 File archivo=new File("C:/Users/Mariana/Documents/prueba/s-"+filename+".txt");			 
+			 BufferedReader in4 = new BufferedReader(new FileReader("C:/Users/cdt/Documents/myl-big/"+filename));			 
+			 File archivo=new File("C:/Users/cdt/Documents/myl-big/s-"+filename+".txt");			 
 			 
-		      PrintWriter out1 = new PrintWriter(new BufferedWriter(new FileWriter("C:/Users/Mariana/Documents/prueba/spoilers/s-"+filename)));
+		      PrintWriter out1 = new PrintWriter(new BufferedWriter(new FileWriter("C:/Users/cdt/Documents/myl-big/spoilers/s-"+filename)));
 		      int lineCount = 1;
 		      String s = null;
 		      while((s = in4.readLine()) != null ){ 
@@ -37,7 +39,7 @@ public class Main {
 		    	  if(s.contains("Who has this card?") || s.contains("click to enlarge") || s.contains("top upward arrow") || s.contains("search for a card") || s.contains("affiliates") || s.contains("Total time spent") || s.contains("TradeCardsOnline") || s.contains("The information presented") || s.contains("Close Ad") || s.contains("your messages")){
 		    		  s="";
 		    	  }else if(s.contains("Who wants this card?")){
-		    		  s=s.replace("Who wants this card? 	", "	Nombre: ");		    		  
+		    		  s=s.replace("Who wants this card?	", "	Nombre: ");		    		  
 		    		  s=s.substring(0, s.length()-1);		    		  
 		    		  
 		    	  }else if(!s.contains("Nombre:") && !s.contains("N° de coleccionista:") && !s.contains("Tipo de Carta:") && !s.contains("Raza:") && !s.contains("Coste:") && !s.contains("Fuerza:") && !s.contains("Ilustrador:") && !s.contains("Frecuencia:") &&  !s.isEmpty() && s.trim().length()>0){

@@ -20,6 +20,9 @@
 			<script src="${pageContext.request.contextPath}/scripts/castillo.js" type="text/javascript"></script>
 			<script src="${pageContext.request.contextPath}/scripts/menu.js" type="text/javascript"></script>
 			<script src="${pageContext.request.contextPath}/scripts/oponente.js" type="text/javascript"></script>
+			<script src="${pageContext.request.contextPath}/scripts/mousetrap.min.js" type="text/javascript"></script>
+			<script src="${pageContext.request.contextPath}/scripts/shortcuts.js" type="text/javascript"></script>
+			<script src="${pageContext.request.contextPath}/scripts/phases.js" type="text/javascript"></script>
 		 ]]>
 </jsp:text>
  
@@ -71,15 +74,15 @@
 </div>	
 <table id="Table1" class="Table" style="HEIGHT: 97%; WIDTH: 100%">
   <tbody>
-    <tr style="HEIGHT: 50%;">
+    <tr style="HEIGHT: 48%;">
       <td style="WIDTH: 25%;">
         <table id="Ctrl1" class="Table" style="HEIGHT: 100%; WIDTH: 100%">
           <tbody>
           	<tr style="height: 33%">
-              <td colspan="4"><div id="reserva2" class="divredgold" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"><div id="reserva2aux" class="target"></div></div></td>              
+              <td colspan="4"><div id="reserva2" class="divredgold" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>              
             </tr>
             <tr style="height: 33%">
-              <td colspan="4"><div id="oropagado2" class="divredgoldpayed" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"><div id="oropagado2aux" class="target"></div></div></td>              
+              <td colspan="4"><div id="oropagado2" class="divredgoldpayed" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>              
             </tr>
             <tr>
               <td style="WIDTH: 25%"><div id="remocion2d" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)">
@@ -105,13 +108,13 @@
               <td style="width: 80%"><div id="mano2" align="center" class="divred" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>              
             </tr>
             <tr class="campo">
-              <td colspan="2"><div id="apoyo2" class="divredcastle" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"><div id="apoyo2aux" class="target"></div></div></td>
+              <td colspan="2"><div id="apoyo2" class="divredcastle" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
             </tr>
             <tr class="campo">
-              <td colspan="2"><div id="defensa2" class="divredshield" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"><div id="defensa2aux" class="target"></div></div></td>
+              <td colspan="2"><div id="defensa2" class="divredshield" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
             </tr>
             <tr class="campo">
-              <td colspan="2"><div id="ataque2" class="divredsword" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"><div id="ataque2aux" class="target"></div></div></td>
+              <td colspan="2"><div id="ataque2" class="divredsword" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
             </tr>
           </tbody>
         </table></td>
@@ -144,27 +147,27 @@
       <!-- <center><img id="viewCard" src="" draggable="true" height="100%"/></center> -->
       </td>
     </tr>
-    <tr style="HEIGHT: 50%;">
+    <tr style="HEIGHT: 4%;">
+    <td></td>
+    <td>
+    <img id="fagrup" name="fagrup" class="fase" src="${pageContext.request.contextPath}/images/fases/agrupacion.png" ondblclick="phaseChange(event)" height="50%" width="12.5%"/>
+    <img id="fvigil" name="fvigil" class="fase" src="${pageContext.request.contextPath}/images/fases/vigilia.png" ondblclick="phaseChange(event)" height="50%" width="12.5%"/>
+    <img id="fataqu" name="fataqu" class="fase" src="${pageContext.request.contextPath}/images/fases/ataque.png" ondblclick="phaseChange(event)" height="50%" width="12.5%"/>
+    <img id="fbloqu" name="fbloqu" class="fase" src="${pageContext.request.contextPath}/images/fases/bloqueo.png" ondblclick="phaseChange(event)" height="50%" width="12.5%"/>
+    <img id="ftalis" name="ftalis" class="fase" src="${pageContext.request.contextPath}/images/fases/guerratalismanes.png" ondblclick="phaseChange(event)" height="50%" width="12.5%"/>
+    <img id="fdanio" name="fdanio" class="fase" src="${pageContext.request.contextPath}/images/fases/danio.png" ondblclick="phaseChange(event)" height="50%" width="12.5%"/>
+    <img id="ffinal" name="ffinal" class="fase" src="${pageContext.request.contextPath}/images/fases/final.png" ondblclick="phaseChange(event)" height="50%" width="12.5%"/>
+    <img id="fturno" name="fturno" class="fase" src="${pageContext.request.contextPath}/images/fases/turno.png" ondblclick="phaseChange(event)" height="50%" width="12.5%"/>
+    </td>
+    <td></td>
+    </tr>
+    <tr style="HEIGHT: 48%;">
       <td id="chat" style="WIDTH: 25%;">
       	<table style="width: 100%">
 			<tr><td>
  				<div id="container">
 					<div class="leftPanel">
-					 
-							
 							<input type="hidden" id="userName" /><span class="onLineUserName" ></span>
-						
-						<!--  
-						 <div class="userInfo">
-							<span class="disconnected" id="status">Desconectado</span>
-							Nombre: <input type="text" id="userName" /><span class="onLineUserName" ></span>
-						</div>
-						
-						 <div>
-							<button id="connect" onclick="wsclient.connect(document.getElementById('userName').value);">Conectar</button>
-							<button id="disconnect" disabled="disabled" onclick="wsclient.disconnect();">DesconexiÃ³n</button>
-						</div>
-						 --> 
 					 </div>
 										
 					<div id="conversations">
@@ -179,13 +182,13 @@
         <table id="P2" class="Table" style="HEIGHT: 100%; WIDTH: 100%">
           <tbody>
             <tr class="campo">
-              <td colspan="2"><div id="ataque1" class="divbluesword" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"><div id="ataque1aux" class="target"></div></div></td>              
+              <td colspan="2"><div id="ataque1" class="divbluesword" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>              
             </tr>
             <tr class="campo">
-              <td colspan="2"><div id="defensa1" class="divblueshield" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"><div id="defensa1aux" class="target"></div></div></td>
+              <td colspan="2"><div id="defensa1" class="divblueshield" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
             </tr>
             <tr class="campo">
-              <td colspan="2"><div id="apoyo1" class="divbluecastle" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"><div id="apoyo1aux" class="target"></div></div></td>
+             <td colspan="2"><div id="apoyo1" class="divbluecastle" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>
             </tr>
             <tr style="HEIGHT: 70px;">
               <td style="width: 80%"><div id="mano1" class="divblue" align="center" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div>
@@ -212,10 +215,10 @@
               </div></td>
             </tr>
             <tr style="height: 33%">
-              <td colspan="4"><div id="oropagado1" class="divbluegoldpayed" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"><div id="oropagado1aux" class="target"></div></div></td>              
+              <td colspan="4"><div id="oropagado1" class="divbluegoldpayed" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>              
             </tr>
             <tr style="height: 33%">
-              <td colspan="4"><div id="reserva1" class="divbluegold" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"><div id="reserva1aux" class="target"></div></div></td>              
+             <td colspan="4"><div id="reserva1" class="divbluegold" ondrop="wsclient.drop(event)" ondragover="wsclient.allowDrop(event)"></div></td>              
             </tr>
           </tbody>
         </table></td>

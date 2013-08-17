@@ -44,6 +44,7 @@ var wsclient = (function() {
             } else if (message.statusInfo) {
                 if (message.statusInfo.status == 'CONNECTED') {
                     addOnlineUser(message.statusInfo.user);
+                    
                 } else if (message.statusInfo.status == 'DISCONNECTED') {
                     removeOnlineUser(message.statusInfo.user);
                 }
@@ -66,6 +67,12 @@ var wsclient = (function() {
                 	card.attr("class",card.attr("class")+" forclear");
             	}else{
             		target($("#"+message.targetInfo.origen), $("#"+message.targetInfo.destino));
+            	}
+            } else if(message.phaseInfo){
+            	addMessagePhase(message.phaseInfo.from, message.phaseInfo.message, cleanWhitespaces(message.phaseInfo.from) + 'conversation');
+            	if(message.phaseInfo.phase!="dado"){
+            		disablePhases();
+            		$("#"+message.phaseInfo.phase).attr("class","faseActive");
             	}
             }
         }
@@ -90,12 +97,6 @@ var wsclient = (function() {
 
     function updateUserConnected() {
         var inputUsername = $('#userName');
-//        var onLineUserName = $('.onLineUserName');
-//        onLineUserName.html(inputUsername.val());
-//        inputUsername.css({display:'none'});
-//        onLineUserName.css({visibility:'visible'});
-//        $('#status').html('Conectado');
-//        $('#status').attr({class : 'connected'});
         $('#onLineUsersPanel').css({visibility:'visible'});
         
         toChat(document.getElementById("user1").value, document.getElementById("user2").value, "gameready");
@@ -140,6 +141,8 @@ var wsclient = (function() {
         $('<p class="messages"></p><textarea id="' + conversationId + 'message" rows="3"></textarea>').appendTo(conversationPanel);
         var sendButton = createSendButton(name);
         sendButton.appendTo(conversationPanel);
+        var dado = createDadoButton(name);
+        dado.appendTo(conversationPanel);
         conversationPanel.appendTo($('#conversations'));
         
         $("#"+conversationId + "message").keyup(function(event){
@@ -159,6 +162,16 @@ var wsclient = (function() {
             toChat(from, name, message);
             addMessage(from, message, conversationId);
             document.getElementById(conversationId+'message').value = '';
+        });        
+        return button;
+    }
+    
+    function createDadoButton(name) {
+        var button = $(document.createElement('button'));
+        button.html('Lanzar dado');
+        button.click(function () {
+        	var num=Math.floor((Math.random()*6))+1;
+        	msgPhase(num+" obtenido", "dado");
         });        
         return button;
     }
@@ -192,6 +205,14 @@ var wsclient = (function() {
         messages.scrollTop(messages[0].scrollHeight);
         $('#'+conversationPanelId+' textarea').focus();
     }
+    
+    function addMessagePhase(from, message, conversationPanelId) {
+        var messages = $('#' + conversationPanelId + ' .messages');
+        $('<div class="messageph">'+from+" :"+message+'</div>').appendTo(messages);
+        messages.scrollTop(messages[0].scrollHeight);
+        $('#'+conversationPanelId+' textarea').focus();
+    }
+    
 
     function toChat(sender, receiver, message) {    	
         ws.send(JSON.stringify({messageInfo : {from : sender, to : receiver, message : message}}));
@@ -212,11 +233,18 @@ var wsclient = (function() {
     function toChatTarget(sender, receiver, message, origen, destino){
     	ws.send(JSON.stringify({targetInfo : {from : sender, to : receiver, message : message, origen: origen, destino: destino}}));
     }
+    
+    function toChatPhase(sender, receiver, message,phase) {
+    	var conversationId = cleanWhitespaces(receiver) + 'conversation';
+    	addMessagePhase(sender, message, conversationId);
+        ws.send(JSON.stringify({phaseInfo : {from : sender, to : receiver, message : message, phase: phase}}));
+    }
 
     /********* usuarios conectados *******/
     function addOnlineUser(userName) {
         var newOnlineUser = createOnlineUser(userName);
         newOnlineUser.appendTo($('#onlineUsers'));
+        
     }
 
     function removeOnlineUser(userName) {
@@ -275,6 +303,7 @@ var wsclient = (function() {
         toChatCard: toChatCard,
         toChatCards: toChatCards,
         toChatTarget: toChatTarget,
+        toChatPhase: toChatPhase,
         addMessage: addMessage,
         allowDrop : allowDrop,
         drag : drag,

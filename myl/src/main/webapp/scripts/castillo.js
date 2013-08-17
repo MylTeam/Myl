@@ -2,6 +2,7 @@ function shuffle(){
 	obj["deck1"].sort(function() {
 		return Math.random() - 0.5;
 	});
+	msgLog("Barajando el mazo castillo");
 }
 
 function view(lista,context){
@@ -46,14 +47,14 @@ function dropxcards(cant){
 	}
 	for(var c=0;c<cant;c++){
 		obj["cementerio1"].unshift(obj["deck1"].splice(0,1)[0]);
+		msgLogCard(obj["cementerio1"][0], "deck1", "cementerio1", "Botando carta");
 	}
 	var c = document.getElementById("cementerio1");
 	if (obj["cementerio1"].length != 0) {
 		c.src = context + "/images/myl/"+obj["cementerio1"][0].siglas+"/" + obj["cementerio1"][0].numero+ ".jpg";
 	} else {
 		c.src = context + "/images/myl/cementerio1.jpg";
-	}
-	msgLogCard(obj["cementerio1"][0], "deck1", "cementerio1", "Botando "+cant+" cartas");
+	}	
 	if(deckLength<cantAux){
 		msgLog("El castillo no tiene mas cartas");
 	}
@@ -116,4 +117,10 @@ function msgTargetClean(targetclear){
 	var from=document.getElementById("userName").value;
     var to=document.getElementById("user2").value;
     wsclient.toChatTarget(from,to,"clean",targetclear,null);
+}
+
+function msgPhase(msg,phase){
+	var from=document.getElementById("userName").value;
+    var to=document.getElementById("user2").value;
+    wsclient.toChatPhase(from,to,msg,phase);
 }

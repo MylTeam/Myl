@@ -28,8 +28,7 @@
 
 
 <jsp:text>
-	<![CDATA[						
-			
+	<![CDATA[									
 			<script src="${pageContext.request.contextPath}/struts/js/plugins/jquery.form.min.js" type="text/javascript"></script>
 			<script src="${pageContext.request.contextPath}/scripts/jquery.lazyload.js" type="text/javascript"></script>
 			<script src="${pageContext.request.contextPath}/scripts/dataTables/media/js/jquery.dataTables.js" type="text/javascript"></script>			

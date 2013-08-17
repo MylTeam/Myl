@@ -88,6 +88,16 @@ img.cardright{
 	z-index: 1;
 }
 
+img.fase{
+	opacity:0.4;
+	filter:alpha(opacity=40);
+}
+
+img.faseActive{
+	opacity:1.0;
+	filter:alpha(opacity=100);
+}
+
 #iframe{background-image: url("images/old_paper.jpg");}
 #bar{text-align: right;height: 3%;background-color: #0B3E6F;background-image: url('images/title-bg.png');background-size: auto 100%;}
 
@@ -155,6 +165,13 @@ p.messages div.message {
 p.messages div.messagepl {
     padding: 2px;
     background-color: #5EBFFF;
+    margin: 5px 0;
+    border-radius: 5px;
+}
+
+p.messages div.messageph {
+    padding: 2px;
+    background-color: yellow;
     margin: 5px 0;
     border-radius: 5px;
 }
