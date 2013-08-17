@@ -82,7 +82,7 @@ pageHMenu {
 	top: 100px;
 	vertical-align: top;
 	text-align: left;		
-	background: url("images/ui-bg_diagonals-thick_15_0b3e6f_40x40.png") repeat scroll 50% 50% black;	
+	background: black;	
 	color: #def;
 	padding: 0px;	
 	border-color: #8ad;

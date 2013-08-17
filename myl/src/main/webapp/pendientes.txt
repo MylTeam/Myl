@@ -28,6 +28,11 @@ DECK
 
 -score
 
+formatos
+primer episodio: Espada sagrada - Hordas
+segundo episodio: Bestiario - Dominus
+tercer episodio: Inmortales - Vikingos
+
 USUARIO
  -mas datos
  -score

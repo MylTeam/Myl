@@ -22,10 +22,9 @@
 <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/scripts/dataTables/media/css/demo_page.css" />
 <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/scripts/dataTables/media/css/demo_table.css" />
 <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/scripts/dataTables/media/css/demo_table_jui.css" />
-
 <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/Estilos/print.css" />
 <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/Estilos/main.css" />
-<link type="text/css" href="${pageContext.request.contextPath}/Estilos/default.css?123" rel="stylesheet" />
+<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/Estilos/default.css?123" />
 
 
 <jsp:text>
@@ -33,8 +32,7 @@
 			
 			<script src="${pageContext.request.contextPath}/struts/js/plugins/jquery.form.min.js" type="text/javascript"></script>
 			<script src="${pageContext.request.contextPath}/scripts/jquery.lazyload.js" type="text/javascript"></script>
-			<script src="${pageContext.request.contextPath}/scripts/dataTables/media/js/jquery.dataTables.js" type="text/javascript"></script>
-			
+			<script src="${pageContext.request.contextPath}/scripts/dataTables/media/js/jquery.dataTables.js" type="text/javascript"></script>			
 			<script src="${pageContext.request.contextPath}/scripts/jquery.feedback.js" type="text/javascript"></script>			
 			<script src="${pageContext.request.contextPath}/scripts/cdt-util.js" type="text/javascript"></script>
 		]]>
@@ -46,7 +44,7 @@
 <body>
 	<div id="pageHeader">
 		<div class="banner">
-		<img src="${pageContext.request.contextPath}/images/myl/myl.gif"/>
+		<img src="${pageContext.request.contextPath}/images/myl/myl.png"/>
 			
 			<label style="font-size: 15px;"></label>
 		</div>

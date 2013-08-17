@@ -5,7 +5,7 @@
 
 	<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<sj:head debug="true" jqueryui="true" jquerytheme="ui-darkness" locale="es" />
+
 
 <link type="text/css" href="${pageContext.request.contextPath}/scripts/jquery.contextMenu.css" rel="stylesheet" />
 <link type="text/css" href="${pageContext.request.contextPath}/Estilos/smoothness/jquery-ui-1.8.22.custom.css" rel="stylesheet" />
