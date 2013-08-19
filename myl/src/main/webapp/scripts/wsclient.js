@@ -143,6 +143,10 @@ var wsclient = (function() {
         sendButton.appendTo(conversationPanel);
         var dado = createDadoButton(name);
         dado.appendTo(conversationPanel);
+        var wait = createWaitButton();
+        wait.appendTo(conversationPanel);
+        var think = createThinkButton();
+        think.appendTo(conversationPanel);
         conversationPanel.appendTo($('#conversations'));
         
         $("#"+conversationId + "message").keyup(function(event){
@@ -172,6 +176,24 @@ var wsclient = (function() {
         button.click(function () {
         	var num=Math.floor((Math.random()*6))+1;
         	msgPhase(num+" obtenido", "dado");
+        });        
+        return button;
+    }
+    
+    function createWaitButton() {
+        var button = $(document.createElement('button'));
+        button.html('Espera!');
+        button.click(function () {
+        	msgPhase("¡ESPERA!", "dado");
+        });        
+        return button;
+    }
+    
+    function createThinkButton() {
+        var button = $(document.createElement('button'));
+        button.html('Pensando...');
+        button.click(function () {
+        	msgPhase("Pensando...", "dado");
         });        
         return button;
     }
