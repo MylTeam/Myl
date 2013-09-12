@@ -9,7 +9,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.xml.bind.annotation.XmlID;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import com.myl.util.IntegerAdapter;
+
+
+@XmlRootElement
 @Entity
 @Table(name = "Usuario")
 public class Usuario {
@@ -19,8 +28,11 @@ public class Usuario {
 	private String password;
 	private Integer deckPred;
 	
+	private Boolean tieneDeck;	
 	private List<Deck> decks;
 	
+	@XmlID
+	@XmlJavaTypeAdapter(IntegerAdapter.class)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
 	@Column(name = "UsuarioId")
@@ -55,6 +67,7 @@ public class Usuario {
 		this.deckPred = deckPred;
 	}
 	
+	@XmlTransient
 	@OneToMany(mappedBy = "usuario")
 	public List<Deck> getDecks() {
 		return decks;
@@ -62,6 +75,15 @@ public class Usuario {
 	public void setDecks(List<Deck> decks) {
 		this.decks = decks;
 	}
+	
+	@Transient
+	public Boolean getTieneDeck() {
+		return tieneDeck;
+	}
+	public void setTieneDeck(Boolean tieneDeck) {
+		this.tieneDeck = tieneDeck;
+	}
+	
 	
 		
 	
