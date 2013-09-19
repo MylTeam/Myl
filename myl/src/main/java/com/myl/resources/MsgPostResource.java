@@ -19,7 +19,7 @@ public class MsgPostResource {
 	
 	@POST	
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response receiveCalif(JSONObject jsonObject) throws JSONException {
+	public Response receiveCalif(JSONArray jsonObject) throws JSONException {
 		String result="Recibido";
 		System.out.println("Recibido: "+jsonObject);
 		

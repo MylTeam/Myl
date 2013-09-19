@@ -25,23 +25,21 @@ import com.myl.modelo.Usuario;
 public class MsgGetResource {
 	UsuarioDao usuarioDao;
 	
-	
 
 	@GET
 	@Transactional
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })	
-	public List<Usuario> getUsuarios() throws SQLException {
+	public Usuario getUsuarios() throws SQLException {
 
-		List<Usuario> usuarios = usuarioDao.findAll();
-		
-		for(Usuario u:usuarios){
-			if(u.getDecks().isEmpty()){
-				u.setTieneDeck(false);				
-			}else{
-				u.setTieneDeck(true);
-			}
-			
-		}
+		Usuario usuarios=usuarioDao.findById(1);
+//		List<Usuario> usuarios = usuarioDao.findAll();		
+//		for(Usuario u:usuarios){
+//			if(u.getDecks().isEmpty()){
+//				u.setTieneDeck(false);				
+//			}else{
+//				u.setTieneDeck(true);
+//			}			
+//		}
 		
 		return usuarios;
 	}
