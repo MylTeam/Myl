@@ -4,11 +4,7 @@ import java.util.List;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
-
-import org.hibernate.criterion.DetachedCriteria;
-import org.hibernate.criterion.Projections;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.myl.dao.CartaDao;
 import com.myl.modelo.Carta;
 import com.myl.negocio.CartaNegocio;
@@ -17,55 +13,55 @@ import com.myl.negocio.CartaNegocio;
 @Singleton
 @Named("cartaNegocio")
 public class CartaNegocio {
-	private CartaDao CartaDao;	
+	private CartaDao cartaDao;	
 	
 	@Transactional
 	public List<Carta> findAll() {
-		return CartaDao.findAll();
+		return cartaDao.findAll();
 	}
 
 	@Transactional
 	public Carta findById(Integer id) {
-		return CartaDao.findById(id);
+		return cartaDao.findById(id);
 	}
 
 	@Transactional(rollbackFor = Exception.class)
 	public Carta save(Carta entidad) {
-		Carta modelo = CartaDao.save(entidad);		
+		Carta modelo = cartaDao.save(entidad);		
 		return modelo;
 	}
 
 	@Transactional(rollbackFor = Exception.class)
 	public void delete(Carta entidad) {
-		CartaDao.delete(entidad);
+		cartaDao.delete(entidad);
 	}
 
 	@Transactional
-	public List<Carta> findByExample(Carta Carta) {
-		return CartaDao.findByExample(Carta);
+	public List<Carta> findByExample(Carta carta) {
+		return cartaDao.findByExample(carta);
 	}
 	
 	@Transactional
 	public List<String> findByCriteria() { 		
-		return CartaDao.findByCriteria();
+		return cartaDao.findByCriteria();
 	}
 	
 	@Transactional
 	public List<String> findByCriteriaTipo() { 		
-		return CartaDao.findByCriteriaTipo();
+		return cartaDao.findByCriteriaTipo();
 	}
 	
 	@Transactional
 	public List<Carta> findByCriterioBusqueda(Carta carta) { 		
-		return CartaDao.findByCriterioBusqueda(carta);
+		return cartaDao.findByCriterioBusqueda(carta);
 	}
 	
 	public CartaDao getCartaDao() {
-		return CartaDao;
+		return cartaDao;
 	}
 
-	public void setCartaDao(CartaDao CartaDao) {
-		this.CartaDao = CartaDao;
+	public void setCartaDao(CartaDao cartaDao) {
+		this.cartaDao = cartaDao;
 	}
 
 	

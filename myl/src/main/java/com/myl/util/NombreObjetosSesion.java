@@ -1,6 +1,9 @@
 package com.myl.util;
 
 public class NombreObjetosSesion {
+	
+	private NombreObjetosSesion(){}
+	
 	public static final String MUSEOS = "museos";
 	public static final String SUBTEMAS = "subtemas";
 	public static final String MUSEOSEL = "museosel";

@@ -49,9 +49,7 @@ public class LoginController extends ActionSupport implements
 						
 			if (usuarios.isEmpty()) {
 				addActionError("Usuario y/o contraseña incorrectos");
-			}
-
-			else {
+			} else {
 				clearActionErrors();
 				ActionContext.getContext().getSession().put(NombreObjetosSesion.USUARIO, usuarios.get(0));
 				return "next";

@@ -89,7 +89,7 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>,P
 		Type listType = new TypeToken<List<DeckCarta>>() {}.getType();
 		deckCartas=jsonProcessor.fromJson(lista, listType);		
 		
-		if(deckCartas.size()==0){
+		if(deckCartas.isEmpty()){
 			addActionError("El mazo está vacío");
 		}
 	}	
@@ -125,7 +125,7 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>,P
 		Type listType = new TypeToken<List<DeckCarta>>() {}.getType();
 		deckCartas=jsonProcessor.fromJson(lista, listType);
 		
-		if(deckCartas.size()==0){
+		if(deckCartas.isEmpty()){
 			addActionError("El mazo está vacío");
 		}
 	}

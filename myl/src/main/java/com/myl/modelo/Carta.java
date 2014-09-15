@@ -15,11 +15,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Entity
 @Table(name = "Carta")
 public class Carta implements Cloneable{
-			
+
+	private static final Logger logger = LoggerFactory.getLogger(Carta.class);
 	private Integer id;
 	private String nombre;
 	private String efecto;
@@ -171,18 +174,13 @@ public class Carta implements Cloneable{
 		this.cantidad = cantidad;
 	}
 	
-	public Object clone()
-    {
+	public Object clone(){
         Object clone = null;
-        try
-        {
+        try{
             clone = super.clone();
-        } 
-        catch(CloneNotSupportedException e)
-        {
+        } catch(CloneNotSupportedException e){
+        	logger.debug("No se puede clonar");
         }
         return clone;
-    }
-		
-		
+    }		
 }

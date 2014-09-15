@@ -6,10 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
 import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.hibernate.annotations.NamedQueries;
-import org.hibernate.annotations.NamedQuery;
+
 
 @Entity
 @Table(name = "DeckCarta")
@@ -39,7 +37,7 @@ public class DeckCarta {
 	public boolean equals(Object obj) {
 		return EqualsBuilder.reflectionEquals(this, obj, "deck",
 				"carta");
-	}
+	}	
 	
 	@Column(name = "DeckId", insertable=false, updatable=false)
 	public Integer getDeckId() {

@@ -10,31 +10,28 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.myl.modelo.Carta;
 import com.myl.negocio.CartaNegocio;
 
 public class Spoiler {
 
+	private static final Logger logger = LoggerFactory.getLogger(Carta.class);
 	static CartaNegocio cartaNegocio;
 		
 		public static void clean() throws IOException {
-				
-				
-			try {			
-				
+
+			try {							
 				File f=new File("C:/Users/Mariana/Documents/prueba/");
-				
 				for(File file:f.listFiles()){
 					if(file.isFile()){
 					String filename=file.getName();
 					System.out.println(filename);
 					
-					
-				 BufferedReader in4 = new BufferedReader(new FileReader("C:/Users/Mariana/Documents/prueba/"+filename));			 
-				 File archivo=new File("C:/Users/Mariana/Documents/prueba/s-"+filename+".txt");			 
-				 
-			      PrintWriter out1 = new PrintWriter(new BufferedWriter(new FileWriter("C:/Users/Mariana/Documents/prueba/spoilers/s-"+filename)));
-			      int lineCount = 1;
+				 BufferedReader in4 = new BufferedReader(new FileReader("C:/Users/Mariana/Documents/prueba/"+filename));
+			      PrintWriter out1 = new PrintWriter(new BufferedWriter(new FileWriter("C:/Users/Mariana/Documents/prueba/spoilers/s-"+filename)));			      
 			      String s = null;
 			      while((s = in4.readLine()) != null ){ 
 //			    	  System.out.println(s);
@@ -158,9 +155,9 @@ public class Spoiler {
 							}
 						}
 					} catch (FileNotFoundException e) {
-						e.printStackTrace();
+						logger.debug(e.getMessage());						
 					} catch (IOException e) {
-						e.printStackTrace();
+						logger.debug(e.getMessage());
 					}
 				}
 			}

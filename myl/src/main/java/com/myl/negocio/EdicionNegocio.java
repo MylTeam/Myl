@@ -15,41 +15,41 @@ import com.myl.negocio.EdicionNegocio;
 @Singleton
 @Named("edicionNegocio")
 public class EdicionNegocio {
-	private EdicionDao EdicionDao;	
+	private EdicionDao edicionDao;	
 	
 	@Transactional
 	public List<Edicion> findAll() {
-		return EdicionDao.findAll();
+		return edicionDao.findAll();
 	}
 
 	@Transactional
 	public Edicion findById(Integer id) {
-		return EdicionDao.findById(id);
+		return edicionDao.findById(id);
 	}
 
 	@Transactional(rollbackFor = Exception.class)
 	public Edicion save(Edicion entidad) {
-		Edicion modelo = EdicionDao.save(entidad);		
+		Edicion modelo = edicionDao.save(entidad);		
 		return modelo;
 	}
 
 	@Transactional(rollbackFor = Exception.class)
 	public void delete(Edicion entidad) {
-		EdicionDao.delete(entidad);
+		edicionDao.delete(entidad);
 	}
 
 	@Transactional
 	public List<Edicion> findByExample(Edicion Edicion) {
-		return EdicionDao.findByExample(Edicion);
+		return edicionDao.findByExample(Edicion);
 	}
 
 	@Transactional
 	public Boolean existe(String nombre) { 
-		Edicion EdicionEjemplo = new Edicion();
-		List<Edicion> Edicions = null;
-		EdicionEjemplo.setNombre(nombre);
-		Edicions = findByExample(EdicionEjemplo);
-		if (Edicions != null && Edicions.size() > 0) {
+		Edicion edicionEjemplo = new Edicion();
+		List<Edicion> ediciones = null;
+		edicionEjemplo.setNombre(nombre);
+		ediciones = findByExample(edicionEjemplo);
+		if (ediciones != null && !ediciones.isEmpty()) {
 			return true;
 		}
 		return false;
@@ -57,11 +57,11 @@ public class EdicionNegocio {
 	
      
 	public EdicionDao getEdicionDao() {
-		return EdicionDao;
+		return edicionDao;
 	}
 
-	public void setEdicionDao(EdicionDao EdicionDao) {
-		this.EdicionDao = EdicionDao;
+	public void setEdicionDao(EdicionDao edicionDao) {
+		this.edicionDao = edicionDao;
 	}
 
 	
