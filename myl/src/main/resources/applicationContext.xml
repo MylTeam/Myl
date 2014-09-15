@@ -11,8 +11,12 @@
     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd           
 	http://jboss.com/products/seam/spring-seam http://jboss.com/products/seam/spring-seam-2.2.xsd"
 	default-autowire="byName" default-lazy-init="true">
-	<bean id="hibernateSessionFactory"
-		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+ <bean id="hibernateSessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">	
+	
+	<!-- <bean id="hibernateSessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean"> -->
+	  
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.bytecode.use_reflection_optimizer">
@@ -56,9 +60,9 @@
 		</property>
 	</bean>
 
-	<bean id="sessionFactory" class="org.jboss.seam.ioc.spring.SeamManagedSessionFactoryBean">
+	<!-- <bean id="sessionFactory" class="org.jboss.seam.ioc.spring.SeamManagedSessionFactoryBean">
 		<property name="sessionName" value="hibernateSession" />
-	</bean>
+	</bean> -->
 
 
 	<bean id="transactionManager"
@@ -83,6 +87,7 @@
 		proxy-target-class="true" />
 	<context:component-scan base-package="com.myl" />
 	<context:property-placeholder location="classpath:jdbc.properties" />
+	
 	
 	<!-- <context:property-placeholder location="file:src/main/resources/jdbc.properties" /> -->
 </beans>

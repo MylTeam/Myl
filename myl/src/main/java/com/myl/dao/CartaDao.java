@@ -8,7 +8,10 @@ import javax.inject.Singleton;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.context.annotation.Scope;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import org.springframework.stereotype.Repository;
 
 import com.myl.modelo.Carta;
 

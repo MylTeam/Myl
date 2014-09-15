@@ -4,7 +4,12 @@ import java.util.List;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
+
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.context.annotation.Scope;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import org.springframework.stereotype.Repository;
+
 import com.myl.modelo.Deck;
 
 @Singleton

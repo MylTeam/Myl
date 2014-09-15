@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<!-- <?xml version="1.0" encoding="UTF-8"?>
 <components xmlns="http://jboss.com/products/seam/components"
 	xmlns:core="http://jboss.com/products/seam/core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:persistence="http://jboss.com/products/seam/persistence"
@@ -19,3 +19,4 @@
 		name="hibernateSession" auto-create="true" session-factory="#{hibernateSessionFactory}" />	
 		 
 </components>
+ -->
