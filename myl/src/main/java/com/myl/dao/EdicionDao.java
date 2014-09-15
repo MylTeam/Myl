@@ -5,10 +5,7 @@ import java.util.List;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
-import org.springframework.beans.factory.config.BeanDefinition;
-import org.springframework.context.annotation.Scope;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
-import org.springframework.stereotype.Repository;
 
 import com.myl.modelo.Edicion;
 
@@ -38,7 +35,7 @@ public class EdicionDao extends HibernateDaoSupport {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Edicion> findByExample(Edicion Edicion) { 
-		return getHibernateTemplate().findByExample(Edicion);
+	public List<Edicion> findByExample(Edicion edicion) { 
+		return getHibernateTemplate().findByExample(edicion);
 	}
 }

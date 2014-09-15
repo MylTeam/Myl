@@ -21,8 +21,10 @@ public class DeckCarta {
 	private Deck deck;
 	private DeckCartaId	deckCartaId;
 		
+	public DeckCarta(){
 		
-	public DeckCarta(){}
+	}
+	
 	public DeckCarta(Integer deckId, Integer cartaId){
 		this.deckCartaId=new DeckCartaId();
 		this.deckCartaId.setDeckId(deckId);

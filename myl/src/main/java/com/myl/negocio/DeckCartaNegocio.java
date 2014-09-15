@@ -44,8 +44,8 @@ public class DeckCartaNegocio {
 	}
 	 
 	@Transactional
-	public void insertCard(Integer deckId,Integer CartaId,Integer CartaQt){
-		deckCartaDao.insertCard(deckId, CartaId, CartaQt);
+	public void insertCard(Integer deckId,Integer cartaId,Integer cartaQt){
+		deckCartaDao.insertCard(deckId, cartaId, cartaQt);
 	}
 	
 	@Transactional

@@ -11,7 +11,6 @@ import org.apache.struts2.rest.HttpHeaders;
 import com.myl.modelo.Usuario;
 import com.myl.negocio.CartaNegocio;
 import com.myl.util.NombreObjetosSesion;
-import com.myl.util.Spoiler;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -33,8 +32,6 @@ public class LobbyController extends ActionSupport {
 		usuario=(Usuario) ActionContext.getContext().getSession().get(NombreObjetosSesion.USUARIO);
 		setUsername(usuario.getLogin());
 		
-		
-//		Spoiler.loadData(cartaNegocio);
 		if(usuario.getDeckPred()==0){					
 			return new DefaultHttpHeaders("nodeck").disableCaching();
 		}else{
@@ -80,8 +77,5 @@ public class LobbyController extends ActionSupport {
 	public void setCartaNegocio(CartaNegocio cartaNegocio) {
 		this.cartaNegocio = cartaNegocio;
 	}
-
-
-		
 
 }

@@ -29,9 +29,6 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
-import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
-import com.opensymphony.xwork2.validator.annotations.Validations;
-import com.opensymphony.xwork2.validator.annotations.ValidatorType;
 
 @Named
 @Results({ @Result(name = "success", type = "redirectAction", params = {"actionName", "usuario" })
@@ -40,6 +37,8 @@ import com.opensymphony.xwork2.validator.annotations.ValidatorType;
 ,@Result(name="decks", type="json", params={"includeProperties","deckCompleto.*"})
 })
 public class DeckController extends ActionSupport implements ModelDriven<Deck>,Preparable{		
+	
+	private static final long serialVersionUID = -8068256015486413672L;
 	private Integer idSel;
 	private Deck model;
 	private Usuario usuario;
@@ -86,9 +85,9 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>,P
 	
 	public void validateCreate() {			
 		jsonProcessor = new Gson();				
-		Type listType = new TypeToken<List<DeckCarta>>() {}.getType();
-		deckCartas=jsonProcessor.fromJson(lista, listType);		
-		
+		Type listType = new TypeToken<List<DeckCarta>>() {
+			}.getType();
+		deckCartas=jsonProcessor.fromJson(lista, listType);
 		if(deckCartas.isEmpty()){
 			addActionError("El mazo está vacío");
 		}
@@ -96,7 +95,8 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>,P
 		
 	public HttpHeaders create() {
 		jsonProcessor = new Gson();				
-		Type listType = new TypeToken<List<DeckCarta>>() {}.getType();
+		Type listType = new TypeToken<List<DeckCarta>>() {
+			}.getType();
 		deckCartas=jsonProcessor.fromJson(lista, listType);
 		
 		usuario=(Usuario) ActionContext.getContext().getSession().get(NombreObjetosSesion.USUARIO);
@@ -122,7 +122,8 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>,P
 	
 	public void validateUpdate(){
 		jsonProcessor = new Gson();				
-		Type listType = new TypeToken<List<DeckCarta>>() {}.getType();
+		Type listType = new TypeToken<List<DeckCarta>>() {
+			}.getType();
 		deckCartas=jsonProcessor.fromJson(lista, listType);
 		
 		if(deckCartas.isEmpty()){
@@ -132,7 +133,8 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>,P
 	
 	public String update() {
 		jsonProcessor = new Gson();				
-		Type listType = new TypeToken<List<DeckCarta>>() {}.getType();
+		Type listType = new TypeToken<List<DeckCarta>>() {
+			}.getType();
 		deckCartas=jsonProcessor.fromJson(lista, listType);
 		
 		model=deckNegocio.save(model);
@@ -152,6 +154,7 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>,P
 	}
 
 	public void validateDestroy() {
+		throw new UnsupportedOperationException();
 	}
 		
 	public String destroy() {

@@ -1,6 +1,9 @@
 package com.myl.interceptor;
 
-import com.myl.modelo.Usuario;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.myl.modelo.Carta;
 import com.myl.util.NombreObjetosSesion;
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionContext;
@@ -9,7 +12,8 @@ import com.opensymphony.xwork2.interceptor.Interceptor;
 
 public class AutenticarInterceptor implements Interceptor {
 	
-	private static final long serialVersionUID = -1939367355017016797L;	
+	private static final long serialVersionUID = -1939367355017016797L;
+	private static final Logger LOGGER = LoggerFactory.getLogger(Carta.class);
 	private String prevAction;
 
 	@Override
@@ -63,18 +67,17 @@ public class AutenticarInterceptor implements Interceptor {
 
 	@Override
 	public void destroy() {
-
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void init() {
-
+		throw new UnsupportedOperationException();
 	}
 
-	public void errorNotification(Exception e,String actionName){
-		
-		System.out.println("Interceptor en "+actionName);
-		System.out.println(e.getMessage());
+	public void errorNotification(Exception e,String actionName){		
+		LOGGER.error("Interceptor en "+actionName);
+		LOGGER.error(e.getMessage());
 	}
 	
 	public String getPrevAction() {

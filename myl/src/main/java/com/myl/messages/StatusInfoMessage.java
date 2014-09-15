@@ -2,7 +2,9 @@ package com.myl.messages;
 
 public class StatusInfoMessage {
 
-    public enum STATUS {CONNECTED, DISCONNECTED}
+    public enum STATUS {
+    	CONNECTED, DISCONNECTED
+    	}
 
     private final StatusInfo statusInfo;
 

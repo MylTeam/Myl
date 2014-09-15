@@ -39,8 +39,8 @@ public class DeckNegocio {
 	}
 
 	@Transactional
-	public List<Deck> findByExample(Deck Deck) {
-		return deckDao.findByExample(Deck);
+	public List<Deck> findByExample(Deck deck) {
+		return deckDao.findByExample(deck);
 	}
 	   
 	public DeckDao getDeckDao() {

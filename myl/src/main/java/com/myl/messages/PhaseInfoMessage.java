@@ -1,7 +1,5 @@
 package com.myl.messages;
 
-import com.myl.modelo.Carta;
-
 public class PhaseInfoMessage {
 
     private final PhaseInfo phaseInfo;

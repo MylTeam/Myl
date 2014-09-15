@@ -2,7 +2,9 @@ package com.myl.util;
 
 public class NombreObjetosSesion {
 	
-	private NombreObjetosSesion(){}
+	private NombreObjetosSesion(){
+		
+	}
 	
 	public static final String MUSEOS = "museos";
 	public static final String SUBTEMAS = "subtemas";
@@ -15,5 +17,4 @@ public class NombreObjetosSesion {
 	public static final String RECURSO= "recurso";
 	public static final String CARPETA= "carpeta";
 	
-
 }

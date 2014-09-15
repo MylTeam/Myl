@@ -39,8 +39,8 @@ public class EdicionNegocio {
 	}
 
 	@Transactional
-	public List<Edicion> findByExample(Edicion Edicion) {
-		return edicionDao.findByExample(Edicion);
+	public List<Edicion> findByExample(Edicion edicion) {
+		return edicionDao.findByExample(edicion);
 	}
 
 	@Transactional

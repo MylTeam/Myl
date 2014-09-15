@@ -6,10 +6,7 @@ import javax.inject.Named;
 import javax.inject.Singleton;
 
 import org.hibernate.Query;
-import org.springframework.beans.factory.config.BeanDefinition;
-import org.springframework.context.annotation.Scope;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
-import org.springframework.stereotype.Repository;
 
 import com.myl.modelo.DeckCarta;
 
@@ -34,14 +31,13 @@ public class DeckCartaDao extends HibernateDaoSupport {
 
 	public void delete(DeckCarta entity) {
 		entity = getHibernateTemplate().merge(entity);
-//		getHibernateTemplate().refresh(entity);
 		getSession().delete(entity);
 	}
 	
-	public void insertCard(Integer deckId,Integer CartaId,Integer CartaQt){
+	public void insertCard(Integer deckId,Integer cartaId,Integer cartaQt){
 		Query query = getSession().createSQLQuery("insert into deckcarta values(:deckId,:cartaId,:cartaQt)")
 				.addEntity(DeckCarta.class)
-				.setParameter("deckId", deckId).setParameter("cartaId", CartaId).setParameter("cartaQt", CartaQt);
+				.setParameter("deckId", deckId).setParameter("cartaId", cartaId).setParameter("cartaQt", cartaQt);
 		
 		query.executeUpdate();
 	}

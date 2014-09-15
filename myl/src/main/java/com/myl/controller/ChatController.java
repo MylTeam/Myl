@@ -61,7 +61,6 @@ public class ChatController extends ActionSupport {
 		String aux2="cual";
 		Usuario usuario=(Usuario) ActionContext.getContext().getSession().get(NombreObjetosSesion.USUARIO);
 
-//		Usuario usuario=usuarioNegocio.findById(1);
 		deck=deckNegocio.findById(usuario.getDeckPred());
 		deck1=new ArrayList<Carta>();
 		

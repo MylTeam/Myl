@@ -18,9 +18,12 @@ import com.myl.negocio.CartaNegocio;
 
 public class Spoiler {
 
-	private static final Logger logger = LoggerFactory.getLogger(Carta.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(Carta.class);
 	static CartaNegocio cartaNegocio;
 		
+	private Spoiler(){
+		
+	}
 		public static void clean() throws IOException {
 
 			try {							
@@ -28,13 +31,13 @@ public class Spoiler {
 				for(File file:f.listFiles()){
 					if(file.isFile()){
 					String filename=file.getName();
-					System.out.println(filename);
+					LOGGER.debug(filename);
 					
 				 BufferedReader in4 = new BufferedReader(new FileReader("C:/Users/Mariana/Documents/prueba/"+filename));
 			      PrintWriter out1 = new PrintWriter(new BufferedWriter(new FileWriter("C:/Users/Mariana/Documents/prueba/spoilers/s-"+filename)));			      
 			      String s = null;
 			      while((s = in4.readLine()) != null ){ 
-//			    	  System.out.println(s);
+
 			    	  
 			    	  if(s.contains("Who has this card?") || s.contains("click to enlarge") || s.contains("top upward arrow") || s.contains("search for a card") || s.contains("affiliates") || s.contains("Total time spent") || s.contains("TradeCardsOnline") || s.contains("The information presented") || s.contains("Close Ad") || s.contains("your messages")){
 			    		  s="";
@@ -69,7 +72,6 @@ public class Spoiler {
 			    	  }else if(s.contains("Coste:") && !s.isEmpty()){
 			    		  String aux=s;
 			    		  s=in4.readLine();
-//			    		  System.out.println(s);
 			    		  	if(!s.contains("Fuerza:")){
 			    		  		out1.println(aux);
 			    		  		out1.println("Fuerza: 0");
@@ -87,7 +89,7 @@ public class Spoiler {
 				}
 					}
 			    } catch(EOFException e) {
-			      System.err.println("End of stream");
+			    	LOGGER.error("End of stream");
 			    }
 			
 
@@ -110,7 +112,7 @@ public class Spoiler {
 
 						String str = filename.replaceAll("\\D+", "");
 						Integer noEdicion=Integer.valueOf(str);
-						System.out.println(noEdicion);
+						LOGGER.info(noEdicion.toString());
 
 						String s = null;
 						while ((s = in.readLine()) != null) {
@@ -118,11 +120,10 @@ public class Spoiler {
 							if (!s.isEmpty() && !s.contains("Ilustrador:")) {
 								carta = new Carta();
 								
-								// System.out.println(cad);
 								for (int i = 0; i < 9; i++) {
 									String cad = s.substring(s.indexOf(":") + 2);
 									cad=new String(cad.getBytes("UTF-8"));
-									System.out.println(cad);
+									LOGGER.info(cad);
 									
 									
 									if (s.contains("Nombre:")) {
@@ -155,9 +156,9 @@ public class Spoiler {
 							}
 						}
 					} catch (FileNotFoundException e) {
-						logger.debug(e.getMessage());						
+						LOGGER.debug(e.getMessage());						
 					} catch (IOException e) {
-						logger.debug(e.getMessage());
+						LOGGER.debug(e.getMessage());
 					}
 				}
 			}

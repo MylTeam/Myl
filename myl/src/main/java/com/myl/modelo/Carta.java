@@ -22,7 +22,7 @@ import org.slf4j.LoggerFactory;
 @Table(name = "Carta")
 public class Carta implements Cloneable{
 
-	private static final Logger logger = LoggerFactory.getLogger(Carta.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(Carta.class);
 	private Integer id;
 	private String nombre;
 	private String efecto;
@@ -179,7 +179,7 @@ public class Carta implements Cloneable{
         try{
             clone = super.clone();
         } catch(CloneNotSupportedException e){
-        	logger.debug("No se puede clonar");
+        	LOGGER.debug("No se puede clonar");
         }
         return clone;
     }		
