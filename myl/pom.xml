@@ -107,6 +107,13 @@
 			<scope>test</scope>
 		</dependency>
 
+<!-- Plugin que permite hacer el log de las sentencias SQL completas que 
+			son enviadas a la BD -->
+		<dependency>
+			<groupId>p6spy</groupId>
+			<artifactId>p6spy</artifactId>
+			<version>1.3</version>
+		</dependency>
 
 		<dependency>
 			<groupId>net.sourceforge.jwebunit</groupId>
@@ -153,20 +160,36 @@
 			<scope>compile</scope>
 		</dependency>
 		
+		<!-- Logging -->
+		<!-- Ofrece una capa de abstracción para el logging -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
-			<version>1.6.0</version>
+			<version>1.7.6</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<version>1.6.0</version>
-			<type>jar</type>
-			<scope>compile</scope>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<version>1.7.6</version>
 		</dependency>
+
+		<!-- Logback -->
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-core</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+		<!-- Termina logging -->
+		
 		<dependency>
 			<groupId>cglib</groupId>
 			<artifactId>cglib</artifactId>
