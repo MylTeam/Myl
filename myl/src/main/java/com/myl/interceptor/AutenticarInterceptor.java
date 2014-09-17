@@ -78,12 +78,12 @@ public class AutenticarInterceptor implements Interceptor {
 
 	@Override
 	public void destroy() {
-		throw new UnsupportedOperationException();
+		LOGGER.info("onDestroy");
 	}
 
 	@Override
 	public void init() {
-		throw new UnsupportedOperationException();
+		LOGGER.info("onInit");
 	}
 
 	public void errorNotification(Exception e, String actionName) {

@@ -140,23 +140,6 @@
 		<servlet-name>wsLobby</servlet-name>
 		<url-pattern>/lobbyws</url-pattern>
 	</servlet-mapping>
-	
-		<servlet>
-		<servlet-name>Jersey REST Service</servlet-name>
-		<servlet-class>com.sun.jersey.spi.spring.container.servlet.SpringServlet</servlet-class>
-		<init-param>
-			<param-name>com.sun.jersey.config.property.packages</param-name>
-			<param-value>com.myl.resources</param-value>
-		</init-param>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-	<!-- Filtros -->
-
-	<!-- Mapeos de filtros -->
-	<servlet-mapping>
-		<servlet-name>Jersey REST Service</servlet-name>
-		<url-pattern>/rest/*</url-pattern>
-	</servlet-mapping>
 
 	
 	<!-- Welcome file lists -->
