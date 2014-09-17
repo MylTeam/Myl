@@ -7,28 +7,31 @@ import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 
 
 public class IssueMail {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(IssueMail.class);
 	
-	@Autowired
-	private MailSender mailSender;
+	
+	private JavaMailSender mailSender;
 
-	public void setMailSender(MailSender mailSender) {
+	public void setMailSender(JavaMailSender mailSender) {
 		LOGGER.info("Initializing e-mail");
 		this.mailSender = mailSender;
 	}
 
-	public void sendMail(String from, String to, String subject, String msg) {
-
+	public void sendMail(String from, String subject, String msg) {
+		LOGGER.info("Sending e-mail");
 		SimpleMailMessage message = new SimpleMailMessage();
 
 		message.setFrom(from);
-		message.setTo(to);
+		message.setTo("mylzupport@gmail.com");
+//		message.setBcc("csantiagoalva@gmail.com");
 		message.setSubject(subject);
 		message.setText(msg);
 		mailSender.send(message);
+		
 	}
 }

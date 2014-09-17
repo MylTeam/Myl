@@ -43,20 +43,14 @@ public class UsuarioController extends ActionSupport implements ModelDriven<Usua
 	private String confirmPass;
 	private Integer deckId;
 	
-	
-	
-	
 	@SkipValidation
 	public HttpHeaders index() {
 		usuario=(Usuario) ActionContext.getContext().getSession().get(NombreObjetosSesion.USUARIO);		
 		idSel=usuario.getIdUsuario();
+
 		Deck deckAux=new Deck();
 		deckAux.setUsuarioId(usuario.getIdUsuario());
 		lista=deckNegocio.findByExample(deckAux);
-		
-		ApplicationContext context = new ClassPathXmlApplicationContext("mail.xml");	 
-	    IssueMail mail = (IssueMail) context.getBean("mail");		
-		mail.sendMail("csantiagoalva@gmail.com", "csantiagoalva@gmail.com", "prueba", "hola");
 		
 		return new DefaultHttpHeaders("index").disableCaching();
 	}

@@ -26,9 +26,14 @@
 		<interceptors>
 			<!--configuro el interceptor -->
 			<interceptor name="autenticarInterceptor"
-				class="com.myl.interceptor.AutenticarInterceptor" />			
+				class="com.myl.interceptor.AutenticarInterceptor" />
+			<interceptor name="storeMessageInterceptor"
+				class="com.myl.util.MessageStoreInterceptorMyl" />			
 			<interceptor-stack name="MYLStack">
 				<interceptor-ref name="autenticarInterceptor" />
+				<interceptor-ref name="storeMessageInterceptor">
+					<param name="operationMode">STORE</param>
+				</interceptor-ref>
 				<interceptor-ref name="exception" />
 				<interceptor-ref name="alias" />
 				<interceptor-ref name="servletConfig" />
@@ -71,7 +76,17 @@
 			<result name="login">/login.jsp</result>
 			<result name="next" type="redirectAction">usuario</result>
 			<result name="registro">/registro/index-editNew.jsp</result>
+			<result name="error">/errorPage.jsp</result>
+			<result name="error500">/errorPage.jsp</result>
+			<result name="noAutorizado">/accessDenied.jsp</result>
+			<result name="session">/session.jsp</result>
 		</global-results>
+		<global-exception-mappings>
+			<exception-mapping exception="java.lang.IllegalArgumentException"
+				result="error500" />
+			<exception-mapping exception="java.lang.Exception"
+				result="error" />
+		</global-exception-mappings>
 
 
 		<action name="showLogin">
