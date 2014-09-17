@@ -31,120 +31,129 @@ import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
 
 @Named
-@Results({ @Result(name = "success", type = "redirectAction", params = {"actionName", "usuario" })
-,@Result(name = "input", type = "redirectAction", params = {"actionName", "usuario" })
-,@Result(name="res", type="json", params={"includeProperties","resultado.*"})
-,@Result(name="decks", type="json", params={"includeProperties","deckCompleto.*"})
-})
-public class DeckController extends ActionSupport implements ModelDriven<Deck>,Preparable{		
-	
+@Results({
+		@Result(name = "success", type = "redirectAction", params = {
+				"actionName", "usuario" }),
+		@Result(name = "input", type = "redirectAction", params = {
+				"actionName", "usuario" }),
+		@Result(name = "res", type = "json", params = { "includeProperties",
+				"resultado.*" }),
+		@Result(name = "decks", type = "json", params = { "includeProperties",
+				"deckCompleto.*" }) })
+public class DeckController extends ActionSupport implements ModelDriven<Deck>,
+		Preparable {
+
 	private static final long serialVersionUID = -8068256015486413672L;
 	private Integer idSel;
 	private Deck model;
 	private Usuario usuario;
-	
+
 	private List<Carta> resultado;
 	private List<Edicion> ediciones;
-	
+
 	private EdicionNegocio edicionNegocio;
 	private CartaNegocio cartaNegocio;
 	private DeckNegocio deckNegocio;
 	private DeckCartaNegocio deckCartaNegocio;
 	private UsuarioNegocio usuarioNegocio;
-	
+
 	private List<String> razas;
 	private List<String> tipos;
-	private List<DeckCarta> deckCartas;	
+	private List<DeckCarta> deckCartas;
 	private String lista;
 	private String criterioJson;
-	
+
 	private Gson jsonProcessor;
 	private List<Deck> decks;
-	
+
 	private Deck deckAux;
 	private List<DeckCarta> deck;
 	private List<Carta> deckCompleto;
-	
+
 	private List<Carta> deckCom;
-	
+
 	@SkipValidation
-	public HttpHeaders index() {		
-		decks=deckNegocio.findAll();
+	public HttpHeaders index() {
+		decks = deckNegocio.findAll();
 
 		return new DefaultHttpHeaders("index").disableCaching();
 	}
-	
+
 	@SkipValidation
-	public String editNew() {		
-		ediciones=edicionNegocio.findAll();		
-		razas=cartaNegocio.findByCriteria();
-		tipos=cartaNegocio.findByCriteriaTipo();		
-		
+	public String editNew() {
+		ediciones = edicionNegocio.findAll();
+		razas = cartaNegocio.findByCriteria();
+		tipos = cartaNegocio.findByCriteriaTipo();
+
 		return "editNew";
 	}
-	
-	public void validateCreate() {			
-		jsonProcessor = new Gson();				
+
+	public void validateCreate() {
+		jsonProcessor = new Gson();
 		Type listType = new TypeToken<List<DeckCarta>>() {
-			}.getType();
-		deckCartas=jsonProcessor.fromJson(lista, listType);
-		if(deckCartas.isEmpty()){
+		}.getType();
+		deckCartas = jsonProcessor.fromJson(lista, listType);
+		if (deckCartas.isEmpty()) {
 			addActionError("El mazo está vacío");
 		}
-	}	
-		
-	public HttpHeaders create() {
-		jsonProcessor = new Gson();				
-		Type listType = new TypeToken<List<DeckCarta>>() {
-			}.getType();
-		deckCartas=jsonProcessor.fromJson(lista, listType);
-		
-		usuario=(Usuario) ActionContext.getContext().getSession().get(NombreObjetosSesion.USUARIO);
-		
-		model.setUsuarioId(usuario.getIdUsuario());			
-		model=deckNegocio.save(model);
-		
-		for(DeckCarta dc:deckCartas){
-			deckCartaNegocio.insertCard(model.getDeckId(),dc.getCartaId() , dc.getCartaQt());
-		}
-		
-		return new DefaultHttpHeaders("success").setLocationId(model.getDeckId());
 	}
-	
+
+	public HttpHeaders create() {
+		jsonProcessor = new Gson();
+		Type listType = new TypeToken<List<DeckCarta>>() {
+		}.getType();
+		deckCartas = jsonProcessor.fromJson(lista, listType);
+
+		usuario = (Usuario) ActionContext.getContext().getSession()
+				.get(NombreObjetosSesion.USUARIO);
+
+		model.setUsuarioId(usuario.getIdUsuario());
+		model = deckNegocio.save(model);
+
+		for (DeckCarta dc : deckCartas) {
+			deckCartaNegocio.insertCard(model.getDeckId(), dc.getCartaId(),
+					dc.getCartaQt());
+		}
+
+		return new DefaultHttpHeaders("success").setLocationId(model
+				.getDeckId());
+	}
+
 	@SkipValidation
 	public String edit() {
-		ediciones=edicionNegocio.findAll();		
-		razas=cartaNegocio.findByCriteria();		
-		tipos=cartaNegocio.findByCriteriaTipo();
-		
+		ediciones = edicionNegocio.findAll();
+		razas = cartaNegocio.findByCriteria();
+		tipos = cartaNegocio.findByCriteriaTipo();
+
 		return "edit";
 	}
-	
-	public void validateUpdate(){
-		jsonProcessor = new Gson();				
+
+	public void validateUpdate() {
+		jsonProcessor = new Gson();
 		Type listType = new TypeToken<List<DeckCarta>>() {
-			}.getType();
-		deckCartas=jsonProcessor.fromJson(lista, listType);
-		
-		if(deckCartas.isEmpty()){
+		}.getType();
+		deckCartas = jsonProcessor.fromJson(lista, listType);
+
+		if (deckCartas.isEmpty()) {
 			addActionError("El mazo está vacío");
 		}
 	}
-	
+
 	public String update() {
-		jsonProcessor = new Gson();				
+		jsonProcessor = new Gson();
 		Type listType = new TypeToken<List<DeckCarta>>() {
-			}.getType();
-		deckCartas=jsonProcessor.fromJson(lista, listType);
-		
-		model=deckNegocio.save(model);
-		
+		}.getType();
+		deckCartas = jsonProcessor.fromJson(lista, listType);
+
+		model = deckNegocio.save(model);
+
 		deckCartaNegocio.deleteCardsFromDeck(model.getDeckId());
-		
-		for(DeckCarta dc:deckCartas){
-			deckCartaNegocio.insertCard(model.getDeckId(),dc.getCartaId() , dc.getCartaQt());
+
+		for (DeckCarta dc : deckCartas) {
+			deckCartaNegocio.insertCard(model.getDeckId(), dc.getCartaId(),
+					dc.getCartaQt());
 		}
-		
+
 		return "success";
 	}
 
@@ -156,69 +165,69 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>,P
 	public void validateDestroy() {
 		throw new UnsupportedOperationException();
 	}
-		
+
 	public String destroy() {
-		usuario=(Usuario) ActionContext.getContext().getSession().get(NombreObjetosSesion.USUARIO);
+		usuario = (Usuario) ActionContext.getContext().getSession()
+				.get(NombreObjetosSesion.USUARIO);
 		usuario.setDeckPred(0);
-		
+
 		usuarioNegocio.save(usuario);
 		deckNegocio.delete(model);
 		return "success";
 	}
-	
-	
-	public String search(){
-		jsonProcessor = new Gson();				
-		Carta cartaAux=jsonProcessor.fromJson(criterioJson, Carta.class);		
-		resultado= new ArrayList<Carta>();			
-		
-		for(Carta carta:cartaNegocio.findByCriterioBusqueda(cartaAux)){
-						
-				Carta aux=new Carta();
-				aux.setId(carta.getId());
-				aux.setIdTemp(carta.getNumero()+carta.getEdicion().getSiglas());
-				aux.setNombre(carta.getNombre());
-				aux.setNumero(carta.getNumero());
-				aux.setEfecto(carta.getEfecto());
-				aux.setRaza(carta.getRaza());
-				aux.setTipo(carta.getTipo());
-				aux.setFrecuencia(carta.getFrecuencia());
-				aux.setCoste(carta.getCoste());
-				aux.setFuerza(carta.getFuerza());
-				aux.setSiglas(carta.getEdicion().getSiglas());				
-				
-				resultado.add(aux);
-		}		
-			
+
+	public String search() {
+		jsonProcessor = new Gson();
+		Carta cartaAux = jsonProcessor.fromJson(criterioJson, Carta.class);
+		resultado = new ArrayList<Carta>();
+
+		for (Carta carta : cartaNegocio.findByCriterioBusqueda(cartaAux)) {
+
+			Carta aux = new Carta();
+			aux.setId(carta.getId());
+			aux.setIdTemp(carta.getNumero() + carta.getEdicion().getSiglas());
+			aux.setNombre(carta.getNombre());
+			aux.setNumero(carta.getNumero());
+			aux.setEfecto(carta.getEfecto());
+			aux.setRaza(carta.getRaza());
+			aux.setTipo(carta.getTipo());
+			aux.setFrecuencia(carta.getFrecuencia());
+			aux.setCoste(carta.getCoste());
+			aux.setFuerza(carta.getFuerza());
+			aux.setSiglas(carta.getEdicion().getSiglas());
+
+			resultado.add(aux);
+		}
+
 		return "res";
 	}
-	
-	public String buscarDecks(){
-		deckAux=deckNegocio.findById(idSel);
-		deckCompleto=new ArrayList<Carta>();
-		deck=new ArrayList<DeckCarta>();
-		
-		int c=0;
-		for(Carta carta:deckAux.getCartas()){															
-				Carta aux=new Carta();				
-				aux.setId(carta.getId());
-				aux.setCantidad(deckAux.getDeckCartas().get(c).getCartaQt());
-				aux.setNombre(carta.getNombre());
-				aux.setNumero(carta.getNumero());
-				aux.setEfecto(carta.getEfecto());				
-				aux.setTipo(carta.getTipo());
-				aux.setRaza(carta.getRaza());
-				aux.setFrecuencia(carta.getFrecuencia());
-				aux.setCoste(carta.getCoste());
-				aux.setFuerza(carta.getFuerza());
-				aux.setSiglas(carta.getEdicion().getSiglas());
-				deckCompleto.add(aux);
-				c++;
+
+	public String buscarDecks() {
+		deckAux = deckNegocio.findById(idSel);
+		deckCompleto = new ArrayList<Carta>();
+		deck = new ArrayList<DeckCarta>();
+
+		int c = 0;
+		for (Carta carta : deckAux.getCartas()) {
+			Carta aux = new Carta();
+			aux.setId(carta.getId());
+			aux.setCantidad(deckAux.getDeckCartas().get(c).getCartaQt());
+			aux.setNombre(carta.getNombre());
+			aux.setNumero(carta.getNumero());
+			aux.setEfecto(carta.getEfecto());
+			aux.setTipo(carta.getTipo());
+			aux.setRaza(carta.getRaza());
+			aux.setFrecuencia(carta.getFrecuencia());
+			aux.setCoste(carta.getCoste());
+			aux.setFuerza(carta.getFuerza());
+			aux.setSiglas(carta.getEdicion().getSiglas());
+			deckCompleto.add(aux);
+			c++;
 		}
-				
+
 		return "decks";
 	}
-	
+
 	public Integer getIdSel() {
 		return idSel;
 	}
@@ -229,7 +238,6 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>,P
 			model = deckNegocio.findById(idSel);
 		}
 	}
-
 
 	@Override
 	public Deck getModel() {
@@ -242,7 +250,6 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>,P
 	public void setModel(Deck model) {
 		this.model = model;
 	}
-	
 
 	public Deck getDeckAux() {
 		return deckAux;
@@ -261,12 +268,12 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>,P
 	}
 
 	public List<Edicion> getEdiciones() {
-		ediciones=edicionNegocio.findAll();
+		ediciones = edicionNegocio.findAll();
 		return ediciones;
 	}
 
 	public void setEdiciones(List<Edicion> ediciones) {
-		this.ediciones = ediciones;						
+		this.ediciones = ediciones;
 	}
 
 	public EdicionNegocio getEdicionNegocio() {
@@ -302,12 +309,12 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>,P
 	}
 
 	public List<String> getRazas() {
-		razas=cartaNegocio.findByCriteria();
+		razas = cartaNegocio.findByCriteria();
 		return razas;
 	}
 
 	public void setRazas(List<String> razas) {
-		this.razas = razas;		
+		this.razas = razas;
 	}
 
 	public List<DeckCarta> getDeckCartas() {
@@ -356,7 +363,7 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>,P
 
 	public void setDecks(List<Deck> decks) {
 		this.decks = decks;
-	}	
+	}
 
 	public List<Carta> getDeckCompleto() {
 		return deckCompleto;
@@ -382,10 +389,9 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>,P
 		this.usuario = usuario;
 	}
 
-	
-	public void prepare() throws Exception {
-		   clearErrorsAndMessages();
-		}
+	public void prepare() {
+		clearErrorsAndMessages();
+	}
 
 	public UsuarioNegocio getUsuarioNegocio() {
 		return usuarioNegocio;
@@ -396,7 +402,7 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>,P
 	}
 
 	public List<String> getTipos() {
-		tipos=cartaNegocio.findByCriteriaTipo();
+		tipos = cartaNegocio.findByCriteriaTipo();
 		return tipos;
 	}
 
@@ -404,7 +410,4 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>,P
 		this.tipos = tipos;
 	}
 
-	
-
 }
-

@@ -18,7 +18,7 @@ import com.myl.negocio.CartaNegocio;
 
 public class Spoiler {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(Carta.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(Spoiler.class);
 	static CartaNegocio cartaNegocio;
 		
 	private Spoiler(){
@@ -89,14 +89,13 @@ public class Spoiler {
 				}
 					}
 			    } catch(EOFException e) {
-			    	LOGGER.error("End of stream");
+			    	LOGGER.error("End of stream",e);
 			    }
 			
 
 		}
 		
-		public static void loadData(CartaNegocio cartaNegocio){
-//			File f = new File("C:/Users/Mariana/Documents/prueba/spoilers/");			
+		public static void loadData(CartaNegocio cartaNegocio){			
 			File f = new File("C:/Users/cdt/Documents/myl-big/spoilers/");
 			
 			Carta carta;
@@ -150,15 +149,15 @@ public class Spoiler {
 										s=in.readLine();
 									}
 								}
-								System.out.println("------------------Edición "+noEdicion+" ---------------");
+								LOGGER.info("------------------Edición "+noEdicion+" ---------------");
 								carta.setIdEdicion(noEdicion);
 								cartaNegocio.save(carta);
 							}
 						}
 					} catch (FileNotFoundException e) {
-						LOGGER.debug(e.getMessage());						
+						LOGGER.error("Error",e);						
 					} catch (IOException e) {
-						LOGGER.debug(e.getMessage());
+						LOGGER.error("Error",e);
 					}
 				}
 			}

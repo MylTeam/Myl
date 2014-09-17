@@ -2,38 +2,38 @@ package com.myl.messages;
 
 public class StatusInfoMessage {
 
-    public enum STATUS {
-    	CONNECTED, DISCONNECTED
-    	}
+	public enum STATUS {
+		CONNECTED, DISCONNECTED
+	}
 
-    private final StatusInfo statusInfo;
+	private final StatusInfo statusInfo;
 
-    public StatusInfoMessage(String user, STATUS status) {
-        this.statusInfo = new StatusInfo(user, status);
-    }
+	public StatusInfoMessage(String user, STATUS status) {
+		this.statusInfo = new StatusInfo(user, status);
+	}
 
-    public StatusInfo getStatusInfo() {
-        return statusInfo;
-    }
+	public StatusInfo getStatusInfo() {
+		return statusInfo;
+	}
 
-    class StatusInfo {
+	class StatusInfo {
 
-        private final String user;
+		private final String user;
 
-        private final STATUS status;
+		private final STATUS status;
 
-        public StatusInfo(String user, STATUS status) {
-            this.user = user;
-            this.status = status;
-        }
+		public StatusInfo(String user, STATUS status) {
+			this.user = user;
+			this.status = status;
+		}
 
-        public String getUser() {
-            return user;
-        }
+		public String getUser() {
+			return user;
+		}
 
-        public STATUS getStatus() {
-            return status;
-        }
-    }
+		public STATUS getStatus() {
+			return status;
+		}
+	}
 
 }

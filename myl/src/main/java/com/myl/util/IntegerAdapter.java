@@ -12,7 +12,7 @@ public class IntegerAdapter extends XmlAdapter<String, Integer> {
 
 	public String marshal(Integer number) {
 
-		if (number == null){
+		if (number == null) {
 			return "";
 		}
 

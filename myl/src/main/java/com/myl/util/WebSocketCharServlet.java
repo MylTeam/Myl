@@ -80,57 +80,28 @@ public class WebSocketCharServlet extends WebSocketServlet {
 
         @Override
         protected void onTextMessage(CharBuffer charBuffer) throws IOException {
-        	System.out.println(charBuffer.toString());
+        	LOGGER.info(charBuffer.toString());
         	if(charBuffer.toString().contains("messageInfo")){
         		final MessageInfoMessage message = jsonProcessor.fromJson(charBuffer.toString(), MessageInfoMessage.class);
-        		final ChatConnection destinationConnection = getDestinationUserConnection(message.getMessageInfo().getTo());
-                if (destinationConnection != null) {
-                    final CharBuffer jsonMessage = CharBuffer.wrap(jsonProcessor.toJson(message));
-                    destinationConnection.getWsOutbound().writeTextMessage(jsonMessage);
-                } else {
-                	System.out.println("Se está intentando enviar un mensaje a un usuario no conectado");
-                	LOGGER.warn("Se está intentando enviar un mensaje a un usuario no conectado");
-                }
+        		sendMessage(message.getMessageInfo().getTo(), message);
+            	
         	}else if(charBuffer.toString().contains("cardInfo")){
         		final CardInfoMessage message = jsonProcessor.fromJson(charBuffer.toString(), CardInfoMessage.class);
-        		final ChatConnection destinationConnection = getDestinationUserConnection(message.getCardInfo().getTo());
-                if (destinationConnection != null) {
-                    final CharBuffer jsonMessage = CharBuffer.wrap(jsonProcessor.toJson(message));
-                    destinationConnection.getWsOutbound().writeTextMessage(jsonMessage);
-                } else {
-                	System.out.println("Se está intentando enviar un mensaje a un usuario no conectado");
-                }
+        		sendMessage(message.getCardInfo().getTo(), message);
+        		
         	}else if(charBuffer.toString().contains("cardListInfo")){
         		final CardListInfoMessage message = jsonProcessor.fromJson(charBuffer.toString(), CardListInfoMessage.class);
-        		final ChatConnection destinationConnection = getDestinationUserConnection(message.getCardListInfo().getTo());
-                if (destinationConnection != null) {
-                    final CharBuffer jsonMessage = CharBuffer.wrap(jsonProcessor.toJson(message));
-                    destinationConnection.getWsOutbound().writeTextMessage(jsonMessage);
-                } else {
-                	System.out.println("Se está intentando enviar un mensaje a un usuario no conectado");
-                }
+        		sendMessage(message.getCardListInfo().getTo(), message);
+        		
         	}else if(charBuffer.toString().contains("targetInfo")){
         		final TargetInfoMessage message = jsonProcessor.fromJson(charBuffer.toString(), TargetInfoMessage.class);
-        		final ChatConnection destinationConnection = getDestinationUserConnection(message.getTargetInfo().getTo());
-                if (destinationConnection != null) {
-                    final CharBuffer jsonMessage = CharBuffer.wrap(jsonProcessor.toJson(message));
-                    destinationConnection.getWsOutbound().writeTextMessage(jsonMessage);
-                } else {
-                	System.out.println("Se está intentando enviar un mensaje a un usuario no conectado");
-                }
+        		sendMessage(message.getTargetInfo().getTo(), message);
+        		
         	}else if(charBuffer.toString().contains("phaseInfo")){
         		final PhaseInfoMessage message = jsonProcessor.fromJson(charBuffer.toString(), PhaseInfoMessage.class);
-        		final ChatConnection destinationConnection = getDestinationUserConnection(message.getPhaseInfo().getTo());
-                if (destinationConnection != null) {
-                    final CharBuffer jsonMessage = CharBuffer.wrap(jsonProcessor.toJson(message));
-                    destinationConnection.getWsOutbound().writeTextMessage(jsonMessage);
-                } else {
-                	System.out.println("Se está intentando enviar un mensaje a un usuario no conectado");
-                }
+        		sendMessage(message.getPhaseInfo().getTo(), message);
+        		
         	}
-            
-                        
-            
         }
 
         public String getUserName() {
@@ -142,8 +113,7 @@ public class WebSocketCharServlet extends WebSocketServlet {
             final ConnectionInfoMessage connectionInfoMessage = new ConnectionInfoMessage(userName, activeUsers);
             try {
                 outbound.writeTextMessage(CharBuffer.wrap(jsonProcessor.toJson(connectionInfoMessage)));
-            } catch (IOException e) {
-            	System.out.println("No se pudo enviar el mensaje "+ e);
+            } catch (IOException e) {            	
             	LOGGER.error("No se pudo enviar el mensaje", e);
             }
         }
@@ -162,7 +132,6 @@ public class WebSocketCharServlet extends WebSocketServlet {
                 try {
                     connection.getWsOutbound().writeTextMessage(CharBuffer.wrap(jsonProcessor.toJson(message)));
                 } catch (IOException e) {
-                	System.out.println("No se pudo enviar el mensaje "+ e);
                 	LOGGER.error("No se pudo enviar el mensaje", e);
                 }
             }
@@ -182,7 +151,15 @@ public class WebSocketCharServlet extends WebSocketServlet {
             }
             return null;
         }
-
+        
+        private void sendMessage(String string,Object object) throws IOException{
+        	final ChatConnection destinationConnection = getDestinationUserConnection(string);
+            if (destinationConnection != null) {
+                final CharBuffer jsonMessage = CharBuffer.wrap(jsonProcessor.toJson(object));
+                destinationConnection.getWsOutbound().writeTextMessage(jsonMessage);
+            } else {
+            	LOGGER.warn("Se está intentando enviar un mensaje a un usuario no conectado");
+            }
+        }
     }
-
 }

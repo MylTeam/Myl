@@ -7,7 +7,6 @@ import javax.inject.Singleton;
 import org.springframework.transaction.annotation.Transactional;
 import com.myl.dao.CartaDao;
 import com.myl.modelo.Carta;
-import com.myl.negocio.CartaNegocio;
 
 
 @Singleton

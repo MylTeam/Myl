@@ -19,7 +19,6 @@ public class UsuarioNegocio {
 	
 	@Transactional
 	public List<Usuario> findAll() {
-		System.out.println("buscando");
 		return usuarioDao.findAll();
 	}
 

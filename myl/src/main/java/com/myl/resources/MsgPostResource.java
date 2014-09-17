@@ -8,18 +8,23 @@ import javax.ws.rs.core.Response;
 
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 @Path("/msgPost")
 @Component("MsgPostResource")
 public class MsgPostResource {
-	
-	@POST	
+
+	private static final Logger LOGGER = LoggerFactory
+			.getLogger(MsgPostResource.class);
+
+	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response receiveCalif(JSONArray jsonObject) throws JSONException {
-		String result="Recibido";
-		System.out.println("Recibido: "+jsonObject);
-								
-		return Response.status(201).entity(result).build();		
+		String result = "Recibido";
+		LOGGER.info("Recibido: " + jsonObject);
+
+		return Response.status(201).entity(result).build();
 	}
 }

@@ -28,6 +28,7 @@ public class Edicion {
 	public void setId(Integer id) {
 		this.id = id;
 	}
+	
 	@Column(name = "EdicionNb")
 	public String getNombre() {
 		return nombre;
@@ -35,6 +36,7 @@ public class Edicion {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+	
 	@Column(name = "EdicionSg")
 	public String getSiglas() {
 		return siglas;
@@ -49,12 +51,5 @@ public class Edicion {
 	}
 	public void setCartas(List<Carta> cartas) {
 		this.cartas = cartas;
-	}	
-	
-	
-		
-	
-	
-	
-		
+	}			
 }

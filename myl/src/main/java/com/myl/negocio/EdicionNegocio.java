@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.myl.dao.EdicionDao;
 import com.myl.modelo.Edicion;
-import com.myl.negocio.EdicionNegocio;
 
 
 @Singleton

@@ -6,10 +6,11 @@ import java.util.List;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 
-
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 import org.apache.struts2.interceptor.ServletRequestAware;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.myl.modelo.Usuario;
 import com.myl.negocio.UsuarioNegocio;
@@ -29,6 +30,7 @@ import com.opensymphony.xwork2.ActionSupport;
 public class LoginController extends ActionSupport implements
 		ServletRequestAware {
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(LoginController.class);
 	private static final long serialVersionUID = -7475211274962357078L;
 	private String userId;
 	private String password;
@@ -36,6 +38,10 @@ public class LoginController extends ActionSupport implements
 	private UsuarioNegocio service;	
 	private HttpServletRequest request;
 
+	public LoginController(UsuarioNegocio loginService) {
+		service = loginService;
+	}
+	
 	@Override
 	public String execute() throws Exception {
 
@@ -56,13 +62,10 @@ public class LoginController extends ActionSupport implements
 			}
 
 		} catch (Exception e) {
+			LOGGER.error("Error",e);
 			return "error";
 		}
 		return "error";
-	}
-	
-	public LoginController(UsuarioNegocio loginService) {
-		service = loginService;
 	}
 
 	public String getPassword() {
@@ -73,11 +76,16 @@ public class LoginController extends ActionSupport implements
 		this.password = password;
 	}
 
-	public String create() throws Exception {
-		return execute();
+	public String create(){
+			try {
+				return execute();
+			} catch (Exception e) {				
+				LOGGER.error("Error", e);
+				return "error";
+			}			
 	}
 
-	public String index() throws Exception {
+	public String index() {
 		usuarioSel = (Usuario) ActionContext.getContext().getSession().get(NombreObjetosSesion.USUARIO);
 		return "index";
 	}
