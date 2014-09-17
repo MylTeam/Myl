@@ -12,7 +12,8 @@
 	default-autowire="byName" default-lazy-init="true">
 	
 	<import resource="dataSource.xml" />
-	<import resource="hibernateSessionFactory.xml" /> 
+	<import resource="hibernateSessionFactory.xml" />
+	<import resource="mail.xml" /> 
 
 	<tx:annotation-driven transaction-manager="transactionManager"
 		proxy-target-class="true" />

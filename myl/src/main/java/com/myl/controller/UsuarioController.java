@@ -9,11 +9,18 @@ import org.apache.struts2.convention.annotation.Results;
 import org.apache.struts2.interceptor.validation.SkipValidation;
 import org.apache.struts2.rest.DefaultHttpHeaders;
 import org.apache.struts2.rest.HttpHeaders;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.mail.MailSender;
+
+import ch.qos.logback.core.Context;
 
 import com.myl.modelo.Deck;
 import com.myl.modelo.Usuario;
 import com.myl.negocio.DeckNegocio;
 import com.myl.negocio.UsuarioNegocio;
+import com.myl.util.IssueMail;
+
 import com.myl.util.NombreObjetosSesion;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -37,6 +44,8 @@ public class UsuarioController extends ActionSupport implements ModelDriven<Usua
 	private Integer deckId;
 	
 	
+	
+	
 	@SkipValidation
 	public HttpHeaders index() {
 		usuario=(Usuario) ActionContext.getContext().getSession().get(NombreObjetosSesion.USUARIO);		
@@ -44,6 +53,11 @@ public class UsuarioController extends ActionSupport implements ModelDriven<Usua
 		Deck deckAux=new Deck();
 		deckAux.setUsuarioId(usuario.getIdUsuario());
 		lista=deckNegocio.findByExample(deckAux);
+		
+		ApplicationContext context = new ClassPathXmlApplicationContext("mail.xml");	 
+	    IssueMail mail = (IssueMail) context.getBean("mail");		
+		mail.sendMail("csantiagoalva@gmail.com", "csantiagoalva@gmail.com", "prueba", "hola");
+		
 		return new DefaultHttpHeaders("index").disableCaching();
 	}
 	
@@ -162,5 +176,6 @@ public class UsuarioController extends ActionSupport implements ModelDriven<Usua
 	public void setDeckId(Integer deckId) {
 		this.deckId = deckId;
 	}
+
 }
 

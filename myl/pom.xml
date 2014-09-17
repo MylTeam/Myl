@@ -16,6 +16,13 @@
 		
 	</properties>
 
+	<repositories>
+  	<repository>
+  		<id>Java.Net</id>
+  		<url>http://download.java.net/maven/2/</url>
+  	</repository>
+  </repositories>
+  
 	<build>
 		<finalName>myl</finalName>
 		<plugins>
@@ -242,6 +249,11 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${spring.version}</version>
+		</dependency>		
+		<dependency>
+			<groupId>org.springframework</groupId>
 			<artifactId>spring-orm</artifactId>
 			<version>${spring.version}</version>
 			<type>jar</type>
@@ -352,9 +364,9 @@
 			<scope>compile</scope>
 		</dependency>		
 		<dependency>
-			<groupId>com.sun.mail</groupId>
-			<artifactId>javax.mail</artifactId>
-			<version>1.4.4</version>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4.3</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>

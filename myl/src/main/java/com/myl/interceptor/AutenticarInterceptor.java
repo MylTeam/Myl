@@ -3,6 +3,7 @@ package com.myl.interceptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.myl.util.IssueMail;
 import com.myl.util.NombreObjetosSesion;
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionContext;
@@ -83,12 +84,12 @@ public class AutenticarInterceptor implements Interceptor {
 
 	@Override
 	public void init() {
-		LOGGER.info("onInit");
+		LOGGER.info("Initializing AuthInterceptor");
 	}
 
 	public void errorNotification(Exception e, String actionName) {
 		LOGGER.error("Interceptor en " + actionName);
-		LOGGER.error(e.getMessage());
+		LOGGER.error("Error",e);
 	}
 
 	public String getPrevAction() {
