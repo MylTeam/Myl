@@ -33,7 +33,6 @@ public class MessageStoreInterceptorMyl extends MessageStoreInterceptor {
 		try {
 			super.after(invocation, arg1);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			
 			LOGGER.error("No se pudo generar reporte");
 			throw new MessageStoreInterceptorException(e);

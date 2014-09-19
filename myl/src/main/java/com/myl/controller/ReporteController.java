@@ -43,8 +43,6 @@ public class ReporteController extends ActionSupport {
 	}
 
 	public void enviarCorreoReporte(AppError appError) {
-		List<String> to = new ArrayList<String>();
-
 		Date fecha = new Date();
 		String msg="Fecha: "+fecha+"\n URL: "+appError.getUrl()+"\n Error: \n "+appError.getStackTrace();
 		mailSender.sendMail("mylzupport@gmail.com", appError.getExceptionName(), msg);

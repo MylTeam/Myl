@@ -11,10 +11,6 @@ import org.apache.struts2.rest.DefaultHttpHeaders;
 import org.apache.struts2.rest.HttpHeaders;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import ch.qos.logback.core.joran.action.Action;
-
-import com.myl.modelo.Carta;
 import com.myl.modelo.Usuario;
 import com.myl.util.IssueMail;
 import com.myl.util.NombreObjetosSesion;
@@ -43,7 +39,7 @@ public class ContactoController extends ActionSupport {
 
 	
 	public void validateCreate() {
-
+		LOGGER.debug("en ValidateCreate");
 	}
 
 	@Validations(requiredStrings = {
