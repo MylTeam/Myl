@@ -3,6 +3,7 @@ package com.myl.util;
 import java.util.Collection;
 import java.util.Map;
 
+import org.apache.struts2.interceptor.MessageStoreInterceptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,8 +13,7 @@ import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.config.entities.ActionConfig;
 import com.opensymphony.xwork2.config.entities.ResultConfig;
 
-public class MessageStoreInterceptorMyl extends
-		org.apache.struts2.interceptor.MessageStoreInterceptor {
+public class MessageStoreInterceptorMyl extends MessageStoreInterceptor {
 
 	private static final long serialVersionUID = 1L;
 	private static final String REDIRECT = "org.apache.struts2.dispatcher.ServletActionRedirectResult";

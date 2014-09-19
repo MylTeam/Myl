@@ -57,18 +57,21 @@
 				<tr>
 					<td><a class="selected"
 						href="${pageContext.request.contextPath}/usuario">
-							<h3 style="width: 300px">Perfil</h3>
+							<h3 style="width: 240px">Perfil</h3>
 					</a></td>
 					<td><a class="selected"
 						href="${pageContext.request.contextPath}/lobby">
-							<h3 style="width: 300px">Jugar</h3>
+							<h3 style="width: 240px">Jugar</h3>
 					</a></td>
 					<td><a class="selected"
 						href="${pageContext.request.contextPath}/help"><h3
-								style="width: 300px">Ayuda y reglas</h3></a></td>
+								style="width: 240px">Ayuda y reglas</h3></a></td>
+					<td><a class="selected"
+						href="${pageContext.request.contextPath}/contacto/new"><h3
+								style="width: 240px;font-size: 13px">Comentarios / Reportar un problema</h3></a></td>
 					<td><a class="selected"
 						href="${pageContext.request.contextPath}/logout"><h3
-								style="width: 300px">Cerrar Sesión</h3></a></td>
+								style="width: 240px">Cerrar Sesión</h3></a></td>
 				</tr>
 			</table>
 		</center>
@@ -80,16 +83,11 @@
 	
 	<!-- <div id="pageMain">		
 	</div> -->
-	<!-- 
-	<div id="pageFooter">
-		<h2>Escuela Superior de Cómputo.</h2>
-		<p>Av. Juan de Dios Bátiz s/n esquina Miguel Othón de Mendizabal.
-			Unidad Profesional Adolfo López Mateos. Col. Lindavista C.P. 07738,
-			México, D. F.</p>
-		E-mail: <a href="mailto:csantiagoalva@gmail.com">csantiagoalva@gmail.com</a>
 
+	<div id="pageFooter">
+		<p>La información mostrada en este sitio sobre las cartas, incluidos los elementos gráficos, son copyright de sus respectivos dueños. Este sitio no tiene relación alguna con los respectivos propietarios de dicho material.</p>
 	</div>
-	 -->
+
 </body>
 	</html>
 </jsp:root>

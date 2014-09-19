@@ -8,12 +8,15 @@ import java.util.Map;
 
 import javax.inject.Named;
 
+import com.myl.modelo.Usuario;
 import com.myl.util.IssueMail;
 import com.myl.util.AppError;
+import com.myl.util.NombreObjetosSesion;
 
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 @Named
@@ -43,7 +46,7 @@ public class ReporteController extends ActionSupport {
 		List<String> to = new ArrayList<String>();
 
 		Date fecha = new Date();
-		String msg=fecha+"\n"+appError.getUrl()+"\n"+appError.getStackTrace();
+		String msg="Fecha: "+fecha+"\n URL: "+appError.getUrl()+"\n Error: \n "+appError.getStackTrace();
 		mailSender.sendMail("mylzupport@gmail.com", appError.getExceptionName(), msg);
 	}
 
