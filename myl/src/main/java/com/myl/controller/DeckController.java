@@ -29,6 +29,9 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
+import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
+import com.opensymphony.xwork2.validator.annotations.Validations;
+import com.opensymphony.xwork2.validator.annotations.ValidatorType;
 
 @Named
 @Results({
@@ -98,6 +101,9 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>,
 		}
 	}
 
+	@Validations(requiredStrings = {
+			@RequiredStringValidator(fieldName = "model.deckNombre", type = ValidatorType.FIELD, key = "Introduce un nombre para el mazo")
+			})
 	public HttpHeaders create() {
 		jsonProcessor = new Gson();
 		Type listType = new TypeToken<List<DeckCarta>>() {

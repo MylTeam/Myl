@@ -61,12 +61,14 @@ public class WebSocketLobbyServlet extends WebSocketServlet {
         protected void onOpen(WsOutbound outbound) {
             sendConnectionInfo(outbound);
             sendStatusInfoToOtherUsers(new StatusInfoMessage(userName, StatusInfoMessage.STATUS.CONNECTED));
+            LOGGER.info("El usuario "+userName+" ha entrado al lobby");
             CONNECTIONS.put(connectionId, this);
         }
 
         @Override
         protected void onClose(int status) {
             sendStatusInfoToOtherUsers(new StatusInfoMessage(userName, StatusInfoMessage.STATUS.DISCONNECTED));
+            LOGGER.info("El usuario "+userName+" ha salido del lobby");
             CONNECTIONS.remove(connectionId);
         }
 
@@ -77,7 +79,7 @@ public class WebSocketLobbyServlet extends WebSocketServlet {
 
         @Override
         protected void onTextMessage(CharBuffer charBuffer) throws IOException{
-        	LOGGER.info(charBuffer.toString());
+        	LOGGER.info("MsgLobby= "+charBuffer.toString());
         	if(charBuffer.toString().contains("messageInfo")){
         		final MessageInfoMessage message = jsonProcessor.fromJson(charBuffer.toString(), MessageInfoMessage.class);
         		sendMessage(message.getMessageInfo().getTo(), message);
@@ -107,6 +109,9 @@ public class WebSocketLobbyServlet extends WebSocketServlet {
             final List<String> activeUsers = new ArrayList<String>();
             for (ChatConnection connection : CONNECTIONS.values()) {
                 activeUsers.add(connection.getUserName());
+            }
+            if(activeUsers.isEmpty()){
+            	LOGGER.error("No hay usuarios activos");
             }
             return activeUsers;
         }
