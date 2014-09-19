@@ -11,11 +11,13 @@ import org.apache.struts2.rest.DefaultHttpHeaders;
 import org.apache.struts2.rest.HttpHeaders;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import com.myl.modelo.Usuario;
 import com.myl.util.IssueMail;
 import com.myl.util.NombreObjetosSesion;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.validator.annotations.RegexFieldValidator;
 import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
 import com.opensymphony.xwork2.validator.annotations.Validations;
 import com.opensymphony.xwork2.validator.annotations.ValidatorType;
@@ -44,7 +46,10 @@ public class ContactoController extends ActionSupport {
 
 	@Validations(requiredStrings = {
 			@RequiredStringValidator(fieldName = "asunto", type = ValidatorType.FIELD, key = "Introduce el asunto"),
-			@RequiredStringValidator(fieldName = "mensaje", type = ValidatorType.FIELD, key = "Introduce el mensaje")
+			@RequiredStringValidator(fieldName = "mensaje", type = ValidatorType.FIELD, key = "Introduce el mensaje")},
+			regexFields = {
+			@RegexFieldValidator(fieldName = "asunto", type = ValidatorType.FIELD, key = "Asunto no válido", expression = "[A-Z[a-z][0-9]]+"),
+			@RegexFieldValidator(fieldName = "mensaje", type = ValidatorType.FIELD, key = "Mensaje no válido", expression = "[A-Z[a-z][0-9]]+")
 			})
 	public HttpHeaders create() {
 			LOGGER.info(asunto+" : "+mensaje);
