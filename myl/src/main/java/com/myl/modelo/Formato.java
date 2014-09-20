@@ -6,6 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -17,6 +20,9 @@ public class Formato {
 	private String nombre;
 	
 	private List<Deck> decks;
+	
+	private List<Edicion> ediciones;
+	private List<FormatoEdicion> formatoediciones;
 	
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
@@ -43,5 +49,22 @@ public class Formato {
 	}
 	public void setDecks(List<Deck> decks) {
 		this.decks = decks;
+	}
+	
+	@ManyToMany
+	@JoinTable(name = "formato_edicion_tbl", joinColumns = { @JoinColumn(name = "FormatoId") }, inverseJoinColumns = { @JoinColumn(name = "EdicionId") })
+	public List<Edicion> getEdiciones() {
+		return ediciones;
+	}
+	public void setEdiciones(List<Edicion> ediciones) {
+		this.ediciones = ediciones;
+	}
+	
+	@OneToMany(mappedBy = "formato")
+	public List<FormatoEdicion> getFormatoediciones() {
+		return formatoediciones;
+	}
+	public void setFormatoediciones(List<FormatoEdicion> formatoediciones) {
+		this.formatoediciones = formatoediciones;
 	}			
 }

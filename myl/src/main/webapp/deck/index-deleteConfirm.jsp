@@ -31,7 +31,7 @@
 		method="post" theme="simple" id="frmDeck" acceptcharset="UTF-8" cssStyle="border: 0px;width:90%">		
 		<s:hidden id="hdnMethod" name="_method" value="delete" />
 		
-	<input type="hidden" name="context" id="context" value="${pageContext.request.contextPath}"/>
+	<input type="hidden" name="context" id="context" value="${pageContext.request.contextPath}"/>	
 	<input type="hidden" name="idSel" id="idSel" value="${idSel}"/>
 		
 	

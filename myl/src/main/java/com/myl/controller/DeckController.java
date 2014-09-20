@@ -40,14 +40,10 @@ import com.opensymphony.xwork2.validator.annotations.ValidatorType;
 
 @Named
 @Results({
-		@Result(name = "success", type = "redirectAction", params = {
-				"actionName", "usuario" }),
-		@Result(name = "input", type = "redirectAction", params = {
-				"actionName", "usuario" }),
-		@Result(name = "res", type = "json", params = { "includeProperties",
-				"resultado.*" }),
-		@Result(name = "decks", type = "json", params = { "includeProperties",
-				"deckCompleto.*" }) })
+		@Result(name = "success", type = "redirectAction", params = {"actionName", "usuario" }),
+		@Result(name = "input", type = "redirectAction", params = {"actionName", "usuario" }),
+		@Result(name = "res", type = "json", params = { "includeProperties","resultado.*" }),
+		@Result(name = "decks", type = "json", params = { "includeProperties","deckCompleto.*" }) })
 public class DeckController extends ActionSupport implements ModelDriven<Deck>,
 		Preparable {
 
@@ -81,11 +77,8 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>,
 	private List<DeckCarta> deck;
 	private List<Carta> deckCompleto;
 
-	private List<Carta> deckCom;
-
 	@SkipValidation
 	public HttpHeaders index() {
-//		decks = deckNegocio.findAll();
 
 		return new DefaultHttpHeaders("index").disableCaching();
 	}
@@ -111,16 +104,23 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>,
 			addActionError("El mazo está vacío");
 		}
 		
-		if (hasFieldErrors()) {
+
+		String res=deckNegocio.isCorrectFormat(deckCartas, model.getFormatoId());
+		if(!res.isEmpty()){
+			addActionError("Las cartas "+res+" no pertenecen al formato seleccionado.");
+		}
+		
+		if (hasFieldErrors() || hasActionErrors()) {
 			ActionContext.getContext().getSession().put("deckTmp", deckCartas);
 			formatos = formatoNegocio.findAll();
 		}
 	}
+	
 
 	@Validations(requiredStrings = {
 			@RequiredStringValidator(fieldName = "model.deckNombre", type = ValidatorType.FIELD, key = "Introduce un nombre para el mazo")},
 			intRangeFields = {
-			@IntRangeFieldValidator(fieldName = "model.formatoId", type = ValidatorType.FIELD, message = "Selecciona el formato", min = "1")
+			@IntRangeFieldValidator(fieldName = "model.formatoId", type = ValidatorType.FIELD, message = "Selecciona el formato del mazo", min = "1")
 			})	
 	public HttpHeaders create() {
 		jsonProcessor = new Gson();
@@ -154,7 +154,7 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>,
 	}
 
 	public void validateUpdate() {
-		System.out.println("onValidateUpdate");
+
 		jsonProcessor = new Gson();
 		Type listType = new TypeToken<List<DeckCarta>>() {
 		}.getType();
@@ -164,10 +164,18 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>,
 			addActionError("El mazo está vacío");
 		}
 		
-		if (hasFieldErrors()) {
+		
+		String res=deckNegocio.isCorrectFormat(deckCartas, model.getFormatoId());
+		if(!res.isEmpty()){
+			addActionError("Las cartas "+res+"no pertenecen al formato seleccionado.");
+		}
+		
+		if (hasFieldErrors() || hasActionErrors()) {
 			ActionContext.getContext().getSession().put("deckTmp", deckCartas);
 			formatos = formatoNegocio.findAll();
 		}
+		
+		
 	}
 
 	@Validations(requiredStrings = {
@@ -203,8 +211,7 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>,
 	}
 
 	public String destroy() {
-		usuario = (Usuario) ActionContext.getContext().getSession()
-				.get(NombreObjetosSesion.USUARIO);
+		usuario = (Usuario) ActionContext.getContext().getSession().get(NombreObjetosSesion.USUARIO);
 		usuario.setDeckPred(0);
 
 		usuarioNegocio.save(usuario);
@@ -241,7 +248,7 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>,
 	public String buscarDecks() {
 		
 		deckCompleto = new ArrayList<Carta>();
-//		deck = new ArrayList<DeckCarta>();
+
 		
 		deckCartas=(List<DeckCarta>) ActionContext.getContext().getSession().get("deckTmp");
 		ActionContext.getContext().getSession().remove("deckTmp");
@@ -436,14 +443,6 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>,
 
 	public void setDeckCompleto(List<Carta> deckCompleto) {
 		this.deckCompleto = deckCompleto;
-	}
-
-	public List<Carta> getDeckCom() {
-		return deckCom;
-	}
-
-	public void setDeckCom(List<Carta> deckCom) {
-		this.deckCom = deckCom;
 	}
 
 	public Usuario getUsuario() {

@@ -1,5 +1,6 @@
 package com.myl.negocio;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Named;
@@ -8,15 +9,21 @@ import javax.inject.Singleton;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.myl.dao.DeckDao;
+import com.myl.modelo.Carta;
 import com.myl.modelo.Deck;
-
-
+import com.myl.modelo.DeckCarta;
+import com.myl.modelo.Edicion;
+import com.myl.modelo.Formato;
 
 @Singleton
 @Named("deckNegocio")
 public class DeckNegocio {
-	private DeckDao deckDao;	
-	
+	private DeckDao deckDao;
+	private CartaNegocio cartaNegocio;
+	private Carta carta;
+	private Formato formato;
+	private FormatoNegocio formatoNegocio;
+
 	@Transactional
 	public List<Deck> findAll() {
 		return deckDao.findAll();
@@ -29,7 +36,7 @@ public class DeckNegocio {
 
 	@Transactional(rollbackFor = Exception.class)
 	public Deck save(Deck entidad) {
-		Deck modelo = deckDao.save(entidad);		
+		Deck modelo = deckDao.save(entidad);
 		return modelo;
 	}
 
@@ -42,7 +49,41 @@ public class DeckNegocio {
 	public List<Deck> findByExample(Deck deck) {
 		return deckDao.findByExample(deck);
 	}
-	   
+
+	public String isCorrectFormat(List<DeckCarta> deckCartas, Integer formatoId) {
+		String issues="";
+		
+		if(formatoId!=-1){
+		List<Carta> deckTest = new ArrayList<Carta>();
+		for (DeckCarta deckCarta : deckCartas) {
+			carta = cartaNegocio.findById(deckCarta.getCartaId());
+			Carta aux = new Carta();
+			aux.setId(carta.getId());
+			aux.setNombre(carta.getNombre());
+			aux.setIdEdicion(carta.getIdEdicion());
+			deckTest.add(aux);
+		}
+		
+		formato=formatoNegocio.findById(formatoId);		
+		List<Integer> ediciones=new ArrayList<Integer>();		
+		for(Edicion edicion:formato.getEdiciones()){
+			ediciones.add(edicion.getId());
+		}
+		
+		for(Carta carta:deckTest){			
+			if(ediciones.contains(carta.getIdEdicion())){
+				System.out.println("OK: "+carta.getNombre());
+			}else{
+				System.out.println("Error: "+carta.getNombre());
+				issues=issues+carta.getNombre()+", ";
+			}
+		}
+		
+		}
+
+		return issues;
+	}
+
 	public DeckDao getDeckDao() {
 		return deckDao;
 	}
@@ -51,6 +92,36 @@ public class DeckNegocio {
 		this.deckDao = deckDao;
 	}
 
-	
-	
+	public CartaNegocio getCartaNegocio() {
+		return cartaNegocio;
+	}
+
+	public void setCartaNegocio(CartaNegocio cartaNegocio) {
+		this.cartaNegocio = cartaNegocio;
+	}
+
+	public Carta getCarta() {
+		return carta;
+	}
+
+	public void setCarta(Carta carta) {
+		this.carta = carta;
+	}
+
+	public Formato getFormato() {
+		return formato;
+	}
+
+	public void setFormato(Formato formato) {
+		this.formato = formato;
+	}
+
+	public FormatoNegocio getFormatoNegocio() {
+		return formatoNegocio;
+	}
+
+	public void setFormatoNegocio(FormatoNegocio formatoNegocio) {
+		this.formatoNegocio = formatoNegocio;
+	}
+
 }

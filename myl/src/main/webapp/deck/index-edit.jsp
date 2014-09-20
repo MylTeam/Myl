@@ -9,7 +9,7 @@
 <jsp:text>
 	<![CDATA[
 	
-			<script src="${pageContext.request.contextPath}/scripts/jquery-1.7.2.min.js" type="text/javascript"></script>
+			
 			<script src="${pageContext.request.contextPath}/scripts/deck.js" type="text/javascript"></script>
 			
 		 ]]>
@@ -159,8 +159,7 @@
 	<tr>
 	<td>Formato:</td>
 		<td>
-		<s:select id="slcFormato" name="model.formatoId"
-					list="formatos" listValue="nombre" listKey="id" headerValue="Seleccione" headerKey="-1"/>
+		<s:select id="slcFormato" name="model.formatoId" list="formatos" listValue="nombre" listKey="id" headerValue="Seleccione" headerKey="-1"/>
 		</td>
 	</tr>
 	</table>
