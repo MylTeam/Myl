@@ -197,8 +197,16 @@ function eliminar() {
 
 function getDeck(){
 	var context = $('#context').val();
+	var urlMethod;
+	
+	if($("#idSel").length==0){
+		urlMethod=context + "/deck/"+"!buscarDecks";
+	}else{
+		urlMethod=context + "/deck/"+$("#idSel").val()+"!buscarDecks";
+	}
+	
 	$.ajax({
-		url : context + "/deck/"+$("#idSel").val()+"!buscarDecks",
+		url : urlMethod,
 		type : "POST",
 		error : function() {
 			alert('Error');

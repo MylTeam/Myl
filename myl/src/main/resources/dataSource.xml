@@ -32,7 +32,7 @@
 
 		<!-- Propiedad que debe reemplazar la anterior en entornos de producción, 
 			en específico Tomcat -->
- 		<property name="driverClass" value="${jdbc.driverClassName}" /> 
+ 		<property name="driverClass" value="${jdbc.driverClassName}" />
 
 		<property name="jdbcUrl" value="${jdbc.url}" />
 

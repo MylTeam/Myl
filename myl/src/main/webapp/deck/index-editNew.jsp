@@ -19,6 +19,11 @@
 #deck1 {width:100%;height:100%;padding:0px;border:1px solid #aaaaaa;overflow:auto;}
 
 </style>
+<script type="text/javascript">
+	$(function() {
+		getDeck();
+	});		
+	</script>
 </head>
 <body>
 	<s:url id="urlCancelar" value="/usuario" includeContext="true" />
@@ -150,7 +155,7 @@
 	<td>Formato:</td>
 		<td>
 		<s:select id="slcFormato" name="model.formatoId"
-					list="formatos" listValue="nombre" listKey="id" headerValue="Seleccione" headerKey="-1"/>
+					list="formatos" listValue="nombre" listKey="id" headerValue="Seleccione" headerKey="-1" required="true"/>
 		</td>
 	</tr>
 	</table>	

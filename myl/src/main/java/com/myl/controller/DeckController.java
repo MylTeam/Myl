@@ -11,6 +11,8 @@ import org.apache.struts2.convention.annotation.Results;
 import org.apache.struts2.interceptor.validation.SkipValidation;
 import org.apache.struts2.rest.DefaultHttpHeaders;
 import org.apache.struts2.rest.HttpHeaders;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -50,6 +52,7 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>,
 		Preparable {
 
 	private static final long serialVersionUID = -8068256015486413672L;
+	private static final Logger LOGGER = LoggerFactory.getLogger(DeckController.class);
 	private Integer idSel;
 	private Deck model;
 	private Usuario usuario;
@@ -82,13 +85,14 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>,
 
 	@SkipValidation
 	public HttpHeaders index() {
-		decks = deckNegocio.findAll();
+//		decks = deckNegocio.findAll();
 
 		return new DefaultHttpHeaders("index").disableCaching();
 	}
 
 	@SkipValidation
 	public String editNew() {
+		
 		ediciones = edicionNegocio.findAll();
 		razas = cartaNegocio.findByCriteria();
 		tipos = cartaNegocio.findByCriteriaTipo();
@@ -98,6 +102,7 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>,
 	}
 
 	public void validateCreate() {
+
 		jsonProcessor = new Gson();
 		Type listType = new TypeToken<List<DeckCarta>>() {
 		}.getType();
@@ -105,13 +110,18 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>,
 		if (deckCartas.isEmpty()) {
 			addActionError("El mazo está vacío");
 		}
+		
+		if (hasFieldErrors()) {
+			ActionContext.getContext().getSession().put("deckTmp", deckCartas);
+			formatos = formatoNegocio.findAll();
+		}
 	}
 
 	@Validations(requiredStrings = {
 			@RequiredStringValidator(fieldName = "model.deckNombre", type = ValidatorType.FIELD, key = "Introduce un nombre para el mazo")},
 			intRangeFields = {
 			@IntRangeFieldValidator(fieldName = "model.formatoId", type = ValidatorType.FIELD, message = "Selecciona el formato", min = "1")
-			})
+			})	
 	public HttpHeaders create() {
 		jsonProcessor = new Gson();
 		Type listType = new TypeToken<List<DeckCarta>>() {
@@ -144,13 +154,19 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>,
 	}
 
 	public void validateUpdate() {
+		System.out.println("onValidateUpdate");
 		jsonProcessor = new Gson();
 		Type listType = new TypeToken<List<DeckCarta>>() {
 		}.getType();
 		deckCartas = jsonProcessor.fromJson(lista, listType);
-
+		
 		if (deckCartas.isEmpty()) {
 			addActionError("El mazo está vacío");
+		}
+		
+		if (hasFieldErrors()) {
+			ActionContext.getContext().getSession().put("deckTmp", deckCartas);
+			formatos = formatoNegocio.findAll();
 		}
 	}
 
@@ -183,7 +199,7 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>,
 	}
 
 	public void validateDestroy() {
-		throw new UnsupportedOperationException();
+		LOGGER.debug("onValidateDestroy");
 	}
 
 	public String destroy() {
@@ -223,30 +239,59 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>,
 	}
 
 	public String buscarDecks() {
-		deckAux = deckNegocio.findById(idSel);
+		
 		deckCompleto = new ArrayList<Carta>();
-		deck = new ArrayList<DeckCarta>();
-
-		int c = 0;
-		for (Carta carta : deckAux.getCartas()) {
-			Carta aux = new Carta();
-			aux.setId(carta.getId());
-			aux.setCantidad(deckAux.getDeckCartas().get(c).getCartaQt());
-			aux.setNombre(carta.getNombre());
-			aux.setNumero(carta.getNumero());
-			aux.setEfecto(carta.getEfecto());
-			aux.setTipo(carta.getTipo());
-			aux.setRaza(carta.getRaza());
-			aux.setFrecuencia(carta.getFrecuencia());
-			aux.setCoste(carta.getCoste());
-			aux.setFuerza(carta.getFuerza());
-			aux.setSiglas(carta.getEdicion().getSiglas());
-			deckCompleto.add(aux);
-			c++;
+//		deck = new ArrayList<DeckCarta>();
+		
+		deckCartas=(List<DeckCarta>) ActionContext.getContext().getSession().get("deckTmp");
+		ActionContext.getContext().getSession().remove("deckTmp");
+		
+		if (deckCartas==null && idSel!=null ) {
+			System.out.println("DeckIdSel");
+			deckAux = deckNegocio.findById(idSel);
+			int c = 0;
+			for (Carta carta : deckAux.getCartas()) {
+				Carta aux = new Carta();
+				aux.setId(carta.getId());
+				aux.setCantidad(deckAux.getDeckCartas().get(c).getCartaQt());
+				aux.setNombre(carta.getNombre());
+				aux.setNumero(carta.getNumero());
+				aux.setEfecto(carta.getEfecto());
+				aux.setTipo(carta.getTipo());
+				aux.setRaza(carta.getRaza());
+				aux.setFrecuencia(carta.getFrecuencia());
+				aux.setCoste(carta.getCoste());
+				aux.setFuerza(carta.getFuerza());
+				aux.setSiglas(carta.getEdicion().getSiglas());
+				deckCompleto.add(aux);
+				c++;
+			}
+		}else{
+			System.out.println("DeckTmp");
+			int c=0;
+			for(DeckCarta deckCarta : deckCartas){
+				Carta carta=cartaNegocio.findById(deckCarta.getCartaId());
+				Carta aux = new Carta();
+				aux.setId(carta.getId());
+				aux.setCantidad(deckCarta.getCartaQt());
+				aux.setNombre(carta.getNombre());
+				aux.setNumero(carta.getNumero());
+				aux.setEfecto(carta.getEfecto());
+				aux.setTipo(carta.getTipo());
+				aux.setRaza(carta.getRaza());
+				aux.setFrecuencia(carta.getFrecuencia());
+				aux.setCoste(carta.getCoste());
+				aux.setFuerza(carta.getFuerza());
+				aux.setSiglas(carta.getEdicion().getSiglas());
+								
+				deckCompleto.add(aux);
+				c++;
+			}
 		}
-
+		
 		return "decks";
 	}
+		
 
 	public Integer getIdSel() {
 		return idSel;
