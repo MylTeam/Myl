@@ -156,6 +156,13 @@
 	<input type="button" id="btnEnviar" onclick="enviar()" value="Guardar" class="ui-button ui-widget ui-state-default ui-corner-all"/>
 	</td>
 	</tr>
+	<tr>
+	<td>Formato:</td>
+		<td>
+		<s:select id="slcFormato" name="model.formatoId"
+					list="formatos" listValue="nombre" listKey="id" headerValue="Seleccione" headerKey="-1"/>
+		</td>
+	</tr>
 	</table>
 		
 	</td>

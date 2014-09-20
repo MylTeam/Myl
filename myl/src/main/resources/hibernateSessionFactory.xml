@@ -62,6 +62,7 @@
 			<list>
 				<value>com.myl.modelo.Usuario</value>
 				<value>com.myl.modelo.Edicion</value>
+				<value>com.myl.modelo.Formato</value>
 				<value>com.myl.modelo.Carta</value>
 				<value>com.myl.modelo.Deck</value>
 				<value>com.myl.modelo.DeckCarta</value>

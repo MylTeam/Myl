@@ -22,8 +22,10 @@ public class Deck {
 	private Integer deckId;
 	private String deckNombre;
 	private Integer usuarioId;
+	private Integer formatoId;
 
 	private Usuario usuario;
+	private Formato formato;
 	private List<Carta> cartas;
 	private List<DeckCarta> deckCartas;
 
@@ -56,6 +58,15 @@ public class Deck {
 		this.usuarioId = usuarioId;
 	}
 
+	@Column(name = "FormatoId")
+	public Integer getFormatoId() {
+		return formatoId;
+	}
+
+	public void setFormatoId(Integer formatoId) {
+		this.formatoId = formatoId;
+	}
+
 	@ManyToOne
 	@JoinColumns({ @JoinColumn(name = "UsuarioId", referencedColumnName = "UsuarioId", insertable = false, updatable = false) })
 	public Usuario getUsuario() {
@@ -64,6 +75,16 @@ public class Deck {
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}
+
+	@ManyToOne
+	@JoinColumns({ @JoinColumn(name = "FormatoId", referencedColumnName = "FormatoId", insertable = false, updatable = false) })
+	public Formato getFormato() {
+		return formato;
+	}
+
+	public void setFormato(Formato formato) {
+		this.formato = formato;
 	}
 
 	@ManyToMany

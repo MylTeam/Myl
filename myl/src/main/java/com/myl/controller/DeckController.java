@@ -18,17 +18,20 @@ import com.myl.modelo.Carta;
 import com.myl.modelo.Deck;
 import com.myl.modelo.DeckCarta;
 import com.myl.modelo.Edicion;
+import com.myl.modelo.Formato;
 import com.myl.modelo.Usuario;
 import com.myl.negocio.CartaNegocio;
 import com.myl.negocio.DeckCartaNegocio;
 import com.myl.negocio.DeckNegocio;
 import com.myl.negocio.EdicionNegocio;
+import com.myl.negocio.FormatoNegocio;
 import com.myl.negocio.UsuarioNegocio;
 import com.myl.util.NombreObjetosSesion;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
+import com.opensymphony.xwork2.validator.annotations.IntRangeFieldValidator;
 import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
 import com.opensymphony.xwork2.validator.annotations.Validations;
 import com.opensymphony.xwork2.validator.annotations.ValidatorType;
@@ -59,6 +62,7 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>,
 	private DeckNegocio deckNegocio;
 	private DeckCartaNegocio deckCartaNegocio;
 	private UsuarioNegocio usuarioNegocio;
+	private FormatoNegocio formatoNegocio;
 
 	private List<String> razas;
 	private List<String> tipos;
@@ -70,6 +74,7 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>,
 	private List<Deck> decks;
 
 	private Deck deckAux;
+	private List<Formato> formatos;
 	private List<DeckCarta> deck;
 	private List<Carta> deckCompleto;
 
@@ -87,6 +92,7 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>,
 		ediciones = edicionNegocio.findAll();
 		razas = cartaNegocio.findByCriteria();
 		tipos = cartaNegocio.findByCriteriaTipo();
+		formatos = formatoNegocio.findAll();
 
 		return "editNew";
 	}
@@ -102,7 +108,9 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>,
 	}
 
 	@Validations(requiredStrings = {
-			@RequiredStringValidator(fieldName = "model.deckNombre", type = ValidatorType.FIELD, key = "Introduce un nombre para el mazo")
+			@RequiredStringValidator(fieldName = "model.deckNombre", type = ValidatorType.FIELD, key = "Introduce un nombre para el mazo")},
+			intRangeFields = {
+			@IntRangeFieldValidator(fieldName = "model.formatoId", type = ValidatorType.FIELD, message = "Selecciona el formato", min = "1")
 			})
 	public HttpHeaders create() {
 		jsonProcessor = new Gson();
@@ -130,7 +138,8 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>,
 		ediciones = edicionNegocio.findAll();
 		razas = cartaNegocio.findByCriteria();
 		tipos = cartaNegocio.findByCriteriaTipo();
-
+		formatos = formatoNegocio.findAll();
+		
 		return "edit";
 	}
 
@@ -145,6 +154,11 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>,
 		}
 	}
 
+	@Validations(requiredStrings = {
+			@RequiredStringValidator(fieldName = "model.deckNombre", type = ValidatorType.FIELD, key = "Introduce un nombre para el mazo")},
+			intRangeFields = {
+			@IntRangeFieldValidator(fieldName = "model.formatoId", type = ValidatorType.FIELD, message = "Selecciona el formato", min = "1")
+			})
 	public String update() {
 		jsonProcessor = new Gson();
 		Type listType = new TypeToken<List<DeckCarta>>() {
@@ -414,6 +428,22 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>,
 
 	public void setTipos(List<String> tipos) {
 		this.tipos = tipos;
+	}
+
+	public List<Formato> getFormatos() {
+		return formatos;
+	}
+
+	public void setFormatos(List<Formato> formatos) {
+		this.formatos = formatos;
+	}
+
+	public FormatoNegocio getFormatoNegocio() {
+		return formatoNegocio;
+	}
+
+	public void setFormatoNegocio(FormatoNegocio formatoNegocio) {
+		this.formatoNegocio = formatoNegocio;
 	}
 
 }
