@@ -55,7 +55,9 @@ public class DeckNegocio {
 	}
 
 	public String isCorrectFormat(List<DeckCarta> deckCartas, Integer formatoId) {
-		String issues="";
+		String cards="";
+		String edicionesNombre="";
+		String issue="";
 		
 		if(formatoId!=-1){
 		List<Carta> deckTest = new ArrayList<Carta>();
@@ -72,6 +74,7 @@ public class DeckNegocio {
 		List<Integer> ediciones=new ArrayList<Integer>();		
 		for(Edicion edicion:formato.getEdiciones()){
 			ediciones.add(edicion.getId());
+			edicionesNombre=edicionesNombre+edicion.getNombre()+", ";			
 		}
 		
 		for(Carta carta:deckTest){			
@@ -79,13 +82,13 @@ public class DeckNegocio {
 				LOGGER.debug("Ok: "+carta.getNombre());
 			}else{
 				LOGGER.debug("Error: "+carta.getNombre());
-				issues=issues+carta.getNombre()+", ";
+				cards=cards+carta.getNombre()+", ";
 			}
 		}
-		
+		issue="Las cartas "+cards+"no pertenecen al formato seleccionado. \nLas ediciones permitidas para este formato son: "+edicionesNombre;
 		}
 
-		return issues;
+		return issue;
 	}
 
 	public DeckDao getDeckDao() {

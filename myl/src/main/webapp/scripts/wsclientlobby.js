@@ -236,7 +236,7 @@ var wsclient = (function() {
 
     function createOnlineUser(userName,format) {
         var link = $(document.createElement('a'));
-        link.html(userName+'<div style="color:#0000FF">Deck: '+format+'</div>');        
+        link.html(userName+'<div style="color:#0000FF">Formato de Mazo: '+format+'</div>');        
         link.click(function(){
             showConversation(userName);
             

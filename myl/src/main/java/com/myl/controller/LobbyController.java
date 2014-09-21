@@ -34,11 +34,12 @@ public class LobbyController extends ActionSupport {
 	public HttpHeaders index() {
 		usuario=(Usuario) ActionContext.getContext().getSession().get(NombreObjetosSesion.USUARIO);
 		setUsername(usuario.getLogin());
-		setFormat(deckNegocio.findById(usuario.getDeckPred()).getFormato().getNombre());
+		
 		
 		if(usuario.getDeckPred()==0){					
 			return new DefaultHttpHeaders("nodeck").disableCaching();
 		}else{
+			setFormat(deckNegocio.findById(usuario.getDeckPred()).getFormato().getNombre());
 			return new DefaultHttpHeaders("index").disableCaching();
 		}
 	}

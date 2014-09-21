@@ -107,7 +107,7 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>,
 
 		String res=deckNegocio.isCorrectFormat(deckCartas, model.getFormatoId());
 		if(!res.isEmpty()){
-			addActionError("Las cartas "+res+" no pertenecen al formato seleccionado.");
+			addActionError(res);
 		}
 		
 		if (hasFieldErrors() || hasActionErrors()) {
@@ -167,7 +167,7 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>,
 		
 		String res=deckNegocio.isCorrectFormat(deckCartas, model.getFormatoId());
 		if(!res.isEmpty()){
-			addActionError("Las cartas "+res+"no pertenecen al formato seleccionado.");
+			addActionError(res);
 		}
 		
 		if (hasFieldErrors() || hasActionErrors()) {
