@@ -9,3 +9,4 @@ v1.2
 	-Se agrega la restricción para los formatos de mazo.
 	-Se agrega la etiqueta de formato de mazo en el chat.
 	-BugFix: Se corrige el error al intentar eliminar un mazo.
+	
