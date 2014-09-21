@@ -5,5 +5,7 @@ v1.1
 	-Agregada la opción para enviar comentarios
 	
 v1.2
-	-Se corrige el armado de los decks, manteniendo el estado actual cuando se presenta un error al guardar.
-	-Se agrega la restricción para los formatos de deck
+	-Se corrige el armado de los mazos, manteniendo el estado actual cuando se presenta un error al guardar.
+	-Se agrega la restricción para los formatos de mazo.
+	-Se agrega la etiqueta de formato de mazo en el chat.
+	-BugFix: Se corrige el error al intentar eliminar un mazo.

@@ -10,6 +10,7 @@ import org.apache.struts2.rest.HttpHeaders;
 
 import com.myl.modelo.Usuario;
 import com.myl.negocio.CartaNegocio;
+import com.myl.negocio.DeckNegocio;
 import com.myl.util.NombreObjetosSesion;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -27,12 +28,13 @@ public class LobbyController extends ActionSupport {
 	private String format;
 	
 	private CartaNegocio cartaNegocio;
-		
+	private DeckNegocio	deckNegocio;
+	
 	@SkipValidation
 	public HttpHeaders index() {
 		usuario=(Usuario) ActionContext.getContext().getSession().get(NombreObjetosSesion.USUARIO);
 		setUsername(usuario.getLogin());
-		setFormat("formato prueba");
+		setFormat(deckNegocio.findById(usuario.getDeckPred()).getFormato().getNombre());
 		
 		if(usuario.getDeckPred()==0){					
 			return new DefaultHttpHeaders("nodeck").disableCaching();
@@ -88,6 +90,16 @@ public class LobbyController extends ActionSupport {
 
 	public void setFormat(String format) {
 		this.format = format;
+	}
+
+
+	public DeckNegocio getDeckNegocio() {
+		return deckNegocio;
+	}
+
+
+	public void setDeckNegocio(DeckNegocio deckNegocio) {
+		this.deckNegocio = deckNegocio;
 	}
 
 }
