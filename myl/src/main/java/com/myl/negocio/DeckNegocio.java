@@ -85,7 +85,9 @@ public class DeckNegocio {
 				cards=cards+carta.getNombre()+", ";
 			}
 		}
-		issue="Las cartas "+cards+"no pertenecen al formato seleccionado. \nLas ediciones permitidas para este formato son: "+edicionesNombre;
+		if(!cards.isEmpty()){
+			issue="Las cartas "+cards+"no pertenecen al formato seleccionado. \nLas ediciones permitidas para este formato son: "+edicionesNombre;
+		}
 		}
 
 		return issue;
