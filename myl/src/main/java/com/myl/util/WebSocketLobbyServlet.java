@@ -40,7 +40,8 @@ public class WebSocketLobbyServlet extends WebSocketServlet {
     protected StreamInbound createWebSocketInbound(String subProtocol, HttpServletRequest request) {
         final String connectionId = request.getSession().getId();
         final String userName = request.getParameter("userName");
-        return new ChatConnection(connectionId, userName);
+        final String format = request.getParameter("format");
+        return new ChatConnection(connectionId,format, userName);
     }
 
     private static class ChatConnection extends MessageInbound {
@@ -48,26 +49,29 @@ public class WebSocketLobbyServlet extends WebSocketServlet {
         private final String connectionId;
 
         private final String userName;
+        
+        private final String format;
 
         private final Gson jsonProcessor;
 
-        private ChatConnection(String connectionId, String userName) {
+        private ChatConnection(String connectionId, String format, String userName) {
             this.connectionId = connectionId;
             this.userName = userName;
+            this.format = format;
             this.jsonProcessor = new Gson();
         }
 
         @Override
         protected void onOpen(WsOutbound outbound) {
             sendConnectionInfo(outbound);
-            sendStatusInfoToOtherUsers(new StatusInfoMessage(userName, StatusInfoMessage.STATUS.CONNECTED));
+            sendStatusInfoToOtherUsers(new StatusInfoMessage(userName, format, StatusInfoMessage.STATUS.CONNECTED));
             LOGGER.info("El usuario "+userName+" ha entrado al lobby");
             CONNECTIONS.put(connectionId, this);
         }
 
         @Override
         protected void onClose(int status) {
-            sendStatusInfoToOtherUsers(new StatusInfoMessage(userName, StatusInfoMessage.STATUS.DISCONNECTED));
+            sendStatusInfoToOtherUsers(new StatusInfoMessage(userName, format, StatusInfoMessage.STATUS.DISCONNECTED));
             LOGGER.info("El usuario "+userName+" ha salido del lobby");
             CONNECTIONS.remove(connectionId);
         }
@@ -94,10 +98,14 @@ public class WebSocketLobbyServlet extends WebSocketServlet {
         public String getUserName() {
             return userName;
         }
+        public String getFormat() {
+            return format;
+        }
 
         private void sendConnectionInfo(WsOutbound outbound) {
             final List<String> activeUsers = getActiveUsers();
-            final ConnectionInfoMessage connectionInfoMessage = new ConnectionInfoMessage(userName, activeUsers);
+            final List<String> formats = getFormats();
+            final ConnectionInfoMessage connectionInfoMessage = new ConnectionInfoMessage(userName,activeUsers,formats);
             try {
                 outbound.writeTextMessage(CharBuffer.wrap(jsonProcessor.toJson(connectionInfoMessage)));
             } catch (IOException e) {
@@ -114,6 +122,17 @@ public class WebSocketLobbyServlet extends WebSocketServlet {
             	LOGGER.error("No hay usuarios activos");
             }
             return activeUsers;
+        }
+        
+        private List<String> getFormats() {
+            final List<String> formats = new ArrayList<String>();
+            for (ChatConnection connection : CONNECTIONS.values()) {
+            	formats.add(connection.getFormat());
+            }
+            if(formats.isEmpty()){
+            	LOGGER.error("No hay usuarios activos");
+            }
+            return formats;
         }
 
         private void sendStatusInfoToOtherUsers(StatusInfoMessage message) {

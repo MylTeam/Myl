@@ -2,16 +2,16 @@ var wsclient = (function() {
 
     var ws = null;
     var wsURI = 'ws://' + location.host  + '/myl/lobbyws';
-    function connect(userName) {    	
+    function connect(userName,format) {    	
     	
         if(!userName || userName == '') {
             return;
         }
 
         if ('WebSocket' in window) {
-            ws = new WebSocket(wsURI + '?userName=' + userName);
+            ws = new WebSocket(wsURI + '?userName=' + userName+"&format="+format);
         } else if ('MozWebSocket' in window) {
-            ws = new MozWebSocket(wsURI + '?userName=' + userName);
+            ws = new MozWebSocket(wsURI + '?userName=' + userName+"&format="+format);
         } else {
             alert('Tu navegador no soporta WebSockets');
             return;
@@ -44,14 +44,15 @@ var wsclient = (function() {
                 }
             } else if (message.statusInfo) {
                 if (message.statusInfo.status == 'CONNECTED') {
-                    addOnlineUser(message.statusInfo.user);
+                    addOnlineUser(message.statusInfo.user,message.statusInfo.format);
                 } else if (message.statusInfo.status == 'DISCONNECTED') {
                     removeOnlineUser(message.statusInfo.user);
                 }
             } else if (message.connectionInfo) {
                 var activeUsers = message.connectionInfo.activeUsers;
+                var formats = message.connectionInfo.formats;
                 for (var i=0; i<activeUsers.length; i++) {
-                    addOnlineUser(activeUsers[i]);
+                    addOnlineUser(activeUsers[i],formats[i]);
                 }
             } else if (message.cardInfo){
             	processCard(message.cardInfo.from, message.cardInfo.message, message.cardInfo.carta,message.cardInfo.origen,message.cardInfo.destino);
@@ -220,8 +221,8 @@ var wsclient = (function() {
     }
 
     /********* usuarios conectados *******/
-    function addOnlineUser(userName) {
-        var newOnlineUser = createOnlineUser(userName);        
+    function addOnlineUser(userName,format) {
+        var newOnlineUser = createOnlineUser(userName,format);        
         newOnlineUser.appendTo($('#onlineUsers'));        
     }
 
@@ -233,9 +234,9 @@ var wsclient = (function() {
         });
     }
 
-    function createOnlineUser(userName) {
+    function createOnlineUser(userName,format) {
         var link = $(document.createElement('a'));
-        link.html(userName);
+        link.html(userName+'<div style="color:#0000FF">Deck: '+format+'</div>');        
         link.click(function(){
             showConversation(userName);
             

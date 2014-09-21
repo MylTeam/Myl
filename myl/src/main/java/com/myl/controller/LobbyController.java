@@ -24,6 +24,7 @@ public class LobbyController extends ActionSupport {
 	private Integer idSel;
 	private Usuario usuario;
 	private String username;
+	private String format;
 	
 	private CartaNegocio cartaNegocio;
 		
@@ -31,6 +32,7 @@ public class LobbyController extends ActionSupport {
 	public HttpHeaders index() {
 		usuario=(Usuario) ActionContext.getContext().getSession().get(NombreObjetosSesion.USUARIO);
 		setUsername(usuario.getLogin());
+		setFormat("formato prueba");
 		
 		if(usuario.getDeckPred()==0){					
 			return new DefaultHttpHeaders("nodeck").disableCaching();
@@ -76,6 +78,16 @@ public class LobbyController extends ActionSupport {
 
 	public void setCartaNegocio(CartaNegocio cartaNegocio) {
 		this.cartaNegocio = cartaNegocio;
+	}
+
+
+	public String getFormat() {
+		return format;
+	}
+
+
+	public void setFormat(String format) {
+		this.format = format;
 	}
 
 }
