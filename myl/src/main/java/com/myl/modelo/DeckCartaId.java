@@ -24,6 +24,13 @@ public class DeckCartaId implements java.io.Serializable {
 	public boolean equals(Object obj) {
 		return EqualsBuilder.reflectionEquals(this, obj, "");
 	}
+	
+	@Override
+	public int hashCode() {
+
+		return super.hashCode();
+	}
+	
 	@Column(name = "DeckId", nullable = false)			
 	public Integer getDeckId() {
 		return deckId;

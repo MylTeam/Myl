@@ -254,7 +254,6 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>,
 		ActionContext.getContext().getSession().remove("deckTmp");
 		
 		if (deckCartas==null && idSel!=null ) {
-			System.out.println("DeckIdSel");
 			deckAux = deckNegocio.findById(idSel);
 			int c = 0;
 			for (Carta carta : deckAux.getCartas()) {
@@ -274,7 +273,6 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>,
 				c++;
 			}
 		}else{
-			System.out.println("DeckTmp");
 			int c=0;
 			for(DeckCarta deckCarta : deckCartas){
 				Carta carta=cartaNegocio.findById(deckCarta.getCartaId());

@@ -37,6 +37,12 @@ public class FormatoEdicion {
 	public boolean equals(Object obj) {
 		return EqualsBuilder.reflectionEquals(this, obj, "edicion", "formato");
 	}
+	
+	@Override
+	public int hashCode() {
+
+		return super.hashCode();
+	}
 
 	@Column(name = "EdicionId", insertable = false, updatable = false)
 	public Integer getEdicionId() {

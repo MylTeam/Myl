@@ -24,6 +24,13 @@ public class FormatoEdicionId implements java.io.Serializable {
 	public boolean equals(Object obj) {
 		return EqualsBuilder.reflectionEquals(this, obj, "");
 	}
+	
+	@Override
+	public int hashCode() {
+
+		return super.hashCode();
+	}
+	
 	@Column(name = "EdicionId", nullable = false)			
 	public Integer getEdicionId() {
 		return edicionId;

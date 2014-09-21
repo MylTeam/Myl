@@ -16,12 +16,7 @@
 		
 	</properties>
 
-	<repositories>
-  	<repository>
-  		<id>Java.Net</id>
-  		<url>http://download.java.net/maven/2/</url>
-  	</repository>
-  </repositories>
+
   
 	<build>
 		<finalName>myl</finalName>
@@ -46,10 +41,10 @@
 				<artifactId>tomcat7-maven-plugin</artifactId>
 				<version>2.1</version>
 				<configuration>
-  					<url>http://50.62.23.86:8080/manager/text</url>
-					<server>mylprod</server>
-<!--  					<url>http://localhost:8080/manager/text</url>
-					<server>localhost</server> -->
+<!--   					<url>http://50.62.23.86:8080/manager/text</url>
+					<server>mylprod</server> -->
+  					<url>http://localhost:8080/manager/text</url>
+					<server>localhost</server>
 					<path>/myl</path>
 				</configuration>
 			</plugin>
@@ -165,12 +160,12 @@
 			<artifactId>struts2-jquery-grid-plugin</artifactId>
 			<version>3.6.0</version>
 		</dependency>
-		<dependency>
+<!--  		<dependency>
 			<groupId>commons-httpclient</groupId>
 			<artifactId>commons-httpclient</artifactId>
 			<version>3.1</version>
 			<scope>test</scope>
-		</dependency>
+		</dependency> -->
 
 <!-- Plugin que permite hacer el log de las sentencias SQL completas que 
 			son enviadas a la BD -->
@@ -309,20 +304,20 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
-		<dependency>
+		<!-- <dependency>
 			<groupId>com.kenai.nbpwr</groupId>
 			<artifactId>javax-inject</artifactId>
 			<version>1.0-201002241208</version>
 			<type>nbm</type>
 			<scope>compile</scope>
-		</dependency>
-		<dependency>
+		</dependency> -->
+		<!-- <dependency>
 			<groupId>taglibs</groupId>
 			<artifactId>log</artifactId>
 			<version>1.0</version>
 			<type>jar</type>
 			<scope>compile</scope>
-		</dependency>
+		</dependency> -->
 		<dependency>
 			<groupId>javax.servlet.jsp</groupId>
 			<artifactId>jsp-api</artifactId>

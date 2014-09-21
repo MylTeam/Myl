@@ -6,6 +6,8 @@ import java.util.List;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.myl.dao.DeckDao;
@@ -18,6 +20,8 @@ import com.myl.modelo.Formato;
 @Singleton
 @Named("deckNegocio")
 public class DeckNegocio {
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(DeckNegocio.class);
 	private DeckDao deckDao;
 	private CartaNegocio cartaNegocio;
 	private Carta carta;
@@ -72,9 +76,9 @@ public class DeckNegocio {
 		
 		for(Carta carta:deckTest){			
 			if(ediciones.contains(carta.getIdEdicion())){
-				System.out.println("OK: "+carta.getNombre());
+				LOGGER.debug("Ok: "+carta.getNombre());
 			}else{
-				System.out.println("Error: "+carta.getNombre());
+				LOGGER.debug("Error: "+carta.getNombre());
 				issues=issues+carta.getNombre()+", ";
 			}
 		}

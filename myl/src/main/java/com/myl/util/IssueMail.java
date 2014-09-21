@@ -28,7 +28,6 @@ public class IssueMail {
 
 		message.setFrom(from);
 		message.setTo("mylzupport@gmail.com");
-//		message.setBcc("csantiagoalva@gmail.com");
 		message.setSubject(subject);
 		message.setText(msg);
 		mailSender.send(message);
