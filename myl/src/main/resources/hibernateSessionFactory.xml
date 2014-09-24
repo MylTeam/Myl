@@ -31,6 +31,15 @@
 				<prop key="hibernate.connection.useUnicode">true</prop>
             	<prop key="hibernate.connection.characterEncoding">UTF-8</prop>
             	<prop key="hibernate.connection.charSet">UTF-8</prop>
+            	<prop key="connection.autoReconnect"> true </prop> 
+				<prop key="connection.autoReconnectForPools"> true </prop> 
+				<prop key="connection.is-connection-validation-required"> true </prop>
+            	
+            	<prop key="hibernate.c3p0.min_size">5</prop>            	
+         		<prop key="hibernate.c3p0.max_size">20</prop>
+         		<prop key="hibernate.c3p0.timeout">1000</prop>
+         		<prop key="hibernate.c3p0.max_statements">50</prop>
+         		
 				<!-- Define el dialecto de SQL a ocupar -->
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect
 				</prop>
