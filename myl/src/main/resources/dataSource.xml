@@ -23,7 +23,7 @@
 	</bean>
 
 	<!-- Representa la instancia del pool de conexiones -->
-	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+	<bean id="c3p0dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
 		destroy-method="close">
 
 		<!-- Se ocupa este driver para hacer el log de las sentencias completas 
@@ -65,5 +65,7 @@
 		<!-- Cuántas conexiones se pondrán disponibles en el pool cada vez que 
 			este se quede sin conexiones -->
 		<property name="acquireIncrement" value="${acquireIncrement}" />
+		
+		<property name="idleConnectionTestPeriod" value="${idleConnectionTestPeriod}" />		
 	</bean>
 </beans>
