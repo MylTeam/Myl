@@ -57,7 +57,7 @@
 							<td style="width: 15%">${formato.nombre}
 							
 							</td>
-							<td style="text-align: center;width: 18%"><input type="radio" name="deckpred" onclick="setSelection()" value="${deckId}"/></td>
+							<td style="text-align: center;width: 18%"><input id="deckpred" type="radio" name="deckpred" onclick="setSelection(this.value)" value="${deckId}"/></td>
 							<td style="text-align: center;width: 18%">
 									<a href="${pageContext.request.contextPath}/deck/${deckId}/edit">
 									<img height="40" width="40" src="${pageContext.request.contextPath}/images/buttons/editfeather.png" title="Modificar deck"/></a>

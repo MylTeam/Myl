@@ -160,12 +160,12 @@
 			<artifactId>struts2-jquery-grid-plugin</artifactId>
 			<version>3.6.0</version>
 		</dependency>
-<!--  		<dependency>
+  		<dependency>
 			<groupId>commons-httpclient</groupId>
 			<artifactId>commons-httpclient</artifactId>
 			<version>3.1</version>
 			<scope>test</scope>
-		</dependency> -->
+		</dependency>
 
 <!-- Plugin que permite hacer el log de las sentencias SQL completas que 
 			son enviadas a la BD -->
@@ -304,13 +304,13 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
-		<!-- <dependency>
+		<dependency>
 			<groupId>com.kenai.nbpwr</groupId>
 			<artifactId>javax-inject</artifactId>
 			<version>1.0-201002241208</version>
 			<type>nbm</type>
 			<scope>compile</scope>
-		</dependency> -->
+		</dependency>
 		<!-- <dependency>
 			<groupId>taglibs</groupId>
 			<artifactId>log</artifactId>
