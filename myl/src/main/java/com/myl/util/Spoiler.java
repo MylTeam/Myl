@@ -9,32 +9,37 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.myl.modelo.Carta;
+import com.myl.modelo.Edicion;
 import com.myl.negocio.CartaNegocio;
+import com.myl.negocio.EdicionNegocio;
 
 public class Spoiler {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(Spoiler.class);
-	static CartaNegocio cartaNegocio;
-		
-	private Spoiler(){
+	
+	
+
+	public Spoiler(){
 		
 	}
-		public static void clean() throws IOException {
-
+		public void clean() throws IOException {
+			System.out.println("clean");
 			try {							
-				File f=new File("C:/Users/Mariana/Documents/prueba/");
+				File f=new File("C:/Users/Carlos Santiago/Documents/prueba/");
 				for(File file:f.listFiles()){
 					if(file.isFile()){
 					String filename=file.getName();
 					LOGGER.debug(filename);
 					
-				 BufferedReader in4 = new BufferedReader(new FileReader("C:/Users/Mariana/Documents/prueba/"+filename));
-			      PrintWriter out1 = new PrintWriter(new BufferedWriter(new FileWriter("C:/Users/Mariana/Documents/prueba/spoilers/s-"+filename)));			      
+				 BufferedReader in4 = new BufferedReader(new FileReader("C:/Users/Carlos Santiago/Documents/prueba/"+filename));
+			      PrintWriter out1 = new PrintWriter(new BufferedWriter(new FileWriter("C:/Users/Carlos Santiago/Documents/prueba/spoilers/s-"+filename)));			      
 			      String s = null;
 			      while((s = in4.readLine()) != null ){ 
 
@@ -95,10 +100,12 @@ public class Spoiler {
 
 		}
 		
-		public static void loadData(CartaNegocio cartaNegocio){			
-			File f = new File("C:/Users/cdt/Documents/myl-big/spoilers/");
+		public void loadData(CartaNegocio cartaNegocio){			
+			File f = new File("C:/Users/Carlos Santiago/Documents/prueba/spoilers/");
 			
 			Carta carta;
+			
+			List<Carta> cartas=new ArrayList<Carta>();
 
 			for (File file : f.listFiles()) {
 				if (file.isFile()) {
@@ -106,13 +113,14 @@ public class Spoiler {
 
 					try {
 						BufferedReader in = new BufferedReader(new FileReader(
-								"C:/Users/cdt/Documents/myl-big/spoilers/"
+								"C:/Users/Carlos Santiago/Documents/prueba/spoilers/"
 										+ filename));
 
 						String str = filename.replaceAll("\\D+", "");
 						Integer noEdicion=Integer.valueOf(str);
 						LOGGER.info(noEdicion.toString());
-
+						
+						
 						String s = null;
 						while ((s = in.readLine()) != null) {
 							
@@ -151,9 +159,32 @@ public class Spoiler {
 								}
 								LOGGER.info("------------------Edición "+noEdicion+" ---------------");
 								carta.setIdEdicion(noEdicion);
-								cartaNegocio.save(carta);
+								
+								cartas.add(carta);
+
 							}
 						}
+						LOGGER.info("Total de cartas: "+cartas.size());
+						
+						//----------Ordena las cartas
+						for(int i=1;i<cartas.size();i++){
+							for(int j=0;j<cartas.size()-i;j++){
+								if(Integer.valueOf(cartas.get(j).getNumero())>Integer.valueOf(cartas.get(j+1).getNumero())){
+									Carta aux=cartas.get(j);
+									cartas.set(j, cartas.get(j+1));
+									cartas.set(j+1, aux);
+								}								
+							}
+						}
+						LOGGER.info("Se ordenaron "+cartas.size()+" cartas");
+						
+						for(Carta aux:cartas){							
+							LOGGER.info("Guardando: "+aux.getNumero()+" - "+aux.getNombre());
+							cartaNegocio.save(aux);
+						}
+						LOGGER.info("Fin");
+						
+						
 					} catch (FileNotFoundException e) {
 						LOGGER.error("Error",e);						
 					} catch (IOException e) {
@@ -163,7 +194,5 @@ public class Spoiler {
 			}
 
 		}
-
-	
 
 }

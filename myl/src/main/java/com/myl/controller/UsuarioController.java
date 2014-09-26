@@ -1,5 +1,6 @@
 package com.myl.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.inject.Named;
@@ -17,11 +18,13 @@ import ch.qos.logback.core.Context;
 
 import com.myl.modelo.Deck;
 import com.myl.modelo.Usuario;
+import com.myl.negocio.CartaNegocio;
 import com.myl.negocio.DeckNegocio;
+import com.myl.negocio.EdicionNegocio;
 import com.myl.negocio.UsuarioNegocio;
 import com.myl.util.IssueMail;
-
 import com.myl.util.NombreObjetosSesion;
+import com.myl.util.Spoiler;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
@@ -43,8 +46,20 @@ public class UsuarioController extends ActionSupport implements ModelDriven<Usua
 	private String confirmPass;
 	private Integer deckId;
 	
+	private CartaNegocio cartaNegocio;
+	
 	@SkipValidation
 	public HttpHeaders index() {
+		
+//		try {
+//			Spoiler.clean();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		Spoiler spoiler=new Spoiler();
+		spoiler.loadData(cartaNegocio);
+		
 		usuario=(Usuario) ActionContext.getContext().getSession().get(NombreObjetosSesion.USUARIO);		
 		idSel=usuario.getIdUsuario();
 
@@ -170,6 +185,16 @@ public class UsuarioController extends ActionSupport implements ModelDriven<Usua
 	public void setDeckId(Integer deckId) {
 		this.deckId = deckId;
 	}
+
+	public CartaNegocio getCartaNegocio() {
+		return cartaNegocio;
+	}
+
+	public void setCartaNegocio(CartaNegocio cartaNegocio) {
+		this.cartaNegocio = cartaNegocio;
+	}
+
+
 
 }
 

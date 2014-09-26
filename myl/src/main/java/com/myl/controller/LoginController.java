@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import com.myl.modelo.Usuario;
 import com.myl.negocio.UsuarioNegocio;
 import com.myl.util.NombreObjetosSesion;
+import com.myl.util.Spoiler;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -45,6 +46,8 @@ public class LoginController extends ActionSupport implements
 	@Override
 	public String execute() throws Exception {
 
+		
+		
 		usuarioSel = new Usuario();
 		List<Usuario> usuarios = null;
 		usuarioSel.setLogin(userId);
