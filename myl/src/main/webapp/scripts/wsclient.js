@@ -45,8 +45,9 @@ var wsclient = (function() {
                 if (message.statusInfo.status == 'CONNECTED') {
                     addOnlineUser(message.statusInfo.user);
                     
-                } else if (message.statusInfo.status == 'DISCONNECTED') {
+                } else if (message.statusInfo.status == 'DISCONNECTED') {                	
                     removeOnlineUser(message.statusInfo.user);
+//                    alert("El usuario "+message.statusInfo.user+" ha salido de la partida");
                 }
             } else if (message.connectionInfo) {
                 var activeUsers = message.connectionInfo.activeUsers;

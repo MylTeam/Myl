@@ -16,7 +16,7 @@ public class StatusInfoMessage {
 		return statusInfo;
 	}
 
-	class StatusInfo {
+	public class StatusInfo {
 
 		private final String user;
 		private final String format;

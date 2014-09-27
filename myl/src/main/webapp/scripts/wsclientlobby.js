@@ -40,7 +40,8 @@ var wsclient = (function() {
                 }else if(message.messageInfo.message=="plduelojspresp"){
                 	var user = document.getElementById('userName').value;
                 	var url="http://"+location.host+$("#hidden").val()+"/chat?user1="+user+"&user2="+message.messageInfo.from;
-                	window.location=url;
+//                	window.location=url;
+                	window.open(url,"Duelo","height=" + screen.height + "-200,width=" + screen.width+"-200");
                 }
             } else if (message.statusInfo) {
                 if (message.statusInfo.status == 'CONNECTED') {
@@ -62,6 +63,7 @@ var wsclient = (function() {
 
     function disconnect() {
         if (ws != null) {
+        	alert("onDisconnect");
             ws.close();
             ws = null;
         }
@@ -205,7 +207,8 @@ var wsclient = (function() {
         	var url="http://"+location.host+$("#hidden").val()+"/chat?user1="+user+"&user2="+from;
         	var message = "plduelojspresp";
             toChat(user, from, message);
-        	window.location=url;
+//        	window.location=url;
+            window.open(url,"Duelo","height=" + screen.height + "-200,width=" + screen.width+"-200");
         });
         btn.appendTo(messages);
         messages.scrollTop(messages[0].scrollHeight);

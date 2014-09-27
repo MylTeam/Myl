@@ -65,6 +65,7 @@ public class WebSocketCharServlet extends WebSocketServlet {
 
         @Override
         protected void onOpen(WsOutbound outbound) {
+        	LOGGER.info("Abriendo la conexión");
             sendConnectionInfo(outbound);
             sendStatusInfoToOtherUsers(new StatusInfoMessage(userName,format, StatusInfoMessage.STATUS.CONNECTED));
             CONNECTIONS.put(connectionId, this);
@@ -72,6 +73,7 @@ public class WebSocketCharServlet extends WebSocketServlet {
 
         @Override
         protected void onClose(int status) {
+        	LOGGER.info("Cerrando la conexión, status: "+status);
             sendStatusInfoToOtherUsers(new StatusInfoMessage(userName,format, StatusInfoMessage.STATUS.DISCONNECTED));
             CONNECTIONS.remove(connectionId);
         }
@@ -144,8 +146,9 @@ public class WebSocketCharServlet extends WebSocketServlet {
 
         private void sendStatusInfoToOtherUsers(StatusInfoMessage message) {
             final Collection<ChatConnection> otherUsersConnections = getAllChatConnectionsExceptThis();
-            for (ChatConnection connection : otherUsersConnections) {
+            for (ChatConnection connection : otherUsersConnections) {            	
                 try {
+                	LOGGER.info("Notificando estado a: "+connection.getUserName()+" Mensaje: "+message.getStatusInfo().getStatus());
                     connection.getWsOutbound().writeTextMessage(CharBuffer.wrap(jsonProcessor.toJson(message)));
                 } catch (IOException e) {
                 	LOGGER.error("No se pudo enviar el mensaje", e);
