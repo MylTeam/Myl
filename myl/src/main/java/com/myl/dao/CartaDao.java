@@ -27,7 +27,7 @@ public class CartaDao extends HibernateDaoSupport {
 		if (entity.getId() != null) {
 			entity = getHibernateTemplate().merge(entity);
 		}
-		getSession().saveOrUpdate(entity);
+		getSession().saveOrUpdate(entity);		
 		return entity;
 	}
 

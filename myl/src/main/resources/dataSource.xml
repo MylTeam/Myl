@@ -65,7 +65,7 @@
 		<!-- Cuántas conexiones se pondrán disponibles en el pool cada vez que 
 			este se quede sin conexiones -->
 		<property name="acquireIncrement" value="${acquireIncrement}" />
-		
+				
 		<property name="idleConnectionTestPeriod" value="${idleConnectionTestPeriod}" />		
 	</bean>
 </beans>

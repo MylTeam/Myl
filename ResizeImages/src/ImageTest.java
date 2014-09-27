@@ -16,16 +16,17 @@ public class ImageTest {
 	private static final int IMG_HEIGHT = 70;
  
 	public static void main(String [] args){
- 
+		System.out.println("inicio");
 	try{
  
-		String ruta="C:/Users/cdt/Documents/mylimagestest/";
+		String ruta="C:/Users/Carlos Santiago/Documents/mylimagestest/";
 		File f=new File(ruta+"images/");
-				
+				System.out.println(ruta);
 		for(File file:f.listFiles()){
 			if(file.isFile()){
-				
+				System.out.println("isFile");
 			}else if(file.isDirectory()){
+				System.out.println("isDirectory");
 				File c1=new File(ruta+"thumbs1/"+file.getName());
 				File c2=new File(ruta+"thumbs2/"+file.getName());
 				File c3=new File(ruta+"thumbs3/"+file.getName());
@@ -40,8 +41,12 @@ public class ImageTest {
 					c3.mkdirs();
 				}
 				
+				
 				for(File img:file.listFiles()){
 					if(img.isFile()){
+						System.out.println(img.getName());
+						String nameAux=img.getName().substring(4, 7);
+						img.renameTo(new File(ruta+nameAux));
 						
 						BufferedImage originalImage = ImageIO.read(img);
 						int type = originalImage.getType() == 0? BufferedImage.TYPE_INT_ARGB : originalImage.getType();

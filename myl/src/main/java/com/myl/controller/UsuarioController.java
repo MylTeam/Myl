@@ -51,15 +51,6 @@ public class UsuarioController extends ActionSupport implements ModelDriven<Usua
 	@SkipValidation
 	public HttpHeaders index() {
 		
-//		try {
-//			Spoiler.clean();
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-		Spoiler spoiler=new Spoiler();
-		spoiler.loadData(cartaNegocio);
-		
 		usuario=(Usuario) ActionContext.getContext().getSession().get(NombreObjetosSesion.USUARIO);		
 		idSel=usuario.getIdUsuario();
 

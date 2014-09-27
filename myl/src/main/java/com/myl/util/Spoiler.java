@@ -29,7 +29,7 @@ public class Spoiler {
 	public Spoiler(){
 		
 	}
-		public void clean() throws IOException {
+		public static void clean() throws IOException {
 			System.out.println("clean");
 			try {							
 				File f=new File("C:/Users/Carlos Santiago/Documents/prueba/");
@@ -100,7 +100,7 @@ public class Spoiler {
 
 		}
 		
-		public void loadData(CartaNegocio cartaNegocio){			
+		public static void loadData(CartaNegocio cartaNegocio){			
 			File f = new File("C:/Users/Carlos Santiago/Documents/prueba/spoilers/");
 			
 			Carta carta;
