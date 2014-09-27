@@ -41,12 +41,17 @@ public class ImageTest {
 					c3.mkdirs();
 				}
 				
-				
 				for(File img:file.listFiles()){
 					if(img.isFile()){
 						System.out.println(img.getName());
 						String nameAux=img.getName().substring(4, 7);
-						img.renameTo(new File(ruta+nameAux));
+						String path=img.getParent();
+						img.renameTo(new File(path+"\\"+nameAux+".jpg"));						
+					}
+				}
+				
+				for(File img:file.listFiles()){
+					if(img.isFile()){
 						
 						BufferedImage originalImage = ImageIO.read(img);
 						int type = originalImage.getType() == 0? BufferedImage.TYPE_INT_ARGB : originalImage.getType();
