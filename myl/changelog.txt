@@ -12,4 +12,5 @@ v1.2
 
 v1.3
 	-Se agrega Furia
-	-BugFix: Se corrige el error al intentar colocar un mazo como predeterminado.	
+	-BugFix: Se corrige el error al intentar colocar un mazo como predeterminado.
+	-La arena de duelo se abre en una nueva ventana	

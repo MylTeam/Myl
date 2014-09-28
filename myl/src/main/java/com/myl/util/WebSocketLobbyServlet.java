@@ -47,11 +47,8 @@ public class WebSocketLobbyServlet extends WebSocketServlet {
     private static class ChatConnection extends MessageInbound {
 
         private final String connectionId;
-
         private final String userName;
-        
         private final String format;
-
         private final Gson jsonProcessor;
 
         private ChatConnection(String connectionId, String format, String userName) {
@@ -63,9 +60,9 @@ public class WebSocketLobbyServlet extends WebSocketServlet {
 
         @Override
         protected void onOpen(WsOutbound outbound) {
+            LOGGER.info("El usuario "+userName+" ha entrado al lobby");
             sendConnectionInfo(outbound);
             sendStatusInfoToOtherUsers(new StatusInfoMessage(userName, format, StatusInfoMessage.STATUS.CONNECTED));
-            LOGGER.info("El usuario "+userName+" ha entrado al lobby");
             CONNECTIONS.put(connectionId, this);
         }
 

@@ -50,10 +50,8 @@ public class WebSocketCharServlet extends WebSocketServlet {
     private static class ChatConnection extends MessageInbound {
 
         private final String connectionId;
-
         private final String userName;
         private final String format;
-
         private final Gson jsonProcessor;
 
         private ChatConnection(String connectionId, String format, String userName) {

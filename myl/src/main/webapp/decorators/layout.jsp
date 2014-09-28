@@ -81,11 +81,11 @@
 		<decorator:body />
 	</div>
 	
-	<!-- <div id="pageMain">		
-	</div> -->
+	
 
 	<div id="pageFooter">
 		<p>La información mostrada en este sitio sobre las cartas, incluidos los elementos gráficos, son copyright de sus respectivos dueños. Este sitio no tiene relación alguna con los respectivos propietarios de dicho material.</p>
+		<p><a href="${pageContext.request.contextPath}/changelog.jsp">Changelog v1.3</a></p>
 	</div>
 
 </body>
