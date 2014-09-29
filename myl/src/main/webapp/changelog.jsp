@@ -30,21 +30,19 @@
 				<tr>
 					<td>v1.2</td>
 					<td><ul>
-							<li>-Se corrige el armado de los mazos, manteniendo el
-								estado actual cuando se presenta un error al guardar.</li>
-							<li>-Se agrega la restricción para los formatos de mazo. -Se
-								agrega la etiqueta de formato de mazo en el chat.</li>
-							<li>-BugFix: Se corrige el error al intentar eliminar un
-								mazo.</li>
+							<li>-Se corrige el armado de los mazos, manteniendo el estado actual cuando se presenta un error al guardar.</li>
+							<li>-Se agrega la restricción para los formatos de mazo.</li> 
+							<li>-Se agrega la etiqueta de formato de mazo en el chat.</li>
+							<li>-BugFix: Se corrige el error al intentar eliminar un mazo.</li>
 						</ul></td>
 				</tr>
 				<tr>
 					<td>v1.3</td>
 					<td><ul>
 							<li>-Se agrega Furia</li>
-							<li>-BugFix: Se corrige el error al intentar colocar un mazo
-								como predeterminado.</li>
+							<li>-BugFix: Se corrige el error al intentar colocar un mazo como predeterminado.</li>
 							<li>-La arena de duelo se abre en una nueva ventana</li>
+							<li>-Se agregan notificaciones cuando un usuario abandona o reinicia el juego.</li>
 						</ul></td>
 				</tr>
 			</table>

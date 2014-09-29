@@ -6,7 +6,6 @@
 		<pattern>/images/*</pattern>
 		<pattern>/chat*</pattern>
 		<pattern>/help/index.jsp</pattern>
-		<pattern>/changelog.jsp</pattern>		
 
 	</excludes>
  	<decorator name="layout" page="layout.jsp">
