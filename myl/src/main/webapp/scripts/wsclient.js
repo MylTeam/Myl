@@ -1,5 +1,6 @@
 var wsclient = (function() {
 
+	var prevGame=0;
     var ws = null;
     var wsURI = 'ws://' + location.host  + '/myl/chatws';
     function connect(userName) {    	
@@ -44,10 +45,17 @@ var wsclient = (function() {
             } else if (message.statusInfo) {
                 if (message.statusInfo.status == 'CONNECTED') {
                     addOnlineUser(message.statusInfo.user);
+                    if(prevGame==1){
+                    	$( "#dialog-udis" ).dialog("close");
+                    	$("#content-newg").append("El usuario "+message.statusInfo.user+" quiere iniciar una nueva partida.");
+                    	notifyNewGame();                    	
+                    }
                     
                 } else if (message.statusInfo.status == 'DISCONNECTED') {                	
                     removeOnlineUser(message.statusInfo.user);
-//                    alert("El usuario "+message.statusInfo.user+" ha salido de la partida");
+                    $("#content-udis").append("El usuario "+message.statusInfo.user+" ha salido de la partida");
+                    notifyUserDisconnected();
+                    prevGame=1;
                 }
             } else if (message.connectionInfo) {
                 var activeUsers = message.connectionInfo.activeUsers;

@@ -43,7 +43,7 @@ public class WebSocketCharServlet extends WebSocketServlet {
     protected StreamInbound createWebSocketInbound(String subProtocol, HttpServletRequest request) {
         final String connectionId = request.getSession().getId();
         final String userName = request.getParameter("userName");
-        final String format = request.getParameter("format");
+        final String format = request.getParameter("format");        
         return new ChatConnection(connectionId,format, userName);
     }
 
@@ -71,9 +71,11 @@ public class WebSocketCharServlet extends WebSocketServlet {
 
         @Override
         protected void onClose(int status) {
-        	LOGGER.info("Cerrando la conexión, status: "+status);
-            sendStatusInfoToOtherUsers(new StatusInfoMessage(userName,format, StatusInfoMessage.STATUS.DISCONNECTED));
-            CONNECTIONS.remove(connectionId);
+        	LOGGER.info("Cerrando la conexión, status: "+status+" connectionId: "+connectionId);
+        	if(status==1000){
+        		sendStatusInfoToOtherUsers(new StatusInfoMessage(userName,format, StatusInfoMessage.STATUS.DISCONNECTED));
+        	}
+        		CONNECTIONS.remove(connectionId);
         }
 
         @Override

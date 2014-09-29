@@ -23,6 +23,7 @@
 			<script src="${pageContext.request.contextPath}/scripts/mousetrap.min.js" type="text/javascript"></script>
 			<script src="${pageContext.request.contextPath}/scripts/shortcuts.js" type="text/javascript"></script>
 			<script src="${pageContext.request.contextPath}/scripts/phases.js" type="text/javascript"></script>
+			<script src="${pageContext.request.contextPath}/scripts/gral.js" type="text/javascript"></script>
 		 ]]>
 </jsp:text>
  
@@ -238,6 +239,18 @@
  	<div style="display:none;">
 	 <div id="dialog-cant" >
 	 	<input type="text" name="cantidad" id="cantidad" />
+	</div>
+	</div>
+	
+	<div style="display:none;">
+	 <div id="dialog-udis" >
+	 	<div id="content-udis"></div>	 	
+	</div>
+	</div>
+	
+	<div style="display:none;">
+	 <div id="dialog-newg" >
+	 	<div id="content-newg"></div>
 	</div>
 	</div>
 	
