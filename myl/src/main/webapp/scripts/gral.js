@@ -19,9 +19,8 @@ function notifyNewGame(){
 		title: "Nuevo Juego",
 		buttons: {
 			"Aceptar": function () {
-				$(this).dialog("close");
-//				var url="http://"+location.host+$("#hidden").val()+"/chat?user1="+$("#user1").val()+"&user2="+$("#user2").val()+"&format=1";
-//				window.location=url;
+				wsclient.toChat(document.getElementById("user1").value, document.getElementById("user2").value, "gamereadyaccept");
+				$(this).dialog("close");				
 				location.reload();
 			},
 			"Cancelar": function (){
@@ -31,6 +30,10 @@ function notifyNewGame(){
 	
 		}
 	});
+}
+
+function newGame(){
+	location.reload();
 }
 
 

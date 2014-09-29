@@ -1,6 +1,7 @@
 var wsclient = (function() {
 
 	var prevGame=0;
+	var gameAccept=0;
     var ws = null;
     var wsURI = 'ws://' + location.host  + '/myl/chatws';
     function connect(userName) {    	
@@ -34,21 +35,30 @@ var wsclient = (function() {
         function processMessage(message) {
             if (message.messageInfo) {
                 showConversation(message.messageInfo.from);
-                if(message.messageInfo.message!="gameready" && message.messageInfo.message!="gamereadyok"){
+                if(message.messageInfo.message!="gameready" && message.messageInfo.message!="gamereadyok" && message.messageInfo.message!="gamereadyaccept"){
                 	addMessage(message.messageInfo.from, message.messageInfo.message, cleanWhitespaces(message.messageInfo.from) + 'conversation');
                 }else if(message.messageInfo.message=="gameready"){
                 	toChat(document.getElementById("user1").value, document.getElementById("user2").value, "gamereadyok");
                 	showConversation(document.getElementById("user2").value);
                 }else if(message.messageInfo.message=="gamereadyok"){
                 	showConversation(document.getElementById("user2").value);
+                }else if(message.messageInfo.message=="gamereadyaccept"){
+                	gameAccept=1;
                 }
             } else if (message.statusInfo) {
                 if (message.statusInfo.status == 'CONNECTED') {
                     addOnlineUser(message.statusInfo.user);
                     if(prevGame==1){
                     	$( "#dialog-udis" ).dialog("close");
-                    	$("#content-newg").append("El usuario "+message.statusInfo.user+" quiere iniciar una nueva partida.");
-                    	notifyNewGame();                    	
+                    	if(gameAccept==1){
+                    		$("#content-udis").empty();
+                    		$("#content-udis").append("El usuario "+message.statusInfo.user+" ha aceptado la nueva partida.");
+                            notifyUserDisconnected();
+                    		gameAccept=0;
+                    	}else{
+                    		$("#content-newg").append("El usuario "+message.statusInfo.user+" quiere iniciar una nueva partida.");                    	
+                    		notifyNewGame();                    	
+                    	}
                     }
                     
                 } else if (message.statusInfo.status == 'DISCONNECTED') {                	

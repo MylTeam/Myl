@@ -71,7 +71,9 @@
 <input type="hidden" name="hidden" id="hidden" value="${pageContext.request.contextPath}"/>
 
 <div id="bar">
-<INPUT type="button" value="Reglas" onclick="showHelp()"/>
+<input type="button" value="Nuevo Juego" onclick="newGame()"/>
+<input type="button" value="Reglas" onclick="showHelp()"/>
+<input type="button" value="Salir" onclick="window.close()"/>
 </div>	
 <table id="Table1" class="Table" style="HEIGHT: 97%; WIDTH: 100%">
   <tbody>
