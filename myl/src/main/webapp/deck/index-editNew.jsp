@@ -51,6 +51,7 @@
 	<select id="frecuencia">
 	</select>
 		<option value="">--Seleccione--</option>
+		<option value="Milenaria">Milenaria</option>
 		<option value="Ultra Real">Ultra Real</option>
 		<option value="Real">Real</option>
 		<option value="Cortesano">Cortesano</option>
