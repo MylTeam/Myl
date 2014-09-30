@@ -25,7 +25,9 @@ function notifyNewGame(){
 			},
 			"Cancelar": function (){
 				$(this).dialog("close");
-				window.close();
+				var url="http://"+location.host+$("#hidden").val()+"/lobby";
+	        	window.location=url;
+//				window.close();
 			}
 	
 		}
@@ -34,6 +36,11 @@ function notifyNewGame(){
 
 function newGame(){
 	location.reload();
+}
+
+function returnLobby(){
+	var url="http://"+location.host+$("#hidden").val()+"/lobby";
+	window.location=url;
 }
 
 

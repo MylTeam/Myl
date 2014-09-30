@@ -43,8 +43,9 @@ public class WebSocketCharServlet extends WebSocketServlet {
     protected StreamInbound createWebSocketInbound(String subProtocol, HttpServletRequest request) {
         final String connectionId = request.getSession().getId();
         final String userName = request.getParameter("userName");
+        final String userNameTwo = request.getParameter("userNameTwo");
         final String format = request.getParameter("format");        
-        return new ChatConnection(connectionId,format, userName);
+        return new ChatConnection(connectionId,format, userName, userNameTwo);
     }
 
     private static class ChatConnection extends MessageInbound {
@@ -52,11 +53,13 @@ public class WebSocketCharServlet extends WebSocketServlet {
         private final String connectionId;
         private final String userName;
         private final String format;
+        private final String userNameTwo;
         private final Gson jsonProcessor;
 
-        private ChatConnection(String connectionId, String format, String userName) {
+        private ChatConnection(String connectionId, String format, String userName, String userNameTwo) {
             this.connectionId = connectionId;
             this.userName = userName;
+            this.userNameTwo = userNameTwo;
             this.format= format;
             this.jsonProcessor = new Gson();
         }
@@ -65,7 +68,8 @@ public class WebSocketCharServlet extends WebSocketServlet {
         protected void onOpen(WsOutbound outbound) {
         	LOGGER.info("Abriendo la conexión");
             sendConnectionInfo(outbound);
-            sendStatusInfoToOtherUsers(new StatusInfoMessage(userName,format, StatusInfoMessage.STATUS.CONNECTED));
+//            sendStatusInfoToOtherUsers(new StatusInfoMessage(userName,format, StatusInfoMessage.STATUS.CONNECTED));
+            sendStatusInfoToOponent(new StatusInfoMessage(userName,format, StatusInfoMessage.STATUS.CONNECTED));
             CONNECTIONS.put(connectionId, this);
         }
 
@@ -73,7 +77,7 @@ public class WebSocketCharServlet extends WebSocketServlet {
         protected void onClose(int status) {
         	LOGGER.info("Cerrando la conexión, status: "+status+" connectionId: "+connectionId);
         	if(status==1000){
-        		sendStatusInfoToOtherUsers(new StatusInfoMessage(userName,format, StatusInfoMessage.STATUS.DISCONNECTED));
+        		sendStatusInfoToOponent(new StatusInfoMessage(userName,format, StatusInfoMessage.STATUS.DISCONNECTED));
         	}
         		CONNECTIONS.remove(connectionId);
         }
@@ -111,6 +115,10 @@ public class WebSocketCharServlet extends WebSocketServlet {
 
         public String getUserName() {
             return userName;
+        }
+        
+        public String getUserNameTwo() {
+            return userNameTwo;
         }
         
         public String getFormat() {
@@ -153,6 +161,24 @@ public class WebSocketCharServlet extends WebSocketServlet {
                 } catch (IOException e) {
                 	LOGGER.error("No se pudo enviar el mensaje", e);
                 }
+            }
+        }
+        
+        private void sendStatusInfoToOponent(StatusInfoMessage message) {        	
+            final Collection<ChatConnection> otherUsersConnections = getAllChatConnectionsExceptThis();
+            for (ChatConnection connection : otherUsersConnections) {
+            	LOGGER.info("userName= "+connection.getUserName()+" userName2="+this.getUserNameTwo());
+            	if(connection.getUserName().equals(this.getUserNameTwo())){
+            		LOGGER.info("Enviado mensaje de status close");
+            		try {
+            			LOGGER.info("Notificando estado a: "+connection.getUserName()+" Mensaje: "+message.getStatusInfo().getStatus());
+            			connection.getWsOutbound().writeTextMessage(CharBuffer.wrap(jsonProcessor.toJson(message)));
+            		} catch (IOException e) {
+            			LOGGER.error("No se pudo enviar el mensaje", e);
+            		}
+            	}else{
+            		LOGGER.info("No se puede enviar el msj no se porque");
+            	}
             }
         }
 

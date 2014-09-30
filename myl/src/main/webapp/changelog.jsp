@@ -45,6 +45,13 @@
 							<li>-Se agregan notificaciones cuando un usuario abandona o reinicia el juego.</li>
 						</ul></td>
 				</tr>
+				<tr>
+					<td>v1.4</td>
+					<td><ul>
+							<li>-BugFix: Se corrige el error que muestra la notificación de otros usuarios abandonando las partidas.</li>
+							<li>-Se regresa al estilo de cambio de ventana.</li>							
+						</ul></td>
+				</tr>
 			</table>
 		</form>
 	</center>

@@ -32,7 +32,8 @@
 	$(function() {
 		$('#conversations').tabs();
 		$('#userName').val(document.getElementById("user1").value);
-		wsclient.connect(document.getElementById("user1").value);
+		$('#userNameTwo').val(document.getElementById("user2").value);
+		wsclient.connect(document.getElementById("user1").value,document.getElementById("user2").value);
 	});		
 	</script>	
 <style type="text/css">
@@ -73,7 +74,7 @@
 <div id="bar">
 <input type="button" value="Nuevo Juego" onclick="newGame()"/>
 <input type="button" value="Reglas" onclick="showHelp()"/>
-<input type="button" value="Salir" onclick="window.close()"/>
+<input type="button" value="Regresar" onclick="returnLobby()"/>
 </div>	
 <table id="Table1" class="Table" style="HEIGHT: 97%; WIDTH: 100%">
   <tbody>
@@ -171,6 +172,7 @@
  				<div id="container">
 					<div class="leftPanel">
 							<input type="hidden" id="userName" /><span class="onLineUserName" ></span>
+							<input type="hidden" id="userNameTwo" />
 					 </div>
 										
 					<div id="conversations">
@@ -268,3 +270,4 @@
 </body>
 </html>
 </jsp:root>
+

@@ -16,7 +16,7 @@
 		<file>log.log</file>
 		<append>true</append>
 		<encoder>
-			<pattern>%d %5p |Thread: %t | %-55logger{55} | %m %n</pattern>
+			<pattern>%d %5p |Thread: %t | %-55logger{55} | %m %n</pattern>			
 		</encoder>
 	</appender>
 

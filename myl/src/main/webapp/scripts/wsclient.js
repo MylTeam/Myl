@@ -4,16 +4,16 @@ var wsclient = (function() {
 	var gameAccept=0;
     var ws = null;
     var wsURI = 'ws://' + location.host  + '/myl/chatws';
-    function connect(userName) {    	
+    function connect(userName,userNameTwo) {    	
     	
         if(!userName || userName == '') {
             return;
         }
 
         if ('WebSocket' in window) {
-            ws = new WebSocket(wsURI + '?userName=' + userName);
+            ws = new WebSocket(wsURI + '?userName=' + userName +'&userNameTwo=' + userNameTwo);
         } else if ('MozWebSocket' in window) {
-            ws = new MozWebSocket(wsURI + '?userName=' + userName);
+            ws = new MozWebSocket(wsURI + '?userName=' + userName +'&userNameTwo=' + userNameTwo);
         } else {
             alert('Tu navegador no soporta WebSockets');
             return;
@@ -56,6 +56,7 @@ var wsclient = (function() {
                             notifyUserDisconnected();
                     		gameAccept=0;
                     	}else{
+                    		$("#content-newg").empty();
                     		$("#content-newg").append("El usuario "+message.statusInfo.user+" quiere iniciar una nueva partida.");                    	
                     		notifyNewGame();                    	
                     	}
