@@ -16,7 +16,7 @@
 	<center>
 		<s:form id="doLoginFrm" name="doLoginFrm"
 			action="%{#request.contextPath}/login" method="POST"
-			cssStyle="border: 0px;">
+			cssStyle="border: 0px;" namespace="/">
 			<s:actionmessage id="algo" theme="jquery" />
 			<table>
 				<div class="title">Iniciar sesión</div>

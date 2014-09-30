@@ -21,7 +21,7 @@
 	
 		
 
-	<package name="MYL" extends="struts-default,rest-default,json-default">
+	<package name="MYL" extends="struts-default,rest-default,json-default" namespace="/">
 
 		<interceptors>
 			<!--configuro el interceptor -->

@@ -152,30 +152,38 @@ public class WebSocketCharServlet extends WebSocketServlet {
             return formats;
         }
 
-        private void sendStatusInfoToOtherUsers(StatusInfoMessage message) {
-            final Collection<ChatConnection> otherUsersConnections = getAllChatConnectionsExceptThis();
-            for (ChatConnection connection : otherUsersConnections) {            	
-                try {
-                	LOGGER.info("Notificando estado a: "+connection.getUserName()+" Mensaje: "+message.getStatusInfo().getStatus());
-                    connection.getWsOutbound().writeTextMessage(CharBuffer.wrap(jsonProcessor.toJson(message)));
-                } catch (IOException e) {
-                	LOGGER.error("No se pudo enviar el mensaje", e);
-                }
-            }
-        }
+//        private void sendStatusInfoToOtherUsers(StatusInfoMessage message) {
+//            final Collection<ChatConnection> otherUsersConnections = getAllChatConnectionsExceptThis();
+//            for (ChatConnection connection : otherUsersConnections) {            	
+//                try {
+//                	LOGGER.info("Notificando estado a: "+connection.getUserName()+" Mensaje: "+message.getStatusInfo().getStatus());
+//                    connection.getWsOutbound().writeTextMessage(CharBuffer.wrap(jsonProcessor.toJson(message)));
+//                } catch (IOException e) {
+//                	LOGGER.error("No se pudo enviar el mensaje", e);
+//                }
+//            }
+//        }
         
-        private void sendStatusInfoToOponent(StatusInfoMessage message) {        	
-            final Collection<ChatConnection> otherUsersConnections = getAllChatConnectionsExceptThis();
-            for (ChatConnection connection : otherUsersConnections) {
-            	if(connection.getUserName().equals(this.getUserNameTwo())){
-            		try {
-            			LOGGER.info("Notificando estado a: "+connection.getUserName()+" Mensaje: "+message.getStatusInfo().getStatus());
-            			connection.getWsOutbound().writeTextMessage(CharBuffer.wrap(jsonProcessor.toJson(message)));
-            		} catch (IOException e) {
-            			LOGGER.error("No se pudo enviar el mensaje", e);
-            		}
-            	}
-            }
+        private void sendStatusInfoToOponent(StatusInfoMessage message) {
+        	
+        	try {
+        		LOGGER.info("Notificando estado a: "+this.getUserNameTwo()+" Mensaje: "+message.getStatusInfo().getStatus());
+				sendMessage(this.getUserNameTwo(), message);
+			} catch (IOException e1) {
+				LOGGER.error("No se pudo enviar el mensaje", e1);
+			}
+        	
+//            final Collection<ChatConnection> otherUsersConnections = getAllChatConnectionsExceptThis();
+//            for (ChatConnection connection : otherUsersConnections) {
+//            	if(connection.getUserName().equals(this.getUserNameTwo())){
+//            		try {
+//            			LOGGER.info("Notificando estado a: "+connection.getUserName()+" Mensaje: "+message.getStatusInfo().getStatus());
+//            			connection.getWsOutbound().writeTextMessage(CharBuffer.wrap(jsonProcessor.toJson(message)));
+//            		} catch (IOException e) {
+//            			LOGGER.error("No se pudo enviar el mensaje", e);
+//            		}
+//            	}
+//            }
         }
 
         private Collection<ChatConnection> getAllChatConnectionsExceptThis() {

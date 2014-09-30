@@ -13,6 +13,7 @@ import com.myl.util.IssueMail;
 import com.myl.util.AppError;
 import com.myl.util.NombreObjetosSesion;
 
+import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 
