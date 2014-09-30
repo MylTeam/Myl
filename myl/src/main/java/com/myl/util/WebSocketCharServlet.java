@@ -167,17 +167,13 @@ public class WebSocketCharServlet extends WebSocketServlet {
         private void sendStatusInfoToOponent(StatusInfoMessage message) {        	
             final Collection<ChatConnection> otherUsersConnections = getAllChatConnectionsExceptThis();
             for (ChatConnection connection : otherUsersConnections) {
-            	LOGGER.info("userName= "+connection.getUserName()+" userName2="+this.getUserNameTwo());
             	if(connection.getUserName().equals(this.getUserNameTwo())){
-            		LOGGER.info("Enviado mensaje de status close");
             		try {
             			LOGGER.info("Notificando estado a: "+connection.getUserName()+" Mensaje: "+message.getStatusInfo().getStatus());
             			connection.getWsOutbound().writeTextMessage(CharBuffer.wrap(jsonProcessor.toJson(message)));
             		} catch (IOException e) {
             			LOGGER.error("No se pudo enviar el mensaje", e);
             		}
-            	}else{
-            		LOGGER.info("No se puede enviar el msj no se porque");
             	}
             }
         }
