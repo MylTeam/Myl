@@ -5,31 +5,36 @@
 		contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" />
 	<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>Modificar Tema</title>
+<title>Modificar Perfil</title>
+
 </head>
 <body>
-	<s:url id="urlCancelar" value="/catalogo-tema.action" includeContext="true" />
-	<s:actionerror id="saeTema" theme="jquery" />
-	<s:fielderror id="sfeTema" theme="jquery" />
+	<s:url id="urlCancelar" value="/usuario" includeContext="true" />
+	<s:actionerror id="saeUsuario" theme="jquery" />
+	<s:fielderror id="sfeUsuario" theme="jquery" />
 
-	<s:form action="%{#request.contextPath}/catalogo-tema/%{idTema}.action"
-		method="post" theme="simple" acceptcharset="UTF-8" cssStyle="border: 0px;width:90%">
+	<s:form action="%{#request.contextPath}/usuario/%{idSel}"
+		method="post" theme="simple" acceptcharset="UTF-8" cssStyle="border: 0px;">
 		<center>
-			<h1>Modificar Tema</h1>
+			<h1>Modificar Perfil</h1>
 		</center>
 		<s:hidden id="hdnMethod" name="_method" value="put" />
 		<table>
 			<tr>
-				<td><label>Nombre:</label></td>
-				<td><s:textfield id="Nombre" name="model.nombre" maxlength="50" /></td>
+				<td><label>Login:</label></td>
+				<td><s:property value="model.login"/> </td>
 			</tr>
 			<tr>
-				<td colspan="2"><label>Descripción:</label></td>
+				<td><label>E-mail:</label></td>
+				<td><s:textfield id="email" name="model.email" maxlength="80" /></td>
 			</tr>
 			<tr>
-				<td colspan="2"><s:textarea rows="3" cols="70" id="Descripcion"
-						name="model.descripcion" maxlength="200" /></td>
-			</tr>
+				<td><label>Pais:</label></td>			
+				<td><s:select id="slcPais" name="model.idPais"
+						list="listPaises" listValue="nombre" listKey="id"
+						headerValue="Seleccione" headerKey="-1" required="true"/>
+						 </td>
+			</tr>			
 			<tr>
 				<td colspan="2" style="text-align: center;"><sj:submit
 						id="btnAceptar" value="Aceptar" button="true"

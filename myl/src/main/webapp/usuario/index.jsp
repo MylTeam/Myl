@@ -9,14 +9,16 @@
 <title>Perfil</title>
 <jsp:text>
 	<![CDATA[			 		
-			
 			<script src="${pageContext.request.contextPath}/scripts/deckselected.js" type="text/javascript"></script>
 			<script src="${pageContext.request.contextPath}/scripts/usuario.js" type="text/javascript"></script>						
-							
 		 ]]>
 </jsp:text>
 </head>
 <body>
+	<s:actionerror id="saeUsuario" theme="jquery" />
+	<s:fielderror id="sfeUsuario" theme="jquery" />
+	<s:actionmessage id="samUsuario" theme="jquery" />
+
 <form style="width: 90%; border: 0px">
 	<input type="hidden" name="context" id="context" value="${pageContext.request.contextPath}" />
 	
@@ -28,13 +30,12 @@
 	<tr><td>${usuario.login}</td></tr>
 	<tr>	
 	<td>Deck predeterminado:</td>
-	<td>
-	
+	<td>	
 	<input type="hidden" name="deck" id="deck" value="${usuario.deckPred}" />
-	<b><span id="result"> </span></b>
-	
+	<b><span id="result"> </span></b>	
 	</td>
 	</tr>
+	<tr><td><a href="${pageContext.request.contextPath}/usuario/${usuario.idUsuario}/edit">Modificar Perfil</a></td></tr>
 	</table>
 	
 	</td>

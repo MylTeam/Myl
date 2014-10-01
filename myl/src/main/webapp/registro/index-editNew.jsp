@@ -10,7 +10,6 @@
 	<![CDATA[
 	<script src="${pageContext.request.contextPath}/scripts/login.js" type="text/javascript"></script> 			
 		 ]]>
-
 </jsp:text>
 </head>
 <body>
@@ -35,6 +34,17 @@
 			<tr>
 				<td><label>Confirmar contraseña:</label></td>			
 				<td><s:password id="confirmPass" name="confirmPass" maxlength="50" /></td>
+			</tr>
+			<tr>
+				<td><label>E-mail:</label></td>			
+				<td><s:textfield id="email" name="model.email" maxlength="80" /></td>
+			</tr>
+			<tr>
+				<td><label>Pais:</label></td>			
+				<td><s:select id="slcPais" name="model.idPais"
+						list="listPaises" listValue="nombre" listKey="id"
+						headerValue="Seleccione" headerKey="-1" required="true"/>
+						 </td>
 			</tr>
 			<tr>
 				<td colspan="2" style="text-align: center;"><sj:submit id="btnAceptar" value="Aceptar"

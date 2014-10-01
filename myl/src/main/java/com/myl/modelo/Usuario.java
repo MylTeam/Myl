@@ -1,5 +1,6 @@
 package com.myl.modelo;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -27,6 +28,11 @@ public class Usuario {
 	private String login;
 	private String password;
 	private Integer deckPred;
+	
+	private String email;
+	private Date fhRegistro;
+	private Date fhLastSession;
+	private Integer idPais;
 	
 	private Boolean tieneDeck;	
 	private List<Deck> decks;
@@ -84,8 +90,36 @@ public class Usuario {
 		this.tieneDeck = tieneDeck;
 	}
 	
+	@Column(name = "UsuarioEm")
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	
-		
+	@Column(name = "Fh_registro")
+	public Date getFhRegistro() {
+		return fhRegistro;
+	}
+	public void setFhRegistro(Date fhRegistro) {
+		this.fhRegistro = fhRegistro;
+	}
 	
+	@Column(name = "Fh_last")
+	public Date getFhLastSession() {
+		return fhLastSession;
+	}
+	public void setFhLastSession(Date fhLastSession) {
+		this.fhLastSession = fhLastSession;
+	}
+	
+	@Column(name = "id_pais")
+	public Integer getIdPais() {
+		return idPais;
+	}
+	public void setIdPais(Integer idPais) {
+		this.idPais = idPais;
+	}
 	
 }

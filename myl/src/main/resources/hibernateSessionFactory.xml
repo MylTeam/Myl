@@ -71,6 +71,7 @@
 				<value>com.myl.modelo.Deck</value>
 				<value>com.myl.modelo.DeckCarta</value>
 				<value>com.myl.modelo.DeckCartaId</value>
+				<value>com.myl.modelo.Pais</value>
 			</list>
 		</property>
 

@@ -1,17 +1,20 @@
 v1.0
 	-Myl
-	
 v1.1
 	-Agregada la opción para enviar comentarios
-	
 v1.2
 	-Se corrige el armado de los mazos, manteniendo el estado actual cuando se presenta un error al guardar.
 	-Se agrega la restricción para los formatos de mazo.
 	-Se agrega la etiqueta de formato de mazo en el chat.
 	-BugFix: Se corrige el error al intentar eliminar un mazo.
-
 v1.3
 	-Se agrega Furia
 	-BugFix: Se corrige el error al intentar colocar un mazo como predeterminado.
 	-La arena de duelo se abre en una nueva ventana
 	-Se agregan notificaciones cuando un usuario abandona o reinicia el juego.
+v1.4
+	-BugFix: Se corrige el error que muestra la notificación de otros usuarios abandonando las partidas.
+	-Se regresa al estilo de cambio de ventana.
+v1.5
+	-Se agrega más detalle al perfil del usuario
+	-FALTA-Recuperar contraseña

@@ -18,10 +18,12 @@ import org.springframework.mail.MailSender;
 import ch.qos.logback.core.Context;
 
 import com.myl.modelo.Deck;
+import com.myl.modelo.Pais;
 import com.myl.modelo.Usuario;
 import com.myl.negocio.CartaNegocio;
 import com.myl.negocio.DeckNegocio;
 import com.myl.negocio.EdicionNegocio;
+import com.myl.negocio.PaisNegocio;
 import com.myl.negocio.UsuarioNegocio;
 import com.myl.util.IssueMail;
 import com.myl.util.NombreObjetosSesion;
@@ -29,6 +31,12 @@ import com.myl.util.Spoiler;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
+import com.opensymphony.xwork2.validator.annotations.EmailValidator;
+import com.opensymphony.xwork2.validator.annotations.IntRangeFieldValidator;
+import com.opensymphony.xwork2.validator.annotations.RegexFieldValidator;
+import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
+import com.opensymphony.xwork2.validator.annotations.Validations;
+import com.opensymphony.xwork2.validator.annotations.ValidatorType;
 
 @Named
 @Results({ 
@@ -48,10 +56,12 @@ public class UsuarioController extends ActionSupport implements ModelDriven<Usua
 	private Integer deckId;
 	
 	private CartaNegocio cartaNegocio;
+	private List<Pais> listPaises;
+	private PaisNegocio paisNegocio;
 	
 	@SkipValidation
 	public HttpHeaders index() {
-		
+				
 		usuario=(Usuario) ActionContext.getContext().getSession().get(NombreObjetosSesion.USUARIO);		
 		idSel=usuario.getIdUsuario();
 
@@ -59,22 +69,53 @@ public class UsuarioController extends ActionSupport implements ModelDriven<Usua
 		deckAux.setUsuarioId(usuario.getIdUsuario());
 		lista=deckNegocio.findByExample(deckAux);
 		
+		if(usuario.getEmail()==null || usuario.getIdPais()==null){
+			addActionError("Favor de actualizar tus datos");
+		}
+		
 		return new DefaultHttpHeaders("index").disableCaching();
 	}
 	
 	@SkipValidation
 	public String edit() {
+		String result="edit";
+		listPaises=paisNegocio.findAll();
 		
-		return "edit";
+		usuario=(Usuario) ActionContext.getContext().getSession().get(NombreObjetosSesion.USUARIO);
+		
+		if(!usuario.getIdUsuario().equals(idSel)){
+			System.out.println("usuario: "+usuario.getIdUsuario()+" idsel "+idSel);
+			result="success";
+		}
+		
+		return result;
 	}
 	
 	public void validateUpdate(){
-		throw new UnsupportedOperationException();
+		Usuario aux=new Usuario();
+		aux.setEmail(model.getEmail());
+		List<Usuario> usuariosAux=usuarioNegocio.findByExample(aux);
+		
+		if (!usuariosAux.isEmpty()) {
+			if(!usuariosAux.get(0).getIdUsuario().equals(model.getIdUsuario())){
+			addActionError("El correo electrónico ingresado ya está registrado");
+			}
+		}
+		
+		if (hasFieldErrors() || hasActionErrors()) {
+			listPaises=paisNegocio.findAll();
+		}
 	}
 		
-	@SkipValidation
+	@Validations(requiredStrings = {			
+			@RequiredStringValidator(fieldName = "model.email", type = ValidatorType.FIELD, key = "Introduce tu correo electrónico")},			
+			intRangeFields={
+			@IntRangeFieldValidator(fieldName="model.idPais", type = ValidatorType.FIELD, message="Selecciona tu pais", min = "1")},
+			emails={
+			@EmailValidator(fieldName="model.email", type=ValidatorType.FIELD, message="Correo electrónico no válido")})
 	public String update() {
-	
+		model = usuarioNegocio.save(model);
+		ActionContext.getContext().getSession().put(NombreObjetosSesion.USUARIO, model);
 		return "success";
 	}
 
@@ -184,6 +225,22 @@ public class UsuarioController extends ActionSupport implements ModelDriven<Usua
 
 	public void setCartaNegocio(CartaNegocio cartaNegocio) {
 		this.cartaNegocio = cartaNegocio;
+	}
+
+	public List<Pais> getListPaises() {
+		return listPaises;
+	}
+
+	public void setListPaises(List<Pais> listPaises) {
+		this.listPaises = listPaises;
+	}
+
+	public PaisNegocio getPaisNegocio() {
+		return paisNegocio;
+	}
+
+	public void setPaisNegocio(PaisNegocio paisNegocio) {
+		this.paisNegocio = paisNegocio;
 	}
 
 
