@@ -6,6 +6,7 @@ import java.util.List;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 import org.apache.struts2.interceptor.ServletRequestAware;
@@ -45,8 +46,6 @@ public class LoginController extends ActionSupport implements
 	
 	@Override
 	public String execute() throws Exception {
-
-		
 		
 		usuarioSel = new Usuario();
 		List<Usuario> usuarios = null;

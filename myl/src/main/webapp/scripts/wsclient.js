@@ -64,6 +64,7 @@ var wsclient = (function() {
                     
                 } else if (message.statusInfo.status == 'DISCONNECTED') {                	
                     removeOnlineUser(message.statusInfo.user);
+                    $("#content-udis").empty();
                     $("#content-udis").append("El usuario "+message.statusInfo.user+" ha salido de la partida");
                     notifyUserDisconnected();
                     prevGame=1;

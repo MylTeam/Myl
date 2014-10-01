@@ -5,6 +5,8 @@ import javax.inject.Named;
 
 
 
+
+import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 
