@@ -17,4 +17,4 @@ v1.4
 	-Se regresa al estilo de cambio de ventana.
 v1.5
 	-Se agrega más detalle al perfil del usuario
-	-FALTA-Recuperar contraseña
+	-Se agrega la opción para recuperar contraseña

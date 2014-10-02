@@ -42,6 +42,17 @@ public class AutenticarInterceptor implements Interceptor {
 			} else {
 				return "denegado";
 			}
+		} else if ("recuperar-pass".equals(actionInvocation.getProxy().getActionName())) {
+			try {
+				actionInvocation.invoke();
+			} catch (Exception e) {
+				errorNotification(e, actionInvocation.getProxy().getActionName());
+			}
+			if (ActionContext.getContext().getSession().get(NombreObjetosSesion.USUARIO) == null) {
+				return "recuperar-pass";
+			} else {
+				return "denegado";
+			}
 		} else {
 			if (ActionContext.getContext().getSession().get(NombreObjetosSesion.USUARIO) == null) {
 				setPrevAction(actionInvocation.getProxy().getActionName());

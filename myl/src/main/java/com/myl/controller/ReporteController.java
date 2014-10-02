@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.inject.Named;
 
 import com.myl.modelo.Usuario;
+import com.myl.negocio.UsuarioNegocio;
 import com.myl.util.IssueMail;
 import com.myl.util.AppError;
 import com.myl.util.NombreObjetosSesion;
@@ -35,7 +36,9 @@ public class ReporteController extends ActionSupport {
 	private String url;
 	private String stackTrace;
 	private String exceptionName;
-
+	private Usuario usuario;
+	
+	
 	public String generaReporte() {
 		Date fecha = new Date();
 		appError = new AppError(getUrl(), getStackTrace(), fecha, getExceptionName());
@@ -45,7 +48,13 @@ public class ReporteController extends ActionSupport {
 
 	public void enviarCorreoReporte(AppError appError) {
 		Date fecha = new Date();
-		String msg="Fecha: "+fecha+"\n URL: "+appError.getUrl()+"\n Error: \n "+appError.getStackTrace();
+		usuario=(Usuario) ActionContext.getContext().getSession().get(NombreObjetosSesion.USUARIO);
+		String msg="";
+		if(usuario!=null){
+			msg="Usuario: "+usuario.getLogin()+"\n Fecha: "+fecha+"\n URL: "+appError.getUrl()+"\n Error: \n "+appError.getStackTrace();
+		}else{
+			msg="Fecha: "+fecha+"\n URL: "+appError.getUrl()+"\n Error: \n "+appError.getStackTrace();
+		}
 		mailSender.sendMail("mylzupport@gmail.com", appError.getExceptionName(), msg);
 	}
 
@@ -108,6 +117,14 @@ public class ReporteController extends ActionSupport {
 
 	public void setExceptionName(String exceptionName) {
 		this.exceptionName = exceptionName;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 }

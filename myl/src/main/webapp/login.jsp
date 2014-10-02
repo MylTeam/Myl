@@ -17,7 +17,7 @@
 		<s:form id="doLoginFrm" name="doLoginFrm"
 			action="%{#request.contextPath}/login" method="POST"
 			cssStyle="border: 0px;" namespace="/">
-			<s:actionmessage id="algo" theme="jquery" />
+			
 			<table>
 				<div class="title">Iniciar sesión</div>
 				<tr>
@@ -28,14 +28,17 @@
 				</tr>
 				<tr>
 					<td>
-					<sj:submit id="btnAceptar" value="Entrar" button="true" buttonIcon="ui-icon-star" />					
+					<sj:submit id="btnAceptar" value="Entrar" button="true" buttonIcon="ui-icon-star" />
 					</td>
 				</tr>
 			</table>
 			
 			<a href="${pageContext.request.contextPath}/registro/new">¿Nuevo usuario? Registrate!</a>
-			<s:fielderror />
-			<s:actionerror />
+			<br />
+			<a href="${pageContext.request.contextPath}/recuperar-pass/new">¿Olvidaste tu contraseña?</a>
+			<s:fielderror id="sfe" theme="jquery"/>
+			<s:actionerror id="sae" theme="jquery"/>
+			<s:actionmessage id="sam" theme="jquery" />
 		</s:form>
 	</center>
 

@@ -33,4 +33,16 @@ public class IssueMail {
 		mailSender.send(message);
 		
 	}
+	
+	public void sendMailTo(String to, String subject, String msg) {
+		LOGGER.info("Sending e-mail");
+		SimpleMailMessage message = new SimpleMailMessage();
+
+		message.setFrom("mylzupport@gmail.com");		
+		message.setTo(to);
+		message.setSubject(subject);
+		message.setText(msg);
+		mailSender.send(message);
+		
+	}
 }
