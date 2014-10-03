@@ -111,12 +111,13 @@ public class WebSocketLobbyServlet extends WebSocketServlet {
         }
 
         private List<String> getActiveUsers() {
+        	LOGGER.info("Obteniendo lista de usuarios, Total: "+CONNECTIONS.size());
             final List<String> activeUsers = new ArrayList<String>();
-            for (ChatConnection connection : CONNECTIONS.values()) {
+            for (ChatConnection connection : CONNECTIONS.values()) {            	
                 activeUsers.add(connection.getUserName());
             }
             if(activeUsers.isEmpty()){
-            	LOGGER.error("No hay usuarios activos");
+            	LOGGER.error("No hay usuarios activos: "+this.getUserName());
             }
             return activeUsers;
         }
@@ -133,9 +134,10 @@ public class WebSocketLobbyServlet extends WebSocketServlet {
         }
 
         private void sendStatusInfoToOtherUsers(StatusInfoMessage message) {
-            final Collection<ChatConnection> otherUsersConnections = getAllChatConnectionsExceptThis();
+        	LOGGER.info("Enviado estado de: "+this.userName+" a los demás usuarios.");
+            final Collection<ChatConnection> otherUsersConnections = getAllChatConnectionsExceptThis();            
             for (ChatConnection connection : otherUsersConnections) {
-                try {
+                try {                	
                     connection.getWsOutbound().writeTextMessage(CharBuffer.wrap(jsonProcessor.toJson(message)));
                 } catch (IOException e) {
                 	LOGGER.error("No se pudo enviar el mensaje", e);
