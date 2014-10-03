@@ -1,6 +1,7 @@
 package com.myl.controller;
 
 
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Named;
@@ -38,7 +39,7 @@ public class LoginController extends ActionSupport implements
 	private String password;
 	private Usuario usuarioSel;
 	private UsuarioNegocio service;	
-	private HttpServletRequest request;
+	private HttpServletRequest request;	
 
 	public LoginController(UsuarioNegocio loginService) {
 		service = loginService;
@@ -47,19 +48,22 @@ public class LoginController extends ActionSupport implements
 	@Override
 	public String execute() throws Exception {
 		
-		usuarioSel = new Usuario();
+		Usuario usuarioAux = new Usuario();
 		List<Usuario> usuarios = null;
-		usuarioSel.setLogin(userId);
-		usuarioSel.setPassword(password);		
+		usuarioAux.setLogin(userId);
+		usuarioAux.setPassword(password);		
 				
 		try {
-			usuarios = service.findByExample(usuarioSel);
+			usuarios = service.findByExample(usuarioAux);
 						
 			if (usuarios.isEmpty()) {
 				addActionError("Usuario y/o contraseña incorrectos");
 			} else {
 				clearActionErrors();
-				ActionContext.getContext().getSession().put(NombreObjetosSesion.USUARIO, usuarios.get(0));
+				usuarioSel=usuarios.get(0);
+				usuarioSel.setFhLastSession(new Date());
+				usuarioSel=service.save(usuarioSel);
+				ActionContext.getContext().getSession().put(NombreObjetosSesion.USUARIO, usuarioSel);				
 				return "next";
 			}
 
@@ -107,6 +111,34 @@ public class LoginController extends ActionSupport implements
 	@Override
 	public void setServletRequest(HttpServletRequest arg0) {
 		this.request = arg0;
+	}
+
+	public Usuario getUsuarioSel() {
+		return usuarioSel;
+	}
+
+	public void setUsuarioSel(Usuario usuarioSel) {
+		this.usuarioSel = usuarioSel;
+	}
+
+	public UsuarioNegocio getService() {
+		return service;
+	}
+
+	public void setService(UsuarioNegocio service) {
+		this.service = service;
+	}
+
+	public HttpServletRequest getRequest() {
+		return request;
+	}
+
+	public void setRequest(HttpServletRequest request) {
+		this.request = request;
+	}
+
+	public static Logger getLogger() {
+		return LOGGER;
 	}
 
 }
