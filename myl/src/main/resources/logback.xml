@@ -37,14 +37,7 @@
 	
 	<!-- Se define el nivel para el logger de Struts -->	
 	<logger name="org.apache.struts2" level="ERROR" />
-	
-	<logger name="com.myl.util.WebSocketCharServlet" level="ERROR" />
-	<logger name="com.myl.util.WebSocketCharServlet" level="INFO" />
-	<logger name="com.myl.util.WebSocketCharServlet" level="WARN" />
-	
-	<logger name="com.myl.util.WebSocketLobbyServlet" level="ERROR" />
-	<logger name="com.myl.util.WebSocketLobbyServlet" level="INFO" />
-	<logger name="com.myl.util.WebSocketLobbyServlet" level="WARN" />
+
 	
 	<root>
 		<level value="INFO" />
