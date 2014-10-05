@@ -63,7 +63,7 @@
 					<td>v1.5</td>
 					<td><ul>
 							<li>-Se valida el tamaño del mazo antes de entrar a jugar.</li>
-							<li></li>							
+							<li>-Se agrega la sala de chat general</li>							
 						</ul></td>
 				</tr>
 			</table>

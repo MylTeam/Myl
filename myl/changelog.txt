@@ -20,3 +20,4 @@ v1.45
 	-Se agrega la opción para recuperar contraseña
 v1.5
 	-Se valida el tamaño del mazo antes de entrar a jugar.
+	-Se agrega la sala de chat general

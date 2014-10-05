@@ -18,6 +18,7 @@ var wsclient = (function() {
         }
         ws.onopen = function () {
             setConnected(true);
+            showConversation("Sala_Myl");
         };
         ws.onmessage = function (event) {
             var message = JSON.parse(event.data);
@@ -34,7 +35,7 @@ var wsclient = (function() {
             if (message.messageInfo) {
                 showConversation(message.messageInfo.from);
                 if(message.messageInfo.message!="plduelojsp" && message.messageInfo.message!="plduelojspresp"){
-                addMessage(message.messageInfo.from, message.messageInfo.message, cleanWhitespaces(message.messageInfo.from) + 'conversation');
+                	addMessage(message.messageInfo.from, message.messageInfo.message, cleanWhitespaces(message.messageInfo.from) + 'conversation');
                 }else if(message.messageInfo.message=="plduelojsp"){
                 	addMessageButton(message.messageInfo.from, message.messageInfo.message, cleanWhitespaces(message.messageInfo.from) + 'conversation');
                 }else if(message.messageInfo.message=="plduelojspresp"){
@@ -55,6 +56,8 @@ var wsclient = (function() {
                 for (var i=0; i<activeUsers.length; i++) {
                     addOnlineUser(activeUsers[i],formats[i]);
                 }
+            } else if(message.chatInfo){
+            	addMessage(message.chatInfo.from, message.chatInfo.message, 'Sala_Mylconversation');
             } else if (message.cardInfo){
             	processCard(message.cardInfo.from, message.cardInfo.message, message.cardInfo.carta,message.cardInfo.origen,message.cardInfo.destino);
             }
@@ -131,12 +134,13 @@ var wsclient = (function() {
         $('<p class="messageslobby"></p><textarea id="' + conversationId + 'message"></textarea>').appendTo(conversationPanel);
         var sendButton = createSendButton(name);
         sendButton.appendTo(conversationPanel);
-        var closeButton = createCloseButton(cleanWhitespaces(name));
-        closeButton.appendTo(conversationPanel);
-        var playButton = createPlayButton(cleanWhitespaces(name));
-        playButton.appendTo(conversationPanel);
+        if(name!="Sala_Myl"){
+        	var closeButton = createCloseButton(cleanWhitespaces(name));
+        	closeButton.appendTo(conversationPanel);
+        	var playButton = createPlayButton(cleanWhitespaces(name));
+        	playButton.appendTo(conversationPanel);        	
+        }
         conversationPanel.appendTo($('#conversations'));
-        
         $("#"+conversationId + "message").keyup(function(event){
             if(event.keyCode == 13){
             	sendButton.click();
@@ -151,7 +155,11 @@ var wsclient = (function() {
         button.click(function () {
             var from = document.getElementById('userName').value;
             var message = document.getElementById(conversationId+'message').value;
-            toChat(from, name, message);
+            if(name=="Sala_Myl"){
+            	toChatAll(from, message);
+            }else{
+            	toChat(from, name, message);
+            }
             addMessage(from, message, conversationId);
             document.getElementById(conversationId+'message').value = '';
         });
@@ -219,6 +227,10 @@ var wsclient = (function() {
         ws.send(JSON.stringify({messageInfo : {from : sender, to : receiver, message : message}}));
     }
     
+    function toChatAll(sender, message) {
+        ws.send(JSON.stringify({chatInfo : {from : sender, message : message}}));
+    }
+    
     function toChatCard(sender, receiver, message, card, origen, destino) {
         ws.send(JSON.stringify({cardInfo : {from : sender, to : receiver, message : message, carta : card, origen: origen, destino : destino}}));
     }
@@ -282,6 +294,7 @@ var wsclient = (function() {
         connect : connect,
         disconnect : disconnect,
         toChat: toChat,
+        toChatAll: toChatAll,
         toChatCard: toChatCard,
         addMessage: addMessage,
         allowDrop : allowDrop,

@@ -20,6 +20,7 @@ import org.slf4j.LoggerFactory;
 
 import com.google.gson.Gson;
 import com.myl.messages.CardInfoMessage;
+import com.myl.messages.ChatInfoMessage;
 import com.myl.messages.ConnectionInfoMessage;
 import com.myl.messages.MessageInfoMessage;
 import com.myl.messages.StatusInfoMessage;
@@ -84,11 +85,9 @@ public class WebSocketLobbyServlet extends WebSocketServlet {
         	if(charBuffer.toString().contains("messageInfo")){
         		final MessageInfoMessage message = jsonProcessor.fromJson(charBuffer.toString(), MessageInfoMessage.class);
         		sendMessage(message.getMessageInfo().getTo(), message);
-        		
-        	}else if(charBuffer.toString().contains("cardInfo")){
-        		final CardInfoMessage message = jsonProcessor.fromJson(charBuffer.toString(), CardInfoMessage.class);
-        		sendMessage(message.getCardInfo().getTo(), message);
-        		
+        	}else if(charBuffer.toString().contains("chatInfo")){
+        		final ChatInfoMessage message = jsonProcessor.fromJson(charBuffer.toString(), ChatInfoMessage.class);        		
+        		sendMessageToAll(message);	
         	}
         }
 
@@ -135,7 +134,18 @@ public class WebSocketLobbyServlet extends WebSocketServlet {
 
         private void sendStatusInfoToOtherUsers(StatusInfoMessage message) {
         	LOGGER.info("Enviado estado de: "+this.userName+" a los demás usuarios.");
-            final Collection<ChatConnection> otherUsersConnections = getAllChatConnectionsExceptThis();            
+        	final Collection<ChatConnection> otherUsersConnections = getAllChatConnectionsExceptThis();            
+            for (ChatConnection connection : otherUsersConnections) {
+                try {                	
+                    connection.getWsOutbound().writeTextMessage(CharBuffer.wrap(jsonProcessor.toJson(message)));
+                } catch (IOException e) {
+                	LOGGER.error("No se pudo enviar el mensaje", e);
+                }
+            }            
+        }
+        
+        private void sendMessageToAll(Object message) {
+        	final Collection<ChatConnection> otherUsersConnections = getAllChatConnectionsAvailable();            
             for (ChatConnection connection : otherUsersConnections) {
                 try {                	
                     connection.getWsOutbound().writeTextMessage(CharBuffer.wrap(jsonProcessor.toJson(message)));
@@ -148,6 +158,11 @@ public class WebSocketLobbyServlet extends WebSocketServlet {
         private Collection<ChatConnection> getAllChatConnectionsExceptThis() {
             final Collection<ChatConnection> allConnections = CONNECTIONS.values();
             allConnections.remove(this);
+            return allConnections;
+        }
+        
+        private Collection<ChatConnection> getAllChatConnectionsAvailable() {
+            final Collection<ChatConnection> allConnections = CONNECTIONS.values();            
             return allConnections;
         }
 
