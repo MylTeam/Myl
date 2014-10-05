@@ -78,7 +78,7 @@
 			<result name="registro">/registro/index-editNew.jsp</result>
 			<result name="error">/errorPage.jsp</result>
 			<result name="error500">/errorPage.jsp</result>
-			<result name="noAutorizado">/accessDenied.jsp</result>
+			<result name="denied">/accessDenied.jsp</result>
 			<result name="session">/session.jsp</result>
 		</global-results>
 		<global-exception-mappings>

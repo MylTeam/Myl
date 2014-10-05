@@ -1,5 +1,6 @@
 package com.myl.negocio;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.inject.Named;
@@ -51,6 +52,11 @@ public class DeckCartaNegocio {
 	@Transactional
 	public void deleteCardsFromDeck(Integer deckId){
 		deckCartaDao.deleteCardsFromDeck(deckId);
+	}
+	
+	@Transactional
+	public BigDecimal getDeckSize(Integer deckId){
+		return deckCartaDao.getDeckSize(deckId);
 	}
 	
 	public DeckCartaDao getDeckCartaDao() {

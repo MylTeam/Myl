@@ -52,6 +52,20 @@
 							<li>-Se regresa al estilo de cambio de ventana.</li>							
 						</ul></td>
 				</tr>
+				<tr>
+					<td>v1.45</td>
+					<td><ul>
+							<li>-Se agrega más detalle al perfil del usuario.</li>
+							<li>-Se agrega la opción para recuperar contraseña..</li>							
+						</ul></td>
+				</tr>
+				<tr>
+					<td>v1.5</td>
+					<td><ul>
+							<li>-Se valida el tamaño del mazo antes de entrar a jugar.</li>
+							<li></li>							
+						</ul></td>
+				</tr>
 			</table>
 		</form>
 	</center>

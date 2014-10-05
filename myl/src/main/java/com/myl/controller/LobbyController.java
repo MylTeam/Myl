@@ -10,6 +10,7 @@ import org.apache.struts2.rest.HttpHeaders;
 
 import com.myl.modelo.Usuario;
 import com.myl.negocio.CartaNegocio;
+import com.myl.negocio.DeckCartaNegocio;
 import com.myl.negocio.DeckNegocio;
 import com.myl.util.NombreObjetosSesion;
 import com.opensymphony.xwork2.ActionContext;
@@ -27,23 +28,28 @@ public class LobbyController extends ActionSupport {
 	private String username;
 	private String format;
 	
-	private CartaNegocio cartaNegocio;
 	private DeckNegocio	deckNegocio;
+	private DeckCartaNegocio deckCartaNegocio;
 	
 	@SkipValidation
 	public HttpHeaders index() {
 		usuario=(Usuario) ActionContext.getContext().getSession().get(NombreObjetosSesion.USUARIO);
 		setUsername(usuario.getLogin());
 		
-		
-		if(usuario.getDeckPred()==0){					
+		if(usuario.getDeckPred()==0){
+			addActionError("Necesitas armar un mazo para poder jugar.");
 			return new DefaultHttpHeaders("nodeck").disableCaching();
-		}else{
-			setFormat(deckNegocio.findById(usuario.getDeckPred()).getFormato().getNombre());
-			return new DefaultHttpHeaders("index").disableCaching();
+		
+		}else{			
+			if(deckCartaNegocio.getDeckSize(usuario.getDeckPred()).intValue()!=50){
+				addActionError("Tu mazo debe contener 50 cartas exactamente para poder jugar.");
+				return new DefaultHttpHeaders("nodeck").disableCaching();
+			}else{
+				setFormat(deckNegocio.findById(usuario.getDeckPred()).getFormato().getNombre());
+				return new DefaultHttpHeaders("index").disableCaching();
+			}
 		}
 	}
-	
 	
 	public Integer getIdSel() {
 		return idSel;
@@ -73,17 +79,6 @@ public class LobbyController extends ActionSupport {
 		this.username = username;
 	}
 
-
-	public CartaNegocio getCartaNegocio() {
-		return cartaNegocio;
-	}
-
-
-	public void setCartaNegocio(CartaNegocio cartaNegocio) {
-		this.cartaNegocio = cartaNegocio;
-	}
-
-
 	public String getFormat() {
 		return format;
 	}
@@ -101,6 +96,16 @@ public class LobbyController extends ActionSupport {
 
 	public void setDeckNegocio(DeckNegocio deckNegocio) {
 		this.deckNegocio = deckNegocio;
+	}
+
+
+	public DeckCartaNegocio getDeckCartaNegocio() {
+		return deckCartaNegocio;
+	}
+
+
+	public void setDeckCartaNegocio(DeckCartaNegocio deckCartaNegocio) {
+		this.deckCartaNegocio = deckCartaNegocio;
 	}
 
 }

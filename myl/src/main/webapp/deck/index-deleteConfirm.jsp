@@ -45,7 +45,7 @@
 	
 	<table style="width: 100%">
 	<tr><td style="width: 100%;">
-	<img id="viewCard" height="100%"/>
+	<img id="viewCard" height="209" width="150"/>
 	</td></tr>
 	</table>
 	

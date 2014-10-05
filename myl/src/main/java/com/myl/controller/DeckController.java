@@ -101,15 +101,22 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>,
 		Type listType = new TypeToken<List<DeckCarta>>() {
 		}.getType();
 		deckCartas = jsonProcessor.fromJson(lista, listType);
+		
+		/**
+		 * Verifica que el mazo no esté vacío
+		 */
 		if (deckCartas.isEmpty()) {
 			addActionError("El mazo está vacío");
 		}
 		
-
+		/**
+		 * Verifica que el formato sea correcto 
+		 */
 		String res=deckNegocio.isCorrectFormat(deckCartas, model.getFormatoId());
 		if(!res.isEmpty()){
 			addActionError(res);
 		}
+				
 		
 		if (hasFieldErrors() || hasActionErrors()) {
 			ActionContext.getContext().getSession().put("deckTmp", deckCartas);
@@ -146,12 +153,19 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>,
 
 	@SkipValidation
 	public String edit() {
-		ediciones = edicionNegocio.findAll();
-		razas = cartaNegocio.findByCriteria();
-		tipos = cartaNegocio.findByCriteriaTipo();
-		formatos = formatoNegocio.findAll();
-		
-		return "edit";
+		String result="edit";
+		Usuario aux=(Usuario) ActionContext.getContext().getSession().get(NombreObjetosSesion.USUARIO);		
+		if(!model.getUsuarioId().equals(aux.getIdUsuario())){
+			System.out.println();
+			result="denied";
+		}else{
+			ediciones = edicionNegocio.findAll();
+			razas = cartaNegocio.findByCriteria();
+			tipos = cartaNegocio.findByCriteriaTipo();
+			formatos = formatoNegocio.findAll();			
+		}
+
+		return result;
 	}
 
 	public void validateUpdate() {
@@ -204,7 +218,12 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>,
 
 	@SkipValidation
 	public String deleteConfirm() {
-		return "deleteConfirm";
+		String result="deleteConfirm";
+		Usuario aux=(Usuario) ActionContext.getContext().getSession().get(NombreObjetosSesion.USUARIO);		
+		if(!model.getUsuarioId().equals(aux.getIdUsuario())){
+			result="denied";
+		}
+		return result;
 	}
 
 	public void validateDestroy() {

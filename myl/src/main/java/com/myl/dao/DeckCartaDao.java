@@ -1,13 +1,17 @@
 package com.myl.dao;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
 
 import org.hibernate.Query;
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Projections;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
+import com.myl.modelo.Carta;
 import com.myl.modelo.DeckCarta;
 
 @Singleton
@@ -48,6 +52,13 @@ public class DeckCartaDao extends HibernateDaoSupport {
 				.setParameter("deckId", deckId);
 		
 		query.executeUpdate();
+	}
+	
+	public BigDecimal getDeckSize(Integer deckId){
+		Query query = getSession().createSQLQuery("select sum(CartaQt) from deckcarta where DeckId=:deckId")				
+				.setParameter("deckId", deckId);
+		
+		return (BigDecimal) query.uniqueResult();
 	}
 
 	@SuppressWarnings("unchecked")

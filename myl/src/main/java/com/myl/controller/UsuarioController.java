@@ -70,7 +70,7 @@ public class UsuarioController extends ActionSupport implements ModelDriven<Usua
 		lista=deckNegocio.findByExample(deckAux);
 		
 		if(usuario.getEmail()==null || usuario.getIdPais()==null){
-			addActionError("Favor de actualizar tus datos");
+			addActionMessage("Favor de actualizar tus datos");
 		}
 		
 		return new DefaultHttpHeaders("index").disableCaching();
@@ -83,9 +83,8 @@ public class UsuarioController extends ActionSupport implements ModelDriven<Usua
 		
 		usuario=(Usuario) ActionContext.getContext().getSession().get(NombreObjetosSesion.USUARIO);
 		
-		if(!usuario.getIdUsuario().equals(idSel)){
-			System.out.println("usuario: "+usuario.getIdUsuario()+" idsel "+idSel);
-			result="success";
+		if(!usuario.getIdUsuario().equals(idSel)){			
+			result="denied";
 		}
 		
 		return result;
