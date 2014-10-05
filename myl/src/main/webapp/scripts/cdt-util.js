@@ -11,6 +11,11 @@
 /**
  * Objeto que modifica los controles del plugin de DataTables de jQuery
  */
+$(document).ready(function() {
+	var images = ['barco.jpg', 'anubis.jpg', 'zeus.jpg', 'cronos.jpg', 'quetzalcoatl.jpg'];
+	$('body').css({'background-image': 'url('+$("#hdnRutaContexto").val()+'/images/' + images[Math.floor(Math.random() * images.length)] + ')'});
+});
+
 var localizacionDataTables = {
 	oLanguage : {
 		oPaginate : {
@@ -228,3 +233,4 @@ $(document).ready(function() {
 $(document).ready(function() {	
 	$(".ui-state-highlight").css("margin-top","0px");
 });
+
