@@ -1,5 +1,7 @@
 @import "forms.css";
 
+#iframe{background-image: url("images/old_paper.jpg");}
+
 body {
 	text-align: center;
 	width: 95%;
@@ -75,7 +77,7 @@ pageHMenu {
 	min-width: 1014px;
 }
 
-#pageMenu {
+#pageMenu, #pageMenuDialog {
 	-moz-border-radius: 15px;
 	font-variant: small-caps;
 	top: 100px;
@@ -91,7 +93,10 @@ pageHMenu {
 	height: 38px;
 }
 
-#pageMenu h3 {
+
+
+
+#pageMenu h3, #pageMenuDialog h3{
     background-color: #0B3E6F;
     background-image: url("images/title-bg.png");       
     background-repeat: repeat-x;
@@ -104,7 +109,7 @@ pageHMenu {
     
 }
 
-#pageMenu h4 {
+#pageMenu h4, #pageMenuDialog h4 {
 	background-color: #48F;
 	background-image: url("images/title-bg.png");
 	background-repeat: repeat-x;
@@ -113,18 +118,18 @@ pageHMenu {
 	color: white
 }
 
-#pageMenu ul {
+#pageMenu ul, #pageMenuDialog ul {
 	text-indent: 0px;
 }
 
-#pageMenu a {
+#pageMenu a, #pageMenuDialog a{
 	padding: 0px;
 	line-height: 150%;
 	text-decoration: none;
 	color: white;
 }
 
-#pageMenu h3:hover {	
+#pageMenu h3:hover, #pageMenuDialog h3:hover {	
 	color: white; 	
 	text-decoration: none;	
 	background-color: #333333;

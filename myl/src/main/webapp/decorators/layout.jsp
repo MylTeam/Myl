@@ -27,17 +27,22 @@
 <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/Estilos/default.css?123" />
 
 
+
 <jsp:text>
-	<![CDATA[									
+	<![CDATA[
+	<script src="${pageContext.request.contextPath}/scripts/jquery-ui.js" type="text/javascript"></script>
 			<script src="${pageContext.request.contextPath}/struts/js/plugins/jquery.form.min.js" type="text/javascript"></script>
 			<script src="${pageContext.request.contextPath}/scripts/jquery.lazyload.js" type="text/javascript"></script>
 			<script src="${pageContext.request.contextPath}/scripts/dataTables/media/js/jquery.dataTables.js" type="text/javascript"></script>			
 			<script src="${pageContext.request.contextPath}/scripts/jquery.feedback.js" type="text/javascript"></script>			
 			<script src="${pageContext.request.contextPath}/scripts/cdt-util.js" type="text/javascript"></script>
+			<script src="${pageContext.request.contextPath}/scripts/help.js" type="text/javascript"></script>
+			
 		]]>
 </jsp:text>
 
 <decorator:head />
+
 
 </head>
 <body>
@@ -59,12 +64,12 @@
 						href="${pageContext.request.contextPath}/usuario">
 							<h3 style="width: 97%">Perfil</h3>
 					</a></td>
-					<td width="20%"><a class="selected"
+					<td width="20%"><a class="selected" 
 						href="${pageContext.request.contextPath}/lobby">
 							<h3 style="width: 97%">Jugar</h3>
 					</a></td>
-					<td width="20%"><a class="selected"
-						href="${pageContext.request.contextPath}/help"><h3
+					<td width="20%"><a class="selected" id="ahelp"
+						href="javascript:showHelp();" ><h3
 								style="width: 97%">Ayuda y reglas</h3></a></td>
 					<td width="20%"><a class="selected"
 						href="${pageContext.request.contextPath}/contacto/new"><h3
@@ -90,6 +95,34 @@
 		</s:if>
 	</div>
 
+	<div style="display:none;">
+	 <div id="dialog-help" >
+	 	<div id="pageMenuDialog">
+	 		<center>
+			<table style="margin-top: 0px;">
+				<tr>
+					<td width="20%"><a class="selected"
+						href="help/index-cards.jsp" target="iframe">
+							<h3 style="width: 97%">Reglas generales</h3>
+					</a></td>
+					<td width="20%"><a class="selected" 
+						href="help/index-howto.jsp" target="iframe">
+							<h3 style="width: 97%">Como jugar</h3>
+					</a></td>
+					<td width="20%"><a class="selected" 
+						href="help/index-formatos.jsp" target="iframe">
+							<h3 style="width: 97%">Formatos</h3>
+					</a></td>
+				</tr>
+			</table>
+			</center>
+		</div>
+	
+	 	<iframe src="${pageContext.request.contextPath}/help/index.jsp" width="100%" height="90%" id="iframe" name="iframe"/>
+	 	
+	</div>
+	</div>
+	
 </body>
 	</html>
 </jsp:root>

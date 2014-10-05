@@ -10,6 +10,7 @@
 <link type="text/css" href="${pageContext.request.contextPath}/scripts/jquery.contextMenu.css" rel="stylesheet" />
 <link type="text/css" href="${pageContext.request.contextPath}/Estilos/smoothness/jquery-ui-1.8.22.custom.css" rel="stylesheet" />
 <link type="text/css" href="${pageContext.request.contextPath}/Estilos/defaultchat.css?123" rel="stylesheet" />
+
 <jsp:text>
 	<![CDATA[
 			<script type="text/javascript" src="${pageContext.request.contextPath}/scripts/jquery-1.7.2.min.js"></script>
@@ -259,9 +260,25 @@
 	</div>
 	
 	<div style="display:none;">
-	 <div id="dialog-help" >
-	 
-	 	<iframe src="${pageContext.request.contextPath}/help/index.jsp" width="100%" height="70%" id="iframe"/>
+	 <div id="dialog-help" style="background-color: black;">
+	 	
+	 		<center>
+			<table style="margin-top: 0px;background-color: gray;">
+				<tr>
+					<td width="20%" align="center"><a class="selected"
+						href="help/index.jsp" target="iframe">Reglas generales
+					</a></td>
+					<td width="20%" align="center"><a class="selected" 
+						href="help/index-howto.jsp" target="iframe">Como jugar
+					</a></td>
+					<td width="20%" align="center"><a class="selected" 
+						href="help/index-formatos.jsp" target="iframe">Formatos
+					</a></td>
+				</tr>
+			</table>
+			</center>
+		
+	 	<iframe src="${pageContext.request.contextPath}/help/index.jsp" width="100%" height="70%" id="iframe" name="iframe"/>
 	 	
 	</div>
 	</div>

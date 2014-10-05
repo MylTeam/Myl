@@ -21,3 +21,5 @@ v1.45
 v1.5
 	-Se valida el tamaño del mazo antes de entrar a jugar.
 	-Se agrega la sala de chat general
+v1.6
+	-Se modifica la sección de reglas y ayuda

@@ -20,19 +20,20 @@ vertical-align: top;
 
 </head>
 <body>
-<form style="width: 95%; border: 0px;margin-left: auto; margin-right: auto;" id="helpform">
+<form style="width: 95%; height:500px; border: 0px;margin-left: auto; margin-right: auto;" id="helpform">
 	<input type="hidden" name="context" id="context" value="${pageContext.request.contextPath}" />
 	
 	<h1>Mitos y Leyendas</h1>
 	En Mitos y Leyendas adoptas el papel de un señor de la guerra, habitante de un castillo cuyo único propósito es reducir los castillos enemigos a escombros. Para lograr esto se sirve de riquezas que gastara en pagar a poderosos guerreros que se aliaran con el y tecnología que le dará ventaja en el campo de batalla.
 	Todos los componentes de estas batallas épicas se encuentran representados por las cartas que componen la baraja de cada contrincante. Durante el juego los jugadores toman turnos consecutivos y con el transcurso de la partida estas cartas se juegan tanto para asediar el castillo oponente como para defender el propio.
-	<h2>Tipos de cartas</h2>
+	
+		<h2>Tipos de cartas</h2>
 	<table><tr><td colspan="2">
 	<h3>Aliados</h3>
 	</td></tr><tr><td colspan="2">
 	Son cartas fundamentales en el juego, ya que son las cartas usadas mayoritariamente para atacar al oponente. Se
 	juegan en la línea de defensa y pasan a la línea de ataque al momento de realizar el mismo.</td></tr>
-	<tr><td colspan="2"><IMG alt="Aliado" src="${pageContext.request.contextPath}/images/myl/aliado.jpg" height="300px" align="left"/>
+	<tr><td colspan="2"><IMG alt="Aliado" src="${pageContext.request.contextPath}/images/myl/aliado.jpg" height="200px" align="left"/>
 		<h4>Habilidades</h4>
 		
 		<ul>
@@ -66,11 +67,11 @@ vertical-align: top;
 	<td colspan="2" style="width: 50%">
 	<h3>Armas</h3></td>
 	</tr>
-	<tr><td ><IMG alt="Talismán" src="${pageContext.request.contextPath}/images/myl/talisman.jpg" height="300px" align="left"/>
+	<tr><td ><IMG alt="Talismán" src="${pageContext.request.contextPath}/images/myl/talisman.jpg" height="200px" align="left"/>
 	Son cartas de efecto inmediato que al ser jugadas son enviadas al cementerio (excepto por un efecto que no lo permita), estas facilitan el juego dándole más fuerza a tus aliados, destruyendo y desterrando los aliados oponentes,
 	anulándolos, entre muchas cosas más. El efecto que causan los talismanes es, normalmente, hasta la fase final, a menos que la carta lo aclare, diciendo que es de efecto permanente, por cierta cantidad de turnos o hasta que cierto evento ocurra.
 	</td>
-	<td ><IMG alt="Arma" src="${pageContext.request.contextPath}/images/myl/arma.jpg" height="300px" align="left"/>
+	<td ><IMG alt="Arma" src="${pageContext.request.contextPath}/images/myl/arma.jpg" height="200px" align="left"/>
 	Cartas que se sitúan bajo las cartas de Aliados dándoles más fuerza u otra habilidad (ejemplo:Guantes de Hierro) o en la Línea de Apoyo en caso de tener la habilidad Maquinaria o Embarcación. Las armas con habilidad
 	Maquinaria necesitan cierta cantidad de Aliados para usar sus habilidades, que aparece junto a la habilidad Tamaño. En caso de no aparecer la habilidad Tamaño, se entiende que tiene Tamaño 1. En el caso en que el arma
 	tenga en su habilidad la palabra Embarcación, puede jugarse en la Línea de Apoyo, sin necesidad de tener aliados.
@@ -81,12 +82,12 @@ vertical-align: top;
 	<td>
 	<h3>Oro</h3></td>
 	</tr>
-	<tr><td><IMG alt="Tótem" src="${pageContext.request.contextPath}/images/myl/totem.jpg" height="300px" align="left"/>
+	<tr><td><IMG alt="Tótem" src="${pageContext.request.contextPath}/images/myl/totem.jpg" height="200px" align="left"/>
 	Esta carta se pone en la línea de apoyo y tiene habilidades que apoyan o refuerzan las habilidades de otras cartas. Fueron las primeras en obtener la habilidad Orbe(Solo puede ser afectado por cartas que afecten puntualmente a
 	orbes, es decir, si el arma Orbe es un Tótem, no será afectada por cartas que afecten Tótems, o cartas que afecten cualquier otro tipo de cartas, al menos que esta lo aclare). Los más relevantes son: Tótem del Guanaco (La ira del
 	Nahual), Humm-SP y Trípoli-SP, entre otros.
 	</td>
-	<td ><IMG alt="Oro" src="${pageContext.request.contextPath}/images/myl/oro.jpg" height="300px" align="left"/>
+	<td ><IMG alt="Oro" src="${pageContext.request.contextPath}/images/myl/oro.jpg" height="200px" align="left"/>
 	Este tipo de carta es fundamental para cualquier castillo y sirve para pagar el coste de oro de las cartas y las habilidades que lo requieran. Existen 3 tipos de oros:
 	<UL>
 		<li><b>Oros sin habilidad:</b> Cartas de Oro que pueden ser usados para pagar costes o habilidades, pueden ser usados como Oro Inicial. Puedes tener más de 3 copias de estos oros en tu castillo.</li>
@@ -96,6 +97,7 @@ vertical-align: top;
 	</td>
 	</tr>		
 	</table>
+	
 	<h2>Características específicas de la baraja y el juego</h2>
 	<H3>Campo de batalla</H3>
 	Es el lugar donde ocurren los combates contra tu oponente. Cada carta de tu Mazo Castillo debe ser ubicada en un lugar específico dentro del Campo de Batalla. Esta área está dividida en varias partes, cada una de las cuales cumple una función específica.
@@ -217,10 +219,7 @@ Se puede jugar cartas o utilizar habilidades que digan que pueden ser usadas al 
 los efectos que indiquen que terminan en la fase final y los efectos no especificados. Se puede robar una carta del
 mazo castillo, terminando el turno y comenzando el turno del oponente.
 </li>
-
-	<h2>Ediciones</h2>
-	
-	
+		 	
 	
 	
 	</form>
