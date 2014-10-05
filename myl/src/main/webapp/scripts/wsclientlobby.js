@@ -201,7 +201,11 @@ var wsclient = (function() {
 
     function addMessage (from, message, conversationPanelId) {
         var messages = $('#' + conversationPanelId + ' .messageslobby');
-        $('<div class="message"><span><b>' + from + '</b> dice:</span><p>' + $('<p/>').text(message).html() + '</p></div>').appendTo(messages);
+        if(conversationPanelId=="Sala_Mylconversation"){
+        	$('<div class="message"><span><b>' + from + '</b> dice: </span>'+message+'</div>').appendTo(messages);
+        }else{        
+        	$('<div class="message"><span><b>' + from + '</b> dice:</span><p>' + $('<p/>').text(message).html() + '</p></div>').appendTo(messages);
+        }
         messages.scrollTop(messages[0].scrollHeight);
         $('#'+conversationPanelId+' textarea').focus();
     }

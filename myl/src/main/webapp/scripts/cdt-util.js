@@ -224,3 +224,7 @@ function distanciaEntreFechas(feuno, fedos) {
 $(document).ready(function() {	
 	$(".ui-state-error").css("margin-top","0px");
 });
+
+$(document).ready(function() {	
+	$(".ui-state-highlight").css("margin-top","0px");
+});

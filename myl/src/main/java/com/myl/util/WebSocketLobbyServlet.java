@@ -147,8 +147,10 @@ public class WebSocketLobbyServlet extends WebSocketServlet {
         private void sendMessageToAll(Object message) {
         	final Collection<ChatConnection> otherUsersConnections = getAllChatConnectionsAvailable();            
             for (ChatConnection connection : otherUsersConnections) {
-                try {                	
-                    connection.getWsOutbound().writeTextMessage(CharBuffer.wrap(jsonProcessor.toJson(message)));
+                try {
+                	if(!connection.getUserName().equals(this.getUserName())){
+                		connection.getWsOutbound().writeTextMessage(CharBuffer.wrap(jsonProcessor.toJson(message)));
+                	}
                 } catch (IOException e) {
                 	LOGGER.error("No se pudo enviar el mensaje", e);
                 }
@@ -162,7 +164,8 @@ public class WebSocketLobbyServlet extends WebSocketServlet {
         }
         
         private Collection<ChatConnection> getAllChatConnectionsAvailable() {
-            final Collection<ChatConnection> allConnections = CONNECTIONS.values();            
+            final Collection<ChatConnection> allConnections = CONNECTIONS.values();
+            
             return allConnections;
         }
 
