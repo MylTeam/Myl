@@ -156,7 +156,6 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>,
 		String result="edit";
 		Usuario aux=(Usuario) ActionContext.getContext().getSession().get(NombreObjetosSesion.USUARIO);		
 		if(!model.getUsuarioId().equals(aux.getIdUsuario())){
-			System.out.println();
 			result="denied";
 		}else{
 			ediciones = edicionNegocio.findAll();

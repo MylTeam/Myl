@@ -26,11 +26,10 @@ public class Spoiler {
 	
 	
 
-	public Spoiler(){
+	private Spoiler(){
 		
 	}
 		public static void clean() throws IOException {
-			System.out.println("clean");
 			try {							
 				File f=new File("C:/Users/Carlos Santiago/Documents/prueba/");
 				for(File file:f.listFiles()){
