@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.inject.Named;
 
-import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 import org.apache.struts2.interceptor.validation.SkipValidation;
@@ -202,9 +201,7 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>,
 		Type listType = new TypeToken<List<DeckCarta>>() {
 		}.getType();
 		deckCartas = jsonProcessor.fromJson(lista, listType);
-
 		model = deckNegocio.save(model);
-
 		deckCartaNegocio.deleteCardsFromDeck(model.getDeckId());
 
 		for (DeckCarta dc : deckCartas) {

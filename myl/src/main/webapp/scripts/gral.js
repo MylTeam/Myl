@@ -11,6 +11,19 @@ function notifyUserDisconnected(){
 	});
 }
 
+function notifyEndGame(){
+	$( "#dialog-udis" ).dialog({ 
+		width: "20%",
+		resizable: false,
+		title: "Juego Terminado",
+		buttons: {
+			"Aceptar": function () {
+			$(this).dialog("close");
+			}
+		}
+	});
+}
+
 
 function notifyNewGame(){
 	$( "#dialog-newg" ).dialog({ 
@@ -27,7 +40,6 @@ function notifyNewGame(){
 				$(this).dialog("close");
 				var url="http://"+location.host+$("#hidden").val()+"/lobby";
 	        	window.location=url;
-//				window.close();
 			}
 	
 		}

@@ -47,16 +47,26 @@ function dropxcards(cant){
 	}
 	for(var c=0;c<cant;c++){
 		obj["cementerio1"].unshift(obj["deck1"].splice(0,1)[0]);
-		msgLogCard(obj["cementerio1"][0], "deck1", "cementerio1", "Botando carta");
-	}
+		var count=c+1;
+		if(cant>1){
+			msgLogCard(obj["cementerio1"][0], "deck1", "cementerio1", "Botando carta: "+count+" de "+cant);
+		}else{
+			msgLogCard(obj["cementerio1"][0], "deck1", "cementerio1", "Botando carta");
+		}
+	}	
 	var c = document.getElementById("cementerio1");
 	if (obj["cementerio1"].length != 0) {
 		c.src = context + "/images/myl/"+obj["cementerio1"][0].siglas+"/" + obj["cementerio1"][0].numero+ ".jpg";
 	} else {
 		c.src = context + "/images/myl/cementerio1.jpg";
-	}	
-	if(deckLength<cantAux){
-		msgLog("El castillo no tiene mas cartas");
+	}
+	
+	if(deckLength<cantAux || obj.deck1.length==0){
+//		msgLog("El castillo no tiene mas cartas");		
+		msgPhase("Mi castillo no tiene mas cartas", "fendgmeovr");
+		$("#content-udis").empty();
+		$("#content-udis").append("Has sido derrotado por "+$("#user2").val()+".");
+		notifyEndGame();
 	}
 }
 

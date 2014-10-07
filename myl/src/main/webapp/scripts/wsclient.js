@@ -91,9 +91,13 @@ var wsclient = (function() {
             	}
             } else if(message.phaseInfo){
             	addMessagePhase(message.phaseInfo.from, message.phaseInfo.message, cleanWhitespaces(message.phaseInfo.from) + 'conversation');
-            	if(message.phaseInfo.phase!="dado"){
+            	if(message.phaseInfo.phase!="dado" && message.phaseInfo.phase!="fendgmeovr"){
             		disablePhases();
             		$("#"+message.phaseInfo.phase).attr("class","faseActive");
+            	}else if(message.phaseInfo.phase=="fendgmeovr"){
+            		$("#content-udis").empty();
+            		$("#content-udis").append("¡Felicidades!, has derrotado a "+message.phaseInfo.from+".");
+            		notifyEndGame();
             	}
             }
         }
