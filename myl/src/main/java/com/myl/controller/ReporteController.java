@@ -8,6 +8,8 @@ import java.util.Map;
 
 import javax.inject.Named;
 
+import ch.qos.logback.classic.Logger;
+
 import com.myl.modelo.Usuario;
 import com.myl.negocio.UsuarioNegocio;
 import com.myl.util.IssueMail;
@@ -37,6 +39,7 @@ public class ReporteController extends ActionSupport {
 	private String stackTrace;
 	private String exceptionName;
 	private Usuario usuario;
+	private Logger LOGGER;
 	
 	
 	public String generaReporte() {
@@ -56,6 +59,7 @@ public class ReporteController extends ActionSupport {
 			msg="Fecha: "+fecha+"\n URL: "+appError.getUrl()+"\n Error: \n "+appError.getStackTrace();
 		}
 		mailSender.sendMail("mylzupport@gmail.com", appError.getExceptionName(), msg);
+		LOGGER.info(msg);
 	}
 
 	public IssueMail getMailSender() {
@@ -125,6 +129,14 @@ public class ReporteController extends ActionSupport {
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}
+
+	public Logger getLOGGER() {
+		return LOGGER;
+	}
+
+	public void setLOGGER(Logger lOGGER) {
+		LOGGER = lOGGER;
 	}
 
 }

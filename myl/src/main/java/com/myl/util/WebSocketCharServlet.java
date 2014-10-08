@@ -112,6 +112,7 @@ public class WebSocketCharServlet extends WebSocketServlet {
         	}
         }
 
+
         public String getUserName() {
             return userName;
         }
