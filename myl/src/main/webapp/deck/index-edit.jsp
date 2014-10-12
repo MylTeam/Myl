@@ -10,7 +10,7 @@
 	<![CDATA[
 	
 			
-			<script src="${pageContext.request.contextPath}/scripts/deck.js" type="text/javascript"></script>
+			<script src="${pageContext.request.contextPath}/deck/js/deck.js" type="text/javascript"></script>
 			
 		 ]]>
 

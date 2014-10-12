@@ -16,15 +16,15 @@
 			<script type="text/javascript" src="${pageContext.request.contextPath}/scripts/jquery-1.7.2.min.js"></script>
 			<script type="text/javascript" src="${pageContext.request.contextPath}/scripts/jquery-ui-1.8.22.custom.min.js"></script>
 			<script src="${pageContext.request.contextPath}/scripts/jquery.contextMenu.js" type="text/javascript"></script>
-			<script src="${pageContext.request.contextPath}/scripts/wsclient.js?2032" type="text/javascript"></script>
-			<script src="${pageContext.request.contextPath}/scripts/game.js" type="text/javascript"></script>
-			<script src="${pageContext.request.contextPath}/scripts/castillo.js" type="text/javascript"></script>
-			<script src="${pageContext.request.contextPath}/scripts/menu.js" type="text/javascript"></script>
-			<script src="${pageContext.request.contextPath}/scripts/oponente.js" type="text/javascript"></script>
-			<script src="${pageContext.request.contextPath}/scripts/mousetrap.min.js" type="text/javascript"></script>
-			<script src="${pageContext.request.contextPath}/scripts/shortcuts.js" type="text/javascript"></script>
-			<script src="${pageContext.request.contextPath}/scripts/phases.js" type="text/javascript"></script>
-			<script src="${pageContext.request.contextPath}/scripts/gral.js" type="text/javascript"></script>
+			<script src="${pageContext.request.contextPath}/chat/js/wsclient.js?2032" type="text/javascript"></script>
+			<script src="${pageContext.request.contextPath}/chat/js/game.js" type="text/javascript"></script>
+			<script src="${pageContext.request.contextPath}/chat/js/castillo.js" type="text/javascript"></script>
+			<script src="${pageContext.request.contextPath}/chat/js/menu.js" type="text/javascript"></script>
+			<script src="${pageContext.request.contextPath}/chat/js/oponente.js" type="text/javascript"></script>
+			<script src="${pageContext.request.contextPath}/chat/js/mousetrap.min.js" type="text/javascript"></script>
+			<script src="${pageContext.request.contextPath}/chat/js/shortcuts.js" type="text/javascript"></script>
+			<script src="${pageContext.request.contextPath}/chat/js/phases.js" type="text/javascript"></script>
+			<script src="${pageContext.request.contextPath}/chat/js/gral.js" type="text/javascript"></script>
 		 ]]>
 </jsp:text>
  

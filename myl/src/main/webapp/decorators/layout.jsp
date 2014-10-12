@@ -102,7 +102,7 @@
 			<table style="margin-top: 0px;">
 				<tr>
 					<td width="20%"><a class="selected"
-						href="help/index-cards.jsp" target="iframe">
+						href="help/index.jsp" target="iframe">
 							<h3 style="width: 97%">Reglas generales</h3>
 					</a></td>
 					<td width="20%"><a class="selected" 

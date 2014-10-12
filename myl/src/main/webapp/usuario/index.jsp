@@ -9,8 +9,8 @@
 <title>Perfil</title>
 <jsp:text>
 	<![CDATA[			 		
-			<script src="${pageContext.request.contextPath}/scripts/deckselected.js" type="text/javascript"></script>
-			<script src="${pageContext.request.contextPath}/scripts/usuario.js" type="text/javascript"></script>						
+			<script src="${pageContext.request.contextPath}/usuario/js/deckselected.js" type="text/javascript"></script>
+			<script src="${pageContext.request.contextPath}/usuario/js/usuario.js" type="text/javascript"></script>						
 		 ]]>
 </jsp:text>
 </head>
