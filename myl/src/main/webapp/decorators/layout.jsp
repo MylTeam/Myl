@@ -91,7 +91,7 @@
 	<div id="pageFooter">	
 		<p>La información mostrada en este sitio sobre las cartas, incluidos los elementos gráficos, son copyright de sus respectivos dueños. Este sitio no tiene relación alguna con los respectivos propietarios de dicho material.</p>
 		<s:if test="%{#session.usuario}">
-		<p><a href="${pageContext.request.contextPath}/changelog.jsp">Changelog v1.5</a></p>
+		<p><a href="${pageContext.request.contextPath}/changelog.jsp">Changelog v1.6</a></p>
 		</s:if>
 	</div>
 

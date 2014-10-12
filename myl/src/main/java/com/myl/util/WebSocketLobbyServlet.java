@@ -139,7 +139,7 @@ public class WebSocketLobbyServlet extends WebSocketServlet {
                 try {                	
                     connection.getWsOutbound().writeTextMessage(CharBuffer.wrap(jsonProcessor.toJson(message)));
                 } catch (IOException e) {
-                	LOGGER.error("No se pudo enviar el mensaje", e);
+                	LOGGER.error("No se pudo enviar el mensaje de estado de la conexión", e);
                 }
             }            
         }

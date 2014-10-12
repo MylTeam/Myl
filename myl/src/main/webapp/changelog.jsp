@@ -64,7 +64,16 @@
 					<td><ul>
 							<li>-Se valida el tamaño del mazo antes de entrar a jugar.</li>
 							<li>-Se agrega la sala de chat general</li>							
-						</ul></td>
+					</ul></td>
+				</tr>
+				<tr>			
+					<td>v1.6</td>
+					<td><ul>
+							<li>-Se modifica la sección de reglas y ayuda.</li>
+							<li>-Se añade mas detalle al botar x cartas, indicando cuantas cartas han sido botadas.</li>
+							<li>-Se indica cuando el mazo castillo ya no tiene mas cartas.</li>
+							<li>-Se agregan notificaciones de victoria y derrota.</li>							
+					</ul></td>
 				</tr>
 			</table>
 		</form>
