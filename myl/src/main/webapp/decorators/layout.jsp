@@ -30,6 +30,7 @@
 
 <jsp:text>
 	<![CDATA[
+	
 	<script src="${pageContext.request.contextPath}/scripts/jquery-ui.js" type="text/javascript"></script>
 			<script src="${pageContext.request.contextPath}/struts/js/plugins/jquery.form.min.js" type="text/javascript"></script>
 			<script src="${pageContext.request.contextPath}/scripts/jquery.lazyload.js" type="text/javascript"></script>
