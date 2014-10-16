@@ -38,6 +38,8 @@ function notifyNewGame(){
 			},
 			"Cancelar": function (){
 				$(this).dialog("close");
+				showmsg=false;
+				wsclient.toChat(document.getElementById("user1").value, document.getElementById("user2").value, "gamereadyreject");
 				var url="http://"+location.host+$("#hidden").val()+"/lobby";
 	        	window.location=url;
 			}
@@ -56,6 +58,7 @@ function returnLobby(){
 }
 
 function test(){
+	win=true;
 	var context = $('#hidden').val();
 	$.ajax({
 		url : context + "/chat!test?keyctrl="+$("#key").val(),
@@ -70,7 +73,7 @@ function test(){
 }
 
 $(window).on('webapp:page:closing', function(e) {
-	if(obj.deck1.length>0){
+	if(obj.deck1.length>0 && win==false && lose==false && showmsg==true){
         e.preventDefault();
         e.message = 'Tu mazo aún tiene cartas, si sales de esta página se tomará el duelo por perdido.';
 	}    

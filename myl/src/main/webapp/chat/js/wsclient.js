@@ -1,8 +1,13 @@
+var win=false;
+var lose=false;
+var showmsg=true;
+
 var wsclient = (function() {
 
 	var prevGame=0;
 	var gameAccept=0;
-	var win=false;
+	var gameReject=0;
+	
 	
     var ws = null;
     var wsURI = 'ws://' + location.host  + '/myl/chatws';
@@ -37,7 +42,7 @@ var wsclient = (function() {
         function processMessage(message) {
             if (message.messageInfo) {
                 showConversation(message.messageInfo.from);
-                if(message.messageInfo.message!="gameready" && message.messageInfo.message!="gamereadyok" && message.messageInfo.message!="gamereadyaccept"){
+                if(message.messageInfo.message!="gameready" && message.messageInfo.message!="gamereadyok" && message.messageInfo.message!="gamereadyaccept" && message.messageInfo.message!="gamereadyreject"){
                 	addMessage(message.messageInfo.from, message.messageInfo.message, cleanWhitespaces(message.messageInfo.from) + 'conversation');
                 }else if(message.messageInfo.message=="gameready"){
                 	toChat(document.getElementById("user1").value, document.getElementById("user2").value, "gamereadyok");
@@ -46,7 +51,10 @@ var wsclient = (function() {
                 	showConversation(document.getElementById("user2").value);
                 }else if(message.messageInfo.message=="gamereadyaccept"){
                 	gameAccept=1;
+                }else if(message.messageInfo.message=="gamereadyreject"){
+                	gameReject=1;
                 }
+                
             } else if (message.statusInfo) {
                 if (message.statusInfo.status == 'CONNECTED') {
                     addOnlineUser(message.statusInfo.user);
@@ -64,12 +72,23 @@ var wsclient = (function() {
                     	}
                     }
                     
-                } else if (message.statusInfo.status == 'DISCONNECTED') {                	
-                    removeOnlineUser(message.statusInfo.user);
+                } else if (message.statusInfo.status == 'DISCONNECTED') {
+                	removeOnlineUser(message.statusInfo.user);
                     $("#content-udis").empty();
                     $("#content-udis").append("El usuario "+message.statusInfo.user+" ha salido de la partida");
+                	if(gameReject==1){
+                		$("#content-udis").empty();
+                		$("#content-udis").append("El usuario "+message.statusInfo.user+" ha rechazado de la partida");
+                    	showmsg=false;                    	
+                    }else if(gameReject==0 && win==false && lose==false && gameAccept==0){
+                    	$("#content-udis").empty();
+                		$("#content-udis").append("El usuario "+message.statusInfo.user+" ha salido de la partida. Has ganado.");
+                    	test();                    	
+                    }                	
+                	
                     notifyUserDisconnected();                    
                     prevGame=1;
+                    
                 }
             } else if (message.connectionInfo) {
                 var activeUsers = message.connectionInfo.activeUsers;
@@ -102,7 +121,6 @@ var wsclient = (function() {
             		if(win==false){
             			test();
             		}            		
-            		win=true;
 //            		notifyEndGame();
             		//Guardar victoria con ajax
             		 

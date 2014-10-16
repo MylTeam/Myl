@@ -67,6 +67,7 @@ function dropxcards(cant){
 		$("#content-udis").empty();
 		$("#content-udis").append("Has sido derrotado por "+$("#user2").val()+".");
 		notifyEndGame();
+		lose=true;
 	}
 }
 
