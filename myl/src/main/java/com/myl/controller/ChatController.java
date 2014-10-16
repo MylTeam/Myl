@@ -2,6 +2,7 @@ package com.myl.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import javax.inject.Named;
 
@@ -42,13 +43,25 @@ public class ChatController extends ActionSupport {
 
 	private Integer deckId;
 	private UsuarioNegocio usuarioNegocio;
-
+	
+	private String key;
+	private String keyctrl;
+	
 	@SkipValidation
 	public HttpHeaders index() {
-
+		
+		Random randomGenerator = new Random();
+		key=Integer.valueOf(randomGenerator.nextInt(10000)).toString();
+		
 		return new DefaultHttpHeaders("index").disableCaching();
 	}
 
+	public void test(){
+		if(keyctrl.isEmpty()){
+			System.out.println("PRUEBA DE DUELO GANADO");
+		}
+	}
+	
 	public String prueba() {
 		String aux2 = "cual";
 		Usuario usuario = (Usuario) ActionContext.getContext().getSession()
@@ -144,6 +157,22 @@ public class ChatController extends ActionSupport {
 
 	public void setUsuarioNegocio(UsuarioNegocio usuarioNegocio) {
 		this.usuarioNegocio = usuarioNegocio;
+	}
+
+	public String getKey() {
+		return key;
+	}
+
+	public void setKey(String key) {
+		this.key = key;
+	}
+
+	public String getKeyctrl() {
+		return keyctrl;
+	}
+
+	public void setKeyctrl(String keyctrl) {
+		this.keyctrl = keyctrl;
 	}
 
 }

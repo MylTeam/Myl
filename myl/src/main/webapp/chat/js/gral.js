@@ -55,4 +55,32 @@ function returnLobby(){
 	window.location=url;
 }
 
+function test(){
+	var context = $('#hidden').val();
+	$.ajax({
+		url : context + "/chat!test?keyctrl="+$("#key").val(),
+		type : "POST",
+		error : function() {
+			alert('Error');
+		},
+		success : function(data) {
+			notifyEndGame();
+		}
+	});
+}
+
+$(window).on('webapp:page:closing', function(e) {
+	if(obj.deck1.length>0){
+        e.preventDefault();
+        e.message = 'Tu mazo aún tiene cartas, si sales de esta página se tomará el duelo por perdido.';
+	}    
+});
+
+$(window).on('beforeunload', function() {
+    var e = $.Event('webapp:page:closing');
+    $(window).trigger(e);
+    if(e.isDefaultPrevented()) {
+        return e.message;
+    }
+});
 

@@ -2,6 +2,8 @@ var wsclient = (function() {
 
 	var prevGame=0;
 	var gameAccept=0;
+	var win=false;
+	
     var ws = null;
     var wsURI = 'ws://' + location.host  + '/myl/chatws';
     function connect(userName,userNameTwo) {    	
@@ -66,7 +68,7 @@ var wsclient = (function() {
                     removeOnlineUser(message.statusInfo.user);
                     $("#content-udis").empty();
                     $("#content-udis").append("El usuario "+message.statusInfo.user+" ha salido de la partida");
-                    notifyUserDisconnected();
+                    notifyUserDisconnected();                    
                     prevGame=1;
                 }
             } else if (message.connectionInfo) {
@@ -97,7 +99,13 @@ var wsclient = (function() {
             	}else if(message.phaseInfo.phase=="fendgmeovr"){
             		$("#content-udis").empty();
             		$("#content-udis").append("¡Felicidades!, has derrotado a "+message.phaseInfo.from+".");
-            		notifyEndGame();
+            		if(win==false){
+            			test();
+            		}            		
+            		win=true;
+//            		notifyEndGame();
+            		//Guardar victoria con ajax
+            		 
             	}
             }
         }

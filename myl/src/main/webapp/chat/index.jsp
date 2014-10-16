@@ -71,6 +71,7 @@
 <body>	
 
 <input type="hidden" name="hidden" id="hidden" value="${pageContext.request.contextPath}"/>
+<s:hidden id="key" name="key" />
 
 <div id="bar">
 <input type="button" value="Nuevo Juego" onclick="newGame()"/>

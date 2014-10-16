@@ -33,14 +33,7 @@
 
 		<table style="width: 100%">
 			<tr>
-				<td style="width: 20%;">
-					<div id="fb-root">
-						<div class="fb-like-box"
-							data-href="https://www.facebook.com/mylzonline" data-height="400"
-							data-colorscheme="dark" data-show-faces="false"
-							data-header="false" data-stream="true" data-show-border="true"></div>
-					</div>
-				</td>
+
 				<td style="width: 50%; vertical-align: top">
 				
 					<table>
@@ -95,7 +88,7 @@
 
 				</td>
 
-				<td style="width: 20%; height: 100%;"><a
+				<td style="width: 50%; height: 100%;text-align: center;"><a
 					class="twitter-timeline" href="https://twitter.com/MylOnlineZ"
 					data-widget-id="521443826024476672">Tweets por @MylOnlineZ</a></td>
 			</tr>
