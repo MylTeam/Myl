@@ -1,7 +1,8 @@
 var win=false;
 var lose=false;
 var showmsg=true;
-
+var id;
+	
 var wsclient = (function() {
 
 	var prevGame=0;
@@ -42,13 +43,17 @@ var wsclient = (function() {
         function processMessage(message) {
             if (message.messageInfo) {
                 showConversation(message.messageInfo.from);
-                if(message.messageInfo.message!="gameready" && message.messageInfo.message!="gamereadyok" && message.messageInfo.message!="gamereadyaccept" && message.messageInfo.message!="gamereadyreject"){
+                if(message.messageInfo.message.indexOf("gamereado")==-1 && message.messageInfo.message.indexOf("gamereadiok")==-1 && message.messageInfo.message!="gamereadyaccept" && message.messageInfo.message!="gamereadyreject"){
                 	addMessage(message.messageInfo.from, message.messageInfo.message, cleanWhitespaces(message.messageInfo.from) + 'conversation');
-                }else if(message.messageInfo.message=="gameready"){
-                	toChat(document.getElementById("user1").value, document.getElementById("user2").value, "gamereadyok");
+                }else if(message.messageInfo.message.indexOf("gamereado")>=0){
+                	toChat(document.getElementById("user1").value, document.getElementById("user2").value, "gamereadiok"+$("#key").val());
                 	showConversation(document.getElementById("user2").value);
-                }else if(message.messageInfo.message=="gamereadyok"){
+                	id=message.messageInfo.message.substring(9);
+                	sendKey();
+                }else if(message.messageInfo.message.indexOf("gamereadiok")>=0){
                 	showConversation(document.getElementById("user2").value);
+                	id=message.messageInfo.message.substring(11);
+                	sendKey();                	
                 }else if(message.messageInfo.message=="gamereadyaccept"){
                 	gameAccept=1;
                 }else if(message.messageInfo.message=="gamereadyreject"){
@@ -57,7 +62,7 @@ var wsclient = (function() {
                 
             } else if (message.statusInfo) {
                 if (message.statusInfo.status == 'CONNECTED') {
-                    addOnlineUser(message.statusInfo.user);
+                    addOnlineUser(message.statusInfo.user);                    
                     if(prevGame==1){
                     	$( "#dialog-udis" ).dialog("close");
                     	if(gameAccept==1){
@@ -120,10 +125,7 @@ var wsclient = (function() {
             		$("#content-udis").append("¡Felicidades!, has derrotado a "+message.phaseInfo.from+".");
             		if(win==false){
             			test();
-            		}            		
-//            		notifyEndGame();
-            		//Guardar victoria con ajax
-            		 
+            		}
             	}
             }
         }
@@ -150,7 +152,7 @@ var wsclient = (function() {
         var inputUsername = $('#userName');
         $('#onLineUsersPanel').css({visibility:'visible'});
         
-        toChat(document.getElementById("user1").value, document.getElementById("user2").value, "gameready");
+        toChat(document.getElementById("user1").value, document.getElementById("user2").value, "gamereado"+$("#key").val());
     }
 
     function updateUserDisconnected() {

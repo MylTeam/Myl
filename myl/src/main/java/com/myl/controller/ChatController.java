@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import javassist.tools.web.Webserver;
+
 import javax.inject.Named;
 
 import org.apache.struts2.convention.annotation.Result;
@@ -11,6 +13,8 @@ import org.apache.struts2.convention.annotation.Results;
 import org.apache.struts2.interceptor.validation.SkipValidation;
 import org.apache.struts2.rest.DefaultHttpHeaders;
 import org.apache.struts2.rest.HttpHeaders;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.myl.modelo.Carta;
 import com.myl.modelo.Deck;
@@ -18,6 +22,8 @@ import com.myl.modelo.Usuario;
 import com.myl.negocio.DeckNegocio;
 import com.myl.negocio.UsuarioNegocio;
 import com.myl.util.NombreObjetosSesion;
+import com.myl.util.WebSocketCharServlet;
+
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -26,11 +32,13 @@ import com.opensymphony.xwork2.ActionSupport;
 		@Result(name = "success", type = "redirectAction", params = {
 				"actionName", "chat" }),
 		@Result(name = "cual", type = "json", params = { "includeProperties",
-				"deck1.*" })
-})
+				"deck1.*" }) })
 public class ChatController extends ActionSupport {
 
 	private static final long serialVersionUID = 8585016072024421730L;
+	private static final Logger LOGGER = LoggerFactory
+			.getLogger(ChatController.class);
+
 	private Integer idSel;
 
 	private Deck deck;
@@ -43,25 +51,35 @@ public class ChatController extends ActionSupport {
 
 	private Integer deckId;
 	private UsuarioNegocio usuarioNegocio;
-	
+
 	private String key;
 	private String keyctrl;
-	
+
 	@SkipValidation
 	public HttpHeaders index() {
-		
+
 		Random randomGenerator = new Random();
-		key=Integer.valueOf(randomGenerator.nextInt(10000)).toString();
-		
+		key = Integer.valueOf(randomGenerator.nextInt(100000000)).toString();
+
 		return new DefaultHttpHeaders("index").disableCaching();
 	}
 
-	public void test(){
-		if(keyctrl.isEmpty()){
-			System.out.println("PRUEBA DE DUELO GANADO");
+	public void test() {
+		key = (String) ActionContext.getContext().getSession().get("OponentId");
+		if (keyctrl.equals(key)) {
+			LOGGER.info(user1 + " Has ganado a " + user2);
+			
+			
+		} else {
+			LOGGER.info("Error " + user1 + " : " + keyctrl + " - " + key);
 		}
+		ActionContext.getContext().getSession().remove("OponentId");
 	}
-	
+
+	public void settingUp() {
+		ActionContext.getContext().getSession().put("OponentId", key);
+	}
+
 	public String prueba() {
 		String aux2 = "cual";
 		Usuario usuario = (Usuario) ActionContext.getContext().getSession()
@@ -173,6 +191,10 @@ public class ChatController extends ActionSupport {
 
 	public void setKeyctrl(String keyctrl) {
 		this.keyctrl = keyctrl;
+	}
+
+	public static Logger getLogger() {
+		return LOGGER;
 	}
 
 }

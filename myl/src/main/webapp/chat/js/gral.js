@@ -61,13 +61,26 @@ function test(){
 	win=true;
 	var context = $('#hidden').val();
 	$.ajax({
-		url : context + "/chat!test?keyctrl="+$("#key").val(),
+		url : context + "/chat!test",
 		type : "POST",
+		data: "keyctrl="+id+"&user1="+$("#user1").val()+"&user2="+$("#user2").val(),
 		error : function() {
 			alert('Error');
 		},
 		success : function(data) {
 			notifyEndGame();
+		}
+	});
+}
+
+function sendKey(){
+	var context = $('#hidden').val();
+	$.ajax({
+		url : context + "/chat!settingUp",
+		type : "POST",
+		data: "key="+id,
+		error : function() {
+			alert('Error');
 		}
 	});
 }

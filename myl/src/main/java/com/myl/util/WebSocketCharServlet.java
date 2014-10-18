@@ -15,6 +15,8 @@ import org.apache.catalina.websocket.MessageInbound;
 import org.apache.catalina.websocket.StreamInbound;
 import org.apache.catalina.websocket.WebSocketServlet;
 import org.apache.catalina.websocket.WsOutbound;
+import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.dispatcher.SessionMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,13 +28,15 @@ import com.myl.messages.MessageInfoMessage;
 import com.myl.messages.PhaseInfoMessage;
 import com.myl.messages.StatusInfoMessage;
 import com.myl.messages.TargetInfoMessage;
+import com.opensymphony.xwork2.ActionContext;
 
 //@WebServlet(urlPatterns = "/chat")
 public class WebSocketCharServlet extends WebSocketServlet {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(WebSocketCharServlet.class);
 
-    private static final Map<String, ChatConnection> CONNECTIONS = new HashMap<String, ChatConnection>();       
+    private static final Map<String, ChatConnection> CONNECTIONS = new HashMap<String, ChatConnection>();
+        
     
     @Override
     protected boolean verifyOrigin(String origin) {
@@ -55,6 +59,8 @@ public class WebSocketCharServlet extends WebSocketServlet {
         private final String format;
         private final String userNameTwo;
         private final Gson jsonProcessor;
+        
+        private String key;
 
         private ChatConnection(String connectionId, String format, String userName, String userNameTwo) {
             this.connectionId = connectionId;
@@ -62,6 +68,7 @@ public class WebSocketCharServlet extends WebSocketServlet {
             this.userNameTwo = userNameTwo;
             this.format= format;
             this.jsonProcessor = new Gson();
+
         }
 
         @Override
@@ -87,11 +94,14 @@ public class WebSocketCharServlet extends WebSocketServlet {
         }
 
         @Override
-        protected void onTextMessage(CharBuffer charBuffer) throws IOException {        	
+        protected void onTextMessage(CharBuffer charBuffer) throws IOException {
+        	String to = "";
+        	
         	if(charBuffer.toString().contains("messageInfo")){
         		LOGGER.info(charBuffer.toString());
         		final MessageInfoMessage message = jsonProcessor.fromJson(charBuffer.toString(), MessageInfoMessage.class);
-        		sendMessage(message.getMessageInfo().getTo(), message);
+        		to=message.getMessageInfo().getTo();
+        		sendMessage(to, message);
         		
         	}else if(charBuffer.toString().contains("cardInfo")){
         		final CardInfoMessage message = jsonProcessor.fromJson(charBuffer.toString(), CardInfoMessage.class);
@@ -99,17 +109,21 @@ public class WebSocketCharServlet extends WebSocketServlet {
         		
         	}else if(charBuffer.toString().contains("cardListInfo")){
         		final CardListInfoMessage message = jsonProcessor.fromJson(charBuffer.toString(), CardListInfoMessage.class);
-        		sendMessage(message.getCardListInfo().getTo(), message);
+        		to=message.getCardListInfo().getTo();
+        		sendMessage(to, message);
         		
         	}else if(charBuffer.toString().contains("targetInfo")){
         		final TargetInfoMessage message = jsonProcessor.fromJson(charBuffer.toString(), TargetInfoMessage.class);
-        		sendMessage(message.getTargetInfo().getTo(), message);
+        		to=message.getTargetInfo().getTo();
+        		sendMessage(to, message);
         		
         	}else if(charBuffer.toString().contains("phaseInfo")){
         		final PhaseInfoMessage message = jsonProcessor.fromJson(charBuffer.toString(), PhaseInfoMessage.class);
-        		sendMessage(message.getPhaseInfo().getTo(), message);
+        		to=message.getPhaseInfo().getTo();
+        		sendMessage(to, message);
         		
         	}
+
         }
 
 
@@ -156,6 +170,7 @@ public class WebSocketCharServlet extends WebSocketServlet {
         private void sendStatusInfoToOponent(StatusInfoMessage message) {
         	
         	try {
+        		
         		LOGGER.info("Notificando estado a: "+this.getUserNameTwo()+" de: "+this.getUserName()+" Mensaje: "+message.getStatusInfo().getStatus());
 				sendMessage(this.getUserNameTwo(), message);
 			} catch (IOException e1) {
@@ -188,5 +203,10 @@ public class WebSocketCharServlet extends WebSocketServlet {
             	LOGGER.warn("Se está intentando enviar un mensaje a un usuario no conectado");
             }
         }
+
     }
+
+	public static Map<String, ChatConnection> getConnections() {
+		return CONNECTIONS;
+	}
 }
