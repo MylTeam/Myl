@@ -29,6 +29,9 @@ public class Usuario {
 	private String password;
 	private Integer deckPred;
 	
+	private Integer wons;
+	private Integer lost;
+	
 	private String email;
 	private Date fhRegistro;
 	private Date fhLastSession;
@@ -121,6 +124,22 @@ public class Usuario {
 	}
 	public void setIdPais(Integer idPais) {
 		this.idPais = idPais;
+	}
+	
+	@Column(name = "dl_won")
+	public Integer getWons() {
+		return wons;
+	}
+	public void setWons(Integer wons) {
+		this.wons = wons;
+	}
+	
+	@Column(name = "dl_lost")
+	public Integer getLost() {
+		return lost;
+	}
+	public void setLost(Integer lost) {
+		this.lost = lost;
 	}
 	
 }

@@ -72,9 +72,7 @@ public class ChatController extends ActionSupport {
 
 	public void test() {
 		key = (String) ActionContext.getContext().getSession().get("OponentId");
-		if (keyctrl.equals(key)) {
-		user2="carlos";
-		user1="userTest";
+		if (keyctrl.equals(key)) {		
 			
 			Duelo example = new Duelo();
 	
@@ -98,6 +96,11 @@ public class ChatController extends ActionSupport {
 				duelo.setDueloQt(duelo.getDueloQt()+1);
 				dueloNegocio.save(duelo);
 			}
+			
+			us1.setWons(us1.getWons()+1);
+			us2.setLost(us1.getLost()+1);
+			usuarioNegocio.save(us1);
+			usuarioNegocio.save(us2);
 
 		} else {
 			LOGGER.info("Error " + user1 + " : " + keyctrl + " - " + key);
