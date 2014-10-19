@@ -12,9 +12,15 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<gson.version>2.2.2</gson.version>
 		<tomcat.version>7.0.29</tomcat.version>
+		<!-- <spring.version>3.0.5.RELEASE</spring.version> -->
+		<!-- <hibernate.version>3.5.5-Final</hibernate.version> -->
+		<!-- <struts.version>2.2.1.1</struts.version> -->
+		<!-- <jquery.version>3.6.0</jquery.version> -->
 		<spring.version>3.0.5.RELEASE</spring.version>
 		<hibernate.version>3.5.5-Final</hibernate.version>
 		<struts.version>2.2.1.1</struts.version>
+		<jquery.version>3.6.0</jquery.version>
+		
 	</properties>
 
 
@@ -172,12 +178,12 @@
 		<dependency>
 			<groupId>com.jgeppert.struts2.jquery</groupId>
 			<artifactId>struts2-jquery-plugin</artifactId>
-			<version>3.6.0</version>
+			<version>${jquery.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.jgeppert.struts2.jquery</groupId>
 			<artifactId>struts2-jquery-grid-plugin</artifactId>
-			<version>3.6.0</version>
+			<version>${jquery.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-httpclient</groupId>
