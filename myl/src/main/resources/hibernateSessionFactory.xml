@@ -72,6 +72,8 @@
 				<value>com.myl.modelo.DeckCarta</value>
 				<value>com.myl.modelo.DeckCartaId</value>
 				<value>com.myl.modelo.Pais</value>
+				<value>com.myl.modelo.Duelo</value>
+				<value>com.myl.modelo.DueloId</value>
 			</list>
 		</property>
 

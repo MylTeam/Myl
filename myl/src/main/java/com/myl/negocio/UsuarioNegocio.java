@@ -42,6 +42,11 @@ public class UsuarioNegocio {
 	public List<Usuario> findByExample(Usuario usuario) {		
 		return usuarioDao.findByExample(usuario);
 	}
+	
+	@Transactional
+	public List<Usuario> findByName(String string) {		
+		return usuarioDao.findByName(string);
+	}
 
 	public UsuarioDao getUsuarioDao() {
 		return usuarioDao;

@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import javassist.tools.web.Webserver;
-
 import javax.inject.Named;
 
 import org.apache.struts2.convention.annotation.Result;
@@ -18,12 +16,12 @@ import org.slf4j.LoggerFactory;
 
 import com.myl.modelo.Carta;
 import com.myl.modelo.Deck;
+import com.myl.modelo.Duelo;
 import com.myl.modelo.Usuario;
 import com.myl.negocio.DeckNegocio;
+import com.myl.negocio.DueloNegocio;
 import com.myl.negocio.UsuarioNegocio;
 import com.myl.util.NombreObjetosSesion;
-import com.myl.util.WebSocketCharServlet;
-
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -43,18 +41,26 @@ public class ChatController extends ActionSupport {
 
 	private Deck deck;
 	private DeckNegocio deckNegocio;
-
+	private UsuarioNegocio usuarioNegocio;
+	private DueloNegocio dueloNegocio;
+	
 	private List<Carta> deck1;
 
 	private String user1;
 	private String user2;
 
 	private Integer deckId;
-	private UsuarioNegocio usuarioNegocio;
+	
 
 	private String key;
 	private String keyctrl;
 
+	private Duelo duelo;
+	
+	private Usuario us1;
+	private Usuario us2;
+	
+	
 	@SkipValidation
 	public HttpHeaders index() {
 
@@ -67,9 +73,32 @@ public class ChatController extends ActionSupport {
 	public void test() {
 		key = (String) ActionContext.getContext().getSession().get("OponentId");
 		if (keyctrl.equals(key)) {
-			LOGGER.info(user1 + " Has ganado a " + user2);
+		user2="carlos";
+		user1="userTest";
 			
+			Duelo example = new Duelo();
+	
+			List<Usuario> listUsers=usuarioNegocio.findByName(user1);			
+			if(!listUsers.isEmpty()){
+				us1=listUsers.get(0);				
+			}			
+			listUsers=usuarioNegocio.findByName(user2);
+			if(!listUsers.isEmpty()){
+				us2=listUsers.get(0);
+			}
 			
+			example.setWinnerId(us1.getIdUsuario());
+			example.setLoserId(us2.getIdUsuario());
+			
+			List<Duelo> listDuel=dueloNegocio.findByExample(example);
+			if(listDuel.isEmpty()){				
+				dueloNegocio.insertDuel(example.getWinnerId(), example.getLoserId(), 1);				
+			}else{
+				duelo=listDuel.get(0);
+				duelo.setDueloQt(duelo.getDueloQt()+1);
+				dueloNegocio.save(duelo);
+			}
+
 		} else {
 			LOGGER.info("Error " + user1 + " : " + keyctrl + " - " + key);
 		}
@@ -195,6 +224,38 @@ public class ChatController extends ActionSupport {
 
 	public static Logger getLogger() {
 		return LOGGER;
+	}
+
+	public Duelo getDuelo() {
+		return duelo;
+	}
+
+	public void setDuelo(Duelo duelo) {
+		this.duelo = duelo;
+	}
+
+	public DueloNegocio getDueloNegocio() {
+		return dueloNegocio;
+	}
+
+	public void setDueloNegocio(DueloNegocio dueloNegocio) {
+		this.dueloNegocio = dueloNegocio;
+	}
+
+	public Usuario getUs1() {
+		return us1;
+	}
+
+	public void setUs1(Usuario us1) {
+		this.us1 = us1;
+	}
+
+	public Usuario getUs2() {
+		return us2;
+	}
+
+	public void setUs2(Usuario us2) {
+		this.us2 = us2;
 	}
 
 }

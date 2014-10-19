@@ -36,6 +36,7 @@ public class Usuario {
 	
 	private Boolean tieneDeck;	
 	private List<Deck> decks;
+		
 	
 	@XmlID
 	@XmlJavaTypeAdapter(IntegerAdapter.class)
