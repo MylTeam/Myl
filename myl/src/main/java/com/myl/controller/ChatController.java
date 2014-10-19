@@ -98,7 +98,7 @@ public class ChatController extends ActionSupport {
 			}
 			
 			us1.setWons(us1.getWons()+1);
-			us2.setLost(us1.getLost()+1);
+			us2.setLost(us2.getLost()+1);
 			usuarioNegocio.save(us1);
 			usuarioNegocio.save(us2);
 
