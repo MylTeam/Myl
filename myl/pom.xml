@@ -64,9 +64,8 @@
 				<artifactId>tomcat7-maven-plugin</artifactId>
 				<version>2.1</version>
 				<configuration>
-					<!-- <url>http://50.62.23.86:8080/manager/text</url> <server>mylprod</server> -->
-					<url>http://localhost:8080/manager/text</url>
-					<server>localhost</server>
+					<url>http://50.62.23.86:8080/manager/text</url> <server>mylprod</server>
+					<!-- <url>http://localhost:8080/manager/text</url><server>localhost</server> -->
 					<path>/myl</path>
 				</configuration>
 			</plugin>

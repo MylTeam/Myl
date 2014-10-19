@@ -92,6 +92,8 @@ public class RegistroController extends ActionSupport implements
 			})
 	public HttpHeaders create() {
 		model.setDeckPred(0);
+		model.setWons(0);
+		model.setLost(0);
 		model.setFhRegistro(new Date());
 		model = usuarioNegocio.save(model);
 
