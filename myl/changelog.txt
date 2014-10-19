@@ -26,3 +26,8 @@ v1.6
 	-Se añade mas detalle al botar x cartas, indicando cuantas cartas han sido botadas.
 	-Se indica cuando el mazo castillo ya no tiene mas cartas.
 	-Se agregan notificaciones de victoria y derrota.
+v1.7
+	-Se agregan marcadores de victoria y derrota.
+	-Se agrega el ranking con los 100 mejores jugadores.
+	-Se agregan estadísticas para el usuario.
+	-Se agrega conexión con twitter para visualizar noticias.

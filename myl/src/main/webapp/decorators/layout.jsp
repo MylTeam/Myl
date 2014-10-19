@@ -61,21 +61,25 @@
 		<center>
 			<table style="margin-top: 0px;">
 				<tr>
-					<td width="20%"><a class="selected"
+					<td width="17%"><a class="selected"
 						href="${pageContext.request.contextPath}/usuario">
 							<h3 style="width: 97%">Perfil</h3>
 					</a></td>
-					<td width="20%"><a class="selected" 
+					<td width="17%"><a class="selected" 
 						href="${pageContext.request.contextPath}/lobby">
 							<h3 style="width: 97%">Jugar</h3>
 					</a></td>
-					<td width="20%"><a class="selected" id="ahelp"
+					<td width="17%"><a class="selected" 
+						href="${pageContext.request.contextPath}/ranking">
+							<h3 style="width: 97%">Ranking</h3>
+					</a></td>
+					<td width="17%"><a class="selected" id="ahelp"
 						href="javascript:showHelp();" ><h3
 								style="width: 97%">Ayuda y reglas</h3></a></td>
-					<td width="20%"><a class="selected"
+					<td width="17%"><a class="selected"
 						href="${pageContext.request.contextPath}/contacto/new"><h3
 								style="width: 97%;font-size: 13px">Comentarios / Reportar un problema</h3></a></td>
-					<td width="20%"><a class="selected"
+					<td width="15%"><a class="selected"
 						href="${pageContext.request.contextPath}/logout"><h3
 								style="width: 97%">Cerrar Sesión</h3></a></td>
 				</tr>
@@ -92,7 +96,7 @@
 	<div id="pageFooter">	
 		<p>La información mostrada en este sitio sobre las cartas, incluidos los elementos gráficos, son copyright de sus respectivos dueños. Este sitio no tiene relación alguna con los respectivos propietarios de dicho material.</p>
 		<s:if test="%{#session.usuario}">
-		<p><a href="${pageContext.request.contextPath}/changelog.jsp">Changelog v1.6</a></p>
+		<p><a href="${pageContext.request.contextPath}/changelog.jsp">Changelog v1.7</a></p>
 		</s:if>
 	</div>
 

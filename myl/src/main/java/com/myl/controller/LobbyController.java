@@ -45,7 +45,7 @@ public class LobbyController extends ActionSupport {
 				addActionError("Tu mazo debe contener 50 cartas exactamente para poder jugar.");
 				return new DefaultHttpHeaders("nodeck").disableCaching();
 			}else{
-				setFormat(deckNegocio.findById(usuario.getDeckPred()).getFormato().getNombre());
+				setFormat(deckNegocio.findById(usuario.getDeckPred()).getFormato().getNombre()+" / V: "+usuario.getWons()+" D: "+usuario.getLost());
 				return new DefaultHttpHeaders("index").disableCaching();
 			}
 		}

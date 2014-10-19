@@ -51,5 +51,14 @@ public class UsuarioDao extends HibernateDaoSupport {
 				.addEntity(Usuario.class).setParameter("s", s);
 		return query.list();
 	}
+	
+	public List<Usuario> findFirstX(Integer i) {
+		Query query = getSession()
+				.createSQLQuery("select * from usuario order by dl_won desc")
+				.addEntity(Usuario.class).setMaxResults(i);
+		return query.list();
+	}
+	
+	
 
 }

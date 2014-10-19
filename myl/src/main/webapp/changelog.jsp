@@ -30,50 +30,67 @@
 				<tr>
 					<td>v1.2</td>
 					<td><ul>
-							<li>-Se corrige el armado de los mazos, manteniendo el estado actual cuando se presenta un error al guardar.</li>
-							<li>-Se agrega la restricción para los formatos de mazo.</li> 
+							<li>-Se corrige el armado de los mazos, manteniendo el
+								estado actual cuando se presenta un error al guardar.</li>
+							<li>-Se agrega la restricción para los formatos de mazo.</li>
 							<li>-Se agrega la etiqueta de formato de mazo en el chat.</li>
-							<li>-BugFix: Se corrige el error al intentar eliminar un mazo.</li>
+							<li>-BugFix: Se corrige el error al intentar eliminar un
+								mazo.</li>
 						</ul></td>
 				</tr>
 				<tr>
 					<td>v1.3</td>
 					<td><ul>
 							<li>-Se agrega Furia</li>
-							<li>-BugFix: Se corrige el error al intentar colocar un mazo como predeterminado.</li>
+							<li>-BugFix: Se corrige el error al intentar colocar un mazo
+								como predeterminado.</li>
 							<li>-La arena de duelo se abre en una nueva ventana</li>
-							<li>-Se agregan notificaciones cuando un usuario abandona o reinicia el juego.</li>
+							<li>-Se agregan notificaciones cuando un usuario abandona o
+								reinicia el juego.</li>
 						</ul></td>
 				</tr>
 				<tr>
 					<td>v1.4</td>
 					<td><ul>
-							<li>-BugFix: Se corrige el error que muestra la notificación de otros usuarios abandonando las partidas.</li>
-							<li>-Se regresa al estilo de cambio de ventana.</li>							
+							<li>-BugFix: Se corrige el error que muestra la notificación
+								de otros usuarios abandonando las partidas.</li>
+							<li>-Se regresa al estilo de cambio de ventana.</li>
 						</ul></td>
 				</tr>
 				<tr>
 					<td>v1.45</td>
 					<td><ul>
 							<li>-Se agrega más detalle al perfil del usuario.</li>
-							<li>-Se agrega la opción para recuperar contraseña..</li>							
+							<li>-Se agrega la opción para recuperar contraseña..</li>
 						</ul></td>
 				</tr>
 				<tr>
 					<td>v1.5</td>
 					<td><ul>
 							<li>-Se valida el tamaño del mazo antes de entrar a jugar.</li>
-							<li>-Se agrega la sala de chat general</li>							
-					</ul></td>
+							<li>-Se agrega la sala de chat general</li>
+						</ul></td>
 				</tr>
-				<tr>			
+				<tr>
 					<td>v1.6</td>
 					<td><ul>
 							<li>-Se modifica la sección de reglas y ayuda.</li>
-							<li>-Se añade mas detalle al botar x cartas, indicando cuantas cartas han sido botadas.</li>
-							<li>-Se indica cuando el mazo castillo ya no tiene mas cartas.</li>
-							<li>-Se agregan notificaciones de victoria y derrota.</li>							
-					</ul></td>
+							<li>-Se añade mas detalle al botar x cartas, indicando
+								cuantas cartas han sido botadas.</li>
+							<li>-Se indica cuando el mazo castillo ya no tiene mas
+								cartas.</li>
+							<li>-Se agregan notificaciones de victoria y derrota.</li>
+						</ul></td>
+				</tr>
+				<tr>
+					<td>v1.7</td>
+					<td><ul>
+							<li>-Se agregan marcadores de victoria y derrota.</li>
+							<li>-Se agrega el ranking con los 100 mejores jugadores.</li>
+							<li>-Se agregan estadísticas para el usuario.</li>
+							<li>-Se agrega conexión con twitter para visualizar
+								noticias.</li>
+						</ul></td>
 				</tr>
 			</table>
 		</form>

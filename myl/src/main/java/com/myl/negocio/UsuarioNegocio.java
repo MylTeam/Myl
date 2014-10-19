@@ -47,6 +47,11 @@ public class UsuarioNegocio {
 	public List<Usuario> findByName(String string) {		
 		return usuarioDao.findByName(string);
 	}
+	
+	@Transactional
+	public List<Usuario> findFirstX(Integer i) {		
+		return usuarioDao.findFirstX(i);
+	}
 
 	public UsuarioDao getUsuarioDao() {
 		return usuarioDao;

@@ -18,10 +18,12 @@ import org.springframework.mail.MailSender;
 import ch.qos.logback.core.Context;
 
 import com.myl.modelo.Deck;
+import com.myl.modelo.Duelo;
 import com.myl.modelo.Pais;
 import com.myl.modelo.Usuario;
 import com.myl.negocio.CartaNegocio;
 import com.myl.negocio.DeckNegocio;
+import com.myl.negocio.DueloNegocio;
 import com.myl.negocio.EdicionNegocio;
 import com.myl.negocio.PaisNegocio;
 import com.myl.negocio.UsuarioNegocio;
@@ -39,82 +41,85 @@ import com.opensymphony.xwork2.validator.annotations.Validations;
 import com.opensymphony.xwork2.validator.annotations.ValidatorType;
 
 @Named
-@Results({ 
-	@Result(name = "success", type = "redirectAction", params = {"actionName", "usuario" })	
-})
-public class UsuarioController extends ActionSupport implements ModelDriven<Usuario> {
+@Results({ @Result(name = "success", type = "redirectAction", params = {
+		"actionName", "usuario" }) })
+public class UsuarioController extends ActionSupport implements
+		ModelDriven<Usuario> {
 
 	private static final long serialVersionUID = 1L;
 	private Integer idSel;
-	private Usuario model=null;
+	private Integer deckId;
+
+	private Usuario model = null;
 	private Usuario usuario;
-	private UsuarioNegocio usuarioNegocio;
-	private DeckNegocio deckNegocio;
-	private List<Deck> lista;
+
 	private Deck deck;
 	private String confirmPass;
-	private Integer deckId;
-	
+
+	private UsuarioNegocio usuarioNegocio;
+	private DeckNegocio deckNegocio;
 	private CartaNegocio cartaNegocio;
-	private List<Pais> listPaises;
 	private PaisNegocio paisNegocio;
-	
+	private DueloNegocio dueloNegocio;
+
+	private List<Deck> lista;
+	private List<Pais> listPaises;
+	private List<Duelo> duelosGanados;
+	private List<Duelo> duelosPerdidos;
+
 	@SkipValidation
 	public HttpHeaders index() {
-				
-		usuario=(Usuario) ActionContext.getContext().getSession().get(NombreObjetosSesion.USUARIO);		
-		idSel=usuario.getIdUsuario();
 
-		Deck deckAux=new Deck();
+		usuario = (Usuario) ActionContext.getContext().getSession()
+				.get(NombreObjetosSesion.USUARIO);
+		idSel = usuario.getIdUsuario();
+
+		Deck deckAux = new Deck();
 		deckAux.setUsuarioId(usuario.getIdUsuario());
-		lista=deckNegocio.findByExample(deckAux);
-		
-		if(usuario.getEmail()==null || usuario.getIdPais()==null){
+		lista = deckNegocio.findByExample(deckAux);
+
+		if (usuario.getEmail() == null || usuario.getIdPais() == null) {
 			addActionMessage("Favor de actualizar tus datos");
 		}
-		
+
 		return new DefaultHttpHeaders("index").disableCaching();
 	}
-	
+
 	@SkipValidation
 	public String edit() {
-		String result="edit";
-		listPaises=paisNegocio.findAll();
-		
-		usuario=(Usuario) ActionContext.getContext().getSession().get(NombreObjetosSesion.USUARIO);
-		
-		if(!usuario.getIdUsuario().equals(idSel)){			
-			result="denied";
+		String result = "edit";
+		listPaises = paisNegocio.findAll();
+
+		usuario = (Usuario) ActionContext.getContext().getSession()
+				.get(NombreObjetosSesion.USUARIO);
+		if (!usuario.getIdUsuario().equals(idSel)) {
+			result = "denied";
 		}
-		
+
 		return result;
 	}
-	
-	public void validateUpdate(){
-		Usuario aux=new Usuario();
+
+	public void validateUpdate() {
+		Usuario aux = new Usuario();
 		aux.setEmail(model.getEmail());
-		List<Usuario> usuariosAux=usuarioNegocio.findByExample(aux);
-		
+		List<Usuario> usuariosAux = usuarioNegocio.findByExample(aux);
+
 		if (!usuariosAux.isEmpty()) {
-			if(!usuariosAux.get(0).getIdUsuario().equals(model.getIdUsuario())){
-			addActionError("El correo electrónico ingresado ya está registrado");
+			if (!usuariosAux.get(0).getIdUsuario().equals(model.getIdUsuario())) {
+				addActionError("El correo electrónico ingresado ya está registrado");
 			}
 		}
-		
+
 		if (hasFieldErrors() || hasActionErrors()) {
-			listPaises=paisNegocio.findAll();
+			listPaises = paisNegocio.findAll();
 		}
 	}
-		
-	@Validations(requiredStrings = {			
-			@RequiredStringValidator(fieldName = "model.email", type = ValidatorType.FIELD, key = "Introduce tu correo electrónico")},			
-			intRangeFields={
-			@IntRangeFieldValidator(fieldName="model.idPais", type = ValidatorType.FIELD, message="Selecciona tu pais", min = "1")},
-			emails={
-			@EmailValidator(fieldName="model.email", type=ValidatorType.FIELD, message="Correo electrónico no válido")})
+
+	@Validations(requiredStrings = { @RequiredStringValidator(fieldName = "model.email", type = ValidatorType.FIELD, key = "Introduce tu correo electrónico") }, intRangeFields = { @IntRangeFieldValidator(fieldName = "model.idPais", type = ValidatorType.FIELD, message = "Selecciona tu pais", min = "1") }, emails = { @EmailValidator(fieldName = "model.email", type = ValidatorType.FIELD, message = "Correo electrónico no válido") })
 	public String update() {
 		model = usuarioNegocio.save(model);
-		ActionContext.getContext().getSession().put(NombreObjetosSesion.USUARIO, model);
+		ActionContext.getContext().getSession()
+				.put(NombreObjetosSesion.USUARIO, model);
 		return "success";
 	}
 
@@ -129,21 +134,40 @@ public class UsuarioController extends ActionSupport implements ModelDriven<Usua
 
 	@SkipValidation
 	public String destroy() {
-		
+
 		return "success";
 	}
-	
-	public void setDeckPredeterminado(){
-		usuario=(Usuario) ActionContext.getContext().getSession().get(NombreObjetosSesion.USUARIO);
+
+	public String show() {
+		String result="show";
+		usuario = (Usuario) ActionContext.getContext().getSession()
+				.get(NombreObjetosSesion.USUARIO);
+		if (!usuario.getIdUsuario().equals(idSel)) {
+			result = "denied";
+		} else {
+			Duelo aux = new Duelo();
+			aux.setWinnerId(model.getIdUsuario());
+			duelosGanados = dueloNegocio.findByExample(aux);
+			aux = new Duelo();
+			aux.setLoserId(model.getIdUsuario());
+			duelosPerdidos = dueloNegocio.findByExample(aux);
+		}
+
+		return result;
+	}
+
+	public void setDeckPredeterminado() {
+		usuario = (Usuario) ActionContext.getContext().getSession()
+				.get(NombreObjetosSesion.USUARIO);
 		usuario.setDeckPred(deckId);
 		usuarioNegocio.save(usuario);
 	}
-	
+
 	public Integer getIdSel() {
 		return idSel;
 	}
 
-	public void setIdSel(Integer idSel) {		
+	public void setIdSel(Integer idSel) {
 		this.idSel = idSel;
 		if (idSel != null) {
 			model = usuarioNegocio.findById(idSel);
@@ -242,7 +266,28 @@ public class UsuarioController extends ActionSupport implements ModelDriven<Usua
 		this.paisNegocio = paisNegocio;
 	}
 
+	public List<Duelo> getDuelosGanados() {
+		return duelosGanados;
+	}
 
+	public void setDuelosGanados(List<Duelo> duelosGanados) {
+		this.duelosGanados = duelosGanados;
+	}
+
+	public List<Duelo> getDuelosPerdidos() {
+		return duelosPerdidos;
+	}
+
+	public void setDuelosPerdidos(List<Duelo> duelosPerdidos) {
+		this.duelosPerdidos = duelosPerdidos;
+	}
+
+	public DueloNegocio getDueloNegocio() {
+		return dueloNegocio;
+	}
+
+	public void setDueloNegocio(DueloNegocio dueloNegocio) {
+		this.dueloNegocio = dueloNegocio;
+	}
 
 }
-

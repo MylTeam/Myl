@@ -5,12 +5,12 @@
 		contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" />
 
 	<html xmlns="http://www.w3.org/1999/xhtml">
-	
+
 <head>
 <title>Perfil</title>
 <jsp:text>
 	<![CDATA[
-		 	<script src="${pageContext.request.contextPath}/usuario/js/facebook.js" type="text/javascript"></script>
+		 	
 			<script src="${pageContext.request.contextPath}/usuario/js/deckselected.js" type="text/javascript"></script>
 			<script src="${pageContext.request.contextPath}/usuario/js/usuario.js" type="text/javascript"></script>
 			<script src="${pageContext.request.contextPath}/usuario/js/twitter.js" type="text/javascript"></script>
@@ -35,22 +35,25 @@
 			<tr>
 
 				<td style="width: 50%; vertical-align: top">
-				
-					<table>
+
+					<table style="width: 100%">
 						<tr>
-							<td>Bienvenido ${usuario.login}</td>
-							</tr><tr>
+							<td><h2>Bienvenido ${usuario.login}</h2></td>
+						</tr>
+						<tr>
 							<td><input type="hidden" name="deck" id="deck"
 								value="${usuario.deckPred}" /> <b>Mazo: <span id="result">
 								</span></b></td>
-								</tr><tr>
-							<td><a
-								href="${pageContext.request.contextPath}/usuario/${usuario.idUsuario}/edit">Modificar
-									Perfil</a></td>
+							<td><b><a
+									href="${pageContext.request.contextPath}/usuario/${usuario.idUsuario}/edit">Modificar
+										Perfil</a></b></td>
+							<td><b><a
+									href="${pageContext.request.contextPath}/usuario/${usuario.idUsuario}">Tus
+										estadísticas</a></b></td>
 						</tr>
 
 					</table>
-					
+
 					<table id="tblDeck" style="width: 100%;">
 						<thead>
 							<tr>
@@ -88,7 +91,7 @@
 
 				</td>
 
-				<td style="width: 50%; height: 100%;text-align: center;"><a
+				<td style="width: 50%; height: 100%; text-align: center;"><a
 					class="twitter-timeline" href="https://twitter.com/MylOnlineZ"
 					data-widget-id="521443826024476672">Tweets por @MylOnlineZ</a></td>
 			</tr>

@@ -854,7 +854,7 @@
 			 */
 			this.oLanguage = {
 				"sProcessing": "Procesando...",
-				"sLengthMenu": "Mostrar _MENU_ registros",
+				"sLengthMenu": "Mostrar _MENU_",
 				"sZeroRecords": "No se encontraron registros",
 				"sInfo": "Mostrando _START_ a _END_ de _TOTAL_ registros",
 				"sInfoEmpty": "Mostrando 0 a 0 de 0 registros",
