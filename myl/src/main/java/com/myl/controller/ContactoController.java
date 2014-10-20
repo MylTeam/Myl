@@ -49,8 +49,8 @@ public class ContactoController extends ActionSupport {
 			@RequiredStringValidator(fieldName = "asunto", type = ValidatorType.FIELD, key = "Introduce el asunto"),
 			@RequiredStringValidator(fieldName = "mensaje", type = ValidatorType.FIELD, key = "Introduce el mensaje")},
 			regexFields = {
-			@RegexFieldValidator(fieldName = "asunto", type = ValidatorType.FIELD, key = "Asunto no válido", expression = "[A-Z[a-z][0-9]]+"),
-			@RegexFieldValidator(fieldName = "mensaje", type = ValidatorType.FIELD, key = "Mensaje no válido", expression = "[A-Z[a-z][0-9]]+")
+			@RegexFieldValidator(fieldName = "asunto", type = ValidatorType.FIELD, key = "Asunto no válido", expression = "[A-Z[a-z][0-9]\\s]+"),
+			@RegexFieldValidator(fieldName = "mensaje", type = ValidatorType.FIELD, key = "Mensaje no válido", expression = "[A-Z[a-z][0-9]\\s]+")
 			})
 	public HttpHeaders create() {
 			LOGGER.info(asunto+" : "+mensaje);

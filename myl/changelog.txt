@@ -31,3 +31,5 @@ v1.7
 	-Se agrega el ranking con los 100 mejores jugadores.
 	-Se agregan estadísticas para el usuario.
 	-Se agrega conexión con twitter para visualizar noticias.
+v1.8
+	-BugFix: Se arregla el error al tratar de enviar un comentario.
