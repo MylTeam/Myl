@@ -42,8 +42,31 @@ import com.opensymphony.xwork2.validator.annotations.ValidatorType;
 @Results({
 		@Result(name = "success", type = "redirectAction", params = {"actionName", "usuario" }),
 		@Result(name = "input", type = "redirectAction", params = {"actionName", "usuario" }),
-		@Result(name = "res", type = "json", params = { "includeProperties","resultado.*" }),
-		@Result(name = "decks", type = "json", params = { "includeProperties","deckCompleto.*" }) })
+		@Result(name = "res", type = "json", params = { "root","action", "includeProperties",
+				"resultado\\[\\d+\\]\\.id,"
+				+ "resultado\\[\\d+\\]\\.nombre,"
+				+ "resultado\\[\\d+\\]\\.efecto,"
+				+ "resultado\\[\\d+\\]\\.frecuencia,"
+				+ "resultado\\[\\d+\\]\\.coste,"
+				+ "resultado\\[\\d+\\]\\.fuerza,"
+				+ "resultado\\[\\d+\\]\\.idTemp,"
+				+ "resultado\\[\\d+\\]\\.numero,"
+				+ "resultado\\[\\d+\\]\\.raza,"
+				+ "resultado\\[\\d+\\]\\.tipo,"				
+				+ "resultado\\[\\d+\\]\\.siglas" }),
+		@Result(name = "decks", type = "json", params = { "root","action", "includeProperties",
+				"deckCompleto\\[\\d+\\]\\.id,"
+				+ "deckCompleto\\[\\d+\\]\\.cantidad,"
+				+ "deckCompleto\\[\\d+\\]\\.nombre,"
+				+ "deckCompleto\\[\\d+\\]\\.efecto,"
+				+ "deckCompleto\\[\\d+\\]\\.frecuencia,"
+				+ "deckCompleto\\[\\d+\\]\\.coste,"
+				+ "deckCompleto\\[\\d+\\]\\.fuerza,"
+				+ "deckCompleto\\[\\d+\\]\\.numero,"
+				+ "deckCompleto\\[\\d+\\]\\.raza,"
+				+ "deckCompleto\\[\\d+\\]\\.tipo,"				
+				+ "deckCompleto\\[\\d+\\]\\.siglas"		
+		}) })
 public class DeckController extends ActionSupport implements ModelDriven<Deck>,
 		Preparable {
 
@@ -235,7 +258,8 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>,
 		return "success";
 	}
 
-	public String search() {
+	@SkipValidation
+	public String search() {		
 		jsonProcessor = new Gson();
 		Carta cartaAux = jsonProcessor.fromJson(criterioJson, Carta.class);
 		resultado = new ArrayList<Carta>();
@@ -256,11 +280,11 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>,
 			aux.setSiglas(carta.getEdicion().getSiglas());
 
 			resultado.add(aux);
-		}
-
+		}		
 		return "res";
 	}
 
+	@SkipValidation
 	public String buscarDecks() {
 		
 		deckCompleto = new ArrayList<Carta>();

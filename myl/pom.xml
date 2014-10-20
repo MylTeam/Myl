@@ -14,8 +14,8 @@
 		<tomcat.version>7.0.29</tomcat.version>
 		<spring.version>3.0.5.RELEASE</spring.version>		
 		<hibernate.version>3.5.5-Final</hibernate.version>
-		<struts.version>2.2.1.1</struts.version>
-		<jquery.version>3.6.0</jquery.version>
+		<struts.version>2.3.16.3</struts.version>
+		<jquery.version>3.7.0</jquery.version>
 	</properties>
 
 
@@ -121,7 +121,7 @@
 		<dependency>
 			<groupId>org.apache.struts</groupId>
 			<artifactId>struts2-rest-plugin</artifactId>
-			<version>2.1.8.1</version>
+			<version>${struts.version}</version>
 			<type>jar</type>
 			<scope>compile</scope>
 			<exclusions>
@@ -134,28 +134,28 @@
 		<dependency>
 			<groupId>org.apache.struts</groupId>
 			<artifactId>struts2-convention-plugin</artifactId>
-			<version>2.1.8.1</version>
+			<version>${struts.version}</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.struts</groupId>
 			<artifactId>struts2-config-browser-plugin</artifactId>
-			<version>2.1.8.1</version>
+			<version>${struts.version}</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.struts</groupId>
 			<artifactId>struts2-dojo-plugin</artifactId>
-			<version>2.1.8.1</version>
+			<version>${struts.version}</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.struts</groupId>
 			<artifactId>struts2-spring-plugin</artifactId>
-			<version>2.2.1</version>
+			<version>${struts.version}</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>

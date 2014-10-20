@@ -200,7 +200,7 @@ function getDeck(){
 	var urlMethod;
 	
 	if($("#idSel").length==0){
-		urlMethod=context + "/deck/"+"!buscarDecks";
+		urlMethod=context + "/deck"+"!buscarDecks";
 	}else{
 		urlMethod=context + "/deck/"+$("#idSel").val()+"!buscarDecks";
 	}

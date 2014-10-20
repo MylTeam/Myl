@@ -84,7 +84,7 @@ public class RegistroController extends ActionSupport implements
 			@RequiredStringValidator(fieldName = "model.email", type = ValidatorType.FIELD, key = "Introduce tu correo electrónico"),			
 			@RequiredStringValidator(fieldName = "confirmPass", type = ValidatorType.FIELD, key = "Confirma la contraseña")},			
 			regexFields = {
-			@RegexFieldValidator(fieldName = "model.login", type = ValidatorType.FIELD, key = "Nombre de usuario no válido", expression = "[A-Z[a-z][0-9]]+")},
+			@RegexFieldValidator(fieldName = "model.login", type = ValidatorType.FIELD, key = "Nombre de usuario no válido", regexExpression = "[A-Z[a-z][0-9]]+")},
 			intRangeFields={
 			@IntRangeFieldValidator(fieldName="model.idPais", type = ValidatorType.FIELD, message="Selecciona tu pais", min = "1")},
 			emails={
