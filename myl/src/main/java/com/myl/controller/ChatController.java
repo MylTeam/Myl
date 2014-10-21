@@ -28,9 +28,18 @@ import com.opensymphony.xwork2.ActionSupport;
 @Named
 @Results({
 		@Result(name = "success", type = "redirectAction", params = {
-				"actionName", "chat" }),
-		@Result(name = "cual", type = "json", params = { "includeProperties",
-				"deck1.*" }) })
+				"actionName", "chat" }),		
+		@Result(name = "cual", type = "json", params = { "root","action", "includeProperties",
+						"deck1\\[\\d+\\]\\.nombre,"
+						+ "deck1\\[\\d+\\]\\.efecto,"
+						+ "deck1\\[\\d+\\]\\.frecuencia,"
+						+ "deck1\\[\\d+\\]\\.coste,"
+						+ "deck1\\[\\d+\\]\\.fuerza,"
+						+ "deck1\\[\\d+\\]\\.idTemp,"
+						+ "deck1\\[\\d+\\]\\.numero,"
+						+ "deck1\\[\\d+\\]\\.raza,"
+						+ "deck1\\[\\d+\\]\\.tipo,"				
+						+ "deck1\\[\\d+\\]\\.siglas" })	})
 public class ChatController extends ActionSupport {
 
 	private static final long serialVersionUID = 8585016072024421730L;
