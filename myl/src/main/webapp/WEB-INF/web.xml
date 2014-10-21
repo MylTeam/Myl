@@ -33,14 +33,14 @@
 		evitando con ello tener que abrir sesiones para cada objeto asociado -->
 	<filter>
 		<filter-name>openSessionInViewFilter</filter-name>
-		<filter-class>org.springframework.orm.hibernate3.support.OpenSessionInViewFilter</filter-class>
+		<filter-class>org.springframework.orm.hibernate4.support.OpenSessionInViewFilter</filter-class>
 		<init-param>
 			<param-name>flushMode</param-name>
 			<param-value>ALWAYS</param-value>
 		</init-param>
 		<init-param>
 			<param-name>sessionFactoryBeanName</param-name>
-			<param-value>hibernateSessionFactory</param-value>
+			<param-value>sessionFactory</param-value>
 		</init-param>
 		<init-param>
 			<param-name>singleSession</param-name>

@@ -16,6 +16,7 @@ import com.myl.modelo.Deck;
 import com.myl.modelo.Pais;
 import com.myl.modelo.Usuario;
 import com.myl.negocio.DeckNegocio;
+import com.myl.negocio.GenericBs;
 import com.myl.negocio.PaisNegocio;
 import com.myl.negocio.UsuarioNegocio;
 import com.opensymphony.xwork2.ActionSupport;
@@ -49,9 +50,13 @@ public class RegistroController extends ActionSupport implements
 	
 	private PaisNegocio paisNegocio;
 	
+	
+	
 	@SkipValidation
-	public String editNew() {
-		listPaises=paisNegocio.findAll(); 
+	public String editNew() {		
+	
+		listPaises=paisNegocio.findAll();
+		
 		return "editNew";
 	}
 

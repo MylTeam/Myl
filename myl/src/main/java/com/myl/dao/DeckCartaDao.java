@@ -7,39 +7,57 @@ import javax.inject.Named;
 import javax.inject.Singleton;
 
 import org.hibernate.Query;
+import org.hibernate.SessionFactory;
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Example;
 import org.hibernate.criterion.Projections;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.context.annotation.Scope;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import org.springframework.stereotype.Repository;
 
 import com.myl.modelo.Carta;
 import com.myl.modelo.DeckCarta;
 
-@Singleton
-@Named("deckCartaDao")
-public class DeckCartaDao extends HibernateDaoSupport {
+@Repository("deckCartaDao")
+@Scope(value = BeanDefinition.SCOPE_SINGLETON)
+public class DeckCartaDao {
+	
+	@Autowired
+	SessionFactory sessionFactory;
+	
 	public List<DeckCarta> findAll() {		
-		return getHibernateTemplate().loadAll(DeckCarta.class);
+		return sessionFactory.getCurrentSession().createCriteria(DeckCarta.class).list();
 	}
 
 	public DeckCarta findById(Integer id) {
-		return getHibernateTemplate().get(DeckCarta.class, id);
+		sessionFactory.getCurrentSession().clear();
+		return (DeckCarta) sessionFactory.getCurrentSession().get(DeckCarta.class, id);
 	}
 
 	public DeckCarta save(DeckCarta entity) {
 		if (entity.getDeckCartaId() != null) {
-			entity = getHibernateTemplate().merge(entity);
+			entity = (DeckCarta) sessionFactory.getCurrentSession().merge(entity);
 		}
-		getSession().saveOrUpdate(entity);
+		sessionFactory.getCurrentSession().saveOrUpdate(entity);		
 		return entity;
 	}
 
 	public void delete(DeckCarta entity) {
-		entity = getHibernateTemplate().merge(entity);
-		getSession().delete(entity);
+		entity = (DeckCarta) sessionFactory.getCurrentSession().merge(entity);
+		sessionFactory.getCurrentSession().saveOrUpdate(entity);
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<DeckCarta> findByExample(DeckCarta example) { 
+		return (List<DeckCarta>) sessionFactory.getCurrentSession()
+				.createCriteria(example.getClass())
+				.add(Example.create(example)).list();
 	}
 	
 	public void insertCard(Integer deckId,Integer cartaId,Integer cartaQt){
-		Query query = getSession().createSQLQuery("insert into deckcarta values(:deckId,:cartaId,:cartaQt)")
+		Query query = sessionFactory.getCurrentSession().createSQLQuery("insert into deckcarta values(:deckId,:cartaId,:cartaQt)")
 				.addEntity(DeckCarta.class)
 				.setParameter("deckId", deckId).setParameter("cartaId", cartaId).setParameter("cartaQt", cartaQt);
 		
@@ -47,7 +65,7 @@ public class DeckCartaDao extends HibernateDaoSupport {
 	}
 	
 	public void deleteCardsFromDeck(Integer deckId){
-		Query query = getSession().createSQLQuery("delete from deckcarta where DeckId=:deckId")		
+		Query query = sessionFactory.getCurrentSession().createSQLQuery("delete from deckcarta where DeckId=:deckId")		
 				.addEntity(DeckCarta.class)
 				.setParameter("deckId", deckId);
 		
@@ -55,14 +73,19 @@ public class DeckCartaDao extends HibernateDaoSupport {
 	}
 	
 	public BigDecimal getDeckSize(Integer deckId){
-		Query query = getSession().createSQLQuery("select sum(CartaQt) from deckcarta where DeckId=:deckId")				
+		Query query = sessionFactory.getCurrentSession().createSQLQuery("select sum(CartaQt) from deckcarta where DeckId=:deckId")				
 				.setParameter("deckId", deckId);
 		
 		return (BigDecimal) query.uniqueResult();
 	}
 
-	@SuppressWarnings("unchecked")
-	public List<DeckCarta> findByExample(DeckCarta deckCarta) { 
-		return getHibernateTemplate().findByExample(deckCarta);
+
+
+	public SessionFactory getSessionFactory() {
+		return sessionFactory;
+	}
+
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
 	}
 }

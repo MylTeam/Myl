@@ -8,6 +8,9 @@ import javax.inject.Singleton;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.myl.dao.DeckDao;
@@ -17,8 +20,8 @@ import com.myl.modelo.DeckCarta;
 import com.myl.modelo.Edicion;
 import com.myl.modelo.Formato;
 
-@Singleton
-@Named("deckNegocio")
+@Service("deckNegocio")
+@Scope(value = BeanDefinition.SCOPE_SINGLETON)
 public class DeckNegocio {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(DeckNegocio.class);

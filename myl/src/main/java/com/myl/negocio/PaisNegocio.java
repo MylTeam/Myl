@@ -5,14 +5,16 @@ import java.util.List;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.myl.dao.PaisDao;
 import com.myl.modelo.Pais;
 
-
-@Singleton
-@Named("paisNegocio")
+@Service("paisNegocio")
+@Scope(value = BeanDefinition.SCOPE_SINGLETON)
 public class PaisNegocio {
 	private PaisDao paisDao;	
 	

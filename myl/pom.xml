@@ -12,8 +12,10 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<gson.version>2.2.2</gson.version>
 		<tomcat.version>7.0.29</tomcat.version>
-		<spring.version>3.0.5.RELEASE</spring.version>		
-		<hibernate.version>3.5.5-Final</hibernate.version>
+		<!-- <spring.version>3.0.5.RELEASE</spring.version> -->
+		<!-- <hibernate.version>3.5.5-Final</hibernate.version> -->		
+		<spring.version>4.1.1.RELEASE</spring.version>
+		<hibernate.version>4.3.6.Final</hibernate.version>
 		<struts.version>2.3.16.3</struts.version>
 		<jquery.version>3.7.0</jquery.version>
 	</properties>
@@ -156,6 +158,24 @@
 			<groupId>org.apache.struts</groupId>
 			<artifactId>struts2-spring-plugin</artifactId>
 			<version>${struts.version}</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>spring-web</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>spring-beans</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>spring-context</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>spring-core</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
+			</exclusions>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
@@ -251,8 +271,8 @@
 
 		<dependency>
 			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
-			<version>3.0.1</version>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
@@ -370,6 +390,7 @@
 			<artifactId>hibernate-entitymanager</artifactId>
 			<version>${hibernate.version}</version>
 		</dependency>
+
 
 		<dependency>
 			<groupId>c3p0</groupId>
