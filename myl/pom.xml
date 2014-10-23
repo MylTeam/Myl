@@ -31,7 +31,7 @@
 				<artifactId>sonar-maven-plugin</artifactId>
 				<version>2.1</version>
 			</plugin>
-			<plugin>
+			<!-- <plugin>
 				<groupId>com.samaxes.maven</groupId>
 				<artifactId>minify-maven-plugin</artifactId>
 				<version>1.7.4</version>
@@ -39,16 +39,16 @@
 					<execution>
 						<id>default-minify</id>
 						<configuration>
-							<!-- <cssSourceDir>Estilos</cssSourceDir> <cssSourceFiles> <cssSourceFile>default.css</cssSourceFile> 
+							<cssSourceDir>Estilos</cssSourceDir> <cssSourceFiles> <cssSourceFile>default.css</cssSourceFile> 
 								</cssSourceFiles> <jsSourceDir>scripts</jsSourceDir> <jsSourceFiles> <jsSourceFile>cdtCore.js</jsSourceFile> 
-								</jsSourceFiles> -->
+								</jsSourceFiles>
 						</configuration>
 						<goals>
 							<goal>minify</goal>
 						</goals>
 					</execution>
 				</executions>
-			</plugin>
+			</plugin> -->
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>2.3.2</version>
@@ -266,8 +266,8 @@
 
 		<dependency>
 			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
-			<version>2.5</version>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
@@ -426,6 +426,7 @@
 			<artifactId>spring-websocket</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
+
 	</dependencies>
 
 </project>

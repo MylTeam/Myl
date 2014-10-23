@@ -12,15 +12,16 @@ import org.springframework.web.socket.config.annotation.EnableWebSocket;
 import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
 import org.springframework.web.socket.handler.PerConnectionWebSocketHandler;
+import org.springframework.web.socket.server.support.DefaultHandshakeHandler;
 
 @Configuration
 @EnableWebMvc
 @EnableWebSocket
-@ComponentScan(basePackages={"mk.hsilomedus.springsockets.service"})
+@ComponentScan(basePackages={"com.myl.springsockets"})
 public class WebConfig extends WebMvcConfigurerAdapter implements WebSocketConfigurer {
 
   public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-    registry.addHandler(chatWebSocketHandler(), "/chat").withSockJS();
+    registry.addHandler(chatWebSocketHandler(), "/lobbyws");
   }
   
   @Bean
@@ -34,5 +35,6 @@ public class WebConfig extends WebMvcConfigurerAdapter implements WebSocketConfi
   public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
           configurer.enable();
   }
+
 
 }

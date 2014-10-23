@@ -1,7 +1,7 @@
 var wsclient = (function() {
 
     var ws = null;
-    var wsURI = 'ws://' + location.host  + '/myl/lobbyws';
+    var wsURI = 'http://' + location.host  + '/myl/lobbyws';
     function connect(userName,format) {    	
     	
         if(!userName || userName == '') {
@@ -9,17 +9,18 @@ var wsclient = (function() {
         }
 
         if ('WebSocket' in window) {
-            ws = new WebSocket(wsURI + '?userName=' + userName+"&format="+format);
+            ws = new SockJS(wsURI);
         } else if ('MozWebSocket' in window) {
-            ws = new MozWebSocket(wsURI + '?userName=' + userName+"&format="+format);
+            ws = new SockJS(wsURI);
         } else {
             alert('Tu navegador no soporta WebSockets');
             return;
         }
         ws.onopen = function () {
-//        	toChatSession(userName, format, "FORMAT");
+        	toChatSession(userName, format, "FORMAT");
             setConnected(true);
             showConversation("Sala_Myl");
+            //Quitar si es con websocketservlet
             
         };
         ws.onmessage = function (event) {

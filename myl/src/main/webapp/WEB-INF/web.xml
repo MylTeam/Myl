@@ -123,7 +123,7 @@
 		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
 	</listener>
 
-	<servlet>
+<servlet>
 		<servlet-name>wsChat</servlet-name>
 		<servlet-class>com.myl.util.WebSocketCharServlet</servlet-class>
 	</servlet>
