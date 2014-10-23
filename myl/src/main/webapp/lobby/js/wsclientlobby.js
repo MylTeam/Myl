@@ -19,6 +19,8 @@ var wsclient = (function() {
         ws.onopen = function () {
             setConnected(true);
             showConversation("Sala_Myl");
+            //Quitar si es con websocketservlet
+//            toChatSession(userName, format, "FORMAT");
         };
         ws.onmessage = function (event) {
             var message = JSON.parse(event.data);
@@ -229,6 +231,10 @@ var wsclient = (function() {
 
     function toChat(sender, receiver, message) {
         ws.send(JSON.stringify({messageInfo : {from : sender, to : receiver, message : message}}));
+    }
+    
+    function toChatSession(user, formatOrUserTwo, type) {
+        ws.send(JSON.stringify({sessionInfo : {user : user, formatOrUserTwo : formatOrUserTwo, type : type}}));
     }
     
     function toChatAll(sender, message) {
