@@ -2,16 +2,13 @@
 package com.myl.springsockets;
 
 import java.io.IOException;
-import java.nio.CharBuffer;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.apache.catalina.websocket.WsOutbound;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -20,10 +17,7 @@ import org.springframework.web.socket.WebSocketSession;
 
 import com.google.gson.Gson;
 import com.myl.messages.ConnectionInfoMessage;
-import com.myl.messages.MessageInfoMessage;
 import com.myl.messages.SessionInfoMessage;
-import com.myl.messages.StatusInfoMessage;
-import com.myl.util.WebSocketLobbyServlet;
 
 
 @Service
