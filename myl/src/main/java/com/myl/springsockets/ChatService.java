@@ -11,6 +11,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.apache.catalina.User;
+import org.hibernate.engine.jdbc.connections.internal.UserSuppliedConnectionProviderImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -28,6 +30,7 @@ public class ChatService {
   
   private Set<WebSocketSession> conns = java.util.Collections.synchronizedSet(new HashSet<WebSocketSession>());  
   private Map<WebSocketSession, UserConnection> nickNames = java.util.Collections.synchronizedMap(new HashMap<WebSocketSession, UserConnection>());
+  private Map<WebSocketSession, String> users = java.util.Collections.synchronizedMap(new HashMap<WebSocketSession, String>());
   private static final Logger LOGGER = LoggerFactory.getLogger(ChatService.class);
   private Gson jsonProcessor=new Gson();
   
@@ -80,7 +83,9 @@ public class ChatService {
       sendConnectionInfo(session,connection);
             
       nickNames.put(session,connection);
+      users.put(session, jsonProcessor.toJson(connection));
       
+      LOGGER.info("tamaño: "+users.size());
       //Enviar status a todos      
       sendStatusInfoToOtherUsers(new StatusInfoMessage(connection.getUserName(), connection.getFormatOrUser(), StatusInfoMessage.STATUS.CONNECTED),connection);
 
