@@ -17,7 +17,7 @@ var wsclient = (function() {
             return;
         }
         ws.onopen = function () {
-//        	toChatSession(userName, format, "FORMAT");
+        	toChatSession(userName, format, "FORMAT");
             setConnected(true);
             showConversation("Sala_Myl");
             
