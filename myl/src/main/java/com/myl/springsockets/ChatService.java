@@ -9,10 +9,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
 
-import org.apache.catalina.User;
-import org.hibernate.engine.jdbc.connections.internal.UserSuppliedConnectionProviderImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -20,9 +17,13 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
 import com.google.gson.Gson;
+import com.myl.messages.ChatInfoMessage;
 import com.myl.messages.ConnectionInfoMessage;
+import com.myl.messages.MessageInfoMessage;
 import com.myl.messages.SessionInfoMessage;
 import com.myl.messages.StatusInfoMessage;
+import com.myl.util.Util;
+
 
 
 @Service
@@ -40,80 +41,35 @@ public class ChatService {
   }
   
   public void registerCloseConnection(WebSocketSession session) {
-//    String nick = nickNames.get(session);
-    conns.remove(session);
-//    nickNames.remove(session);
-//    if (nick!= null) {
-//      String messageToSend = "{\"removeUser\":\"" + nick + "\"}";
-//      for (WebSocketSession sock : conns) {
-//        try {
-//          sock.sendMessage(new TextMessage(messageToSend));
-//        } catch (IOException e) {
-//          System.out.println("IO exception when sending remove user message");
-//        }
-//      }
-//    }    
+    
+    sendStatusInfoToOtherUsers(new StatusInfoMessage(nickNames.get(session).getUserName(), nickNames.get(session).getFormatOrUser(), StatusInfoMessage.STATUS.DISCONNECTED),session);    
+    nickNames.remove(session);
+    conns.remove(session);  
   }
   
   public void processMessage(WebSocketSession session, String message) {
 	  LOGGER.info("En process message");	  
     if (!nickNames.containsKey(session) && message.contains("sessionInfo")) {
     	LOGGER.info("Registrando usuario");
-      //No nickname has been assigned by now
-      //the first message is the nickname
-      //escape the " character first
-//      message = message.replace("\"", "\\\"");
-//      
-//      //broadcast all the nicknames to him
-//      for (String nick : nickNames.values()) {
-//        try {
-//          session.sendMessage(new TextMessage("{\"addUser\":\"" + nick + "\"}"));
-//        } catch (IOException e) {
-//          System.out.println("Error when sending addUser message");          
-//        }
-//      }
-      
+  
       //Recupera los datos de la sesion del usuario
       SessionInfoMessage sessionMessage = jsonProcessor.fromJson(message, SessionInfoMessage.class);
       LOGGER.info("msj sesion: "+sessionMessage );
-    //Register the nickname with the
       final UserConnection userConnection=new UserConnection(sessionMessage.getSessionInfo().getUser(), sessionMessage.getSessionInfo().getFormatOrUserTwo());
-      
       sendConnectionInfo(session,userConnection);
-            
       nickNames.put(session,userConnection);
-            
-      
-      String json=jsonProcessor.toJson(userConnection);      
-      LOGGER.info("===========>"+json);
-//      users.put(session, jsonProcessor.toJson(connection));      
-//      LOGGER.info("tamaño: "+users.size());
-      //Enviar status a todos      
-//      sendStatusInfoToOtherUsers(new StatusInfoMessage(userConnection.getUserName(), userConnection.getFormatOrUser(), StatusInfoMessage.STATUS.CONNECTED),userConnection);
       sendStatusInfoToOtherUsers(new StatusInfoMessage(userConnection.getUserName(), userConnection.getFormatOrUser(), StatusInfoMessage.STATUS.CONNECTED),session);
-
-      
-      //broadcast him to everyone now
-//      String messageToSend = "{\"addUser\":\"" + message + "\"}";
-//      for (WebSocketSession sock : conns) {
-//        try {
-//          sock.sendMessage(new TextMessage(messageToSend));
-//        } catch (IOException e) {
-//          System.out.println("Error when sending broadcast addUser message");
-//        }
-//      }
+           
     
-//    } else {
-//      //Broadcast the message
-//      String messageToSend = "{\"nickname\":\"" + nickNames.get(session)
-//          + "\", \"message\":\"" + message.replace("\"", "\\\"") +"\"}";
-//      for (WebSocketSession sock : conns) {
-//        try {
-//          sock.sendMessage(new TextMessage(messageToSend));
-//        } catch (IOException e) {
-//          System.out.println("Error when sending message message");
-//        }
-//      }
+    } else {
+    	//mensajes enviados en el chat
+    	if(message.contains("messageInfo")){
+    		final MessageInfoMessage messageInfoMessage = jsonProcessor.fromJson(message, MessageInfoMessage.class);
+    		sendMessage(messageInfoMessage.getMessageInfo().getTo(), messageInfoMessage);
+       	}else if(message.contains("chatInfo")){
+    		final ChatInfoMessage chatInfoMessage = jsonProcessor.fromJson(message, ChatInfoMessage.class);        		
+    		sendMessageToAll(chatInfoMessage,session);	
+    	}
     }
   }
 
@@ -132,19 +88,42 @@ public class ChatService {
       }
   }
   
-//  private void sendStatusInfoToOtherUsers(StatusInfoMessage message, UserConnection connection) {
+  private void sendMessageToAll(Object message,WebSocketSession session) {
+	  for(WebSocketSession sessionAux:conns){
+		  if(!sessionAux.equals(session)){
+				try {
+					sessionAux.sendMessage(new TextMessage(jsonProcessor.toJson(message)));
+				} catch (IOException e) {
+					LOGGER.error("No se pudo enviar el mensaje de estado de la conexión", e);
+				}
+			}
+	  }  	
+  }
+  
+  private void sendMessage(String string,Object object) {
+  	final WebSocketSession destinationConnection = getDestinationUserConnection(string);
+      if (destinationConnection != null) {          
+          try {
+			destinationConnection.sendMessage(new TextMessage(jsonProcessor.toJson(object)));
+		} catch (IOException e) {
+			LOGGER.error("No se pudo enviar el mensaje", e);
+		}
+      } else {
+      	LOGGER.warn("Se está intentando enviar un mensaje a un usuario no conectado");
+      }
+  }
+  
+  private WebSocketSession getDestinationUserConnection(String destinationUser) {
+      for (UserConnection connection : nickNames.values()) {    	  
+          if (destinationUser.equals(connection.getUserName())) {
+        	  return Util.getKeyByValue(nickNames, connection);
+          }
+      }
+      return null;
+  }
+  
   private void sendStatusInfoToOtherUsers(StatusInfoMessage message, WebSocketSession session) {
-//  	LOGGER.info("Enviado estado de: "+connection.getUserName()+" a los demás usuarios.");
-//  	final Collection<UserConnection> otherUsersConnections = getAllChatConnectionsExceptThis(connection.getUserName());
-//  	LOGGER.info("size: "+otherUsersConnections.size());
-//      for (UserConnection connectionAux : otherUsersConnections) {
-//    	  LOGGER.info(connectionAux.getUserName());
-//          try {        	  
-//        	  connectionAux.getSession().sendMessage(new TextMessage(jsonProcessor.toJson(message)));        	                
-//          } catch (IOException e) {
-//          	LOGGER.error("No se pudo enviar el mensaje de estado de la conexión", e);
-//          }
-//      }
+  	LOGGER.info("Enviado estado de: "+nickNames.get(session).getUserName()+" a los demás usuarios.");
   		for(WebSocketSession sessionAux:conns){
   			if(!sessionAux.equals(session)){
   				try {
@@ -154,19 +133,7 @@ public class ChatService {
 				}
   			}
   		}
-  }
-  
-  private Collection<UserConnection> getAllChatConnectionsExceptThis(String userName) {
-	  LOGGER.info("getallchatconnectionsExceptThis");
-      final Collection<UserConnection> allConnections = nickNames.values();
-      LOGGER.info("size all "+nickNames.size());
-      for(UserConnection connection:allConnections){
-    	  if(connection.getUserName().equals(userName)){
-    		  allConnections.remove(connection);
-    	  }
-      }      
-      return allConnections;
-  }
+  }  
   
   private List<String> getActiveUsers() {
   	LOGGER.info("Obteniendo lista de usuarios, Total: "+nickNames.size());
@@ -190,6 +157,5 @@ public class ChatService {
       }
       return formats;
   }
-
 
 }
