@@ -17,11 +17,16 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
 import com.google.gson.Gson;
+import com.myl.messages.CardInfoMessage;
+import com.myl.messages.CardListInfoMessage;
 import com.myl.messages.ChatInfoMessage;
 import com.myl.messages.ConnectionInfoMessage;
 import com.myl.messages.MessageInfoMessage;
+import com.myl.messages.PhaseInfoMessage;
 import com.myl.messages.SessionInfoMessage;
+import com.myl.messages.SessionInfoMessage.TYPE;
 import com.myl.messages.StatusInfoMessage;
+import com.myl.messages.TargetInfoMessage;
 import com.myl.util.Util;
 
 
@@ -41,34 +46,59 @@ public class ChatService {
   }
   
   public void registerCloseConnection(WebSocketSession session) {
+	  
+    if(nickNames.get(session).getTipo().equals(TYPE.FORMAT)){
+    	sendStatusInfoToOtherUsers(new StatusInfoMessage(nickNames.get(session).getUserName(), nickNames.get(session).getFormatOrUser(), StatusInfoMessage.STATUS.DISCONNECTED),session);
+    }else{
+    	sendMessage(nickNames.get(session).getFormatOrUser(), new StatusInfoMessage(nickNames.get(session).getUserName(), nickNames.get(session).getFormatOrUser(), StatusInfoMessage.STATUS.DISCONNECTED));
+    }
     
-    sendStatusInfoToOtherUsers(new StatusInfoMessage(nickNames.get(session).getUserName(), nickNames.get(session).getFormatOrUser(), StatusInfoMessage.STATUS.DISCONNECTED),session);    
     nickNames.remove(session);
     conns.remove(session);  
   }
   
   public void processMessage(WebSocketSession session, String message) {
-	  LOGGER.info("En process message");	  
     if (!nickNames.containsKey(session) && message.contains("sessionInfo")) {
-    	LOGGER.info("Registrando usuario");
   
       //Recupera los datos de la sesion del usuario
       SessionInfoMessage sessionMessage = jsonProcessor.fromJson(message, SessionInfoMessage.class);
-      LOGGER.info("msj sesion: "+sessionMessage );
-      final UserConnection userConnection=new UserConnection(sessionMessage.getSessionInfo().getUser(), sessionMessage.getSessionInfo().getFormatOrUserTwo());
+      final UserConnection userConnection=new UserConnection(sessionMessage.getSessionInfo().getUser(), sessionMessage.getSessionInfo().getFormatOrUserTwo(),sessionMessage.getSessionInfo().getType());
       sendConnectionInfo(session,userConnection);
-      nickNames.put(session,userConnection);
-      sendStatusInfoToOtherUsers(new StatusInfoMessage(userConnection.getUserName(), userConnection.getFormatOrUser(), StatusInfoMessage.STATUS.CONNECTED),session);
+      nickNames.put(session,userConnection);      
+      
+      if(userConnection.getTipo().equals(TYPE.FORMAT)){
+    	  sendStatusInfoToOtherUsers(new StatusInfoMessage(userConnection.getUserName(), userConnection.getFormatOrUser(), StatusInfoMessage.STATUS.CONNECTED),session);
+      }else{
+    	  sendMessage(userConnection.getFormatOrUser(), new StatusInfoMessage(userConnection.getUserName(), userConnection.getFormatOrUser(), StatusInfoMessage.STATUS.CONNECTED));
+      }
            
     
     } else {
     	//mensajes enviados en el chat
     	if(message.contains("messageInfo")){
-    		final MessageInfoMessage messageInfoMessage = jsonProcessor.fromJson(message, MessageInfoMessage.class);
-    		sendMessage(messageInfoMessage.getMessageInfo().getTo(), messageInfoMessage);
+    		final MessageInfoMessage msg = jsonProcessor.fromJson(message, MessageInfoMessage.class);
+    		sendMessage(msg.getMessageInfo().getTo(), msg);
        	}else if(message.contains("chatInfo")){
-    		final ChatInfoMessage chatInfoMessage = jsonProcessor.fromJson(message, ChatInfoMessage.class);        		
-    		sendMessageToAll(chatInfoMessage,session);	
+    		final ChatInfoMessage msg = jsonProcessor.fromJson(message, ChatInfoMessage.class);        		
+    		sendMessageToAll(msg,session);    	
+    	}
+    	//Métodos para el duel room
+       	else if(message.contains("cardInfo")){
+    		final CardInfoMessage msg = jsonProcessor.fromJson(message, CardInfoMessage.class);
+    		sendMessage(msg.getCardInfo().getTo(), msg);
+    		
+    	}else if(message.contains("cardListInfo")){
+    		final CardListInfoMessage msg = jsonProcessor.fromJson(message, CardListInfoMessage.class);
+    		sendMessage(msg.getCardListInfo().getTo(), msg);
+    		
+    	}else if(message.contains("targetInfo")){
+    		final TargetInfoMessage msg = jsonProcessor.fromJson(message, TargetInfoMessage.class);    		
+    		sendMessage(msg.getTargetInfo().getTo(), msg);
+    		
+    	}else if(message.contains("phaseInfo")){
+    		final PhaseInfoMessage msg = jsonProcessor.fromJson(message, PhaseInfoMessage.class);
+    		sendMessage(msg.getPhaseInfo().getTo(), msg);
+    		
     	}
     }
   }
@@ -88,6 +118,7 @@ public class ChatService {
       }
   }
   
+  //Envía un mensaje a todos los usuarios
   private void sendMessageToAll(Object message,WebSocketSession session) {
 	  for(WebSocketSession sessionAux:conns){
 		  if(!sessionAux.equals(session)){
@@ -100,6 +131,7 @@ public class ChatService {
 	  }  	
   }
   
+//Envía un mensaje a un usuario específico
   private void sendMessage(String string,Object object) {
   	final WebSocketSession destinationConnection = getDestinationUserConnection(string);
       if (destinationConnection != null) {          
@@ -124,8 +156,10 @@ public class ChatService {
   
   private void sendStatusInfoToOtherUsers(StatusInfoMessage message, WebSocketSession session) {
   	LOGGER.info("Enviado estado de: "+nickNames.get(session).getUserName()+" a los demás usuarios.");
-  		for(WebSocketSession sessionAux:conns){
-  			if(!sessionAux.equals(session)){
+  	WebSocketSession sessionAux;
+  	for (UserConnection connection : nickNames.values()) {
+  		sessionAux=Util.getKeyByValue(nickNames, connection);
+  		if(connection.getTipo().equals(TYPE.FORMAT) && !sessionAux.equals(session)){
   				try {
 					sessionAux.sendMessage(new TextMessage(jsonProcessor.toJson(message)));
 				} catch (IOException e) {
@@ -133,13 +167,25 @@ public class ChatService {
 				}
   			}
   		}
-  }  
+    
+//  		for(WebSocketSession sessionAux:conns){
+//  			if(!sessionAux.equals(session)){
+//  				try {
+//					sessionAux.sendMessage(new TextMessage(jsonProcessor.toJson(message)));
+//				} catch (IOException e) {
+//					LOGGER.error("No se pudo enviar el mensaje de estado de la conexión", e);
+//				}
+//  			}
+//  		}
+  } 
   
   private List<String> getActiveUsers() {
   	LOGGER.info("Obteniendo lista de usuarios, Total: "+nickNames.size());
       final List<String> activeUsers = new ArrayList<String>();
-      for (UserConnection connection : nickNames.values()) {            	
-          activeUsers.add(connection.getUserName());
+      for (UserConnection connection : nickNames.values()) {
+    	  if(connection.getTipo().equals(TYPE.FORMAT)){
+    		  activeUsers.add(connection.getUserName());
+    	  }
       }
       if(activeUsers.isEmpty()){
       	LOGGER.error("No hay usuarios activos");
@@ -150,7 +196,9 @@ public class ChatService {
   private List<String> getFormats() {
       final List<String> formats = new ArrayList<String>();
       for (UserConnection connection : nickNames.values()) {
-      	formats.add(connection.getFormatOrUser());
+    	  if(connection.getTipo().equals(TYPE.FORMAT)){
+    		  formats.add(connection.getFormatOrUser());
+    	  }
       }
       if(formats.isEmpty()){
       	LOGGER.error("No hay usuarios activos");

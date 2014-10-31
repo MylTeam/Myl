@@ -4,16 +4,18 @@ import java.io.Serializable;
 
 import org.springframework.web.socket.WebSocketSession;
 
+import com.myl.messages.SessionInfoMessage.TYPE;
+
 public class UserConnection implements Serializable{
 
 	private final String userName;
 	private final String formatOrUser;
-//	private final WebSocketSession session;
+	private final TYPE tipo;
 
-	public UserConnection(String userName, String formatOrUser) {
+	public UserConnection(String userName, String formatOrUser,TYPE tipo) {
 		this.userName = userName;
 		this.formatOrUser = formatOrUser;
-//		this.session = session;
+		this.tipo=tipo;
 	}
 
 	public String getUserName() {
@@ -23,9 +25,10 @@ public class UserConnection implements Serializable{
 	public String getFormatOrUser() {
 		return formatOrUser;
 	}
+	
+	public TYPE getTipo(){
+		return tipo;
+	}
 
-//	public WebSocketSession getSession() {
-//		return session;
-//	}
 
 }

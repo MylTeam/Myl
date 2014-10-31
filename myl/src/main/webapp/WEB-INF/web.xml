@@ -123,14 +123,14 @@
 		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
 	</listener>
 
-<servlet>
+<!-- <servlet>
 		<servlet-name>wsChat</servlet-name>
 		<servlet-class>com.myl.util.WebSocketCharServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>wsChat</servlet-name>
 		<url-pattern>/chatws</url-pattern>
-	</servlet-mapping>
+	</servlet-mapping> -->
 	
 	<!-- <servlet>
 		<servlet-name>wsLobby</servlet-name>

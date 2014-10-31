@@ -37,7 +37,7 @@ var wsclient = (function() {
         	console.log(message);
             if (message.messageInfo) {
                 showConversation(message.messageInfo.from);
-                if(message.messageInfo.message!="plduelojsp" && message.messageInfo.message!="plduelojspresp"){
+                if(message.messageInfo.message!="plduelojsp" && message.messageInfo.message!="plduelojspresp" && message.messageInfo.message.indexOf("gamereado")==-1 && message.messageInfo.message.indexOf("gamereadiok")==-1 && message.messageInfo.message!="gamereadyaccept" && message.messageInfo.message!="gamereadyreject"){
                 	addMessage(message.messageInfo.from, message.messageInfo.message, cleanWhitespaces(message.messageInfo.from) + 'conversation');
                 }else if(message.messageInfo.message=="plduelojsp"){
                 	addMessageButton(message.messageInfo.from, message.messageInfo.message, cleanWhitespaces(message.messageInfo.from) + 'conversation');

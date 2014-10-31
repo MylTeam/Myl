@@ -33,7 +33,6 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
   
   @Override
   protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-    System.out.println("New message: " + message.getPayload());
     chatService.processMessage(session, message.getPayload());
   }
 

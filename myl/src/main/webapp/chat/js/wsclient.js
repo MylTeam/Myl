@@ -11,7 +11,8 @@ var wsclient = (function() {
 	
 	
     var ws = null;
-    var wsURI = 'ws://' + location.host  + '/myl/chatws';
+    var wsURI = 'ws://' + location.host  + '/myl/lobbyws';
+//    var wsURI = 'ws://' + location.host  + '/myl/chatws';
     function connect(userName,userNameTwo) {    	
     	
         if(!userName || userName == '') {
@@ -27,6 +28,7 @@ var wsclient = (function() {
             return;
         }
         ws.onopen = function () {
+        	toChatSession(userName, userNameTwo, "OPONENT");
             setConnected(true);
         };
         ws.onmessage = function (event) {
@@ -291,6 +293,10 @@ var wsclient = (function() {
 
     function toChat(sender, receiver, message) {    	
         ws.send(JSON.stringify({messageInfo : {from : sender, to : receiver, message : message}}));
+    }
+    
+    function toChatSession(user, formatOrUserTwo, type) {
+        ws.send(JSON.stringify({sessionInfo : {user : user, formatOrUserTwo : formatOrUserTwo, type : type}}));
     }
     
     function toChatCard(sender, receiver, message, card, origen, destino) {
