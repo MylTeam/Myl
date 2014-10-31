@@ -20,9 +20,11 @@ var wsclient = (function() {
         }
 
         if ('WebSocket' in window) {
-            ws = new WebSocket(wsURI + '?userName=' + userName +'&userNameTwo=' + userNameTwo);
+//            ws = new WebSocket(wsURI + '?userName=' + userName +'&userNameTwo=' + userNameTwo);
+            ws = new WebSocket(wsURI);
         } else if ('MozWebSocket' in window) {
-            ws = new MozWebSocket(wsURI + '?userName=' + userName +'&userNameTwo=' + userNameTwo);
+//            ws = new MozWebSocket(wsURI + '?userName=' + userName +'&userNameTwo=' + userNameTwo);
+            ws = new MozWebSocket(wsURI);
         } else {
             alert('Tu navegador no soporta WebSockets');
             return;
