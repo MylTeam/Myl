@@ -33,3 +33,4 @@ v1.7
 	-Se agrega conexión con twitter para visualizar noticias.
 v1.8
 	-BugFix: Se arregla el error al tratar de enviar un comentario.
+	-BugFix: Se arregla el problema de la conexiones.

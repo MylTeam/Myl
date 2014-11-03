@@ -92,6 +92,14 @@
 								noticias.</li>
 						</ul></td>
 				</tr>
+				<tr>
+					<td>v1.8</td>
+					<td><ul>
+						<li>-BugFix: Se arregla el error al tratar de enviar un comentario.</li>
+						<li>-BugFix: Se arregla el problema de la conexiones.</li>
+					</ul>
+					</td>
+				</tr>
 			</table>
 		</form>
 	</center>
