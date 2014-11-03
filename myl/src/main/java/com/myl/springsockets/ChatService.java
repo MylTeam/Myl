@@ -42,7 +42,6 @@ public class ChatService {
 
   public void registerOpenConnection(WebSocketSession session) {
     conns.add(session);
-    LOGGER.info("conexiones: "+conns.size());
   }
   
   public void registerCloseConnection(WebSocketSession session) {
@@ -104,29 +103,29 @@ public class ChatService {
   }
 
   
-  private void sendConnectionInfo(WebSocketSession session,UserConnection connection) {
-	  LOGGER.info("Enviando msj a: "+session.toString());
+  private void sendConnectionInfo(WebSocketSession session,UserConnection connection) {	  
       final List<String> activeUsers = getActiveUsers();
       final List<String> formats = getFormats();
       final ConnectionInfoMessage connectionInfoMessage = new ConnectionInfoMessage(connection.getUserName(),activeUsers,formats);
       try {
-    	  LOGGER.info(jsonProcessor.toJson(connectionInfoMessage)+" , "+session);
+    	  LOGGER.info("Conexion a: Id-"+session.getId()+" user: "+connection.getUserName());
     	  session.sendMessage(new TextMessage(jsonProcessor.toJson(connectionInfoMessage)));
-    	  LOGGER.info("Msj enviado");
       } catch (IOException e) {
-      	LOGGER.error("No se pudo enviar el mensaje", e);
+      	LOGGER.error("SCI: No se pudo enviar el mensaje", e);
       }
   }
   
   //Envía un mensaje a todos los usuarios
   private void sendMessageToAll(Object message,WebSocketSession session) {
 	  for(WebSocketSession sessionAux:conns){
-		  if(!sessionAux.equals(session)){
-				try {
+		  if(!sessionAux.equals(session) && sessionAux.isOpen()){
+				try {					
 					sessionAux.sendMessage(new TextMessage(jsonProcessor.toJson(message)));
 				} catch (IOException e) {
 					LOGGER.error("No se pudo enviar el mensaje de estado de la conexión", e);
 				}
+			}else{
+				LOGGER.warn("SMA: Se está intentando enviar un mensaje a un usuario no conectado");
 			}
 	  }  	
   }
@@ -134,14 +133,14 @@ public class ChatService {
 //Envía un mensaje a un usuario específico
   private void sendMessage(String string,Object object) {
   	final WebSocketSession destinationConnection = getDestinationUserConnection(string);
-      if (destinationConnection != null) {          
+      if (destinationConnection != null && destinationConnection.isOpen()) {          
           try {
 			destinationConnection.sendMessage(new TextMessage(jsonProcessor.toJson(object)));
-		} catch (IOException e) {
+		} catch (Exception e) {
 			LOGGER.error("No se pudo enviar el mensaje", e);
 		}
       } else {
-      	LOGGER.warn("Se está intentando enviar un mensaje a un usuario no conectado");
+      	LOGGER.warn("SM: Se está intentando enviar un mensaje a un usuario no conectado");
       }
   }
   
@@ -155,32 +154,24 @@ public class ChatService {
   }
   
   private void sendStatusInfoToOtherUsers(StatusInfoMessage message, WebSocketSession session) {
-  	LOGGER.info("Enviado estado de: "+nickNames.get(session).getUserName()+" a los demás usuarios.");
+  	LOGGER.info("STATUS: "+nickNames.get(session).getUserName()+" "+message.getStatusInfo().getStatus()+". Msj enviado a los demás usuarios.");
   	WebSocketSession sessionAux;
   	for (UserConnection connection : nickNames.values()) {
   		sessionAux=Util.getKeyByValue(nickNames, connection);
-  		if(connection.getTipo().equals(TYPE.FORMAT) && !sessionAux.equals(session)){
+  		if(connection.getTipo().equals(TYPE.FORMAT) && !sessionAux.equals(session) && sessionAux.isOpen()){
   				try {
 					sessionAux.sendMessage(new TextMessage(jsonProcessor.toJson(message)));
-				} catch (IOException e) {
+				} catch (Exception e) {
 					LOGGER.error("No se pudo enviar el mensaje de estado de la conexión", e);
 				}
+  			}else{
+  				LOGGER.warn("SSU: Se está intentando enviar un mensaje a un usuario no conectado");
   			}
   		}
-    
-//  		for(WebSocketSession sessionAux:conns){
-//  			if(!sessionAux.equals(session)){
-//  				try {
-//					sessionAux.sendMessage(new TextMessage(jsonProcessor.toJson(message)));
-//				} catch (IOException e) {
-//					LOGGER.error("No se pudo enviar el mensaje de estado de la conexión", e);
-//				}
-//  			}
-//  		}
   } 
   
   private List<String> getActiveUsers() {
-  	LOGGER.info("Obteniendo lista de usuarios, Total: "+nickNames.size());
+//  	LOGGER.info("Obteniendo lista de usuarios, Total: "+nickNames.size());
       final List<String> activeUsers = new ArrayList<String>();
       for (UserConnection connection : nickNames.values()) {
     	  if(connection.getTipo().equals(TYPE.FORMAT)){
@@ -188,7 +179,7 @@ public class ChatService {
     	  }
       }
       if(activeUsers.isEmpty()){
-      	LOGGER.error("No hay usuarios activos");
+      	LOGGER.error("GAU: No hay usuarios activos");
       }
       return activeUsers;
   }
@@ -199,10 +190,7 @@ public class ChatService {
     	  if(connection.getTipo().equals(TYPE.FORMAT)){
     		  formats.add(connection.getFormatOrUser());
     	  }
-      }
-      if(formats.isEmpty()){
-      	LOGGER.error("No hay usuarios activos");
-      }
+      }      
       return formats;
   }
 

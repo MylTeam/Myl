@@ -21,12 +21,17 @@ import org.springframework.web.socket.server.support.DefaultHandshakeHandler;
 public class WebConfig extends WebMvcConfigurerAdapter implements WebSocketConfigurer {
 
   public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-    registry.addHandler(chatWebSocketHandler(), "/lobbyws");
+    registry.addHandler(chatWebSocketHandler(), "/lobbyws").addHandler(duelWebSocketHandler(), "/chatws");
   }
   
   @Bean
   public WebSocketHandler chatWebSocketHandler() {
     return new PerConnectionWebSocketHandler(ChatWebSocketHandler.class);
+  }
+  
+  @Bean
+  public WebSocketHandler duelWebSocketHandler() {
+    return new PerConnectionWebSocketHandler(DuelWebSocketHandler.class);
   }
 
 

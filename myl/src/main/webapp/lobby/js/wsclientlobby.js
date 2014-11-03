@@ -35,8 +35,7 @@ var wsclient = (function() {
             closeAllConversations();
         };
 
-        function processMessage(message) {
-        	console.log(message);
+        function processMessage(message) {        	
             if (message.messageInfo) {
                 showConversation(message.messageInfo.from);
                 if(message.messageInfo.message!="plduelojsp" && message.messageInfo.message!="plduelojspresp" && message.messageInfo.message.indexOf("gamereado")==-1 && message.messageInfo.message.indexOf("gamereadiok")==-1 && message.messageInfo.message!="gamereadyaccept" && message.messageInfo.message!="gamereadyreject"){
@@ -224,7 +223,8 @@ var wsclient = (function() {
         	var url="http://"+location.host+$("#hidden").val()+"/chat?user1="+user+"&user2="+from;
         	var message = "plduelojspresp";
             toChat(user, from, message);
-        	window.location=url;
+            bloquearUI();
+            setTimeout(function() {window.location=url;}, 2000);
 //            window.open(url,"Duelo","height=" + screen.height + "-200,width=" + screen.width+"-200");
         });
         btn.appendTo(messages);

@@ -234,3 +234,17 @@ $(document).ready(function() {
 	$(".ui-state-highlight").css("margin-top","0px");
 });
 
+function bloquearUI() {
+	$.blockUI({
+		css : {
+			border : 'none',
+			padding : '15px',
+			backgroundColor : '#000',
+			'-webkit-border-radius' : '10px',
+			'-moz-border-radius' : '10px',
+			opacity : 0.5,
+			color : '#fff'
+		},
+		message : "Por favor, espere..."
+	});
+}

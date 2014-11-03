@@ -11,8 +11,8 @@ var wsclient = (function() {
 	
 	
     var ws = null;
-    var wsURI = 'ws://' + location.host  + '/myl/lobbyws';
-//    var wsURI = 'ws://' + location.host  + '/myl/chatws';
+//    var wsURI = 'ws://' + location.host  + '/myl/lobbyws';
+    var wsURI = 'ws://' + location.host  + '/myl/chatws';
     function connect(userName,userNameTwo) {    	
     	
         if(!userName || userName == '') {
@@ -30,6 +30,7 @@ var wsclient = (function() {
             return;
         }
         ws.onopen = function () {
+        	bloquearUI();
         	toChatSession(userName, userNameTwo, "OPONENT");
             setConnected(true);
         };
@@ -54,10 +55,12 @@ var wsclient = (function() {
                 	showConversation(document.getElementById("user2").value);
                 	id=message.messageInfo.message.substring(9);
                 	sendKey();
+                	$.unblockUI();
                 }else if(message.messageInfo.message.indexOf("gamereadiok")>=0){
                 	showConversation(document.getElementById("user2").value);
                 	id=message.messageInfo.message.substring(11);
                 	sendKey();                	
+                	$.unblockUI();
                 }else if(message.messageInfo.message=="gamereadyaccept"){
                 	gameAccept=1;
                 }else if(message.messageInfo.message=="gamereadyreject"){

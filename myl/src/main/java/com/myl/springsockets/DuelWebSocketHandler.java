@@ -8,13 +8,13 @@ import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 
-public class ChatWebSocketHandler extends TextWebSocketHandler {
+public class DuelWebSocketHandler extends TextWebSocketHandler {
   
   @Autowired
   private ChatService chatService;
   
   @Override
-  public void afterConnectionEstablished(WebSocketSession session) throws Exception {
+  public void afterConnectionEstablished(WebSocketSession session) throws Exception {    
     chatService.registerOpenConnection(session);
   }
   

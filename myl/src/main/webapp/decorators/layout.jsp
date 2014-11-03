@@ -38,6 +38,7 @@
 			<script src="${pageContext.request.contextPath}/scripts/jquery.feedback.js" type="text/javascript"></script>			
 			<script src="${pageContext.request.contextPath}/scripts/cdt-util.js" type="text/javascript"></script>
 			<script src="${pageContext.request.contextPath}/scripts/help.js" type="text/javascript"></script>
+			<script src="${pageContext.request.contextPath}/scripts/blockUI.js" type="text/javascript"></script>
 			
 		]]>
 </jsp:text>
