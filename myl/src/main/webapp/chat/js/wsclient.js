@@ -39,6 +39,10 @@ var wsclient = (function() {
             processMessage(message);
         };
 
+        ws.onerror=function(event){
+        	console.log(event.data);
+        };
+        
         ws.onclose = function () {
             setConnected(false);
             document.getElementById('userName').value = '';

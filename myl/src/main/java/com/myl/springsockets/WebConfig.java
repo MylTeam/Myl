@@ -12,6 +12,7 @@ import org.springframework.web.socket.config.annotation.EnableWebSocket;
 import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
 import org.springframework.web.socket.handler.PerConnectionWebSocketHandler;
+import org.springframework.web.socket.server.standard.ServletServerContainerFactoryBean;
 import org.springframework.web.socket.server.support.DefaultHandshakeHandler;
 
 @Configuration
@@ -34,6 +35,12 @@ public class WebConfig extends WebMvcConfigurerAdapter implements WebSocketConfi
     return new PerConnectionWebSocketHandler(DuelWebSocketHandler.class);
   }
 
+  @Bean
+  public ServletServerContainerFactoryBean createWebSocketContainer() {
+      ServletServerContainerFactoryBean container = new ServletServerContainerFactoryBean();
+      container.setMaxTextMessageBufferSize(20*1024);      
+      return container;
+  }
 
   // Allow serving HTML files through the default Servlet
   @Override

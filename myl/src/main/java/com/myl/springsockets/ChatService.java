@@ -73,6 +73,7 @@ public class ChatService {
            
     
     } else {
+    	
     	//mensajes enviados en el chat
     	if(message.contains("messageInfo")){
     		final MessageInfoMessage msg = jsonProcessor.fromJson(message, MessageInfoMessage.class);
@@ -86,7 +87,7 @@ public class ChatService {
     		final CardInfoMessage msg = jsonProcessor.fromJson(message, CardInfoMessage.class);
     		sendMessage(msg.getCardInfo().getTo(), msg);
     		
-    	}else if(message.contains("cardListInfo")){
+    	}else if(message.contains("cardListInfo")){    		
     		final CardListInfoMessage msg = jsonProcessor.fromJson(message, CardListInfoMessage.class);
     		sendMessage(msg.getCardListInfo().getTo(), msg);
     		

@@ -65,7 +65,7 @@
 				<configuration>
 					<!-- <url>http://50.62.23.86:8080/manager/text</url> <server>mylprod</server> -->
 					<url>http://localhost:8080/manager/text</url>
-					<server>localhost</server> 
+					<server>localhost</server>
 					<path>/myl</path>
 				</configuration>
 			</plugin>
