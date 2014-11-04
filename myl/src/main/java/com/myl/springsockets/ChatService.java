@@ -125,7 +125,7 @@ public class ChatService {
 					LOGGER.error("No se pudo enviar el mensaje de estado de la conexión", e);
 				}
 			}else{
-				LOGGER.warn("SMA: Se está intentando enviar un mensaje a un usuario no conectado");
+//				LOGGER.warn("SMA: Se está intentando enviar un mensaje a un usuario no conectado");
 			}
 	  }  	
   }
@@ -165,7 +165,7 @@ public class ChatService {
 					LOGGER.error("No se pudo enviar el mensaje de estado de la conexión", e);
 				}
   			}else{
-  				LOGGER.warn("SSU: Se está intentando enviar un mensaje a un usuario no conectado");
+//  				LOGGER.warn("SSU: Se está intentando enviar un mensaje a un usuario no conectado");
   			}
   		}
   } 

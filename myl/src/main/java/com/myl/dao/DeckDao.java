@@ -40,7 +40,7 @@ public class DeckDao {
 
 	public void delete(Deck entity) {
 		entity = (Deck) sessionFactory.getCurrentSession().merge(entity);
-		sessionFactory.getCurrentSession().saveOrUpdate(entity);
+		sessionFactory.getCurrentSession().delete(entity);
 	}
 
 	@SuppressWarnings("unchecked")
