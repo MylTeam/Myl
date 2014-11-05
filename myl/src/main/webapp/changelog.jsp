@@ -97,6 +97,7 @@
 					<td><ul>
 						<li>-BugFix: Se arregla el error al tratar de enviar un comentario.</li>
 						<li>-BugFix: Se arregla el problema de la conexiones.</li>
+						<li>-BugFix: Se arregla la pérdida de conexión al mostrar el mazo al oponente.</li>
 					</ul>
 					</td>
 				</tr>

@@ -96,6 +96,7 @@ public class RegistroController extends ActionSupport implements
 			@EmailValidator(fieldName="model.email", type=ValidatorType.FIELD, message="Correo electrónico no válido")
 			})
 	public HttpHeaders create() {
+		model.setLogin(model.getLogin().trim());
 		model.setDeckPred(0);
 		model.setWons(0);
 		model.setLost(0);
