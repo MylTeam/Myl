@@ -13,7 +13,6 @@ import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
 import org.springframework.web.socket.handler.PerConnectionWebSocketHandler;
 import org.springframework.web.socket.server.standard.ServletServerContainerFactoryBean;
-import org.springframework.web.socket.server.support.DefaultHandshakeHandler;
 
 @Configuration
 @EnableWebMvc
@@ -23,6 +22,7 @@ public class WebConfig extends WebMvcConfigurerAdapter implements WebSocketConfi
 
   public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
     registry.addHandler(chatWebSocketHandler(), "/lobbyws").addHandler(duelWebSocketHandler(), "/chatws");
+//    registry.addHandler(chatWebSocketHandler(), "/lobbyws").setHandshakeHandler(handshakeHandler()).addHandler(duelWebSocketHandler(), "/chatws").setHandshakeHandler(handshakeHandler());
   }
   
   @Bean
@@ -41,6 +41,16 @@ public class WebConfig extends WebMvcConfigurerAdapter implements WebSocketConfi
       container.setMaxTextMessageBufferSize(20*1024);      
       return container;
   }
+  
+//  @Bean
+//  public DefaultHandshakeHandler handshakeHandler() {
+//	  
+//      WebSocketPolicy policy = new WebSocketPolicy(WebSocketBehavior.SERVER);
+//      policy.setInputBufferSize(20*1024);      
+//
+//      return new DefaultHandshakeHandler(
+//              new JettyRequestUpgradeStrategy(new WebSocketServerFactory(policy)));
+//  }
 
   // Allow serving HTML files through the default Servlet
   @Override
