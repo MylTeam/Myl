@@ -101,6 +101,15 @@
 					</ul>
 					</td>
 				</tr>
+				<tr>
+					<td>v1.85</td>
+					<td><ul>
+						<li>-BugFix: Se corrige el error al quedarse sin cartas, se notifica el juego perdido.</li>
+						<li>-Añadido: Contador de mazo.</li>
+					</ul>
+					</td>
+				</tr>
+	
 			</table>
 		</form>
 	</center>

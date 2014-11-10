@@ -32,6 +32,10 @@ function notifyNewGame(){
 		title: "Nuevo Juego",
 		buttons: {
 			"Aceptar": function () {
+				wsclient.toChat(document.getElementById("user1").value, document.getElementById("user2").value, "gamereadiok"+$("#key").val());        		
+        		sendKey();
+        		$.unblockUI();
+        		
 				wsclient.toChat(document.getElementById("user1").value, document.getElementById("user2").value, "gamereadyaccept");
 				$(this).dialog("close");				
 				location.reload();

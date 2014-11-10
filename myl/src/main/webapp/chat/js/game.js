@@ -72,7 +72,7 @@ function drawCard() {
 		msgLogCard(null, "deck1", "mano1", "Robando carta");
 	}else{
 		msgLog("El castillo no tiene mas cartas");
-		lose=true;
+//		lose=true;
 	}
 }
 

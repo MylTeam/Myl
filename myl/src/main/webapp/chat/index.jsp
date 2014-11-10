@@ -6,7 +6,6 @@
 	<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 
-
 <link type="text/css" href="${pageContext.request.contextPath}/scripts/jquery.contextMenu.css" rel="stylesheet" />
 <link type="text/css" href="${pageContext.request.contextPath}/Estilos/smoothness/jquery-ui-1.8.22.custom.css" rel="stylesheet" />
 <link type="text/css" href="${pageContext.request.contextPath}/Estilos/defaultchat.css?123" rel="stylesheet" />
@@ -156,7 +155,7 @@
       </td>
     </tr>
     <tr style="HEIGHT: 4%;">
-    <td></td>
+    <td style="text-align: right;">Mazo: <span id="totalp2"></span></td>
     <td>
     <img id="fagrup" name="fagrup" class="fase" src="${pageContext.request.contextPath}/images/fases/agrupacion.png" ondblclick="phaseChange(event)" height="50%" width="12.5%"/>
     <img id="fvigil" name="fvigil" class="fase" src="${pageContext.request.contextPath}/images/fases/vigilia.png" ondblclick="phaseChange(event)" height="50%" width="12.5%"/>
@@ -167,7 +166,7 @@
     <img id="ffinal" name="ffinal" class="fase" src="${pageContext.request.contextPath}/images/fases/final.png" ondblclick="phaseChange(event)" height="50%" width="12.5%"/>
     <img id="fturno" name="fturno" class="fase" src="${pageContext.request.contextPath}/images/fases/turno.png" ondblclick="phaseChange(event)" height="50%" width="12.5%"/>
     </td>
-    <td></td>
+    <td>Mazo: <span id="totalp1"></span></td>
     </tr>
     <tr style="HEIGHT: 48%;">
       <td id="chat" style="WIDTH: 25%;">

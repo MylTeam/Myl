@@ -33,6 +33,9 @@ var wsclient = (function() {
         	bloquearUI();
         	toChatSession(userName, userNameTwo, "OPONENT");
             setConnected(true);
+            
+            $("#totalp1").text("50");
+            $("#totalp2").text("50");
         };
         ws.onmessage = function (event) {
             var message = JSON.parse(event.data);
@@ -55,11 +58,15 @@ var wsclient = (function() {
                 if(message.messageInfo.message.indexOf("gamereado")==-1 && message.messageInfo.message.indexOf("gamereadiok")==-1 && message.messageInfo.message!="gamereadyaccept" && message.messageInfo.message!="gamereadyreject"){
                 	addMessage(message.messageInfo.from, message.messageInfo.message, cleanWhitespaces(message.messageInfo.from) + 'conversation');
                 }else if(message.messageInfo.message.indexOf("gamereado")>=0){
-                	toChat(document.getElementById("user1").value, document.getElementById("user2").value, "gamereadiok"+$("#key").val());
-                	showConversation(document.getElementById("user2").value);
-                	id=message.messageInfo.message.substring(9);
-                	sendKey();
-                	$.unblockUI();
+                	if(prevGame==0){
+                		toChat(document.getElementById("user1").value, document.getElementById("user2").value, "gamereadiok"+$("#key").val());
+                		showConversation(document.getElementById("user2").value);
+                		id=message.messageInfo.message.substring(9);
+                		sendKey();
+                		$.unblockUI();
+                	}else{
+                		id=message.messageInfo.message.substring(9);
+                	}
                 }else if(message.messageInfo.message.indexOf("gamereadiok")>=0){
                 	showConversation(document.getElementById("user2").value);
                 	id=message.messageInfo.message.substring(11);
@@ -77,10 +84,11 @@ var wsclient = (function() {
                     if(prevGame==1){
                     	$( "#dialog-udis" ).dialog("close");
                     	if(gameAccept==1){
+                    		toChat(document.getElementById("user1").value, document.getElementById("user2").value, "gamereadiok"+$("#key").val());
                     		$("#content-udis").empty();
                     		$("#content-udis").append("El usuario "+message.statusInfo.user+" ha aceptado la nueva partida.");
                             notifyUserDisconnected();
-                    		gameAccept=0;
+                    		gameAccept=0;                    		
                     	}else{
                     		$("#content-newg").empty();
                     		$("#content-newg").append("El usuario "+message.statusInfo.user+" quiere iniciar una nueva partida.");                    	
@@ -95,7 +103,8 @@ var wsclient = (function() {
                 	if(gameReject==1){
                 		$("#content-udis").empty();
                 		$("#content-udis").append("El usuario "+message.statusInfo.user+" ha rechazado de la partida");
-                    	showmsg=false;                    	
+                    	showmsg=false;
+                    	$.unblockUI();
                     }else if(gameReject==0 && win==false && lose==false && gameAccept==0){
                     	$("#content-udis").empty();
                 		$("#content-udis").append("El usuario "+message.statusInfo.user+" ha salido de la partida. Has ganado.");
@@ -115,6 +124,7 @@ var wsclient = (function() {
             	addMessageCard(message.cardInfo.from, message.cardInfo.message, cleanWhitespaces(message.cardInfo.from) + 'conversation');            	
             	if(message.cardInfo.origen!=null && message.cardInfo.destino!=null){
             		processCard(message.cardInfo.from, message.cardInfo.message, message.cardInfo.carta,message.cardInfo.origen,message.cardInfo.destino);
+            		// implementar el conteo del deck oponente
             	}
             } else if (message.cardListInfo){
             	addMessageCard(message.cardListInfo.from, message.cardListInfo.message, cleanWhitespaces(message.cardListInfo.from) + 'conversation');            	
@@ -312,6 +322,9 @@ var wsclient = (function() {
     	var conversationId = cleanWhitespaces(receiver) + 'conversation';
     	addMessageCard(sender, message, conversationId);
         ws.send(JSON.stringify({cardInfo : {from : sender, to : receiver, message : message, carta : card, origen: origen, destino : destino}}));
+                
+        //Implementar el conteo de cartas
+        deckCounter(origen, destino, "#totalp1");
     }
     
     function toChatCards(sender, receiver, message, cards, origen) {
@@ -406,6 +419,9 @@ var wsclient = (function() {
 })();
 
 function processCard(from,message,card,origen,destino){
+	
+	deckCounter(origen, destino, "#totalp2");	
+	
 	var context=$('#hidden').val();
 	if(origen!="deck1" && destino!="mano1"){
 		card.idTemp="op"+card.idTemp;		
@@ -540,7 +556,7 @@ function processCard(from,message,card,origen,destino){
 					objOp[origen].splice(c,1);					
 				}
 			}
-			$("#"+card.idTemp).remove()
+			$("#"+card.idTemp).remove();
 		}else if(origen=="cementerio1" || origen=="destierro1" || origen=="remocion1"){
 			for(var c=0;c<objOp[origen].length;c++){
 				if(objOp[origen][c].idTemp==card.idTemp){			
@@ -578,4 +594,22 @@ function processCards(from,message,cards,origen){
 			msgLog("Dejó de ver "+origen.replace("1","")+" oponente");
 		}
 	});	
+}
+
+function deckCounter(origen,destino,player){
+	var c=parseInt($(player).text());
+	if(origen=="deck1" && destino!="deck1"){
+		c=c-1;		
+	}else if(origen!="deck1" && destino=="deck1"){
+		c=c+1;		
+	}
+	$(player).text(c);
+	
+	if(player==="#totalp1" && c===0 && lose===false && win!=true){
+		msgPhase("Mi castillo no tiene mas cartas", "fendgmeovr");
+		$("#content-udis").empty();
+		$("#content-udis").append("Has sido derrotado por "+$("#user2").val()+".");
+		notifyEndGame();
+		lose=true;
+	}
 }

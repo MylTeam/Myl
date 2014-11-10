@@ -62,12 +62,12 @@ function dropxcards(cant){
 	}
 	
 	if(deckLength<cantAux || obj.deck1.length==0){
-//		msgLog("El castillo no tiene mas cartas");		
-		msgPhase("Mi castillo no tiene mas cartas", "fendgmeovr");
-		$("#content-udis").empty();
-		$("#content-udis").append("Has sido derrotado por "+$("#user2").val()+".");
-		notifyEndGame();
-		lose=true;
+		msgLog("El castillo no tiene mas cartas");		
+//		msgPhase("Mi castillo no tiene mas cartas", "fendgmeovr");
+//		$("#content-udis").empty();
+//		$("#content-udis").append("Has sido derrotado por "+$("#user2").val()+".");
+//		notifyEndGame();
+//		lose=true;
 	}
 }
 
