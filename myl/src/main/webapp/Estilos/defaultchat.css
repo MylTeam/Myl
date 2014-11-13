@@ -164,7 +164,14 @@ p.messages div.message {
 
 p.messages div.messagepl {
     padding: 2px;
-    background-color: #5EBFFF;
+    background-color: #9ED8FF;
+    margin: 5px 0;
+    border-radius: 5px;
+}
+
+p.messages div.messagepl2 {
+    padding: 2px;
+    background-color: #FF8080;
     margin: 5px 0;
     border-radius: 5px;
 }

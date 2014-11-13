@@ -109,7 +109,15 @@
 					</ul>
 					</td>
 				</tr>
-	
+				<tr>
+					<td>v1.86</td>
+					<td><ul>
+						<li>-Se modifica el chat para identificar los movimientos de cada jugador.</li>
+						<li>-Se indica desde y hacia donde se mueven las cartas.</li>
+					</ul>
+					</td>
+				</tr>
+				
 			</table>
 		</form>
 	</center>

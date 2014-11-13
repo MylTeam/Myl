@@ -8,6 +8,7 @@ var wsclient = (function() {
 	var prevGame=0;
 	var gameAccept=0;
 	var gameReject=0;
+	var dragOrigin;
 	
 	
     var ws = null;
@@ -297,14 +298,18 @@ var wsclient = (function() {
     
     function addMessageCard(from, message, conversationPanelId) {
         var messages = $('#' + conversationPanelId + ' .messages');
-        $('<div class="messagepl">'+from+" :"+message+'</div>').appendTo(messages);
+        if(from===$("#userNameTwo").val()){
+        	$('<div class="messagepl2"><b>'+from+":</b> "+message+'</div>').appendTo(messages);
+        }else{
+        	$('<div class="messagepl"><b>'+from+":</b> "+message+'</div>').appendTo(messages);
+        }
         messages.scrollTop(messages[0].scrollHeight);
         $('#'+conversationPanelId+' textarea').focus();
     }
     
     function addMessagePhase(from, message, conversationPanelId) {
         var messages = $('#' + conversationPanelId + ' .messages');
-        $('<div class="messageph">'+from+" :"+message+'</div>').appendTo(messages);
+        $('<div class="messageph"><b>'+from+":</b> "+message+'</div>').appendTo(messages);
         messages.scrollTop(messages[0].scrollHeight);
         $('#'+conversationPanelId+' textarea').focus();
     }
@@ -391,7 +396,10 @@ var wsclient = (function() {
     	var from=document.getElementById("user1").value;
     	var to=document.getElementById("user2").value;
     	var data = ev.dataTransfer.getData("Text");
-    	var msg="Moviendo carta hacia "+ev.target.id.replace("1","");   
+    	var origenMsg=origen.replace("1","");
+    	var destinoMsg=ev.target.id.replace("1","");
+    	
+    	var msg="Moviendo carta desde: <b>"+origenMsg.replace("deck","Mazo")+"</b> hacia: <b>"+destinoMsg.replace("deck","Mazo")+"</b>";   
     	toChatCard(from, to, msg, card["carta"], card["origen"], card["destino"] );
     }
     	

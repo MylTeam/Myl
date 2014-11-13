@@ -38,4 +38,7 @@ v1.8
 v1.85
 	-BugFix: Se corrige el error al quedarse sin cartas, se notifica el juego perdido.
 	-Añadido: Contador de mazo
+v1.86
+	-Se modifica el chat para identificar los movimientos de cada jugador.
+	-Se indica desde y hacia donde se mueven las cartas.
 	
