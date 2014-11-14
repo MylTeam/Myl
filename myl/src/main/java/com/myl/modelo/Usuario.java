@@ -37,6 +37,9 @@ public class Usuario {
 	private Date fhLastSession;
 	private Integer idPais;
 	
+	private Boolean verificado;
+	private Long codigo;
+	
 	private Boolean tieneDeck;	
 	private List<Deck> decks;
 		
@@ -140,6 +143,22 @@ public class Usuario {
 	}
 	public void setLost(Integer lost) {
 		this.lost = lost;
+	}
+	
+	@Column(name = "em_verificado")
+	public Boolean getVerificado() {
+		return verificado;
+	}
+	public void setVerificado(Boolean verificado) {
+		this.verificado = verificado;
+	}
+	
+	@Column(name = "cd_verificacion")
+	public Long getCodigo() {
+		return codigo;
+	}
+	public void setCodigo(Long codigo) {
+		this.codigo = codigo;
 	}
 	
 }

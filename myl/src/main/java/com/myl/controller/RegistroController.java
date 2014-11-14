@@ -2,6 +2,7 @@ package com.myl.controller;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import javax.inject.Named;
 
@@ -19,6 +20,7 @@ import com.myl.negocio.DeckNegocio;
 import com.myl.negocio.GenericBs;
 import com.myl.negocio.PaisNegocio;
 import com.myl.negocio.UsuarioNegocio;
+import com.myl.util.IssueMail;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.validator.annotations.EmailValidator;
@@ -50,6 +52,7 @@ public class RegistroController extends ActionSupport implements
 	
 	private PaisNegocio paisNegocio;
 	
+	private IssueMail mailSender;
 	
 	
 	@SkipValidation
@@ -99,12 +102,26 @@ public class RegistroController extends ActionSupport implements
 		model.setLogin(model.getLogin().trim());
 		model.setDeckPred(0);
 		model.setWons(0);
-		model.setLost(0);
+		model.setLost(0);		
 		model.setFhRegistro(new Date());
+		
+		Random random=new Random();
+		model.setCodigo(random.nextLong()*99999+1);
+		model.setVerificado(false);
 		model = usuarioNegocio.save(model);
 
+		
+//		String msg="Por favor confirma tu e-mail ingresando a la siguiente liga: \n \n <a href='http://50.62.23.86:8080/myl/usuario!confirm?cd="+model.getCodigo()+"'>Confirmar</a> \n \n MyL Team";
+//		mailSender.sendMail(model.getEmail(), "MyL: Confirmar E-mail", msg);
+		
 		return new DefaultHttpHeaders("registered").setLocationId(model
 				.getIdUsuario());
+	}
+	
+	public String show(){
+		
+		
+		return "show";
 	}
 
 	public Usuario getUsuario() {
@@ -192,6 +209,14 @@ public class RegistroController extends ActionSupport implements
 
 	public void setPaisNegocio(PaisNegocio paisNegocio) {
 		this.paisNegocio = paisNegocio;
+	}
+
+	public IssueMail getMailSender() {
+		return mailSender;
+	}
+
+	public void setMailSender(IssueMail mailSender) {
+		this.mailSender = mailSender;
 	}
 
 }

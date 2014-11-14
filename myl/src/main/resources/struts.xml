@@ -76,7 +76,7 @@
 		<default-interceptor-ref name="MYLStack" />
 		<global-results>
 			<result name="login">/login.jsp</result>
-			<result name="next" type="redirectAction">usuario</result>
+			<result name="next" type="redirectAction">usuario</result>			
 			<result name="registro">/registro/index-editNew.jsp</result>
 			<result name="error">/errorPage.jsp</result>
 			<result name="error500">/errorPage.jsp</result>

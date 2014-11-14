@@ -414,8 +414,8 @@
 			<version>${spring.version}</version>
 		</dependency>
 
-<!-- 
-		<dependency>
+
+		<!-- <dependency>
 			<groupId>org.eclipse.jetty.websocket</groupId>
 			<artifactId>javax-websocket-client-impl</artifactId>
 			<version>9.1.0.v20131115</version>
@@ -438,8 +438,8 @@
 			<artifactId>jetty-client</artifactId>
 			<version>9.1.0.v20131115</version>
 			<scope>test</scope>
-		</dependency>
- -->
+		</dependency> -->
+ 
 	</dependencies>
 
 </project>

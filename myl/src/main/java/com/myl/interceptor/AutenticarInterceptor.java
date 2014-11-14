@@ -18,7 +18,7 @@ public class AutenticarInterceptor implements Interceptor {
 
 	@Override
 	public String intercept(ActionInvocation actionInvocation) {
-
+		System.out.println(actionInvocation.getProxy().getActionName());
 		String previous = null;
 		if ("login".equals(actionInvocation.getProxy().getActionName())) {
 			try {
@@ -32,6 +32,7 @@ public class AutenticarInterceptor implements Interceptor {
 				return "next";
 			}
 		} else if ("registro".equals(actionInvocation.getProxy().getActionName())) {
+			
 			try {
 				actionInvocation.invoke();
 			} catch (Exception e) {
@@ -40,7 +41,7 @@ public class AutenticarInterceptor implements Interceptor {
 			if (ActionContext.getContext().getSession().get(NombreObjetosSesion.USUARIO) == null) {
 				return "registro";
 			} else {
-				return "denegado";
+				return "denied";
 			}
 		} else if ("recuperar-pass".equals(actionInvocation.getProxy().getActionName())) {
 			try {
@@ -51,9 +52,11 @@ public class AutenticarInterceptor implements Interceptor {
 			if (ActionContext.getContext().getSession().get(NombreObjetosSesion.USUARIO) == null) {
 				return "recuperar-pass";
 			} else {
-				return "denegado";
-			}
-		} else {
+				return "denied";
+			}		
+		} 
+		
+		else {
 			if (ActionContext.getContext().getSession().get(NombreObjetosSesion.USUARIO) == null) {
 				setPrevAction(actionInvocation.getProxy().getActionName());
 				ActionContext.getContext().getSession().put("prevAction", getPrevAction());
