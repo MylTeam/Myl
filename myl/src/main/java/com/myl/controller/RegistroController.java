@@ -21,6 +21,8 @@ import com.myl.negocio.GenericBs;
 import com.myl.negocio.PaisNegocio;
 import com.myl.negocio.UsuarioNegocio;
 import com.myl.util.IssueMail;
+import com.myl.util.NombreObjetosSesion;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.validator.annotations.EmailValidator;
@@ -31,8 +33,6 @@ import com.opensymphony.xwork2.validator.annotations.Validations;
 import com.opensymphony.xwork2.validator.annotations.ValidatorType;
 
 @Named
-@Results({ @Result(name = "registered", type = "redirectAction", params = {
-		"actionName", "login" }) })
 public class RegistroController extends ActionSupport implements
 		ModelDriven<Usuario> {
 
@@ -49,21 +49,21 @@ public class RegistroController extends ActionSupport implements
 
 	private String confirmPass;
 	private List<Pais> listPaises;
-	
+
 	private PaisNegocio paisNegocio;
-	
+
 	private IssueMail mailSender;
-	
-	
+	private Long cd;
+
 	@SkipValidation
-	public String editNew() {		
-	
-		listPaises=paisNegocio.findAll();
-		
+	public String editNew() {
+
+		listPaises = paisNegocio.findAll();
+
 		return "editNew";
 	}
 
-	public void validateCreate() {		
+	public void validateCreate() {
 
 		if (!model.getPassword().equals(confirmPass)) {
 			addActionError("Las contraseñas no son iguales");
@@ -74,53 +74,60 @@ public class RegistroController extends ActionSupport implements
 		if (!usuarioNegocio.findByExample(aux).isEmpty()) {
 			addActionError("Nombre de usuario no disponible");
 		}
-		
-		aux=new Usuario();
+
+		aux = new Usuario();
 		aux.setEmail(model.getEmail());
 		if (!usuarioNegocio.findByExample(aux).isEmpty()) {
 			addActionError("El correo electrónico ingresado ya está registrado");
 		}
-		
+
 		if (hasFieldErrors() || hasActionErrors()) {
-			listPaises=paisNegocio.findAll();
+			listPaises = paisNegocio.findAll();
 		}
 	}
 
 	@Validations(requiredStrings = {
-			@RequiredStringValidator(fieldName = "model.login", type = ValidatorType.FIELD, key = "Introduce un nombre de usuario"),			
+			@RequiredStringValidator(fieldName = "model.login", type = ValidatorType.FIELD, key = "Introduce un nombre de usuario"),
 			@RequiredStringValidator(fieldName = "model.password", type = ValidatorType.FIELD, key = "Introduce la contraseña"),
-			@RequiredStringValidator(fieldName = "model.email", type = ValidatorType.FIELD, key = "Introduce tu correo electrónico"),			
-			@RequiredStringValidator(fieldName = "confirmPass", type = ValidatorType.FIELD, key = "Confirma la contraseña")},			
-			regexFields = {
-			@RegexFieldValidator(fieldName = "model.login", type = ValidatorType.FIELD, key = "Nombre de usuario no válido", regexExpression = "[A-Z[a-z][0-9]]+")},
-			intRangeFields={
-			@IntRangeFieldValidator(fieldName="model.idPais", type = ValidatorType.FIELD, message="Selecciona tu pais", min = "1")},
-			emails={
-			@EmailValidator(fieldName="model.email", type=ValidatorType.FIELD, message="Correo electrónico no válido")
-			})
-	public HttpHeaders create() {
+			@RequiredStringValidator(fieldName = "model.email", type = ValidatorType.FIELD, key = "Introduce tu correo electrónico"),
+			@RequiredStringValidator(fieldName = "confirmPass", type = ValidatorType.FIELD, key = "Confirma la contraseña") }, regexFields = { @RegexFieldValidator(fieldName = "model.login", type = ValidatorType.FIELD, key = "Nombre de usuario no válido", regexExpression = "[A-Z[a-z][0-9]]+") }, intRangeFields = { @IntRangeFieldValidator(fieldName = "model.idPais", type = ValidatorType.FIELD, message = "Selecciona tu pais", min = "1") }, emails = { @EmailValidator(fieldName = "model.email", type = ValidatorType.FIELD, message = "Correo electrónico no válido") })
+	public String create() {
 		model.setLogin(model.getLogin().trim());
 		model.setDeckPred(0);
 		model.setWons(0);
-		model.setLost(0);		
+		model.setLost(0);
 		model.setFhRegistro(new Date());
-		
-		Random random=new Random();
-		model.setCodigo(random.nextLong()*99999+1);
+
+		Random random = new Random();
+		model.setCodigo(random.nextLong() * 99999 + 1);
 		model.setVerificado(false);
+		
+		model.setEstatus(true);
+		model.setDiasRestantes(14);
 		model = usuarioNegocio.save(model);
 
+		String msg="Por favor confirma tu e-mail ingresando a la siguiente liga: \n \n http://50.62.23.86:8080/myl/registro/"+model.getIdUsuario()+"?cd="+model.getCodigo()+" \n \n MyL Team";
+		mailSender.sendMailTo(model.getEmail(), "MyL: Confirmar E-mail", msg);
+
+		addActionMessage("El registro se ha realizado exitósamente.");
+		addActionMessage("Un enlace ha sido enviado a tu correo electrónico para verificar tu identidad.");
 		
-//		String msg="Por favor confirma tu e-mail ingresando a la siguiente liga: \n \n <a href='http://50.62.23.86:8080/myl/usuario!confirm?cd="+model.getCodigo()+"'>Confirmar</a> \n \n MyL Team";
-//		mailSender.sendMail(model.getEmail(), "MyL: Confirmar E-mail", msg);
-		
-		return new DefaultHttpHeaders("registered").setLocationId(model
-				.getIdUsuario());
+		return "login";
 	}
-	
-	public String show(){
-		
-		
+
+	public String show() {		
+		if (cd.equals(model.getCodigo())) {			
+			if (!model.getVerificado()) {
+				model.setVerificado(true);
+				usuarioNegocio.save(model);
+				addActionMessage("Gracias por verificar tu correo "+ model.getLogin()+".");				
+			} else {
+				addActionMessage("Tu correo ya había sido verificado con anterioridad "+ model.getLogin()+".");				
+			}
+		} else {			
+			addActionError("El código ingresado no es válido.");
+		}
+
 		return "show";
 	}
 
@@ -131,7 +138,7 @@ public class RegistroController extends ActionSupport implements
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-	
+
 	public Integer getIdSel() {
 		return idSel;
 	}
@@ -162,7 +169,7 @@ public class RegistroController extends ActionSupport implements
 	public void setLista(List<Deck> lista) {
 		this.lista = lista;
 	}
-	
+
 	public DeckNegocio getDeckNegocio() {
 		return deckNegocio;
 	}
@@ -186,7 +193,7 @@ public class RegistroController extends ActionSupport implements
 	public void setConfirmPass(String confirmPass) {
 		this.confirmPass = confirmPass;
 	}
-	
+
 	public Deck getDeck() {
 		return deck;
 	}
@@ -217,6 +224,14 @@ public class RegistroController extends ActionSupport implements
 
 	public void setMailSender(IssueMail mailSender) {
 		this.mailSender = mailSender;
+	}
+
+	public Long getCd() {
+		return cd;
+	}
+
+	public void setCd(Long cd) {
+		this.cd = cd;
 	}
 
 }

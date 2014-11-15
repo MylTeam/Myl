@@ -40,6 +40,9 @@ public class Usuario {
 	private Boolean verificado;
 	private Long codigo;
 	
+	private Boolean estatus;
+	private Integer diasRestantes;
+	
 	private Boolean tieneDeck;	
 	private List<Deck> decks;
 		
@@ -159,6 +162,22 @@ public class Usuario {
 	}
 	public void setCodigo(Long codigo) {
 		this.codigo = codigo;
+	}
+	
+	@Column(name = "estatus")
+	public Boolean getEstatus() {
+		return estatus;
+	}
+	public void setEstatus(Boolean estatus) {
+		this.estatus = estatus;
+	}
+	
+	@Column(name = "vf_diasrestantes")
+	public Integer getDiasRestantes() {
+		return diasRestantes;
+	}
+	public void setDiasRestantes(Integer diasRestantes) {
+		this.diasRestantes = diasRestantes;
 	}
 	
 }

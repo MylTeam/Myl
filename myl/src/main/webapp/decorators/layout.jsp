@@ -57,7 +57,7 @@
 	</div>
 	<input type="text" style="display: none;" id="hdnRutaContexto"
 		value="${pageContext.request.contextPath}" />
-
+<s:if test="#session.usuario != null">
 	<div id="pageMenu">
 		<center>
 			<table style="margin-top: 0px;">
@@ -87,6 +87,7 @@
 			</table>
 		</center>
 	</div>
+	</s:if>
 	<div id="pageContent">
 
 		<decorator:body />

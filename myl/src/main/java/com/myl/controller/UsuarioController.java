@@ -81,6 +81,12 @@ public class UsuarioController extends ActionSupport implements
 		if (usuario.getEmail() == null || usuario.getIdPais() == null) {
 			addActionMessage("Favor de actualizar tus datos");
 		}
+		if(!usuario.getVerificado() && usuario.getDiasRestantes()>=8){
+			addActionMessage("Por favor verifica tu correo electrónico, si no lo verificas en "+ (usuario.getDiasRestantes()-7) +" días, tu cuenta será bloqueda y no podrás jugar");
+		}
+		if(!usuario.getVerificado() && usuario.getDiasRestantes()<8){
+			addActionMessage("Por favor verifica tu correo electrónico, si no lo verificas en "+ usuario.getDiasRestantes() +" días, tu cuenta será eliminada");
+		}
 
 		return new DefaultHttpHeaders("index").disableCaching();
 	}

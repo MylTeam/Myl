@@ -8,21 +8,19 @@
 
 <head>
 <title>Confirm</title>
-<jsp:text>
-	<![CDATA[
-		 
-								
-		 ]]>
-</jsp:text>
+
 </head>
 <body>
-
-	<form style="width: 50%; border: 0px">
-		<input type="hidden" name="context" id="context"
-			value="${pageContext.request.contextPath}" />
-	confirmar
-	</form>
+	<s:actionerror id="saeConfirmacion" theme="jquery" />	
+	<s:fielderror id="sfeConfirmacion" theme="jquery" />
+	<s:actionmessage id="samConfirmacion" theme="jquery" />
+	<s:if test="#session.usuario != null">
+		<a href="${pageContext.request.contextPath}/usuario"><h1>Regresar</h1></a>
+	</s:if><s:else>
+	<a href="${pageContext.request.contextPath}/login"><h1>Regresar</h1></a>
+	</s:else>
 </body>
 	</html>
 </jsp:root>
+
 

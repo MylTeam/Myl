@@ -82,6 +82,8 @@
 			<result name="error500">/errorPage.jsp</result>
 			<result name="denied">/accessDenied.jsp</result>
 			<result name="session">/session.jsp</result>
+			<result name="confirmEmail">/registro/index-show.jsp</result>
+			<result name="recuperar-pass">/recuperar-pass/index-editNew.jsp</result>
 		</global-results>
 		<global-exception-mappings>
 			<exception-mapping exception="java.lang.IllegalArgumentException"

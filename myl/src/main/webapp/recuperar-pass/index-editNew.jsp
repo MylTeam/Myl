@@ -8,7 +8,7 @@
 <title>Recuperar contraseña</title>
 <jsp:text>
 	<![CDATA[
-	<script src="${pageContext.request.contextPath}/scripts/login.js" type="text/javascript"></script> 			
+	 			
 		 ]]>
 </jsp:text>
 </head>
