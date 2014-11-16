@@ -2,6 +2,7 @@ package com.myl.controller;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Random;
 
 import javax.inject.Named;
 
@@ -66,7 +67,11 @@ public class UsuarioController extends ActionSupport implements
 	private List<Pais> listPaises;
 	private List<Duelo> duelosGanados;
 	private List<Duelo> duelosPerdidos;
+	
+	private Integer confirm;
 
+	private IssueMail mailSender;
+	
 	@SkipValidation
 	public HttpHeaders index() {
 
@@ -94,12 +99,27 @@ public class UsuarioController extends ActionSupport implements
 	@SkipValidation
 	public String edit() {
 		String result = "edit";
-		listPaises = paisNegocio.findAll();
-
+		
 		usuario = (Usuario) ActionContext.getContext().getSession()
 				.get(NombreObjetosSesion.USUARIO);
 		if (!usuario.getIdUsuario().equals(idSel)) {
 			result = "denied";
+		}else{
+			if(confirm!=null){
+				if(model.getCodigo()==0){
+					Random random = new Random();
+					model.setCodigo(random.nextLong() * 99999 + 1);
+					model=usuarioNegocio.save(model);
+				}
+				if(model.getEmail()!=null){
+					String msg="Por favor confirma tu e-mail ingresando a la siguiente liga: \n \n http://50.62.23.86:8080/myl/registro/"+model.getIdUsuario()+"?cd="+model.getCodigo()+" \n \n MyL Team";				
+					mailSender.sendMailTo(model.getEmail(), "MyL: Confirmar E-mail", msg);
+					addActionMessage("Se ha enviado un e-mail a "+model.getEmail()+" para realizar la verificación de identidad.");
+				}else{
+					addActionError("Debes guardar los cambios antes de confirmar tu e-mail");
+				}
+			}
+			listPaises = paisNegocio.findAll();
 		}
 
 		return result;
@@ -121,7 +141,9 @@ public class UsuarioController extends ActionSupport implements
 		}
 	}
 
-	@Validations(requiredStrings = { @RequiredStringValidator(fieldName = "model.email", type = ValidatorType.FIELD, key = "Introduce tu correo electrónico") }, intRangeFields = { @IntRangeFieldValidator(fieldName = "model.idPais", type = ValidatorType.FIELD, message = "Selecciona tu pais", min = "1") }, emails = { @EmailValidator(fieldName = "model.email", type = ValidatorType.FIELD, message = "Correo electrónico no válido") })
+	@Validations(requiredStrings = { @RequiredStringValidator(fieldName = "model.email", type = ValidatorType.FIELD, key = "Introduce tu correo electrónico") }, 
+			intRangeFields = { @IntRangeFieldValidator(fieldName = "model.idPais", type = ValidatorType.FIELD, message = "Selecciona tu pais", min = "1") }, 
+			emails = { @EmailValidator(fieldName = "model.email", type = ValidatorType.FIELD, message = "Correo electrónico no válido") })
 	public String update() {
 		model = usuarioNegocio.save(model);
 		ActionContext.getContext().getSession()
@@ -294,6 +316,22 @@ public class UsuarioController extends ActionSupport implements
 
 	public void setDueloNegocio(DueloNegocio dueloNegocio) {
 		this.dueloNegocio = dueloNegocio;
+	}
+
+	public Integer getConfirm() {
+		return confirm;
+	}
+
+	public void setConfirm(Integer confirm) {
+		this.confirm = confirm;
+	}
+
+	public IssueMail getMailSender() {
+		return mailSender;
+	}
+
+	public void setMailSender(IssueMail mailSender) {
+		this.mailSender = mailSender;
 	}
 
 }

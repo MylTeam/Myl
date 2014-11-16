@@ -36,11 +36,16 @@ public class LobbyController extends ActionSupport {
 		usuario=(Usuario) ActionContext.getContext().getSession().get(NombreObjetosSesion.USUARIO);
 		setUsername(usuario.getLogin());
 		
+		if(!usuario.getEstatus()){
+			addActionError("Tu usuario ha sido desactivado por lo que no podrás jugar. Esto se debe a que no has verificado tu e-mail o has sido sancionado, si tienes dudas contacta al administrador.");
+			return new DefaultHttpHeaders("nodeck").disableCaching();
+		}
+		
 		if(usuario.getDeckPred()==0){
 			addActionError("Necesitas armar un mazo para poder jugar.");
 			return new DefaultHttpHeaders("nodeck").disableCaching();
 		
-		}else{			
+		}else{
 			if(deckCartaNegocio.getDeckSize(usuario.getDeckPred()).intValue()!=50){
 				addActionError("Tu mazo debe contener 50 cartas exactamente para poder jugar.");
 				return new DefaultHttpHeaders("nodeck").disableCaching();

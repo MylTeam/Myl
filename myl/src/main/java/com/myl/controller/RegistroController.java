@@ -90,7 +90,10 @@ public class RegistroController extends ActionSupport implements
 			@RequiredStringValidator(fieldName = "model.login", type = ValidatorType.FIELD, key = "Introduce un nombre de usuario"),
 			@RequiredStringValidator(fieldName = "model.password", type = ValidatorType.FIELD, key = "Introduce la contraseña"),
 			@RequiredStringValidator(fieldName = "model.email", type = ValidatorType.FIELD, key = "Introduce tu correo electrónico"),
-			@RequiredStringValidator(fieldName = "confirmPass", type = ValidatorType.FIELD, key = "Confirma la contraseña") }, regexFields = { @RegexFieldValidator(fieldName = "model.login", type = ValidatorType.FIELD, key = "Nombre de usuario no válido", regexExpression = "[A-Z[a-z][0-9]]+") }, intRangeFields = { @IntRangeFieldValidator(fieldName = "model.idPais", type = ValidatorType.FIELD, message = "Selecciona tu pais", min = "1") }, emails = { @EmailValidator(fieldName = "model.email", type = ValidatorType.FIELD, message = "Correo electrónico no válido") })
+			@RequiredStringValidator(fieldName = "confirmPass", type = ValidatorType.FIELD, key = "Confirma la contraseña") }, 
+			regexFields = { @RegexFieldValidator(fieldName = "model.login", type = ValidatorType.FIELD, key = "Nombre de usuario no válido", regexExpression = "[A-Z[a-z][0-9]]+") }, 
+			intRangeFields = { @IntRangeFieldValidator(fieldName = "model.idPais", type = ValidatorType.FIELD, message = "Selecciona tu pais", min = "1") }, 
+			emails = { @EmailValidator(fieldName = "model.email", type = ValidatorType.FIELD, message = "Correo electrónico no válido") })
 	public String create() {
 		model.setLogin(model.getLogin().trim());
 		model.setDeckPred(0);
@@ -120,7 +123,8 @@ public class RegistroController extends ActionSupport implements
 			if (!model.getVerificado()) {
 				model.setVerificado(true);
 				usuarioNegocio.save(model);
-				addActionMessage("Gracias por verificar tu correo "+ model.getLogin()+".");				
+				addActionMessage("Gracias por verificar tu correo "+ model.getLogin()+".");
+				ActionContext.getContext().getSession().put(NombreObjetosSesion.USUARIO, model);
 			} else {
 				addActionMessage("Tu correo ya había sido verificado con anterioridad "+ model.getLogin()+".");				
 			}

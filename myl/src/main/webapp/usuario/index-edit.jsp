@@ -12,6 +12,7 @@
 	<s:url id="urlCancelar" value="/usuario" includeContext="true" />
 	<s:actionerror id="saeUsuario" theme="jquery" />
 	<s:fielderror id="sfeUsuario" theme="jquery" />
+	<s:actionmessage id="samUsuario" theme="jquery" />
 
 	<s:form action="%{#request.contextPath}/usuario/%{idSel}"
 		method="post" theme="simple" acceptcharset="UTF-8" cssStyle="border: 0px;">
@@ -25,8 +26,14 @@
 				<td><s:property value="model.login"/> </td>
 			</tr>
 			<tr>
-				<td><label>E-mail:</label></td>
-				<td><s:textfield id="email" name="model.email" maxlength="80" /></td>
+				<td><label>E-mail:</label></td>				
+				<s:if test="model.verificado == true">
+					<td><s:property value="model.email"/></td>
+				</s:if>
+				<s:else>
+					<td><s:textfield id="email" name="model.email" maxlength="80" />${blanks}
+					<a href="${pageContext.request.contextPath}/usuario/${model.idUsuario}/edit?confirm=1"><b>Verificar</b></a></td>
+				</s:else>				
 			</tr>
 			<tr>
 				<td><label>Pais:</label></td>			
