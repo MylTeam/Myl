@@ -17,6 +17,9 @@ import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import com.myl.util.IntegerAdapter;
+import com.opensymphony.xwork2.validator.annotations.EmailValidator;
+import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
+import com.opensymphony.xwork2.validator.annotations.ValidatorType;
 
 
 @XmlRootElement
@@ -100,6 +103,8 @@ public class Usuario {
 		this.tieneDeck = tieneDeck;
 	}
 	
+	@RequiredStringValidator(fieldName = "model.email", type = ValidatorType.FIELD, key = "Introduce tu correo electrónico")
+	@EmailValidator(fieldName = "model.email", type = ValidatorType.FIELD, message = "Correo electrónico no válido")
 	@Column(name = "UsuarioEm")
 	public String getEmail() {
 		return email;

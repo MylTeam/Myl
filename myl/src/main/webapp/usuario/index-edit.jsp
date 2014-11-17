@@ -14,34 +14,36 @@
 	<s:fielderror id="sfeUsuario" theme="jquery" />
 	<s:actionmessage id="samUsuario" theme="jquery" />
 
-	<s:form action="%{#request.contextPath}/usuario/%{idSel}"
-		method="post" theme="simple" acceptcharset="UTF-8" cssStyle="border: 0px;">
+	<s:if test="model.verificado == false">
+		<s:set var="confirmar" value="1"/>	
+	</s:if>	
+
+	<s:url var="urlEdit" value="usuario/%{idSel}" />
+	
+	<s:form action="/%{urlEdit}" method="post" theme="simple" acceptcharset="UTF-8" cssStyle="border: 0px;">
+		<s:hidden id="hdnMethod" name="_method" value="put" />
+		
+		<s:hidden id="confirm" name="confirm" value="%{confirmar}"/>
+		
 		<center>
 			<h1>Modificar Perfil</h1>
 		</center>
-		<s:hidden id="hdnMethod" name="_method" value="put" />
+
 		<table>
 			<tr>
 				<td><label>Login:</label></td>
-				<td><s:property value="model.login"/> </td>
+				<td><s:property value="model.login" /></td>
 			</tr>
 			<tr>
-				<td><label>E-mail:</label></td>				
-				<s:if test="model.verificado == true">
-					<td><s:property value="model.email"/></td>
-				</s:if>
-				<s:else>
-					<td><s:textfield id="email" name="model.email" maxlength="80" />${blanks}
-					<a href="${pageContext.request.contextPath}/usuario/${model.idUsuario}/edit?confirm=1"><b>Verificar</b></a></td>
-				</s:else>				
+				<td><label>E-mail:</label></td>
+					<td><s:property value="model.email" /></td>
 			</tr>
 			<tr>
-				<td><label>Pais:</label></td>			
+				<td><label>Pais:</label></td>
 				<td><s:select id="slcPais" name="model.idPais"
 						list="listPaises" listValue="nombre" listKey="id"
-						headerValue="Seleccione" headerKey="-1" required="true"/>
-						 </td>
-			</tr>			
+						headerValue="Seleccione" headerKey="-1" required="true" /></td>
+			</tr>
 			<tr>
 				<td colspan="2" style="text-align: center;"><sj:submit
 						id="btnAceptar" value="Aceptar" button="true"

@@ -104,21 +104,7 @@ public class UsuarioController extends ActionSupport implements
 				.get(NombreObjetosSesion.USUARIO);
 		if (!usuario.getIdUsuario().equals(idSel)) {
 			result = "denied";
-		}else{
-			if(confirm!=null){
-				if(model.getCodigo()==0){
-					Random random = new Random();
-					model.setCodigo(random.nextLong() * 99999 + 1);
-					model=usuarioNegocio.save(model);
-				}
-				if(model.getEmail()!=null){
-					String msg="Por favor confirma tu e-mail ingresando a la siguiente liga: \n \n http://50.62.23.86:8080/myl/registro/"+model.getIdUsuario()+"?cd="+model.getCodigo()+" \n \n MyL Team";				
-					mailSender.sendMailTo(model.getEmail(), "MyL: Confirmar E-mail", msg);
-					addActionMessage("Se ha enviado un e-mail a "+model.getEmail()+" para realizar la verificación de identidad.");
-				}else{
-					addActionError("Debes guardar los cambios antes de confirmar tu e-mail");
-				}
-			}
+		}else{			
 			listPaises = paisNegocio.findAll();
 		}
 
@@ -145,11 +131,23 @@ public class UsuarioController extends ActionSupport implements
 			intRangeFields = { @IntRangeFieldValidator(fieldName = "model.idPais", type = ValidatorType.FIELD, message = "Selecciona tu pais", min = "1") }, 
 			emails = { @EmailValidator(fieldName = "model.email", type = ValidatorType.FIELD, message = "Correo electrónico no válido") })
 	public String update() {
+		
+		if(confirm!=null){
+			if(model.getCodigo()==0){
+				Random random = new Random();
+				model.setCodigo(random.nextLong() * 99999 + 1);				
+			}			
+				String msg="Por favor confirma tu e-mail ingresando a la siguiente liga: \n \n http://50.62.23.86:8080/myl/registro/"+model.getIdUsuario()+"?cd="+model.getCodigo()+" \n \n MyL Team";				
+				mailSender.sendMailTo(model.getEmail(), "MyL: Confirmar E-mail", msg);
+				addActionMessage("Se ha enviado un e-mail a "+model.getEmail()+" para realizar la verificación de identidad.");			
+		}
+				
 		model = usuarioNegocio.save(model);
-		ActionContext.getContext().getSession()
-				.put(NombreObjetosSesion.USUARIO, model);
+		ActionContext.getContext().getSession().put(NombreObjetosSesion.USUARIO, model);
+		addActionMessage("Se han actualizado correctamente tus datos");
 		return "success";
 	}
+	
 
 	@SkipValidation
 	public String deleteConfirm() {
