@@ -15,16 +15,17 @@
 	<s:actionmessage id="samUsuario" theme="jquery" />
 
 	<s:if test="model.verificado == false">
-		<s:set var="confirmar" value="1"/>	
-	</s:if>	
+		<s:set var="confirmar" value="1" />
+	</s:if>
 
 	<s:url var="urlEdit" value="usuario/%{idSel}" />
-	
-	<s:form action="/%{urlEdit}" method="post" theme="simple" acceptcharset="UTF-8" cssStyle="border: 0px;">
+
+	<s:form action="/%{urlEdit}" method="post" theme="simple"
+		acceptcharset="UTF-8" cssStyle="border: 0px;">
 		<s:hidden id="hdnMethod" name="_method" value="put" />
-		
-		<s:hidden id="confirm" name="confirm" value="%{confirmar}"/>
-		
+
+		<s:hidden id="confirm" name="confirm" value="%{confirmar}" />
+
 		<center>
 			<h1>Modificar Perfil</h1>
 		</center>
@@ -38,9 +39,10 @@
 				<td><label>E-mail:</label></td>
 				<s:if test="model.verificado == true">
 					<td><s:property value="model.email" /></td>
-					</s:if><s:else>
+				</s:if>
+				<s:else>
 					<td><s:textfield id="email" name="model.email" maxlength="80" /></td>
-					</s:else>
+				</s:else>
 			</tr>
 			<tr>
 				<td><label>Pais:</label></td>
@@ -49,10 +51,16 @@
 						headerValue="Seleccione" headerKey="0" /></td>
 			</tr>
 			<tr>
-				<td colspan="2" style="text-align: center;"><sj:submit
-						id="btnAceptar" value="Aceptar" button="true"
-						buttonIcon="ui-icon-star" /> <sj:a id="btnCancelar" button="true"
-						href="#" onclick="location.href='%{urlCancelar}'">Cancelar</sj:a></td>
+				<td colspan="2" style="text-align: center;"><s:if
+						test="model.verificado == false">
+						<sj:submit id="btnAceptar" value="Verificar" button="true"
+							buttonIcon="ui-icon-star" />
+					</s:if>
+					<s:else>
+						<sj:submit id="btnAceptar" value="Aceptar" button="true"
+							buttonIcon="ui-icon-star" />
+					</s:else> <sj:a id="btnCancelar" button="true" href="#"
+						onclick="location.href='%{urlCancelar}'">Cancelar</sj:a></td>
 			</tr>
 		</table>
 	</s:form>
