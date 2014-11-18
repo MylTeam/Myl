@@ -26,6 +26,7 @@ import com.myl.negocio.CartaNegocio;
 import com.myl.negocio.DeckNegocio;
 import com.myl.negocio.DueloNegocio;
 import com.myl.negocio.EdicionNegocio;
+import com.myl.negocio.GenericBs;
 import com.myl.negocio.PaisNegocio;
 import com.myl.negocio.UsuarioNegocio;
 import com.myl.util.IssueMail;
@@ -60,10 +61,11 @@ public class UsuarioController extends ActionSupport implements
 
 	private UsuarioNegocio usuarioNegocio;
 	private DeckNegocio deckNegocio;
-	private CartaNegocio cartaNegocio;
-	private PaisNegocio paisNegocio;
+	private CartaNegocio cartaNegocio;	
 	private DueloNegocio dueloNegocio;
 
+	private GenericBs genericBs;
+	
 	private List<Deck> lista;
 	private List<Pais> listPaises;
 	private List<Duelo> duelosGanados;
@@ -106,7 +108,7 @@ public class UsuarioController extends ActionSupport implements
 		if (!usuario.getIdUsuario().equals(idSel)) {
 			result = "denied";
 		}else{			
-			listPaises = paisNegocio.findAll();
+			listPaises=genericBs.findAll(Pais.class);
 		}
 
 		return result;
@@ -128,7 +130,8 @@ public class UsuarioController extends ActionSupport implements
 		}
 
 		if (hasFieldErrors() || hasActionErrors()) {
-			listPaises = paisNegocio.findAll();
+			listPaises=genericBs.findAll(Pais.class);
+			System.out.println("despues de obtener lista de paises");
 		}
 	}
 
@@ -138,7 +141,6 @@ public class UsuarioController extends ActionSupport implements
 			emails = { @EmailValidator(fieldName = "model.email", type = ValidatorType.FIELD, message = "Correo electrónico no válido")
 			})
 	public String update() {
-		System.out.println("en update");
 		if(confirm!=null){
 			if(model.getCodigo()==0){
 				Random random = new Random();
@@ -203,6 +205,7 @@ public class UsuarioController extends ActionSupport implements
 	public void setIdSel(Integer idSel) {
 		this.idSel = idSel;
 		if (idSel != null) {
+			System.out.println("en set idsel");
 			model = usuarioNegocio.findById(idSel);
 		}
 	}
@@ -291,14 +294,6 @@ public class UsuarioController extends ActionSupport implements
 		this.listPaises = listPaises;
 	}
 
-	public PaisNegocio getPaisNegocio() {
-		return paisNegocio;
-	}
-
-	public void setPaisNegocio(PaisNegocio paisNegocio) {
-		this.paisNegocio = paisNegocio;
-	}
-
 	public List<Duelo> getDuelosGanados() {
 		return duelosGanados;
 	}
@@ -337,6 +332,14 @@ public class UsuarioController extends ActionSupport implements
 
 	public void setMailSender(IssueMail mailSender) {
 		this.mailSender = mailSender;
+	}
+
+	public GenericBs getGenericBs() {
+		return genericBs;
+	}
+
+	public void setGenericBs(GenericBs genericBs) {
+		this.genericBs = genericBs;
 	}
 
 }

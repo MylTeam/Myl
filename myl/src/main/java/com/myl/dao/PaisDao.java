@@ -30,7 +30,8 @@ public class PaisDao {
 	
 	@Transactional
 	public List<Pais> findAll() {		
-		return sessionFactory.getCurrentSession().createCriteria(Pais.class).list();
+		System.out.println("buscando paises");
+		return sessionFactory.getCurrentSession().createCriteria(Pais.class).list();		
 	}
 
 	public Pais findById(Integer id) {

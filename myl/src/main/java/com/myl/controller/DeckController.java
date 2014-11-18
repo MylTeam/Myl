@@ -27,6 +27,7 @@ import com.myl.negocio.DeckCartaNegocio;
 import com.myl.negocio.DeckNegocio;
 import com.myl.negocio.EdicionNegocio;
 import com.myl.negocio.FormatoNegocio;
+import com.myl.negocio.GenericBs;
 import com.myl.negocio.UsuarioNegocio;
 import com.myl.util.NombreObjetosSesion;
 import com.opensymphony.xwork2.ActionContext;
@@ -84,7 +85,7 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>,
 	private DeckNegocio deckNegocio;
 	private DeckCartaNegocio deckCartaNegocio;
 	private UsuarioNegocio usuarioNegocio;
-	private FormatoNegocio formatoNegocio;
+	private GenericBs genericBs;
 
 	private List<String> razas;
 	private List<String> tipos;
@@ -112,7 +113,7 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>,
 		ediciones = edicionNegocio.findAll();
 		razas = cartaNegocio.findByCriteria();
 		tipos = cartaNegocio.findByCriteriaTipo();
-		formatos = formatoNegocio.findAll();
+		formatos=genericBs.findAll(Formato.class);
 
 		return "editNew";
 	}
@@ -142,7 +143,7 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>,
 		
 		if (hasFieldErrors() || hasActionErrors()) {
 			ActionContext.getContext().getSession().put("deckTmp", deckCartas);
-			formatos = formatoNegocio.findAll();
+			formatos=genericBs.findAll(Formato.class);
 		}
 	}
 	
@@ -183,7 +184,7 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>,
 			ediciones = edicionNegocio.findAll();
 			razas = cartaNegocio.findByCriteria();
 			tipos = cartaNegocio.findByCriteriaTipo();
-			formatos = formatoNegocio.findAll();			
+			formatos=genericBs.findAll(Formato.class);			
 		}
 
 		return result;
@@ -208,7 +209,7 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>,
 		
 		if (hasFieldErrors() || hasActionErrors()) {
 			ActionContext.getContext().getSession().put("deckTmp", deckCartas);
-			formatos = formatoNegocio.findAll();
+			formatos=genericBs.findAll(Formato.class);
 		}
 		
 		
@@ -518,14 +519,14 @@ public class DeckController extends ActionSupport implements ModelDriven<Deck>,
 
 	public void setFormatos(List<Formato> formatos) {
 		this.formatos = formatos;
+	}	
+
+	public GenericBs getGenericBs() {
+		return genericBs;
 	}
 
-	public FormatoNegocio getFormatoNegocio() {
-		return formatoNegocio;
-	}
-
-	public void setFormatoNegocio(FormatoNegocio formatoNegocio) {
-		this.formatoNegocio = formatoNegocio;
+	public void setGenericBs(GenericBs genericBs) {
+		this.genericBs = genericBs;
 	}
 
 }
