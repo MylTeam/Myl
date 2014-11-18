@@ -35,6 +35,7 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.validator.annotations.EmailValidator;
+import com.opensymphony.xwork2.validator.annotations.ExpressionValidator;
 import com.opensymphony.xwork2.validator.annotations.IntRangeFieldValidator;
 import com.opensymphony.xwork2.validator.annotations.RegexFieldValidator;
 import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
@@ -111,14 +112,18 @@ public class UsuarioController extends ActionSupport implements
 		return result;
 	}
 
-	public void validateUpdate() {
-		Usuario aux = new Usuario();
-		aux.setEmail(model.getEmail());
-		List<Usuario> usuariosAux = usuarioNegocio.findByExample(aux);
+	public void validateUpdate() {		
+		
+		if(!model.getEmail().equals("")){
+			Usuario aux = new Usuario();
+			aux.setEmail(model.getEmail());
+			List<Usuario> usuariosAux = usuarioNegocio.findByExample(aux);
 
-		if (!usuariosAux.isEmpty()) {
-			if (!usuariosAux.get(0).getIdUsuario().equals(model.getIdUsuario())) {
-				addActionError("El correo electrónico ingresado ya está registrado");
+		
+			if (!usuariosAux.isEmpty()) {
+				if (!usuariosAux.get(0).getIdUsuario().equals(model.getIdUsuario())) {
+					addActionError("El correo electrónico ingresado ya está registrado");
+				}
 			}
 		}
 
@@ -127,11 +132,13 @@ public class UsuarioController extends ActionSupport implements
 		}
 	}
 
-	@Validations(requiredStrings = { @RequiredStringValidator(fieldName = "model.email", type = ValidatorType.FIELD, key = "Introduce tu correo electrónico") }, 
-			intRangeFields = { @IntRangeFieldValidator(fieldName = "model.idPais", type = ValidatorType.FIELD, message = "Selecciona tu pais", min = "1") }, 
-			emails = { @EmailValidator(fieldName = "model.email", type = ValidatorType.FIELD, message = "Correo electrónico no válido") })
+	@Validations(
+			intRangeFields = { @IntRangeFieldValidator(fieldName = "model.idPais", type = ValidatorType.SIMPLE, message = "Selecciona tu pais", min = "1") },
+			requiredStrings = { @RequiredStringValidator(fieldName = "model.email", type = ValidatorType.FIELD, key = "Introduce tu correo electrónico") }, 			 
+			emails = { @EmailValidator(fieldName = "model.email", type = ValidatorType.FIELD, message = "Correo electrónico no válido")
+			})
 	public String update() {
-		
+		System.out.println("en update");
 		if(confirm!=null){
 			if(model.getCodigo()==0){
 				Random random = new Random();

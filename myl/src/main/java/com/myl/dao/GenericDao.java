@@ -85,6 +85,7 @@ public class GenericDao {
 	 */
 	@Transactional(propagation = Propagation.MANDATORY)
 	public <C> C update(C entity) {
+		System.out.println("en generico update");
 		sessionFactory.getCurrentSession().update(entity);
 		return entity;
 	}

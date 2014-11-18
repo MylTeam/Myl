@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.myl.modelo.Pais;
 import com.myl.modelo.Pais;
+import com.myl.modelo.Usuario;
 
 @Repository("paisDao")
 @Scope(value = BeanDefinition.SCOPE_SINGLETON)
@@ -29,8 +30,7 @@ public class PaisDao {
 	
 	@Transactional
 	public List<Pais> findAll() {		
-		return (List<Pais>) sessionFactory.getCurrentSession()
-				.createCriteria(Pais.class).list();
+		return sessionFactory.getCurrentSession().createCriteria(Pais.class).list();
 	}
 
 	public Pais findById(Integer id) {

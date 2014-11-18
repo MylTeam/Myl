@@ -36,13 +36,17 @@
 			</tr>
 			<tr>
 				<td><label>E-mail:</label></td>
+				<s:if test="model.verificado == true">
 					<td><s:property value="model.email" /></td>
+					</s:if><s:else>
+					<td><s:textfield id="email" name="model.email" maxlength="80" /></td>
+					</s:else>
 			</tr>
 			<tr>
 				<td><label>Pais:</label></td>
 				<td><s:select id="slcPais" name="model.idPais"
 						list="listPaises" listValue="nombre" listKey="id"
-						headerValue="Seleccione" headerKey="-1" required="true" /></td>
+						headerValue="Seleccione" headerKey="0" /></td>
 			</tr>
 			<tr>
 				<td colspan="2" style="text-align: center;"><sj:submit

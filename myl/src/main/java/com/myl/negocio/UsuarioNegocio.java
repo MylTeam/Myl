@@ -33,12 +33,7 @@ public class UsuarioNegocio {
 	public Usuario save(Usuario entidad) {
 		Usuario modelo = usuarioDao.save(entidad);
 		return modelo;
-	}
-
-	@Transactional(rollbackFor = Exception.class)
-	public void delete(Usuario entidad) { 
-		usuarioDao.delete(entidad);
-	}
+	}	
 
 	@Transactional
 	public List<Usuario> findByExample(Usuario usuario) {		

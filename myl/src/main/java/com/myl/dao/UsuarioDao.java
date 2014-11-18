@@ -34,17 +34,13 @@ public class UsuarioDao {
 	}
 
 	public Usuario save(Usuario entity) {
+		System.out.println("en dao usuario: save");
 		if (entity.getIdUsuario() != null) {
 			entity = (Usuario) sessionFactory.getCurrentSession().merge(entity);
 		}
 		sessionFactory.getCurrentSession().saveOrUpdate(entity);
 		return entity;
-	}
-
-	public void delete(Usuario entity) {
-		entity = (Usuario) sessionFactory.getCurrentSession().merge(entity);
-		sessionFactory.getCurrentSession().saveOrUpdate(entity);
-	}
+	}	
 
 	@SuppressWarnings("unchecked")
 	public List<Usuario> findByExample(Usuario example) {
