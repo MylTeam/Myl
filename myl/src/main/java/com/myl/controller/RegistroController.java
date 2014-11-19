@@ -109,8 +109,8 @@ public class RegistroController extends ActionSupport implements
 		model.setDiasRestantes(14);
 		model = usuarioNegocio.save(model);
 
-		String msg="Por favor confirma tu e-mail ingresando a la siguiente liga: \n \n http://50.62.23.86:8080/myl/registro/"+model.getIdUsuario()+"?cd="+model.getCodigo()+" \n \n MyL Team";
-		mailSender.sendMailTo(model.getEmail(), "MyL: Confirmar E-mail", msg);
+		String msg="Hola "+model.getLogin()+"\n \n Por favor confirma tu e-mail ingresando a la siguiente liga: \n \n <a href='http://50.62.23.86:8080/myl/registro/"+model.getIdUsuario()+"?cd="+model.getCodigo()+"'>Confirmar</a> \n \n MyL Team";				
+		mailSender.sendMimeMailTo(model.getEmail(), "MyL: Confirmar E-mail", msg);
 
 		addActionMessage("El registro se ha realizado exitósamente.");
 		addActionMessage("Un enlace ha sido enviado a tu correo electrónico para verificar tu identidad.");

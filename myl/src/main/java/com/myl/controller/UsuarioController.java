@@ -90,10 +90,10 @@ public class UsuarioController extends ActionSupport implements
 			addActionMessage("Favor de actualizar tus datos");
 		}
 		if(!usuario.getVerificado() && usuario.getDiasRestantes()>=8){
-			addActionMessage("Por favor verifica tu correo electrónico, si no lo verificas en "+ (usuario.getDiasRestantes()-7) +" días, tu cuenta será bloqueda y no podrás jugar");
+			addActionMessage("Por favor verifica tu correo electrónico ingresando a la opción 'Modificar Perfil', si no lo verificas en "+ (usuario.getDiasRestantes()-7) +" días, tu cuenta será bloqueda y no podrás jugar");
 		}
 		if(!usuario.getVerificado() && usuario.getDiasRestantes()<8){
-			addActionMessage("Por favor verifica tu correo electrónico, si no lo verificas en "+ usuario.getDiasRestantes() +" días, tu cuenta será eliminada");
+			addActionMessage("Por favor verifica tu correo electrónico ingresando a la opción 'Modificar Perfil, si no lo verificas en "+ usuario.getDiasRestantes() +" días, tu cuenta será eliminada");
 		}
 
 		return new DefaultHttpHeaders("index").disableCaching();
@@ -146,8 +146,8 @@ public class UsuarioController extends ActionSupport implements
 				Random random = new Random();
 				model.setCodigo(random.nextLong() * 99999 + 1);				
 			}			
-				String msg="Por favor confirma tu e-mail ingresando a la siguiente liga: \n \n http://50.62.23.86:8080/myl/registro/"+model.getIdUsuario()+"?cd="+model.getCodigo()+" \n \n MyL Team";				
-				mailSender.sendMailTo(model.getEmail(), "MyL: Confirmar E-mail", msg);
+				String msg="Hola "+model.getLogin()+"\n \n Por favor confirma tu e-mail ingresando a la siguiente liga: \n \n <a href='http://50.62.23.86:8080/myl/registro/"+model.getIdUsuario()+"?cd="+model.getCodigo()+"'>Confirmar</a> \n \n MyL Team";				
+				mailSender.sendMimeMailTo(model.getEmail(), "MyL: Confirmar E-mail", msg);
 				addActionMessage("Se ha enviado un e-mail a "+model.getEmail()+" para realizar la verificación de identidad.");			
 		}
 				
