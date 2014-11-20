@@ -146,9 +146,9 @@ public class UsuarioController extends ActionSupport implements
 				Random random = new Random();
 				model.setCodigo(random.nextLong() * 99999 + 1);				
 			}			
-				String msg="Hola "+model.getLogin()+"\n \n Por favor confirma tu e-mail ingresando a la siguiente liga: \n \n <a href='http://50.62.23.86:8080/myl/registro/"+model.getIdUsuario()+"?cd="+model.getCodigo()+"'>Confirmar</a> \n \n MyL Team";				
+				String msg="Hola "+model.getLogin()+"<p>Por favor confirma tu e-mail ingresando a la siguiente liga:</p><p><a href='http://50.62.23.86:8080/myl/registro/"+model.getIdUsuario()+"?cd="+model.getCodigo()+"'>Confirmar</a></p><p>MyL Team</p>";				
 				mailSender.sendMimeMailTo(model.getEmail(), "MyL: Confirmar E-mail", msg);
-				addActionMessage("Se ha enviado un e-mail a "+model.getEmail()+" para realizar la verificación de identidad.");			
+				addActionMessage("Se ha enviado un e-mail a "+model.getEmail()+" para realizar la verificación de identidad. Si no lo ves revisa tu bandeja de SPAM.");			
 		}
 				
 		model = usuarioNegocio.save(model);
