@@ -205,7 +205,6 @@ public class UsuarioController extends ActionSupport implements
 	public void setIdSel(Integer idSel) {
 		this.idSel = idSel;
 		if (idSel != null) {
-			System.out.println("en set idsel");
 			model = usuarioNegocio.findById(idSel);
 		}
 	}

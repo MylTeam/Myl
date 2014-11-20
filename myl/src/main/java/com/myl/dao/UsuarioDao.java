@@ -34,7 +34,6 @@ public class UsuarioDao {
 	}
 
 	public Usuario save(Usuario entity) {
-		System.out.println("en dao usuario: save");
 		if (entity.getIdUsuario() != null) {
 			entity = (Usuario) sessionFactory.getCurrentSession().merge(entity);
 		}

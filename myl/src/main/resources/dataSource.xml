@@ -17,8 +17,11 @@
 		para conexión con BD y de configuración del pool de conexiones -->
 	<bean
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="location">
-			<value>classpath:jdbc.properties</value>
+		<property name="locations">
+			<list>
+				<value>classpath:jdbc.properties</value>
+				<value>classpath:mail.properties</value>
+			</list>			
 		</property>
 	</bean>
 

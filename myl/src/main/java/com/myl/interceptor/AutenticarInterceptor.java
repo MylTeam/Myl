@@ -18,7 +18,6 @@ public class AutenticarInterceptor implements Interceptor {
 
 	@Override
 	public String intercept(ActionInvocation actionInvocation) throws Exception {	
-		System.out.println(actionInvocation.getProxy().getMethod());
 		String previous = null;
 		if ("login".equals(actionInvocation.getProxy().getActionName())) {
 				actionInvocation.invoke();

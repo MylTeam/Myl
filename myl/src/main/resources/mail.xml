@@ -8,15 +8,10 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 >
  
 <bean id="mailSenderImpl" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-	<property name="host" value="smtp-mail.outlook.com" />
-	<property name="port" value="587" />
-	<property name="username" value="mylzupport@outlook.com" />
-	<property name="password" value="theblisterexist1" />
-	
-	<!-- <property name="host" value="smtp.gmail.com" />
-	<property name="port" value="587" />
-	<property name="username" value="mylzupport@gmail.com" />
-	<property name="password" value="theblisterexist1" /> -->
+	<property name="host" value="${mail.host}" />
+	<property name="port" value="${mail.port}" />
+	<property name="username" value="${mail.username}" />
+	<property name="password" value="${mail.password}" />	
  
 	<property name="javaMailProperties">
 	   <props>

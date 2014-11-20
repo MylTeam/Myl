@@ -1,5 +1,11 @@
 package com.myl.util;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
@@ -24,14 +30,16 @@ public class IssueMail {
 	public void setMailSender(JavaMailSender mailSender) {
 		LOGGER.info("Initializing e-mail");
 		this.mailSender = mailSender;
+
 	}
 
 	public void sendMail(String from, String subject, String msg) {
+
 		LOGGER.info("Sending e-mail");
 		SimpleMailMessage message = new SimpleMailMessage();
 
 		message.setFrom(from);
-		message.setTo("mylzupport@outlook.com");
+		message.setTo(getEmail());
 		message.setSubject(subject);
 		message.setText(msg);
 		mailSender.send(message);
@@ -42,7 +50,7 @@ public class IssueMail {
 		LOGGER.info("Sending e-mail");
 		SimpleMailMessage message = new SimpleMailMessage();
 
-		message.setFrom("mylzupport@outlook.com");
+		message.setFrom(getEmail());
 		message.setTo(to);
 		message.setSubject(subject);
 		message.setText(msg);
@@ -52,19 +60,37 @@ public class IssueMail {
 
 	public void sendMimeMailTo(String to, String subject, String msg) {
 		LOGGER.info("Sending Mime e-mail");
-		
+
 		try {
 			MimeMessage mimeMessage = mailSender.createMimeMessage();
-			MimeMessageHelper helper=new MimeMessageHelper(mimeMessage, false, "utf-8");
-			helper.setFrom("mylzupport@outlook.com");
+			MimeMessageHelper helper = new MimeMessageHelper(mimeMessage,
+					false, "utf-8");
+			helper.setFrom(getEmail());
 			helper.setTo(to);
-			helper.setSubject(subject);		
+			helper.setSubject(subject);
 			mimeMessage.setContent(msg, "text/html");
-			
-			mailSender.send(mimeMessage);			
+
+			mailSender.send(mimeMessage);
 		} catch (MessagingException e) {
 			LOGGER.error("Error al intentar enviar e-mail");
-		}	
+		}
 
 	}
+	
+	public String getEmail(){
+		String email="";
+		Properties prop = new Properties();
+		try {
+			InputStream input = new FileInputStream("./src/main/resources/mail.properties");
+			prop.load(input);
+			email=prop.getProperty("mail.username");
+			System.out.println(email);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return email;
+	}
+
 }
