@@ -81,8 +81,9 @@ public class IssueMail {
 		String email="";
 		Properties prop = new Properties();
 		try {
-			InputStream input = new FileInputStream("./src/main/resources/mail.properties");
-			prop.load(input);
+//			InputStream input = new FileInputStream("/WEB-INF/classes/mail.properties");
+//			prop.load(input);
+			prop.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("mail.properties"));			
 			email=prop.getProperty("mail.username");
 			System.out.println(email);
 		} catch (FileNotFoundException e) {
