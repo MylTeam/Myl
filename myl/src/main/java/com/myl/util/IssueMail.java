@@ -27,11 +27,45 @@ public class IssueMail {
 			.getLogger(IssueMail.class);
 
 	private JavaMailSender mailSender;
-
+	private JavaMailSender mailSender1;
+	private JavaMailSender mailSender2;
+	private JavaMailSender mailSender3;
+	private JavaMailSender mailSender4;
+	private JavaMailSender mailSender5;
+	private JavaMailSender mailSenderErr;
+	private JavaMailSender mailSenderCom;
+	
 	public void setMailSender(JavaMailSender mailSender) {
-		LOGGER.info("Initializing e-mail");
-		this.mailSender = mailSender;
-
+		LOGGER.info("Initializing e-mail 0");
+		this.mailSender = mailSender;		
+	}
+	public void setMailSender1(JavaMailSender mailSender1) {
+		LOGGER.info("Initializing e-mail 1");
+		this.mailSender1 = mailSender1;
+	}
+	public void setMailSender2(JavaMailSender mailSender2) {
+		LOGGER.info("Initializing e-mail 2");
+		this.mailSender2 = mailSender2;
+	}
+	public void setMailSender3(JavaMailSender mailSender3) {
+		LOGGER.info("Initializing e-mail 3");
+		this.mailSender3 = mailSender3;
+	}
+	public void setMailSender4(JavaMailSender mailSender4) {
+		LOGGER.info("Initializing e-mail 4");
+		this.mailSender4 = mailSender4;
+	}
+	public void setMailSender5(JavaMailSender mailSender5) {
+		LOGGER.info("Initializing e-mail 5");
+		this.mailSender5 = mailSender5;
+	}
+	public void setMailSenderErr(JavaMailSender mailSenderErr) {
+		LOGGER.info("Initializing e-mail errors");
+		this.mailSenderErr = mailSenderErr;
+	}
+	public void setMailSenderCom(JavaMailSender mailSenderCom) {
+		LOGGER.info("Initializing e-mail comments");
+		this.mailSenderCom = mailSenderCom;
 	}
 
 //	public void sendMail(String from, String subject, String msg) {
@@ -100,14 +134,30 @@ public class IssueMail {
 			helper.setSubject(subject);
 			mimeMessage.setContent(msg, "text/html");
 
-			mailSender.send(mimeMessage);
+			if(c.equals(1)){
+				System.out.println(mailSender1);
+				mailSender1.send(mimeMessage);
+			}else if(c.equals(2)){
+				System.out.println(mailSender2);
+				mailSender2.send(mimeMessage);
+			}else if(c.equals(3)){
+				System.out.println(mailSender3);
+				mailSender3.send(mimeMessage);
+			}else if(c.equals(4)){
+				System.out.println(mailSender4);
+				mailSender4.send(mimeMessage);
+			}else if(c.equals(5)){
+				System.out.println(mailSender5);
+				mailSender5.send(mimeMessage);
+			}
+			
 			
 		} catch (Exception e) {
-			LOGGER.error("Error al intentar enviar e-mail de confirmación desde "+from);
+			LOGGER.error("Error al intentar enviar e-mail de confirmación desde "+from);			
 			if(c.equals(5)){
 				c=0;
-			}
-			sendMailError("E-mail "+from+" bloqueado", ""+e.getStackTrace());
+			}			
+//			sendMailError("E-mail "+from+" bloqueado", ""+e.getStackTrace());
 			sendMailConfirm(c+=1, to, subject, msg);
 		}
 	}
@@ -119,7 +169,7 @@ public class IssueMail {
 		message.setTo(getProperty("mail.username"));
 		message.setSubject(subject);
 		message.setText(msg);
-		mailSender.send(message);
+		mailSenderCom.send(message);
 	}
 	
 	public void sendMailError(String subject, String msg) {
@@ -129,7 +179,7 @@ public class IssueMail {
 		message.setTo(getProperty("mail.username"));
 		message.setSubject(subject);
 		message.setText(msg);
-		mailSender.send(message);
+		mailSenderErr.send(message);
 	}
 	
 	public String getProperty(String propiedad){
