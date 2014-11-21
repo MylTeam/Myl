@@ -58,9 +58,10 @@ public class ContactoController extends ActionSupport {
 			
 			Date fecha = new Date();
 			Usuario usuario=(Usuario) ActionContext.getContext().getSession().get(NombreObjetosSesion.USUARIO);
-			String msg=" Fecha: "+fecha+"\n Enviado por: "+usuario.getLogin()+"\n Asunto: "+asunto+"\n Mensaje: "+mensaje;
+			String msg=" Fecha: "+fecha+"\n Enviado por: "+usuario.getLogin()+"\n Correo: "+usuario.getEmail()+" Asunto: "+asunto+"\n Mensaje: "+mensaje;
 			String asuntoUsuario=usuario.getLogin()+" : "+asunto;
-			mailSender.sendMail("mylzupport@gmail.com", asuntoUsuario, msg);
+//			mailSender.sendMail("mylzupport@gmail.com", asuntoUsuario, msg);
+			mailSender.sendMailComment(asuntoUsuario, msg);
 			
 		return new DefaultHttpHeaders("success");
 	}

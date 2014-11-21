@@ -58,7 +58,7 @@ public class ReporteController extends ActionSupport {
 		}else{
 			msg="Fecha: "+fecha+"\n URL: "+appError.getUrl()+"\n Error: \n "+appError.getStackTrace();
 		}
-		mailSender.sendMail(mailSender.getEmail(), appError.getExceptionName(), msg);
+		mailSender.sendMailError(appError.getExceptionName(), msg);
 		LOGGER.info(msg);
 	}
 
