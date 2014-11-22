@@ -6,6 +6,7 @@
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
 http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 
+<!-- Bean que inicializa el envío de correos -->
 	<bean id="mailSender" class="com.myl.util.IssueMail">
 		<property name="mailSender" ref="mailSenderImpl" />
 		<property name="mailSender1" ref="mailSenderImpl1" />
@@ -17,6 +18,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 		<property name="mailSenderCom" ref="mailSenderImplCom" />		
 	</bean>
 	
+	<!-- Bean que define un correo -->
 	<bean id="mailSenderImpl" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host" value="${mail.host}" />
 		<property name="port" value="${mail.port}" />
@@ -29,7 +31,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 			</props>
 		</property>
 	</bean>
-	
+	<!-- Bean que define un correo -->
 	<bean id="mailSenderImpl1" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host" value="${mail.host2}" />
 		<property name="port" value="${mail.port}" />
@@ -42,7 +44,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 			</props>
 		</property>
 	</bean>
-	
+	<!-- Bean que define un correo -->
 	<bean id="mailSenderImpl2" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host" value="${mail.host2}" />
 		<property name="port" value="${mail.port}" />
@@ -55,9 +57,9 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 			</props>
 		</property>
 	</bean>
-	
+	<!-- Bean que define un correo -->
 	<bean id="mailSenderImpl3" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-		<property name="host" value="${mail.host}" />
+		<property name="host" value="${mail.host2}" />
 		<property name="port" value="${mail.port}" />
 		<property name="username" value="${mail.confirm3}" />
 		<property name="password" value="${mail.password}" />
@@ -68,7 +70,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 			</props>
 		</property>
 	</bean>
-	
+	<!-- Bean que define un correo -->
 	<bean id="mailSenderImpl4" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host" value="${mail.host}" />
 		<property name="port" value="${mail.port}" />
@@ -81,7 +83,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 			</props>
 		</property>
 	</bean>
-	
+	<!-- Bean que define un correo -->
 	<bean id="mailSenderImpl5" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host" value="${mail.host}" />
 		<property name="port" value="${mail.port}" />
@@ -94,7 +96,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 			</props>
 		</property>
 	</bean>
-	
+	<!-- Bean que define un correo -->
 	<bean id="mailSenderImplErr" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host" value="${mail.host}" />
 		<property name="port" value="${mail.port}" />
@@ -107,7 +109,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 			</props>
 		</property>
 	</bean>
-	
+	<!-- Bean que define un correo -->
 	<bean id="mailSenderImplCom" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host" value="${mail.host}" />
 		<property name="port" value="${mail.port}" />
