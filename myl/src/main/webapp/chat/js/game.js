@@ -81,7 +81,12 @@ function createCard(c, context, origenPila) {
 	img.id = obj[origenPila][c].idTemp;
 	img.name = obj[origenPila][c].numero;	
 	img.src = context + "/images/thumbs/"+obj[origenPila][c].siglas+"/" + obj[origenPila][c].numero + ".jpg";
-	img.className=obj[origenPila][c].tipo+" cardright";
+	
+	if(img.id.indexOf("tc")>=0){
+		img.className=obj[origenPila][c].tipo+" cardright opcard";
+	}else{
+		img.className=obj[origenPila][c].tipo+" cardright owcard";
+	}
 	img.draggable = "true";
 	img.height = "70";
 	img.alt=obj[origenPila][c].siglas;
@@ -124,7 +129,11 @@ function createCardOp(c, context, origenPila) {
 	img.id = objOp[origenPila][c].idTemp;
 	img.name = objOp[origenPila][c].numero;	
 	img.src = context + "/images/thumbs/"+objOp[origenPila][c].siglas+"/" + objOp[origenPila][c].numero + ".jpg";
-	img.className=objOp[origenPila][c].tipo+" oponentcard";	
+	if(img.id.indexOf("optc")>=0){
+		img.className=objOp[origenPila][c].tipo+" oponentcard owcard";	
+	}else{
+		img.className=objOp[origenPila][c].tipo+" oponentcard opcard";
+	}
 	img.height = "70";
 	img.alt=objOp[origenPila][c].siglas;
 	img.onmouseover = function showImage(ev) {

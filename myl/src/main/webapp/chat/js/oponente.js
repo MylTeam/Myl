@@ -6,8 +6,13 @@ function takecontrol(id){
 	if(parent=="dialog"){
 		parent=$("#dialog").attr("name");
 	}
-	
+		
 	var newid=id.substring(2);
+	newid="tc"+newid;
+	if(id.indexOf("optc")>=0){
+		newid=id.substring(4);	
+	}
+	
 	var newparent=parent.replace("2","1");	
 
 	for(var c=0;c<objOp[newparent].length;c++){

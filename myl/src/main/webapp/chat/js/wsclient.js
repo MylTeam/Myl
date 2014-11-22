@@ -471,9 +471,13 @@ function processCard(from,message,card,origen,destino){
 			 * cambia la carta de propietario
 			 */
 			for(var c=0;c<obj[origen.replace("2","1")].length;c++){
-				if(obj[origen.replace("2","1")][c].idTemp==card.idTemp.substring(2)){
+				var idTempAux=card.idTemp.substring(4);
+				if(card.idTemp.indexOf("optc")===-1){
+					idTempAux="tc"+card.idTemp.substring(2);
+				}				
+				if(obj[origen.replace("2","1")][c].idTemp==idTempAux){
 					obj[origen.replace("2","1")].splice(c,1);
-					$("#"+card.idTemp.substring(2)).remove();
+					$("#"+idTempAux).remove();
 				}
 			}
 			

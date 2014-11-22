@@ -117,7 +117,13 @@
 					</ul>
 					</td>
 				</tr>
-				
+				<tr>
+				<td>v1.9</td>
+				<td><ul>
+					<li>-Se arreglan varios bugs.</li>
+					<li>-BugFix: Se corrige el error al tomar el control de las cartas del oponente.</li>
+				</ul></td>
+				</tr>
 			</table>
 		</form>
 	</center>

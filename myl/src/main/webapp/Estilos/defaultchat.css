@@ -88,6 +88,18 @@ img.cardright{
 	z-index: 1;
 }
 
+img.opcard{
+	border-width: 3px;
+	border-color: red;
+	border-style: outset;
+}
+
+img.owcard{
+	border-width: 3px;
+	border-color: chartreuse;
+	border-style: outset;
+}
+
 img.fase{
 	opacity:0.4;
 	filter:alpha(opacity=40);
