@@ -66,9 +66,9 @@
 						</div>
 					</div>
 				</td>
-				<td style="width: 30%">
+				<td style="width: 30%;vertical-align: top;">
 					<h3>Usuarios conectados:</h3>
-					<div id="onLineUsersPanel" style="overflow: scroll; height: 350px">
+					<div id="onLineUsersPanel">
 						<ul id="onlineUsers">
 
 						</ul>

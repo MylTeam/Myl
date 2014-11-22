@@ -255,11 +255,15 @@ var wsclient = (function() {
     }
 
     function removeOnlineUser(userName) {
+    	var conversationId = cleanWhitespaces(userName) + 'conversation';
         $('#onlineUsers > li').each(function (index, elem) {
             if (elem.id == userName + 'onlineuser') {
                 $(elem).remove();
             }
         });
+        if ($("#"+conversationId).length > 0){
+        	  removeTab(conversationId);
+        	}
     }
 
     function createOnlineUser(userName,format) {
