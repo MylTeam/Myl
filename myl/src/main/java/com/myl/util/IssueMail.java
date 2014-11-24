@@ -1,9 +1,13 @@
 package com.myl.util;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.Properties;
 
 import javax.mail.MessagingException;
@@ -122,8 +126,12 @@ public class IssueMail {
 //		return email;
 //	}
 	/************************/
-	public void sendMailConfirm(Integer c,String to, String subject, String msg) {
-		String from=getProperty("mail.confirm"+c);
+	public void sendMailConfirm(String to, String subject, String msg) {		
+//		String from=getProperty("mail.confirm"+c);
+		Properties p = getProperties();
+		Integer c=Integer.valueOf(p.getProperty("mail.current"));		
+		String from = p.getProperty("mail.confirm"+c);
+		
 		LOGGER.info("Sending Confirm e-mail from "+from);
 		try {
 			MimeMessage mimeMessage = mailSender.createMimeMessage();
@@ -132,33 +140,27 @@ public class IssueMail {
 			helper.setFrom(from);
 			helper.setTo(to);
 			helper.setSubject(subject);
-			mimeMessage.setContent(msg, "text/html");
-
+			mimeMessage.setContent(msg, "text/html");			
+			
 			if(c.equals(1)){
-				System.out.println(mailSender1);
 				mailSender1.send(mimeMessage);
 			}else if(c.equals(2)){
-				System.out.println(mailSender2);
 				mailSender2.send(mimeMessage);
 			}else if(c.equals(3)){
-				System.out.println(mailSender3);
 				mailSender3.send(mimeMessage);
 			}else if(c.equals(4)){
-				System.out.println(mailSender4);
 				mailSender4.send(mimeMessage);
 			}else if(c.equals(5)){
-				System.out.println(mailSender5);
 				mailSender5.send(mimeMessage);
 			}
-			
 			
 		} catch (Exception e) {
 			LOGGER.error("Error al intentar enviar e-mail de confirmación desde "+from);			
 			if(c.equals(5)){
 				c=0;
 			}			
-//			sendMailError("E-mail "+from+" bloqueado", ""+e.getStackTrace());
-			sendMailConfirm(c+=1, to, subject, msg);
+			setProperty("mail.current", String.valueOf(c+=1));
+			sendMailConfirm(to, subject, msg);
 		}
 	}
 	
@@ -185,7 +187,7 @@ public class IssueMail {
 	public String getProperty(String propiedad){
 		String property="";
 		Properties prop = new Properties();
-		try {
+		try {			
 			prop.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("mail.properties"));			
 			property=prop.getProperty(propiedad);
 		} catch (FileNotFoundException e) {
@@ -194,6 +196,40 @@ public class IssueMail {
 			e.printStackTrace();
 		}
 		return property;
+	}
+	
+	public Properties getProperties(){		
+		Properties prop = new Properties();
+		try {			
+			InputStream input=Thread.currentThread().getContextClassLoader().getResourceAsStream("mail.properties");
+			prop.load(input);			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return prop;
+	}
+	
+	public void setProperty(String property, String value){
+		Properties prop = new Properties();
+		try {
+			InputStream input=Thread.currentThread().getContextClassLoader().getResourceAsStream("mail.properties");
+			prop.load(input);
+			
+			URL url = Thread.currentThread().getContextClassLoader().getResource("mail.properties");		
+			FileOutputStream out = new FileOutputStream(new File(url.toURI()));
+			prop.setProperty(property,value);
+			prop.store(out, null);
+			out.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 }

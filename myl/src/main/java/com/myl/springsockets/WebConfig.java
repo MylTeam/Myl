@@ -14,6 +14,7 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
 import org.springframework.web.socket.handler.PerConnectionWebSocketHandler;
 import org.springframework.web.socket.server.standard.ServletServerContainerFactoryBean;
 
+
 @Configuration
 @EnableWebMvc
 @EnableWebSocket
@@ -43,8 +44,7 @@ public class WebConfig extends WebMvcConfigurerAdapter implements WebSocketConfi
   }
   
 //  @Bean
-//  public DefaultHandshakeHandler handshakeHandler() {
-//	  
+//  public DefaultHandshakeHandler handshakeHandler() {	  
 //      WebSocketPolicy policy = new WebSocketPolicy(WebSocketBehavior.SERVER);
 //      policy.setInputBufferSize(20*1024);      
 //
