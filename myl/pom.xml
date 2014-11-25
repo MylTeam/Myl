@@ -16,10 +16,10 @@
 		<hibernate.version>4.3.6.Final</hibernate.version>
 		<struts.version>2.3.16.3</struts.version>
 		<jquery.version>3.7.0</jquery.version>
-		<host.url>http://50.62.23.86:8080/manager/text</host.url>
-		<server.name>mylprod</server.name>
-		<!-- <host.url>http://localhost:8080/manager/text</host.url>
-		<server.name>localhost</server.name> -->
+		<!-- <host.url>http://50.62.23.86:8080/manager/text</host.url>
+		<server.name>mylprod</server.name> -->
+		<host.url>http://localhost:8080/manager/text</host.url>
+		<server.name>localhost</server.name>
 	</properties>
 
 

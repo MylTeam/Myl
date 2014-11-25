@@ -26,8 +26,6 @@
 <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/Estilos/main.css" />
 <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/Estilos/default.css?123" />
 
-
-
 <jsp:text>
 	<![CDATA[
 	
