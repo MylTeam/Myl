@@ -12,12 +12,14 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<gson.version>2.2.2</gson.version>
 		<tomcat.version>7.0.29</tomcat.version>
-		<!-- <spring.version>3.0.5.RELEASE</spring.version> -->
-		<!-- <hibernate.version>3.5.5-Final</hibernate.version> -->
 		<spring.version>4.1.1.RELEASE</spring.version>
 		<hibernate.version>4.3.6.Final</hibernate.version>
 		<struts.version>2.3.16.3</struts.version>
 		<jquery.version>3.7.0</jquery.version>
+		<host.url>http://50.62.23.86:8080/manager/text</host.url>
+		<server.name>mylprod</server.name>
+		<!-- <host.url>http://localhost:8080/manager/text</host.url>
+		<server.name>localhost</server.name> -->
 	</properties>
 
 
@@ -50,9 +52,9 @@
 				<groupId>org.apache.tomcat.maven</groupId>
 				<artifactId>tomcat7-maven-plugin</artifactId>
 				<version>2.1</version>
-				<configuration>
-					<url>http://50.62.23.86:8080/manager/text</url> <server>mylprod</server>
-					<!-- <url>http://localhost:8080/manager/text</url><server>localhost</server> -->  
+				<configuration>					
+					<url>${host.url}</url>
+					<server>${server.name}</server>  
 					<path>/myl</path>
 				</configuration>
 			</plugin>

@@ -85,10 +85,10 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 	</bean>
 	<!-- Bean que define un correo -->
 	<bean id="mailSenderImpl5" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-		<property name="host" value="${mail.host.gmail}" />
+		<property name="host" value="${mail.host.outlook}" />
 		<property name="port" value="${mail.port}" />
 		<property name="username" value="${mail.confirm5}" />
-		<property name="password" value="${mail.password}" />
+		<property name="password" value="${mail.pass5}" />
 		<property name="javaMailProperties">
 			<props>
 				<prop key="mail.smtp.auth">true</prop>

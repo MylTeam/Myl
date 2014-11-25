@@ -72,16 +72,6 @@ public class IssueMail {
 		this.mailSenderCom = mailSenderCom;
 	}
 
-//	public void sendMail(String from, String subject, String msg) {
-//		LOGGER.info("Sending e-mail");
-//		SimpleMailMessage message = new SimpleMailMessage();
-//		message.setFrom(from);
-//		message.setTo(getEmail());
-//		message.setSubject(subject);
-//		message.setText(msg);
-//		mailSender.send(message);
-//	}
-
 	public void sendMailTo(String to, String subject, String msg) {
 		LOGGER.info("Sending e-mail");
 		SimpleMailMessage message = new SimpleMailMessage();
@@ -92,42 +82,8 @@ public class IssueMail {
 		mailSender.send(message);
 	}
 
-//	public void sendMimeMailTo(String to, String subject, String msg) {
-//		LOGGER.info("Sending Mime e-mail");
-//		try {
-//			MimeMessage mimeMessage = mailSender.createMimeMessage();
-//			MimeMessageHelper helper = new MimeMessageHelper(mimeMessage,
-//					false, "utf-8");
-//			helper.setFrom(getEmail());
-//			helper.setTo(to);
-//			helper.setSubject(subject);
-//			mimeMessage.setContent(msg, "text/html");
-//
-//			mailSender.send(mimeMessage);
-//		} catch (MessagingException e) {
-//			LOGGER.error("Error al intentar enviar e-mail");
-//		}
-//	}
-	
-//	public String getEmail(){
-//		String email="";
-//		Properties prop = new Properties();
-//		try {
-////			InputStream input = new FileInputStream("/WEB-INF/classes/mail.properties");
-////			prop.load(input);
-//			prop.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("mail.properties"));			
-//			email=prop.getProperty("mail.username");
-//			System.out.println(email);
-//		} catch (FileNotFoundException e) {
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//		return email;
-//	}
 	/************************/
 	public void sendMailConfirm(String to, String subject, String msg) {		
-//		String from=getProperty("mail.confirm"+c);
 		Properties p = getProperties();
 		Integer c=Integer.valueOf(p.getProperty("mail.current"));		
 		String from = p.getProperty("mail.confirm"+c);
@@ -159,7 +115,7 @@ public class IssueMail {
 			if(c.equals(5)){
 				c=0;
 			}			
-			setProperty("mail.current", String.valueOf(c+=1));
+			setProperty("mail.current", String.valueOf(c+=1));			
 			sendMailConfirm(to, subject, msg);
 		}
 	}
