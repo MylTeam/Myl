@@ -36,7 +36,7 @@ public class LobbyController extends ActionSupport {
 		usuario=(Usuario) ActionContext.getContext().getSession().get(NombreObjetosSesion.USUARIO);
 		setUsername(usuario.getLogin());
 		
-		if(!usuario.getEstatus()){
+		if(!usuario.getEstatus() && !usuario.getVerificado()){
 			addActionError("Tu usuario ha sido desactivado por lo que no podrás jugar. Esto se debe a que no has verificado tu e-mail o has sido sancionado, si tienes dudas contacta al administrador.");
 			return new DefaultHttpHeaders("nodeck").disableCaching();
 		}

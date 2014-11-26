@@ -123,6 +123,7 @@ public class RegistroController extends ActionSupport implements
 		if (cd.equals(model.getCodigo())) {			
 			if (!model.getVerificado()) {
 				model.setVerificado(true);
+				model.setEstatus(true);
 				usuarioNegocio.save(model);
 				addActionMessage("Gracias por verificar tu correo "+ model.getLogin()+".");
 				ActionContext.getContext().getSession().put(NombreObjetosSesion.USUARIO, model);
