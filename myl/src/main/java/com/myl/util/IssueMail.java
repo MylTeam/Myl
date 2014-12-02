@@ -84,9 +84,14 @@ public class IssueMail {
 
 	/************************/
 	public void sendMailConfirm(String to, String subject, String msg) {		
-		Properties p = getProperties();
-		Integer c=Integer.valueOf(p.getProperty("mail.current"));		
-		String from = p.getProperty("mail.confirm"+c);
+		Properties pc = getProperties("mailConfirm.properties");		
+		Integer c=Integer.valueOf(pc.getProperty("mail.current"));
+		if(c==null){
+			System.out.println("es nulo");
+			setProperty("mailConfirm.properties", "mail.current", "1");
+		}
+		Properties prop = getProperties("mail.properties");
+		String from = prop.getProperty("mail.confirm"+c);
 		
 		LOGGER.info("Sending Confirm e-mail from "+from);
 		try {
@@ -111,12 +116,13 @@ public class IssueMail {
 			}
 			
 		} catch (Exception e) {
-			LOGGER.error("Error al intentar enviar e-mail de confirmación desde "+from);			
+			LOGGER.error("Error al intentar enviar e-mail de confirmación desde "+from);
+			LOGGER.error("Error",e.getMessage());
 			if(c.equals(5)){
 				c=0;
-			}			
-			setProperty("mail.current", String.valueOf(c+=1));			
-			sendMailConfirm(to, subject, msg);
+			}
+				setProperty("mailConfirm.properties","mail.current", String.valueOf(c+=1));			
+				sendMailConfirm(to, subject, msg);			
 		}
 	}
 	
@@ -154,10 +160,10 @@ public class IssueMail {
 		return property;
 	}
 	
-	public Properties getProperties(){		
+	public Properties getProperties(String propertiesFile){		
 		Properties prop = new Properties();
 		try {			
-			InputStream input=Thread.currentThread().getContextClassLoader().getResourceAsStream("mail.properties");
+			InputStream input=Thread.currentThread().getContextClassLoader().getResourceAsStream(propertiesFile);
 			prop.load(input);			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -167,13 +173,13 @@ public class IssueMail {
 		return prop;
 	}
 	
-	public void setProperty(String property, String value){
+	public void setProperty(String file,String property, String value){
 		Properties prop = new Properties();
 		try {
-			InputStream input=Thread.currentThread().getContextClassLoader().getResourceAsStream("mail.properties");
+			InputStream input=Thread.currentThread().getContextClassLoader().getResourceAsStream(file);
 			prop.load(input);
 			
-			URL url = Thread.currentThread().getContextClassLoader().getResource("mail.properties");		
+			URL url = Thread.currentThread().getContextClassLoader().getResource(file);		
 			FileOutputStream out = new FileOutputStream(new File(url.toURI()));
 			prop.setProperty(property,value);
 			prop.store(out, null);
