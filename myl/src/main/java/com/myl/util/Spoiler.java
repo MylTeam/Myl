@@ -29,16 +29,28 @@ public class Spoiler {
 	private Spoiler(){
 		
 	}
+	public static String ruta="E:/Carlos/Mis documentos/myl/";
+	
+	public static void main(String[] args) {
+		try {
+			clean();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
 		public static void clean() throws IOException {
 			try {							
-				File f=new File("C:/Users/Carlos Santiago/Documents/prueba/");
+				
+				File f=new File(ruta);
+				
 				for(File file:f.listFiles()){
 					if(file.isFile()){
 					String filename=file.getName();
 					LOGGER.debug(filename);
 					
-				 BufferedReader in4 = new BufferedReader(new FileReader("C:/Users/Carlos Santiago/Documents/prueba/"+filename));
-			      PrintWriter out1 = new PrintWriter(new BufferedWriter(new FileWriter("C:/Users/Carlos Santiago/Documents/prueba/spoilers/s-"+filename)));			      
+				 BufferedReader in4 = new BufferedReader(new FileReader(ruta+filename));
+			      PrintWriter out1 = new PrintWriter(new BufferedWriter(new FileWriter(ruta+"spoilers/s-"+filename)));			      
 			      String s = null;
 			      while((s = in4.readLine()) != null ){ 
 
@@ -46,7 +58,7 @@ public class Spoiler {
 			    	  if(s.contains("Who has this card?") || s.contains("click to enlarge") || s.contains("top upward arrow") || s.contains("search for a card") || s.contains("affiliates") || s.contains("Total time spent") || s.contains("TradeCardsOnline") || s.contains("The information presented") || s.contains("Close Ad") || s.contains("your messages")){
 			    		  s="";
 			    	  }else if(s.contains("Who wants this card?")){
-			    		  s=s.replace("Who wants this card? 	", "	Nombre: ");		    		  
+			    		  s=s.replace("Who wants this card?	", "Nombre: ");		    		  
 			    		  s=s.substring(0, s.length()-1);		    		  
 			    		  
 			    	  }else if(!s.contains("Nombre:") && !s.contains("N° de coleccionista:") && !s.contains("Tipo de Carta:") && !s.contains("Raza:") && !s.contains("Coste:") && !s.contains("Fuerza:") && !s.contains("Ilustrador:") && !s.contains("Frecuencia:") &&  !s.isEmpty() && s.trim().length()>0){
@@ -100,7 +112,7 @@ public class Spoiler {
 		}
 		
 		public static void loadData(CartaNegocio cartaNegocio){			
-			File f = new File("C:/Users/Carlos Santiago/Documents/prueba/spoilers/");
+			File f = new File(ruta+"spoilers/");
 			
 			Carta carta;
 			
@@ -112,7 +124,7 @@ public class Spoiler {
 
 					try {
 						BufferedReader in = new BufferedReader(new FileReader(
-								"C:/Users/Carlos Santiago/Documents/prueba/spoilers/"
+								ruta+"spoilers/"
 										+ filename));
 
 						String str = filename.replaceAll("\\D+", "");
@@ -129,7 +141,7 @@ public class Spoiler {
 								for (int i = 0; i < 9; i++) {
 									String cad = s.substring(s.indexOf(":") + 2);
 									cad=new String(cad.getBytes("UTF-8"));
-									LOGGER.info(cad);
+//									LOGGER.info(cad);
 									
 									
 									if (s.contains("Nombre:")) {
@@ -140,6 +152,7 @@ public class Spoiler {
 										carta.setLeyenda(cad);
 									} else if (s.contains("No de coleccionista:")) {									
 										carta.setNumero(cad);
+										LOGGER.info(cad);
 									} else if (s.contains("Tipo de Carta:")) {
 										carta.setTipo(cad);
 									} else if (s.contains("Raza:")) {

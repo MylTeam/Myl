@@ -16,12 +16,14 @@ import org.apache.struts2.rest.HttpHeaders;
 import com.myl.modelo.Deck;
 import com.myl.modelo.Pais;
 import com.myl.modelo.Usuario;
+import com.myl.negocio.CartaNegocio;
 import com.myl.negocio.DeckNegocio;
 import com.myl.negocio.GenericBs;
 import com.myl.negocio.PaisNegocio;
 import com.myl.negocio.UsuarioNegocio;
 import com.myl.util.IssueMail;
 import com.myl.util.NombreObjetosSesion;
+import com.myl.util.Spoiler;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
@@ -54,6 +56,7 @@ public class RegistroController extends ActionSupport implements
 
 	private IssueMail mailSender;
 	private Long cd;
+	
 
 	@SkipValidation
 	public String editNew() {
@@ -239,5 +242,6 @@ public class RegistroController extends ActionSupport implements
 	public void setCd(Long cd) {
 		this.cd = cd;
 	}
+
 
 }

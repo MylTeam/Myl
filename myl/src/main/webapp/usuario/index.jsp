@@ -44,7 +44,7 @@
 							<td><input type="hidden" name="deck" id="deck"
 								value="${usuario.deckPred}" /> <b>Mazo: <span id="result">
 								</span></b></td>
-							<td><b><a
+							<td ><b><a id="lkPerfil"
 									href="${pageContext.request.contextPath}/usuario/${usuario.idUsuario}/edit">Modificar
 										Perfil</a></b></td>
 							<td><b><a
@@ -59,8 +59,8 @@
 							<tr>
 								<th>Nombre</th>
 								<th>Formato</th>
-								<th style="text-align: center;">Predeterminado</th>
-								<th style="text-align: center;">Acciones</th>
+								<th id="opcPred" style="text-align: center;">Predeterminado</th>
+								<th id="opcAcciones" style="text-align: center;">Acciones</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -91,7 +91,7 @@
 
 				</td>
 
-				<td style="width: 50%; height: 100%; text-align: center;"><a
+				<td id="tipNews" style="width: 50%; height: 100%; text-align: center;"><a
 					class="twitter-timeline" href="https://twitter.com/MylOnlineZ"
 					data-widget-id="521443826024476672">Tweets por @MylOnlineZ</a></td>
 			</tr>
@@ -101,6 +101,38 @@
 				type="button" value="Nuevo Mazo"></input></a>
 		</div>
 	</form>
+	
+	      <!-- Tip Content -->
+    <ol id="joyRideTipContent">
+      <li data-id="mnPerfil" data-text="Next" class="custom">
+        <h2>Perfil</h2>
+        <p>Aquí podrás ver tu información, los mazos que has armado y las noticias de la plataforma.</p>
+      </li>
+      <li data-id="mnJugar" data-button="Next" data-options="tipLocation:top;tipAnimation:fade">
+        <h2>Jugar</h2>
+        <p>Podrás acceder a la sala de jugadores en donde podrás charlar y retar a duelo a otros jugadores. Se requiere tener un mazo predeterminado para poder entrar.</p>
+      </li>
+      <li data-id="mnRanking" data-button="Next" data-options="tipLocation:top;tipAnimation:fade">
+        <h2>Ranking</h2>
+        <p>Podrás ver las estadísticas de otros jugadores. (En construcción)</p>
+      </li>
+      <li data-id="lkPerfil" data-button="Next" data-options="tipLocation:right">
+        <h2>Stop #3</h2>
+        <p>It works right aligned.</p>
+      </li>
+      <!-- <li data-button="Next">
+        <h2>Stop #4</h2>
+        <p>It works as a modal too!</p>
+      </li>
+      <li data-class="someclass" data-button="Next" data-options="tipLocation:right">
+        <h2>Stop #4.5</h2>
+        <p>It works with classes, and only on the first visible element with that class.</p>
+      </li>
+      <li data-id="numero5" data-button="Close">
+        <h2>Stop #5</h2>
+        <p>Now what are you waiting for? Add this to your projects and get the most out of your apps!</p>
+      </li> -->
+    </ol>
 </body>
 	</html>
 </jsp:root>
