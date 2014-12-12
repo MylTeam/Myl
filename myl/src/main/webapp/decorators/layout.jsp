@@ -74,26 +74,26 @@
 			<center>
 				<table style="margin-top: 0px;">
 					<tr>
-						<td width="17%"><a class="selected"
+						<td width="20%"><a class="selected"
 							href="${pageContext.request.contextPath}/usuario">
 								<h3 id="mnPerfil" style="width: 97%">Perfil</h3>
 						</a></td>
-						<td width="17%"><a class="selected"
+						<td width="20%"><a class="selected"
 							href="${pageContext.request.contextPath}/lobby">
 								<h3 id="mnJugar" style="width: 97%">Jugar</h3>
 						</a></td>
-						<td width="17%"><a class="selected"
+						<!-- <td width="17%"><a class="selected"
 							href="${pageContext.request.contextPath}/ranking">
 								<h3 id="mnRanking" style="width: 97%">Ranking</h3>
-						</a></td>
-						<td width="17%"><a class="selected" id="ahelp"
+						</a></td> -->
+						<td width="20%"><a class="selected" id="ahelp"
 							href="javascript:showHelp();"><h3 id="mnAyuda" style="width: 97%">Ayuda
 									y reglas</h3></a></td>
-						<td width="17%"><a class="selected"
+						<td width="20%"><a class="selected"
 							href="${pageContext.request.contextPath}/contacto/new"><h3 id="mnComentario"
 									style="width: 97%; font-size: 13px">Comentarios / Reportar
 									un problema</h3></a></td>
-						<td width="15%"><a class="selected"
+						<td width="20%"><a class="selected"
 							href="${pageContext.request.contextPath}/logout"><h3 id="mnCerrar"
 									style="width: 97%">Cerrar Sesión</h3></a></td>
 					</tr>

@@ -47,9 +47,9 @@
 							<td ><b><a id="lkPerfil"
 									href="${pageContext.request.contextPath}/usuario/${usuario.idUsuario}/edit">Modificar
 										Perfil</a></b></td>
-							<td><b><a
+							<!-- <td><b><a
 									href="${pageContext.request.contextPath}/usuario/${usuario.idUsuario}">Tus
-										estadísticas</a></b></td>
+										estadísticas</a></b></td> -->
 						</tr>
 
 					</table>
@@ -91,7 +91,7 @@
 
 				</td>
 
-				<td id="tipNews" style="width: 50%; height: 100%; text-align: center;"><a
+				<td  style="width: 50%; height: 100%; text-align: center;"><a id="tipNews"
 					class="twitter-timeline" href="https://twitter.com/MylOnlineZ"
 					data-widget-id="521443826024476672">Tweets por @MylOnlineZ</a></td>
 			</tr>
@@ -104,34 +104,42 @@
 	
 	      <!-- Tip Content -->
     <ol id="joyRideTipContent">
-      <li data-id="mnPerfil" data-text="Next" class="custom">
+      <li data-id="mnPerfil" data-text="Siguiente" class="custom">
         <h2>Perfil</h2>
         <p>Aquí podrás ver tu información, los mazos que has armado y las noticias de la plataforma.</p>
       </li>
-      <li data-id="mnJugar" data-button="Next" data-options="tipLocation:top;tipAnimation:fade">
+      <li data-id="mnJugar" data-button="Siguiente" data-options="tipLocation:top;tipAnimation:fade">
         <h2>Jugar</h2>
         <p>Podrás acceder a la sala de jugadores en donde podrás charlar y retar a duelo a otros jugadores. Se requiere tener un mazo predeterminado para poder entrar.</p>
       </li>
-      <li data-id="mnRanking" data-button="Next" data-options="tipLocation:top;tipAnimation:fade">
+      <!-- <li data-id="mnRanking" data-button="Siguiente" data-options="tipLocation:top;tipAnimation:fade">
         <h2>Ranking</h2>
         <p>Podrás ver las estadísticas de otros jugadores. (En construcción)</p>
-      </li>
-      <li data-id="lkPerfil" data-button="Next" data-options="tipLocation:right">
-        <h2>Stop #3</h2>
-        <p>It works right aligned.</p>
-      </li>
-      <!-- <li data-button="Next">
-        <h2>Stop #4</h2>
-        <p>It works as a modal too!</p>
-      </li>
-      <li data-class="someclass" data-button="Next" data-options="tipLocation:right">
-        <h2>Stop #4.5</h2>
-        <p>It works with classes, and only on the first visible element with that class.</p>
-      </li>
-      <li data-id="numero5" data-button="Close">
-        <h2>Stop #5</h2>
-        <p>Now what are you waiting for? Add this to your projects and get the most out of your apps!</p>
       </li> -->
+      <li data-id="mnAyuda" data-button="Siguiente" data-options="tipLocation:top;tipAnimation:fade">
+        <h2>Ayuda</h2>
+        <p>Podrás ver todo lo relacionado con el mundo de Mitos y Leyendas: Reglas, modos de juego, formatos. (En construcción)</p>
+      </li>
+      <li data-id="mnComentario" data-button="Siguiente" data-options="tipLocation:top;tipAnimation:fade">
+        <h2>Comentarios</h2>
+        <p>En esta sección podrás reportar algún problema con la aplicación, sugerencias, quejas y comentarios.</p>
+      </li>
+      <li data-id="lkPerfil" data-button="Siguiente" data-options="tipLocation:right;tipAnimation:fade">
+        <h2>Modificar perfil</h2>
+        <p>Desde esta sección podrás modificar tus datos o verificar tu correo electrónico.</p>
+      </li>
+      <li data-id="opcPred" data-button="Siguiente" data-options="tipLocation:right;tipAnimation:fade">
+        <h2>Mazo predeterminado</h2>
+        <p>Para poder jugar debes colocar como predeterminado un mazo dando click sobre el que quieras utilizar.</p>
+      </li>
+      <li data-id="opcAcciones" data-button="Siguiente" data-options="tipLocation:right;tipAnimation:fade">
+        <h2>Gestión del mazo</h2>
+        <p>Podrás crear, modificar y eliminar tus mazos como desees.</p>
+      </li>
+      <li data-id="tipNews" data-button="Finalizar" data-options="tipLocation:right;tipAnimation:fade">
+        <h2>Noticias</h2>
+        <p>Se muestran todas las noticias relacionadas con la plataforma.</p>
+      </li>
     </ol>
 </body>
 	</html>

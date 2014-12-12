@@ -220,11 +220,13 @@ function getDeck(){
 
 function drawDeck(context){
 	var divDeck=document.getElementById("deck1");
+	
 	for(var c=0;c<obj["deckCompleto"].length;c++){
 		var card={
 				cartaId:0,
 				cartaQt:0
 		};
+	
 		
 		card.cartaId=obj.deckCompleto[c].id;
 		card.cartaQt=obj.deckCompleto[c].cantidad;
