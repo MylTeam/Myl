@@ -1,9 +1,6 @@
 
 package com.myl.springsockets;
 
-import org.eclipse.jetty.websocket.api.WebSocketBehavior;
-import org.eclipse.jetty.websocket.api.WebSocketPolicy;
-import org.eclipse.jetty.websocket.server.WebSocketServerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -15,8 +12,7 @@ import org.springframework.web.socket.config.annotation.EnableWebSocket;
 import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
 import org.springframework.web.socket.handler.PerConnectionWebSocketHandler;
-import org.springframework.web.socket.server.jetty.JettyRequestUpgradeStrategy;
-import org.springframework.web.socket.server.support.DefaultHandshakeHandler;
+import org.springframework.web.socket.server.standard.ServletServerContainerFactoryBean;
 
 
 @Configuration
@@ -40,26 +36,27 @@ public class WebConfig extends WebMvcConfigurerAdapter implements WebSocketConfi
     return new PerConnectionWebSocketHandler(DuelWebSocketHandler.class);
   }
 
-//  @Bean
-//  public ServletServerContainerFactoryBean createWebSocketContainer() {
-//      ServletServerContainerFactoryBean container = new ServletServerContainerFactoryBean();
-//      container.setMaxTextMessageBufferSize(20*1024);      
-//      return container;
-//  }
-  
   @Bean
-  public DefaultHandshakeHandler handshakeHandler() {	  
-      WebSocketPolicy policy = new WebSocketPolicy(WebSocketBehavior.SERVER);
-      policy.setInputBufferSize(20*1024);      
-
-      return new DefaultHandshakeHandler(
-              new JettyRequestUpgradeStrategy(new WebSocketServerFactory(policy)));
+  public ServletServerContainerFactoryBean createWebSocketContainer() {
+      ServletServerContainerFactoryBean container = new ServletServerContainerFactoryBean();
+      container.setMaxTextMessageBufferSize(30*1024);
+      container.setMaxSessionIdleTimeout(1*60000);
+      return container;
   }
+  
+//  @Bean
+//  public DefaultHandshakeHandler handshakeHandler() {	  
+//      WebSocketPolicy policy = new WebSocketPolicy(WebSocketBehavior.SERVER);
+//      policy.setInputBufferSize(20*1024);      
+//
+//      return new DefaultHandshakeHandler(
+//              new JettyRequestUpgradeStrategy(new WebSocketServerFactory(policy)));
+//  }
 
   // Allow serving HTML files through the default Servlet
   @Override
   public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
-          configurer.enable();
+          configurer.enable();          
   }
 
 
