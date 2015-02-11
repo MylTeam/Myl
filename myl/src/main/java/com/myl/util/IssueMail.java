@@ -122,7 +122,7 @@ public class IssueMail {
 				c=0;
 			}
 				setProperty("mailConfirm.properties","mail.current", String.valueOf(c+=1));			
-				sendMailConfirm(to, subject, msg);			
+//				sendMailConfirm(to, subject, msg);			
 		}
 	}
 	
