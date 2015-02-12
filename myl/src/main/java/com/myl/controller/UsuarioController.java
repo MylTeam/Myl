@@ -147,9 +147,14 @@ public class UsuarioController extends ActionSupport implements
 				model.setCodigo(random.nextLong() * 99999 + 1);				
 			}			
 				String msg="Hola "+model.getLogin()+"<p>Por favor confirma tu e-mail ingresando a la siguiente liga:</p><p><a href='http://50.62.23.86:8080/myl/registro/"+model.getIdUsuario()+"?cd="+model.getCodigo()+"'>Confirmar</a></p><p>MyL Team</p>";				
-//				mailSender.sendMimeMailTo(model.getEmail(), "MyL: Confirmar E-mail", msg);
-				mailSender.sendMailConfirm(model.getEmail(), "MyL: Confirmar E-mail", msg);
-				addActionMessage("Se ha enviado un e-mail a "+model.getEmail()+" para realizar la verificación de identidad. Si no lo ves revisa tu bandeja de SPAM.");			
+				
+//				mailSender.sendMailConfirm(model.getEmail(), "MyL: Confirmar E-mail", msg);
+				if(mailSender.sendMailConfirmTest(model.getEmail(), "MyL: Confirmar E-mail", msg)){
+					addActionMessage("Se ha enviado un e-mail a "+model.getEmail()+" para realizar la verificación de identidad. Si no lo ves revisa tu bandeja de SPAM.");
+				}else{
+					addActionError("Por el momento no se te puede enviar el correo de verificación por favor inténtalo mas tarde desde tu perfil.");
+				}
+							
 		}
 				
 		model = usuarioNegocio.save(model);

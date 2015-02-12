@@ -38,35 +38,42 @@ public class IssueMail {
 	private JavaMailSender mailSender5;
 	private JavaMailSender mailSenderErr;
 	private JavaMailSender mailSenderCom;
-	
+
 	public void setMailSender(JavaMailSender mailSender) {
 		LOGGER.info("Initializing e-mail 0");
-		this.mailSender = mailSender;		
+		this.mailSender = mailSender;
 	}
+
 	public void setMailSender1(JavaMailSender mailSender1) {
 		LOGGER.info("Initializing e-mail 1");
 		this.mailSender1 = mailSender1;
 	}
+
 	public void setMailSender2(JavaMailSender mailSender2) {
 		LOGGER.info("Initializing e-mail 2");
 		this.mailSender2 = mailSender2;
 	}
+
 	public void setMailSender3(JavaMailSender mailSender3) {
 		LOGGER.info("Initializing e-mail 3");
 		this.mailSender3 = mailSender3;
 	}
+
 	public void setMailSender4(JavaMailSender mailSender4) {
 		LOGGER.info("Initializing e-mail 4");
 		this.mailSender4 = mailSender4;
 	}
+
 	public void setMailSender5(JavaMailSender mailSender5) {
 		LOGGER.info("Initializing e-mail 5");
 		this.mailSender5 = mailSender5;
 	}
+
 	public void setMailSenderErr(JavaMailSender mailSenderErr) {
 		LOGGER.info("Initializing e-mail errors");
 		this.mailSenderErr = mailSenderErr;
 	}
+
 	public void setMailSenderCom(JavaMailSender mailSenderCom) {
 		LOGGER.info("Initializing e-mail comments");
 		this.mailSenderCom = mailSenderCom;
@@ -83,17 +90,17 @@ public class IssueMail {
 	}
 
 	/************************/
-	public void sendMailConfirm(String to, String subject, String msg) {		
-		Properties pc = getProperties("mailConfirm.properties");		
-		Integer c=Integer.valueOf(pc.getProperty("mail.current"));
-		if(c==null){
+	public void sendMailConfirm(String to, String subject, String msg) {
+		Properties pc = getProperties("mailConfirm.properties");
+		Integer c = Integer.valueOf(pc.getProperty("mail.current"));
+		if (c == null) {
 			System.out.println("es nulo");
 			setProperty("mailConfirm.properties", "mail.current", "1");
 		}
 		Properties prop = getProperties("mail.properties");
-		String from = prop.getProperty("mail.confirm"+c);
-		
-		LOGGER.info("Sending Confirm e-mail from "+from);
+		String from = prop.getProperty("mail.confirm" + c);
+
+		LOGGER.info("Sending Confirm e-mail from " + from);
 		try {
 			MimeMessage mimeMessage = mailSender.createMimeMessage();
 			MimeMessageHelper helper = new MimeMessageHelper(mimeMessage,
@@ -101,31 +108,79 @@ public class IssueMail {
 			helper.setFrom(from);
 			helper.setTo(to);
 			helper.setSubject(subject);
-			mimeMessage.setContent(msg, "text/html");			
-			
-			if(c.equals(1)){
+			mimeMessage.setContent(msg, "text/html");
+
+			if (c.equals(1)) {
 				mailSender1.send(mimeMessage);
-			}else if(c.equals(2)){
+			} else if (c.equals(2)) {
 				mailSender2.send(mimeMessage);
-			}else if(c.equals(3)){
+			} else if (c.equals(3)) {
 				mailSender3.send(mimeMessage);
-			}else if(c.equals(4)){
+			} else if (c.equals(4)) {
 				mailSender4.send(mimeMessage);
-			}else if(c.equals(5)){
+			} else if (c.equals(5)) {
 				mailSender5.send(mimeMessage);
 			}
-			
+
 		} catch (Exception e) {
-			LOGGER.error("Error al intentar enviar e-mail de confirmación desde "+from);
-			LOGGER.error("Error",e.getMessage());
-			if(c.equals(5)){
-				c=0;
+			LOGGER.error("Error al intentar enviar e-mail de confirmación desde "
+					+ from);
+			LOGGER.error("Error", e.getMessage());
+			if (c.equals(5)) {
+				c = 0;
 			}
-				setProperty("mailConfirm.properties","mail.current", String.valueOf(c+=1));			
-//				sendMailConfirm(to, subject, msg);			
+			setProperty("mailConfirm.properties", "mail.current",
+					String.valueOf(c += 1));
+			// sendMailConfirm(to, subject, msg);
 		}
 	}
-	
+
+	public Boolean sendMailConfirmTest(String to, String subject, String msg) {
+
+		Properties prop = getProperties("mail.properties");
+		for (Integer c = 1; c <= 5; c++) {
+			String from = prop.getProperty("mail.confirm" + c);
+			try {
+				LOGGER.info("Trying to send Confirm e-mail from " + from);
+				MimeMessage mimeMessage = mailSender.createMimeMessage();
+				MimeMessageHelper helper;
+				try {
+					helper = new MimeMessageHelper(mimeMessage, false, "utf-8");
+					helper.setFrom(from);
+					helper.setTo(to);
+					helper.setSubject(subject);
+					mimeMessage.setContent(msg, "text/html");
+				} catch (MessagingException e) {
+					LOGGER.error("Mail Error", e);
+					return false;
+				}
+
+				if (c.equals(1)) {
+					mailSender1.send(mimeMessage);
+				} else if (c.equals(2)) {
+					mailSender2.send(mimeMessage);
+				} else if (c.equals(3)) {
+					mailSender3.send(mimeMessage);
+				} else if (c.equals(4)) {
+					mailSender4.send(mimeMessage);
+				} else if (c.equals(5)) {
+					mailSender5.send(mimeMessage);
+					
+				}
+				LOGGER.info("E-mail enviado a: "+to);
+				return true;
+			} catch (Exception e) {
+				LOGGER.error("Error al intentar enviar e-mail de confirmación desde " + from);
+				LOGGER.error("Error", e.getMessage());
+				if (c.equals(5)){
+					return false;
+				}
+			}
+		}
+
+		return true;
+	}
+
 	public void sendMailComment(String subject, String msg) {
 		LOGGER.info("Sending Comment e-mail");
 		SimpleMailMessage message = new SimpleMailMessage();
@@ -135,7 +190,7 @@ public class IssueMail {
 		message.setText(msg);
 		mailSenderCom.send(message);
 	}
-	
+
 	public void sendMailError(String subject, String msg) {
 		LOGGER.info("Sending Error e-mail");
 		SimpleMailMessage message = new SimpleMailMessage();
@@ -145,13 +200,14 @@ public class IssueMail {
 		message.setText(msg);
 		mailSenderErr.send(message);
 	}
-	
-	public String getProperty(String propiedad){
-		String property="";
+
+	public String getProperty(String propiedad) {
+		String property = "";
 		Properties prop = new Properties();
-		try {			
-			prop.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("mail.properties"));			
-			property=prop.getProperty(propiedad);
+		try {
+			prop.load(Thread.currentThread().getContextClassLoader()
+					.getResourceAsStream("mail.properties"));
+			property = prop.getProperty(propiedad);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -159,12 +215,13 @@ public class IssueMail {
 		}
 		return property;
 	}
-	
-	public Properties getProperties(String propertiesFile){		
+
+	public Properties getProperties(String propertiesFile) {
 		Properties prop = new Properties();
-		try {			
-			InputStream input=Thread.currentThread().getContextClassLoader().getResourceAsStream(propertiesFile);
-			prop.load(input);			
+		try {
+			InputStream input = Thread.currentThread().getContextClassLoader()
+					.getResourceAsStream(propertiesFile);
+			prop.load(input);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -172,16 +229,18 @@ public class IssueMail {
 		}
 		return prop;
 	}
-	
-	public void setProperty(String file,String property, String value){
+
+	public void setProperty(String file, String property, String value) {
 		Properties prop = new Properties();
 		try {
-			InputStream input=Thread.currentThread().getContextClassLoader().getResourceAsStream(file);
+			InputStream input = Thread.currentThread().getContextClassLoader()
+					.getResourceAsStream(file);
 			prop.load(input);
-			
-			URL url = Thread.currentThread().getContextClassLoader().getResource(file);		
+
+			URL url = Thread.currentThread().getContextClassLoader()
+					.getResource(file);
 			FileOutputStream out = new FileOutputStream(new File(url.toURI()));
-			prop.setProperty(property,value);
+			prop.setProperty(property, value);
 			prop.store(out, null);
 			out.close();
 		} catch (FileNotFoundException e) {
@@ -191,7 +250,7 @@ public class IssueMail {
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 
 }
