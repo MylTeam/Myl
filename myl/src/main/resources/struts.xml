@@ -17,7 +17,7 @@
 	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
 	<constant name="struts.ognl.allowStaticMethodAccess" value="true" />
 	<constant name="struts.mapper.idParameterName" value="idSel" />
-	<constant name="struts.convention.result.path" value="/" />
+	<constant name="struts.convention.result.path" value="/pages" />
 	<constant name="struts.multipart.maxSize" value="20000000" />		
 	<constant name="struts.action.excludePattern" value="/chatws,/lobbyws,/rest/.*"/>
 	
@@ -75,12 +75,12 @@
 
 		<default-interceptor-ref name="MYLStack" />
 		<global-results>
-			<result name="login">/login.jsp</result>
+			<result name="login">/pages/login.jsp</result>
 			<result name="next" type="redirectAction">usuario</result>
-			<result name="error">/errorPage.jsp</result>
-			<result name="error500">/errorPage.jsp</result>
-			<result name="denied">/accessDenied.jsp</result>
-			<result name="session">/session.jsp</result>			
+			<result name="error">/pages/errorPage.jsp</result>
+			<result name="error500">/pages/errorPage.jsp</result>
+			<result name="denied">/pages/accessDenied.jsp</result>
+			<result name="session">/pages/session.jsp</result>			
 		</global-results>
 		<global-exception-mappings>
 			<exception-mapping exception="java.lang.IllegalArgumentException"
@@ -91,7 +91,7 @@
 
 
 		<action name="showLogin">
-			<result>/login.jsp</result>
+			<result>/pages/login.jsp</result>
 		</action>		
 		
 	</package>

@@ -115,7 +115,7 @@
 			propietarios de dicho material.</p>
 		<s:if test="%{#session.usuario}">
 			<p>
-				<a href="${pageContext.request.contextPath}/changelog.jsp">Changelog
+				<a href="${pageContext.request.contextPath}/pages/changelog.jsp">Changelog
 					v1.9</a>
 			</p>
 		</s:if>
@@ -127,16 +127,16 @@
 				<center>
 					<table style="margin-top: 0px;">
 						<tr>
-							<td width="20%"><a class="selected" href="help/index.jsp"
+							<td width="20%"><a class="selected" href="pages/help/index.jsp"
 								target="iframe">
 									<h3 style="width: 97%">Reglas generales</h3>
 							</a></td>
 							<td width="20%"><a class="selected"
-								href="help/index-howto.jsp" target="iframe">
+								href="pages/help/index-howto.jsp" target="iframe">
 									<h3 style="width: 97%">Como jugar</h3>
 							</a></td>
 							<td width="20%"><a class="selected"
-								href="help/index-formatos.jsp" target="iframe">
+								href="pages/help/index-formatos.jsp" target="iframe">
 									<h3 style="width: 97%">Formatos</h3>
 							</a></td>
 						</tr>
@@ -144,7 +144,7 @@
 				</center>
 			</div>
 
-			<iframe src="${pageContext.request.contextPath}/help/index.jsp"
+			<iframe src="${pageContext.request.contextPath}/pages/help/index.jsp"
 				width="100%" height="90%" id="iframe" name="iframe" />
 
 		</div>

@@ -11,8 +11,8 @@
 <jsp:text>
 	<![CDATA[
 		 	
-			<script src="${pageContext.request.contextPath}/usuario/js/deckselected.js" type="text/javascript"></script>
-			<script src="${pageContext.request.contextPath}/usuario/js/index-show.js" type="text/javascript"></script>			
+			<script src="${pageContext.request.contextPath}/pages/usuario/js/deckselected.js" type="text/javascript"></script>
+			<script src="${pageContext.request.contextPath}/pages/usuario/js/index-show.js" type="text/javascript"></script>			
 			
 								
 		 ]]>

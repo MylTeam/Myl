@@ -14,7 +14,7 @@ import com.myl.util.NombreObjetosSesion;
 import com.opensymphony.xwork2.ActionContext;
 
 @Named
-@Results({ @Result(name = "login", location = "/login.jsp") })
+@Results({ @Result(name = "login", location = "/pages/login.jsp") })
 public class LogoutController {	
 
 	public String execute() {		

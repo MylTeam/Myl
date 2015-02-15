@@ -9,7 +9,7 @@
 <jsp:text>
 	<![CDATA[
 			<script src="${pageContext.request.contextPath}/scripts/jquery-1.7.2.min.js" type="text/javascript"></script>
-			<script src="${pageContext.request.contextPath}/deck/js/deck.js" type="text/javascript"></script>			
+			<script src="${pageContext.request.contextPath}/pages/deck/js/deck.js" type="text/javascript"></script>			
 		 ]]>
 </jsp:text>
 <style type="text/css">

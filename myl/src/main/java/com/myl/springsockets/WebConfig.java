@@ -36,13 +36,13 @@ public class WebConfig extends WebMvcConfigurerAdapter implements WebSocketConfi
     return new PerConnectionWebSocketHandler(DuelWebSocketHandler.class);
   }
 
-  @Bean
-  public ServletServerContainerFactoryBean createWebSocketContainer() {
-      ServletServerContainerFactoryBean container = new ServletServerContainerFactoryBean();
-      container.setMaxTextMessageBufferSize(30*1024);
-      container.setMaxSessionIdleTimeout(1*60000);
-      return container;
-  }
+//  @Bean
+//  public ServletServerContainerFactoryBean createWebSocketContainer() {
+//      ServletServerContainerFactoryBean container = new ServletServerContainerFactoryBean();
+//      container.setMaxTextMessageBufferSize(30*1024);
+//      container.setMaxSessionIdleTimeout(1*60000);
+//      return container;
+//  }
   
 //  @Bean
 //  public DefaultHandshakeHandler handshakeHandler() {	  

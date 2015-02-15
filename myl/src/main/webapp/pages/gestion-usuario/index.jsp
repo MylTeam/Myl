@@ -10,7 +10,7 @@
 <title>Perfil</title>
 <jsp:text>
 	<![CDATA[
-			<script src="${pageContext.request.contextPath}/gestion-usuario/js/index.js" type="text/javascript"></script>
+			<script src="${pageContext.request.contextPath}/pages/gestion-usuario/js/index.js" type="text/javascript"></script>
 			
 								
 		 ]]>

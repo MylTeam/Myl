@@ -15,15 +15,15 @@
 			<script type="text/javascript" src="${pageContext.request.contextPath}/scripts/jquery-1.7.2.min.js"></script>
 			<script type="text/javascript" src="${pageContext.request.contextPath}/scripts/jquery-ui-1.8.22.custom.min.js"></script>
 			<script src="${pageContext.request.contextPath}/scripts/jquery.contextMenu.js" type="text/javascript"></script>
-			<script src="${pageContext.request.contextPath}/chat/js/wsclient.js?2032" type="text/javascript"></script>
-			<script src="${pageContext.request.contextPath}/chat/js/game.js" type="text/javascript"></script>
-			<script src="${pageContext.request.contextPath}/chat/js/castillo.js" type="text/javascript"></script>
-			<script src="${pageContext.request.contextPath}/chat/js/menu.js" type="text/javascript"></script>
-			<script src="${pageContext.request.contextPath}/chat/js/oponente.js" type="text/javascript"></script>
-			<script src="${pageContext.request.contextPath}/chat/js/mousetrap.min.js" type="text/javascript"></script>
-			<script src="${pageContext.request.contextPath}/chat/js/shortcuts.js" type="text/javascript"></script>
-			<script src="${pageContext.request.contextPath}/chat/js/phases.js" type="text/javascript"></script>
-			<script src="${pageContext.request.contextPath}/chat/js/gral.js" type="text/javascript"></script>
+			<script src="${pageContext.request.contextPath}/pages/chat/js/wsclient.js?2032" type="text/javascript"></script>
+			<script src="${pageContext.request.contextPath}/pages/chat/js/game.js" type="text/javascript"></script>
+			<script src="${pageContext.request.contextPath}/pages/chat/js/castillo.js" type="text/javascript"></script>
+			<script src="${pageContext.request.contextPath}/pages/chat/js/menu.js" type="text/javascript"></script>
+			<script src="${pageContext.request.contextPath}/pages/chat/js/oponente.js" type="text/javascript"></script>
+			<script src="${pageContext.request.contextPath}/pages/chat/js/mousetrap.min.js" type="text/javascript"></script>
+			<script src="${pageContext.request.contextPath}/pages/chat/js/shortcuts.js" type="text/javascript"></script>
+			<script src="${pageContext.request.contextPath}/pages/chat/js/phases.js" type="text/javascript"></script>
+			<script src="${pageContext.request.contextPath}/pages/chat/js/gral.js" type="text/javascript"></script>
 			<script src="${pageContext.request.contextPath}/scripts/cdt-util.js" type="text/javascript"></script>
 			<script src="${pageContext.request.contextPath}/scripts/blockUI.js" type="text/javascript"></script>
 		 ]]>

@@ -19,10 +19,10 @@
 
 <jsp:text>
 	<![CDATA[			 			
-			<script type="text/javascript" src="${pageContext.request.contextPath}/scripts/jquery-1.7.2.min.js"></script>
-			<script type="text/javascript" src="${pageContext.request.contextPath}/scripts/jquery-ui-1.8.22.custom.min.js"></script>
+			<script src="${pageContext.request.contextPath}/scripts/jquery-1.7.2.min.js" type="text/javascript"></script>
+			<script src="${pageContext.request.contextPath}/scripts/jquery-ui-1.8.22.custom.min.js" type="text/javascript"></script>
 			<script src="${pageContext.request.contextPath}/scripts/jquery.contextMenu.js" type="text/javascript"></script>			
-			<script src="${pageContext.request.contextPath}/lobby/js/wsclientlobby.js" type="text/javascript"></script>
+			<script src="${pageContext.request.contextPath}/pages/lobby/js/wsclientlobby.js" type="text/javascript"></script>
 			<script src="${pageContext.request.contextPath}/scripts/blockUI.js" type="text/javascript"></script>
 			
 					

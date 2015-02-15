@@ -11,7 +11,7 @@
 
 <jsp:text>
 	<![CDATA[			 			
-			<script type="text/javascript" src="${pageContext.request.contextPath}/ranking/js/index.js"></script>
+			<script type="text/javascript" src="${pageContext.request.contextPath}/pages/ranking/js/index.js"></script>
 		 ]]>
 </jsp:text>
 </head>
