@@ -193,7 +193,7 @@
 			</div>
 			<div id="reportSuccess">
 				<img class="waitImg" src="${pageContext.request.contextPath}/images/mail.png" width="128" height="128" alt="" border="0" />
-				<p>Se ha enviado exitosamente el reporte automático, en breve atenderemos este error para darle una solución.</a> 
+				<p>Se ha enviado exitosamente el reporte automático, en breve atenderemos este error para darle una solución.
 				
 				<!-- o para regresar a la pantalla anterior de clic <a href="#" onclick="goBack()" class="colorBlue">aquí</a>-->.</p>
 			</div>
