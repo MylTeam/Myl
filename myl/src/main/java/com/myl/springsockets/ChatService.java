@@ -54,6 +54,8 @@ public class ChatService {
     
     nickNames.remove(session);
     conns.remove(session);  
+    
+    LOGGER.info("registeCloseConnection: nickNamesMap: "+nickNames.size()+" connsSet: "+conns.size());
   }
   
   public void processMessage(WebSocketSession session, String message) {
@@ -104,15 +106,15 @@ public class ChatService {
   }
 
   
-  private void sendConnectionInfo(WebSocketSession session,UserConnection connection) {	  
+  private void sendConnectionInfo(WebSocketSession session,UserConnection connection) {		  
       final List<String> activeUsers = getActiveUsers();
       final List<String> formats = getFormats();
       final ConnectionInfoMessage connectionInfoMessage = new ConnectionInfoMessage(connection.getUserName(),activeUsers,formats);
       try {
-    	  LOGGER.info("Conexion a: Id-"+session.getId()+" user: "+connection.getUserName());
+//    	  LOGGER.info("Conexion a: Id-"+session.getId()+" user: "+connection.getUserName());
     	  session.sendMessage(new TextMessage(jsonProcessor.toJson(connectionInfoMessage)));
       } catch (IOException e) {
-      	LOGGER.error("SCI: No se pudo enviar el mensaje", e);
+//      	LOGGER.error("SCI: No se pudo enviar el mensaje", e);
       }
   }
   
@@ -123,7 +125,7 @@ public class ChatService {
 				try {					
 					sessionAux.sendMessage(new TextMessage(jsonProcessor.toJson(message)));
 				} catch (IOException e) {
-					LOGGER.error("No se pudo enviar el mensaje de estado de la conexión", e);
+//					LOGGER.error("No se pudo enviar el mensaje de estado de la conexión", e);
 				}
 			}else{
 //				LOGGER.warn("SMA: Se está intentando enviar un mensaje a un usuario no conectado");
@@ -138,10 +140,10 @@ public class ChatService {
           try {
 			destinationConnection.sendMessage(new TextMessage(jsonProcessor.toJson(object)));
 		} catch (Exception e) {
-			LOGGER.error("No se pudo enviar el mensaje", e);
+//			LOGGER.error("No se pudo enviar el mensaje", e);
 		}
       } else {
-      	LOGGER.warn("SM: Se está intentando enviar un mensaje a un usuario no conectado");
+//      	LOGGER.warn("SM: Se está intentando enviar un mensaje a un usuario no conectado");
       }
   }
   
@@ -155,7 +157,7 @@ public class ChatService {
   }
   
   private void sendStatusInfoToOtherUsers(StatusInfoMessage message, WebSocketSession session) {
-  	LOGGER.info("STATUS: "+nickNames.get(session).getUserName()+" "+message.getStatusInfo().getStatus()+". Msj enviado a los demás usuarios.");
+//  	LOGGER.info("STATUS: "+nickNames.get(session).getUserName()+" "+message.getStatusInfo().getStatus()+". Msj enviado a los demás usuarios.");
   	WebSocketSession sessionAux;
   	for (UserConnection connection : nickNames.values()) {
   		sessionAux=Util.getKeyByValue(nickNames, connection);
@@ -163,7 +165,7 @@ public class ChatService {
   				try {
 					sessionAux.sendMessage(new TextMessage(jsonProcessor.toJson(message)));
 				} catch (Exception e) {
-					LOGGER.error("No se pudo enviar el mensaje de estado de la conexión", e);
+//					LOGGER.error("No se pudo enviar el mensaje de estado de la conexión", e);
 				}
   			}else{
 //  				LOGGER.warn("SSU: Se está intentando enviar un mensaje a un usuario no conectado");
@@ -174,13 +176,14 @@ public class ChatService {
   private List<String> getActiveUsers() {
 //  	LOGGER.info("Obteniendo lista de usuarios, Total: "+nickNames.size());
       final List<String> activeUsers = new ArrayList<String>();
+      LOGGER.info("getActiveUsers: nickNamesMap: "+nickNames.size()+" connsSet: "+conns.size());
       for (UserConnection connection : nickNames.values()) {
-    	  if(connection.getTipo().equals(TYPE.FORMAT)){
+    	  if(connection.getTipo().equals(TYPE.FORMAT) && conns.contains(Util.getKeyByValue(nickNames, connection))){
     		  activeUsers.add(connection.getUserName());
     	  }
       }
       if(activeUsers.isEmpty()){
-      	LOGGER.error("GAU: No hay usuarios activos");
+//      	LOGGER.error("GAU: No hay usuarios activos");
       }
       return activeUsers;
   }
@@ -188,7 +191,7 @@ public class ChatService {
   private List<String> getFormats() {
       final List<String> formats = new ArrayList<String>();
       for (UserConnection connection : nickNames.values()) {
-    	  if(connection.getTipo().equals(TYPE.FORMAT)){
+    	  if(connection.getTipo().equals(TYPE.FORMAT) && conns.contains(Util.getKeyByValue(nickNames, connection))){    		  
     		  formats.add(connection.getFormatOrUser());
     	  }
       }      
