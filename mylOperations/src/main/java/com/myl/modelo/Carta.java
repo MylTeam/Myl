@@ -184,4 +184,13 @@ public class Carta implements Cloneable {
 		}
 		return clone;
 	}
+
+	@Override
+	public String toString() {
+		return "Carta [id=" + id + ", nombre=" + nombre + ", efecto=" + efecto
+				+ ", leyenda=" + leyenda + ", numero=" + numero + ", tipo="
+				+ tipo + ", raza=" + raza + ", frecuencia=" + frecuencia
+				+ ", coste=" + coste + ", fuerza=" + fuerza + ", idEdicion="
+				+ idEdicion + "]";
+	}
 }

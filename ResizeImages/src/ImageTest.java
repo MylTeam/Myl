@@ -12,14 +12,17 @@ import javax.imageio.ImageIO;
  */
 public class ImageTest {
  
-	private static final int IMG_WIDTH = 50;
-	private static final int IMG_HEIGHT = 70;
+	private static final int IMG_WIDTH = 347 ;
+	private static final int IMG_HEIGHT = 500;
  
+//	private static final int IMG_WIDTH = 50;
+//	private static final int IMG_HEIGHT = 70;
+	
 	public static void main(String [] args){
 		System.out.println("inicio");
 	try{
  
-		String ruta="C:/Users/Carlos Santiago/Documents/mylimagestest/";
+		String ruta="E:/Carlos/Mis documentos/myl/";
 		File f=new File(ruta+"images/");
 				System.out.println(ruta);
 		for(File file:f.listFiles()){
@@ -44,18 +47,18 @@ public class ImageTest {
 				for(File img:file.listFiles()){
 					if(img.isFile()){
 						System.out.println(img.getName());
-						String nameAux=img.getName().substring(4, 7);
+						String nameAux=img.getName().substring(0, img.getName().lastIndexOf("."));
 						String path=img.getParent();
 						img.renameTo(new File(path+"\\"+nameAux+".jpg"));						
 					}
 				}
 				
 				for(File img:file.listFiles()){
-					if(img.isFile()){
-						
+					if(img.isFile() && !img.getName().contains("Thumbs")){
 						BufferedImage originalImage = ImageIO.read(img);
-						int type = originalImage.getType() == 0? BufferedImage.TYPE_INT_ARGB : originalImage.getType();
-				 
+//						int type = originalImage.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : originalImage.getType();
+						int type = BufferedImage.TYPE_INT_RGB ;
+						
 //						BufferedImage resizeImageJpg = resizeImage(originalImage, type);
 //						ImageIO.write(resizeImageJpg, "jpg", new File(ruta+"thumbs1/"+file.getName()+"/"+img.getName()));  
 				 

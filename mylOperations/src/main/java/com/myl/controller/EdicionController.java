@@ -1,17 +1,21 @@
 package com.myl.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.inject.Named;
 
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.struts2.interceptor.validation.SkipValidation;
 
+import com.myl.modelo.Carta;
 import com.myl.modelo.Edicion;
-import com.myl.modelo.Usuario;
-import com.myl.negocio.GenericBs;
-import com.myl.negocio.UsuarioNegocio;
-import com.myl.util.IssueMail;
+import com.myl.negocio.CartaNegocio;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
@@ -32,6 +36,10 @@ public class EdicionController extends ActionSupport implements
 	private File fileImg = null;
 	private String filenameImg;
 	private String contentTypeImg;
+	
+	private List<Carta> cartas;
+	
+	private CartaNegocio cartaNegocio;
 
 	public String index(){
 		
@@ -47,13 +55,13 @@ public class EdicionController extends ActionSupport implements
 	}
 
 	public void validateCreate() {
-System.out.println("here");
+		
+		cartas=cartaNegocio.getCardsFromExcel(fileSpl);
+		cartaNegocio.unzipImages(fileImg, "C:\\Users\\Carlos\\Downloads\\Rebelion\\testUnzip");
 	}
 	
 	public String create() {
-		System.out.println(model.getNombre()+" "+model.getSiglas());
-		System.out.println("°°° "+fileSpl.getAbsolutePath());
-		System.out.println("°°° "+fileImg.getAbsolutePath());
+		
 		
 		return SUCCESS;
 	}
@@ -177,6 +185,26 @@ System.out.println("here");
 
 	public void setArchivoImagenFileName(String filename) {
 		this.filenameImg = filename;
+	}
+
+
+	public List<Carta> getCartas() {
+		return cartas;
+	}
+
+
+	public void setCartas(List<Carta> cartas) {
+		this.cartas = cartas;
+	}
+
+
+	public CartaNegocio getCartaNegocio() {
+		return cartaNegocio;
+	}
+
+
+	public void setCartaNegocio(CartaNegocio cartaNegocio) {
+		this.cartaNegocio = cartaNegocio;
 	}
 
 }

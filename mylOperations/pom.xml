@@ -18,8 +18,7 @@
 		<jquery.version>3.7.0</jquery.version>
 		<host.url>http://50.62.23.86:8080/manager/text</host.url>
 		<server.name>mylprod</server.name>
-		<!-- <host.url>http://localhost:8080/manager/text</host.url>
-		<server.name>localhost</server.name> -->
+		<!-- <host.url>http://localhost:8080/manager/text</host.url> <server.name>localhost</server.name> -->
 	</properties>
 
 
@@ -52,9 +51,9 @@
 				<groupId>org.apache.tomcat.maven</groupId>
 				<artifactId>tomcat7-maven-plugin</artifactId>
 				<version>2.1</version>
-				<configuration>					
+				<configuration>
 					<url>${host.url}</url>
-					<server>${server.name}</server>  
+					<server>${server.name}</server>
 					<path>/myl</path>
 				</configuration>
 			</plugin>
@@ -402,8 +401,13 @@
 			<artifactId>activation</artifactId>
 			<version>1.1.1</version>
 		</dependency>
- 
- 
+		
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>3.9</version>
+		</dependency>
+
 	</dependencies>
 
 </project>
