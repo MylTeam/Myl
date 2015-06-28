@@ -56,7 +56,6 @@ public class RegistroController extends ActionSupport implements
 
 	private IssueMail mailSender;
 	private Long cd;
-	
 
 	@SkipValidation
 	public String editNew() {
@@ -93,10 +92,7 @@ public class RegistroController extends ActionSupport implements
 			@RequiredStringValidator(fieldName = "model.login", type = ValidatorType.FIELD, key = "Introduce un nombre de usuario"),
 			@RequiredStringValidator(fieldName = "model.password", type = ValidatorType.FIELD, key = "Introduce la contraseña"),
 			@RequiredStringValidator(fieldName = "model.email", type = ValidatorType.FIELD, key = "Introduce tu correo electrónico"),
-			@RequiredStringValidator(fieldName = "confirmPass", type = ValidatorType.FIELD, key = "Confirma la contraseña") }, 
-			regexFields = { @RegexFieldValidator(fieldName = "model.login", type = ValidatorType.FIELD, key = "Nombre de usuario no válido", regexExpression = "[A-Z[a-z][0-9]]+") }, 
-			intRangeFields = { @IntRangeFieldValidator(fieldName = "model.idPais", type = ValidatorType.FIELD, message = "Selecciona tu pais", min = "1") }, 
-			emails = { @EmailValidator(fieldName = "model.email", type = ValidatorType.FIELD, message = "Correo electrónico no válido") })
+			@RequiredStringValidator(fieldName = "confirmPass", type = ValidatorType.FIELD, key = "Confirma la contraseña") }, regexFields = { @RegexFieldValidator(fieldName = "model.login", type = ValidatorType.FIELD, key = "Nombre de usuario no válido", regexExpression = "[A-Z[a-z][0-9]]+") }, intRangeFields = { @IntRangeFieldValidator(fieldName = "model.idPais", type = ValidatorType.FIELD, message = "Selecciona tu pais", min = "1") }, emails = { @EmailValidator(fieldName = "model.email", type = ValidatorType.FIELD, message = "Correo electrónico no válido") })
 	public String create() {
 		model.setLogin(model.getLogin().trim());
 		model.setDeckPred(0);
@@ -107,38 +103,47 @@ public class RegistroController extends ActionSupport implements
 		Random random = new Random();
 		model.setCodigo(random.nextLong() * 99999 + 1);
 		model.setVerificado(false);
-		
+
 		model.setEstatus(true);
 		model.setDiasRestantes(14);
+		model.setPassword(usuarioNegocio.digestPassword(model.getPassword()));
+
 		model = usuarioNegocio.save(model);
 
-		String msg="Hola "+model.getLogin()+"<p>Por favor confirma tu e-mail ingresando a la siguiente liga:</p><p><a href='http://50.62.23.86:8080/myl/registro/"+model.getIdUsuario()+"?cd="+model.getCodigo()+"'>Confirmar</a></p><p>MyL Team</p>";				
-//		mailSender.sendMailConfirm(model.getEmail(), "MyL: Confirmar E-mail", msg);
-		
+		String msg = "Hola "
+				+ model.getLogin()
+				+ "<p>Por favor confirma tu e-mail ingresando a la siguiente liga:</p><p><a href='http://50.62.23.86:8080/myl/registro/"
+				+ model.getIdUsuario() + "?cd=" + model.getCodigo()
+				+ "'>Confirmar</a></p><p>MyL Team</p>";
+		// mailSender.sendMailConfirm(model.getEmail(), "MyL: Confirmar E-mail",
+		// msg);
+
 		addActionMessage("El registro se ha realizado exitósamente.");
-		if(mailSender.sendMailConfirmTest(model.getEmail(), "MyL: Confirmar E-mail", msg)){
+		if (mailSender.sendMailConfirmTest(model.getEmail(),
+				"MyL: Confirmar E-mail", msg)) {
 			addActionMessage("Un enlace ha sido enviado a tu correo electrónico para verificar tu identidad. Si no lo ves revisa tu bandeja de SPAM.");
-		}else{
+		} else {
 			addActionError("Por el momento no se te puede enviar el correo de verificación por favor inténtalo mas tarde desde tu perfil.");
 		}
-		
-		
-		
+
 		return "login";
 	}
 
-	public String show() {		
-		if (cd.equals(model.getCodigo())) {			
+	public String show() {
+		if (cd.equals(model.getCodigo())) {
 			if (!model.getVerificado()) {
 				model.setVerificado(true);
 				model.setEstatus(true);
 				usuarioNegocio.save(model);
-				addActionMessage("Gracias por verificar tu correo "+ model.getLogin()+".");
-				ActionContext.getContext().getSession().put(NombreObjetosSesion.USUARIO, model);
+				addActionMessage("Gracias por verificar tu correo "
+						+ model.getLogin() + ".");
+				ActionContext.getContext().getSession()
+						.put(NombreObjetosSesion.USUARIO, model);
 			} else {
-				addActionMessage("Tu correo ya había sido verificado con anterioridad "+ model.getLogin()+".");				
+				addActionMessage("Tu correo ya había sido verificado con anterioridad "
+						+ model.getLogin() + ".");
 			}
-		} else {			
+		} else {
 			addActionError("El código ingresado no es válido.");
 		}
 
@@ -247,6 +252,5 @@ public class RegistroController extends ActionSupport implements
 	public void setCd(Long cd) {
 		this.cd = cd;
 	}
-
 
 }
