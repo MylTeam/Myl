@@ -18,8 +18,7 @@
 		<jquery.version>3.7.0</jquery.version>
 		<host.url>http://50.62.23.86:8080/manager/text</host.url>
 		<server.name>mylprod</server.name>
-		<!-- <host.url>http://localhost:8080/manager/text</host.url>
-		<server.name>localhost</server.name> -->
+		<!-- <host.url>http://localhost:8080/manager/text</host.url> <server.name>localhost</server.name> -->
 	</properties>
 
 
@@ -52,9 +51,9 @@
 				<groupId>org.apache.tomcat.maven</groupId>
 				<artifactId>tomcat7-maven-plugin</artifactId>
 				<version>2.1</version>
-				<configuration>					
+				<configuration>
 					<url>${host.url}</url>
-					<server>${server.name}</server>  
+					<server>${server.name}</server>
 					<path>/myl</path>
 				</configuration>
 			</plugin>
@@ -416,7 +415,7 @@
 		</dependency>
 
 
-		 <dependency>
+		<dependency>
 			<groupId>org.eclipse.jetty.websocket</groupId>
 			<artifactId>javax-websocket-client-impl</artifactId>
 			<version>9.1.0.v20131115</version>
@@ -439,8 +438,20 @@
 			<artifactId>jetty-client</artifactId>
 			<version>9.1.0.v20131115</version>
 			<scope>test</scope>
-		</dependency>  
- 
+		</dependency>
+
+		<!-- Dependencias para el cifrado con sha256 -->
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.9</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.directory.server</groupId>
+			<artifactId>apacheds-all</artifactId>
+			<version>2.0.0-M17</version>
+		</dependency>
+		<!-- Dependencias para el cifrado con sha256 -->
 	</dependencies>
 
 </project>
