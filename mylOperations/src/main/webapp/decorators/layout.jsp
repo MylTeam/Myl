@@ -77,6 +77,10 @@
 								<h3 id="mnPerfil" style="width: 97%">Perfil</h3>
 						</a></td>
 						<td width="20%"><a class="selected"
+							href="${pageContext.request.contextPath}/edicion">
+								<h3 id="mnEdicion" style="width: 97%">Ediciones</h3>
+						</a></td>
+						<td width="20%"><a class="selected"
 							href="${pageContext.request.contextPath}/contacto/new"><h3 id="mnComentario"
 									style="width: 97%; font-size: 13px">Comentarios / Reportar
 									un problema</h3></a></td>
