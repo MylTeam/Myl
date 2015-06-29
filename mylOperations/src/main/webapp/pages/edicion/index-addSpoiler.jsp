@@ -9,12 +9,16 @@
 
 </head>
 <body>
-	<s:actionerror id="saeEdicion" theme="jquery" />
-	<s:fielderror id="sfeEdicion" theme="jquery" />
-	<s:actionmessage id="samEdicion" theme="jquery" />
-	<s:form action="%{#request.contextPath}/edicion/" method="post"
-		theme="simple" acceptcharset="UTF-8" cssStyle="border: 0px;">
+	<s:url id="urlCancelar" value="/usuario" includeContext="true" />
+	<s:actionerror id="saeUsuario" theme="jquery" />
+	<s:fielderror id="sfeUsuario" theme="jquery" />
+	<s:actionmessage id="samUsuario" theme="jquery" />
+	<s:form action="%{#request.contextPath}/edicion/" method="post" theme="simple" acceptcharset="UTF-8" cssStyle="border: 0px;" enctype="multipart/form-data">
 
+
+		<center>
+			<h1>Agregar Edición</h1>
+		</center>
 
 		<table>
 			<tr>
@@ -24,13 +28,20 @@
 			<tr>
 				<td><label>Siglas:</label></td>
 				<td><s:textfield id="siglas" name="model.siglas" maxlength="80" /></td>
+			</tr>			
+			<tr>
+				<td><label>Spoiler:</label></td>
+				<td><s:file id="spoiler" name="archivoSpoiler" /></td>
 			</tr>
-
+			<tr>
+				<td><label>Imagenes:</label></td>
+				<td><s:file id="images" name="archivoImagen" /></td>
+			</tr>
 			<tr>
 				<td colspan="2" style="text-align: center;"><sj:submit
 						id="btnAceptar" value="Aceptar" button="true"
 						buttonIcon="ui-icon-star" /> <sj:a id="btnCancelar" button="true"
-						href="#" onclick="closeDialogAddEdition()">Cancelar</sj:a></td>
+						href="#" onclick="location.href='%{urlCancelar}'">Cancelar</sj:a></td>
 			</tr>
 		</table>
 	</s:form>

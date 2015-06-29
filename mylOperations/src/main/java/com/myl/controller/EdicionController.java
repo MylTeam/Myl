@@ -16,6 +16,7 @@ import org.apache.struts2.interceptor.validation.SkipValidation;
 import com.myl.modelo.Carta;
 import com.myl.modelo.Edicion;
 import com.myl.negocio.CartaNegocio;
+import com.myl.negocio.EdicionNegocio;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
@@ -38,13 +39,18 @@ public class EdicionController extends ActionSupport implements
 	private String contentTypeImg;
 	
 	private List<Carta> cartas;
-	
+	private List<Edicion> ediciones;
 	private CartaNegocio cartaNegocio;
-
+	private EdicionNegocio edicionNegocio;
+	
 	public String index(){
 		
-		
 		return "index";
+	}
+	
+	public String loadTable(){
+		ediciones=edicionNegocio.findAll();
+		return "edicionesTbl";
 	}
 	
 	
@@ -55,14 +61,27 @@ public class EdicionController extends ActionSupport implements
 	}
 
 	public void validateCreate() {
+		System.out.println("here");
 		
-		cartas=cartaNegocio.getCardsFromExcel(fileSpl);
-		cartaNegocio.unzipImages(fileImg, "C:\\Users\\Carlos\\Downloads\\Rebelion\\testUnzip");
 	}
 	
 	public String create() {
 		
 		
+		return SUCCESS;
+	}
+	
+	public String addSpoiler(){
+		
+		return "spoiler";
+	}
+	
+	public void validateSaveSpoiler(){
+		cartas=cartaNegocio.getCardsFromExcel(fileSpl);
+		cartaNegocio.unzipImages(fileImg, "C:\\Users\\Carlos\\Downloads\\Rebelion\\testUnzip");
+	}
+	
+	public String saveSpoiler(){
 		return SUCCESS;
 	}
 
@@ -205,6 +224,26 @@ public class EdicionController extends ActionSupport implements
 
 	public void setCartaNegocio(CartaNegocio cartaNegocio) {
 		this.cartaNegocio = cartaNegocio;
+	}
+
+
+	public List<Edicion> getEdiciones() {
+		return ediciones;
+	}
+
+
+	public void setEdiciones(List<Edicion> ediciones) {
+		this.ediciones = ediciones;
+	}
+
+
+	public EdicionNegocio getEdicionNegocio() {
+		return edicionNegocio;
+	}
+
+
+	public void setEdicionNegocio(EdicionNegocio edicionNegocio) {
+		this.edicionNegocio = edicionNegocio;
 	}
 
 }
