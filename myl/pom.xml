@@ -373,6 +373,23 @@
 			<version>${hibernate.version}</version>
 		</dependency>
 
+		<!-- Dependencias para el cifrado de los archivos de propiedades -->
+		<dependency>
+			<groupId>org.jasypt</groupId>
+			<artifactId>jasypt</artifactId>
+			<version>1.9.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jasypt</groupId>
+			<artifactId>jasypt-hibernate4</artifactId>
+			<version>1.9.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jasypt</groupId>
+			<artifactId>jasypt-spring31</artifactId>
+			<version>1.9.2</version>
+		</dependency>
+		<!-- Dependencias para el cifrado de los archivos de propiedades -->
 
 		<dependency>
 			<groupId>c3p0</groupId>
