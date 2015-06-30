@@ -9,13 +9,13 @@
 
 </head>
 <body>
-	<s:actionerror id="saeEdicion" theme="jquery" />
-	<s:fielderror id="sfeEdicion" theme="jquery" />
-	<s:actionmessage id="samEdicion" theme="jquery" />
-	<s:form action="%{#request.contextPath}/edicion/" method="post"
+	<s:actionerror id="ulAEAddEdition" theme="jquery" />
+	<s:fielderror id="ulFEAddEdition" theme="jquery" />
+	<s:actionmessage id="ulAMAddEdition" theme="jquery"/>
+	<s:form id="frmAddEdition" namespace="/edicion" method="post"
 		theme="simple" acceptcharset="UTF-8" cssStyle="border: 0px;">
 
-
+		<s:hidden name="errores" id="hdnErrores" />
 		<table>
 			<tr>
 				<td><label>Nombre:</label></td>
@@ -27,9 +27,11 @@
 			</tr>
 
 			<tr>
-				<td colspan="2" style="text-align: center;"><sj:submit
-						id="btnAceptar" value="Aceptar" button="true"
-						buttonIcon="ui-icon-star" /> <sj:a id="btnCancelar" button="true"
+				<td colspan="2" style="text-align: center;"> 
+						<sj:a id="btnAceptar" button="true"
+						href="#" onclick="sendFormEdition()">Aceptar</sj:a>
+						
+						<sj:a id="btnCancelar" button="true"
 						href="#" onclick="closeDialogAddEdition()">Cancelar</sj:a></td>
 			</tr>
 		</table>

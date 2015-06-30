@@ -43,7 +43,7 @@ public class EdicionNegocio{
 	}
 
 	@Transactional
-	public Boolean existe(String nombre) { 
+	public Boolean existeNombre(String nombre) { 
 		Edicion edicionEjemplo = new Edicion();
 		List<Edicion> ediciones = null;
 		edicionEjemplo.setNombre(nombre);
@@ -52,6 +52,50 @@ public class EdicionNegocio{
 			return true;
 		}
 		return false;
+	}
+	
+	@Transactional
+	public Boolean existeSiglas(String siglas) { 
+		Edicion edicionEjemplo = new Edicion();
+		List<Edicion> ediciones = null;
+		edicionEjemplo.setSiglas(siglas);
+		ediciones = findByExample(edicionEjemplo);
+		if (ediciones != null && !ediciones.isEmpty()) {
+			return true;
+		}
+		return false;
+	}
+	
+	@Transactional
+	public String existe(Edicion edicion) { 
+		Edicion edicionEjemplo = new Edicion();
+		List<Edicion> ediciones = null;
+		
+		edicionEjemplo.setSiglas(edicion.getNombre());
+		edicionEjemplo.setNombre(edicion.getNombre());
+		ediciones = findByExample(edicionEjemplo);
+		if (ediciones != null && !ediciones.isEmpty()) {
+			return "La edición ya se encuentra registrada.";
+		}
+		
+		ediciones = null;
+		edicionEjemplo = new Edicion();
+		edicionEjemplo.setNombre(edicion.getNombre());
+		ediciones = findByExample(edicionEjemplo);
+		if (ediciones != null && !ediciones.isEmpty()) {
+			return "El nombre de la edición ya está registrado.";
+		}
+		
+		ediciones = null;
+		edicionEjemplo = new Edicion();
+		edicionEjemplo.setSiglas(edicion.getSiglas());
+		ediciones = findByExample(edicionEjemplo);
+		if (ediciones != null && !ediciones.isEmpty()) {
+			return "Las siglas ingresadas ya están registradas.";
+		}
+		
+			
+		return null;
 	}
 	
      

@@ -15,7 +15,7 @@
 	<s:actionmessage id="samEdicion" theme="jquery" />
 
 
-	<form style="width: 90%; border: 0px">
+	<form style="width: 90%; border: 0px" id="frmIndexEdition">
 		<input type="hidden" name="context" id="context"
 			value="${pageContext.request.contextPath}" />
 

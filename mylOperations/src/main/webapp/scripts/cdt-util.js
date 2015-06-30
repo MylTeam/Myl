@@ -248,3 +248,13 @@ function bloquearUI() {
 		message : "Por favor, espere..."
 	});
 }
+
+function sendForm(ruta, idForm) {
+	return $.ajax({
+		url : ruta,
+		type : "POST",
+		async : true,
+		beforeSend : bloquearUI,
+		data : $("#" + idForm).serialize()
+	});
+}
