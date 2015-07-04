@@ -3,13 +3,8 @@
 	<excludes>
 		<pattern>/Estilos/*</pattern>
 		<pattern>/scripts/*</pattern>
-		<pattern>/images/*</pattern>
-		<pattern>/chat*</pattern>
-		<pattern>/help/index.jsp</pattern>
-		<pattern>/help/index-howto.jsp</pattern>
-		<pattern>/help/index-formatos.jsp</pattern>
-		<pattern>/edicion!loadTable*</pattern>
-		<pattern>/edicion!editNew</pattern>
+		<pattern>/images/*</pattern>		
+		<pattern>/edicion!*</pattern>
 
 	</excludes>
  	<decorator name="layout" page="layout.jsp">

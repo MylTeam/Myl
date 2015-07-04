@@ -31,12 +31,12 @@ function addEdition() {
 		beforeSend : bloquearUI,
 		async : true,
 		success : function(data) {
-			console.log(data);
 			$("#divAddEdition").html(data);
 			
 			$("#dlgAddEdition").show();
 			$.publish("openDialogAddEdition");
 			$.unblockUI();
+
 		},
 		error : function(data) {
 			console.log("Error en la petición");
@@ -45,6 +45,37 @@ function addEdition() {
 
 }
 
+
+function sendFormEdition() {
+	var ruta = $("#hdnRutaContexto").val() + "/edicion!create";
+
+	$.when(sendForm(ruta, "frmAddEdition")).done(
+			function(data) {
+				console.log(data);
+				$("#divAddEdition").html(data);
+				if ($("#hdnErrores").val() == "false") {
+					var mensaje = $("#ulAMAddEdition");
+					var actionMessages = $("#ulAMAddEdition").html();
+
+					if (mensaje !== undefined) {
+						mensaje.remove();
+					}
+
+					$("#frmIndexEdition").prepend(
+							"<ul id='ulAMAddEdition' class='success-message'>"
+									+ actionMessages + "</ul>");
+					$("#divAddEdition").html("");
+					reloadEditions();
+					closeDialogAddEdition();
+				}
+				$.unblockUI();
+			});
+}
+
 function closeDialogAddEdition(){
 	$.publish("closeDialogAddEdition");
+}
+
+function reloadEditions() {
+	$.publish("reloadEditions");
 }
