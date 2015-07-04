@@ -79,14 +79,22 @@ public class IssueMail {
 		this.mailSenderCom = mailSenderCom;
 	}
 
-	public void sendMailTo(String to, String subject, String msg) {
+	public Boolean sendMailTo(String to, String subject, String msg) {
 		LOGGER.info("Sending e-mail");
-		SimpleMailMessage message = new SimpleMailMessage();
-		message.setFrom(getProperty("mail.username"));
-		message.setTo(to);
-		message.setSubject(subject);
-		message.setText(msg);
-		mailSender.send(message);
+		MimeMessage mimeMessage = mailSender.createMimeMessage();
+		MimeMessageHelper helper;
+		try {
+			helper = new MimeMessageHelper(mimeMessage, false, "utf-8");
+			helper.setFrom(getProperty("mail.username"));
+			helper.setTo(to);
+			helper.setSubject(subject);
+			mimeMessage.setContent(msg, "text/html");
+		} catch (MessagingException e) {
+			LOGGER.error("Mail Error", e);
+			return false;
+		}
+		mailSender.send(mimeMessage);
+		return true;
 	}
 
 	/************************/

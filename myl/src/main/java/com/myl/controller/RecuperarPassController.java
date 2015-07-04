@@ -92,7 +92,7 @@ public class RecuperarPassController extends ActionSupport implements
 				+ "<p><a href='http://50.62.23.86:8080/myl/recuperar-pass/"
 				+ id + "/edit?cd=" + codigo + "'>Confirmar</a></p>"
 				+ "<p>MyL Team</p>";
-		if (mailSender.sendMailConfirmTest(email, "Myl - recuperar contraseña",
+		if (mailSender.sendMailTo(email, "Myl - recuperar contraseña",
 				msg)) {
 			addActionMessage("Se ha enviado una liga a tu correo electrónico para restablecer tu contraseña");
 		} else {
