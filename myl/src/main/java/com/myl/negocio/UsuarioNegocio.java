@@ -44,6 +44,12 @@ public class UsuarioNegocio {
 		return modelo;
 	}
 
+	@Transactional(rollbackFor = Exception.class)
+	public Usuario update(Usuario entidad) {
+		entidad.setPassword(digestPassword(entidad.getPassword()));
+		return usuarioDao.update(entidad);
+	}
+
 	@Transactional
 	public List<Usuario> findByExample(Usuario usuario) {
 		return usuarioDao.findByExample(usuario);

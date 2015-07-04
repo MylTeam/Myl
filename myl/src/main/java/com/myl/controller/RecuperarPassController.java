@@ -1,33 +1,24 @@
 package com.myl.controller;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.inject.Named;
 
-import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 import org.apache.struts2.interceptor.validation.SkipValidation;
 import org.apache.struts2.rest.DefaultHttpHeaders;
 import org.apache.struts2.rest.HttpHeaders;
 
-import com.myl.modelo.Deck;
-import com.myl.modelo.Pais;
 import com.myl.modelo.Usuario;
-import com.myl.negocio.DeckNegocio;
-import com.myl.negocio.PaisNegocio;
 import com.myl.negocio.UsuarioNegocio;
-import com.myl.util.AppError;
 import com.myl.util.IssueMail;
-import com.myl.util.NombreObjetosSesion;
-import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.validator.annotations.EmailValidator;
-import com.opensymphony.xwork2.validator.annotations.IntRangeFieldValidator;
+import com.opensymphony.xwork2.validator.annotations.FieldExpressionValidator;
 import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
-import com.opensymphony.xwork2.validator.annotations.RegexFieldValidator;
+import com.opensymphony.xwork2.validator.annotations.StringLengthFieldValidator;
 import com.opensymphony.xwork2.validator.annotations.Validations;
 import com.opensymphony.xwork2.validator.annotations.ValidatorType;
 
@@ -46,38 +37,67 @@ public class RecuperarPassController extends ActionSupport implements
 	private UsuarioNegocio usuarioNegocio;
 	private IssueMail mailSender;
 	private String email;
-	private List<Usuario> listUsuarios; 
-	
+	private List<Usuario> listUsuarios;
+	private Long cd;
+	private String confirmPass;
+
 	@SkipValidation
 	public String editNew() {
- 
-		return "editNew";
-	}	
 
-	public void validateCreate(){
-		Usuario aux=new Usuario();
-		aux.setEmail(model.getEmail());		
-		listUsuarios=usuarioNegocio.findByExample(aux);
-		
-		if(listUsuarios.isEmpty()){
+		return "editNew";
+	}
+
+	public void validateCreate() {
+		Usuario aux = new Usuario();
+		aux.setEmail(model.getEmail());
+		listUsuarios = usuarioNegocio.findByExample(aux);
+
+		if (listUsuarios.isEmpty()) {
 			addActionError("No se ha encontrado un usuario con el email ingresado");
-		}		
+		}
 	}
-	
+
+	@Validations(requiredStrings = { @RequiredStringValidator(fieldName = "email", type = ValidatorType.FIELD, key = "Introduce tu correo electrónico"), }, emails = { @EmailValidator(fieldName = "email", type = ValidatorType.FIELD, message = "Correo electrónico no válido") })
+	public HttpHeaders create() {
+		usuario = listUsuarios.get(0);
+		enviarCorreoPass(usuario.getIdUsuario(), usuario.getCodigo(),
+				usuario.getEmail());
+		return new DefaultHttpHeaders("restored").setLocationId(model
+				.getIdUsuario());
+	}
+
+	public String edit() {
+		if (cd != null && cd.equals(model.getCodigo())) {
+			return "edit";
+		}
+		return "restored";
+	}
+
 	@Validations(requiredStrings = {
-			@RequiredStringValidator(fieldName = "email", type = ValidatorType.FIELD, key = "Introduce tu correo electrónico"),			},
-			emails={
-			@EmailValidator(fieldName="email", type=ValidatorType.FIELD, message="Correo electrónico no válido")})
-	public HttpHeaders create() {		
-		usuario=listUsuarios.get(0);
-		enviarCorreoPass(usuario.getLogin(),usuario.getPassword(),usuario.getEmail());
-		addActionMessage("Tu contraseña ha sido enviada a tu correo electrónico");
-		return new DefaultHttpHeaders("restored").setLocationId(model.getIdUsuario());
+			@RequiredStringValidator(fieldName = "model.password", type = ValidatorType.FIELD, key = "Introduce la contraseña", shortCircuit = true),
+			@RequiredStringValidator(fieldName = "confirmPass", type = ValidatorType.FIELD, key = "Introduce la confirmacion de la contraseña", shortCircuit = true) }, stringLengthFields = { @StringLengthFieldValidator(fieldName = "model.password", type = ValidatorType.FIELD, key = "La contraseña debe ser menos a 80 carácteres", maxLength = "80", trim = true, shortCircuit = true) }, fieldExpressions = { @FieldExpressionValidator(fieldName = "confirmPass", expression = "model.password eq confirmPass", key = "Las contraseñas no son iguales") })
+	public String update() {
+		if (cd != null && cd.equals(model.getCodigo())) {
+			usuarioNegocio.update(model);
+			addActionMessage("El cambio de contraseña se ha realizado exitósamente.");
+		} else {
+			addActionError("Error al cambiar intentar cambiar contraseña");
+		}
+		return "restored";
 	}
-	
-	public void enviarCorreoPass(String usuario,String pass,String email) {
-		String msg="De acuerdo a tu solicitud se ha recuperado tus datos de acceso \n Usuario: "+usuario+"\n Password: "+pass;
-		mailSender.sendMailTo(email, "Myl - contraseña recuperada", msg);
+
+	public void enviarCorreoPass(Integer id, Long codigo, String email) {
+		String msg = "Hola "
+				+ "<p>De acuerdo a la solicitud para recuperar tu contraseña es necesario que ingreses a la siguiente liga:</p>"
+				+ "<p><a href='http://50.62.23.86:8080/myl/recuperar-pass/"
+				+ id + "/edit?cd=" + codigo + "'>Confirmar</a></p>"
+				+ "<p>MyL Team</p>";
+		if (mailSender.sendMailConfirmTest(email, "Myl - recuperar contraseña",
+				msg)) {
+			addActionMessage("Se ha enviado una liga a tu correo electrónico para restablecer tu contraseña");
+		} else {
+			addActionError("Por el momento no se te puede enviar el correo de verificación por favor inténtalo mas tarde desde tu perfil.");
+		}
 	}
 
 	public Usuario getUsuario() {
@@ -87,7 +107,7 @@ public class RecuperarPassController extends ActionSupport implements
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-	
+
 	public Integer getIdSel() {
 		return idSel;
 	}
@@ -110,8 +130,6 @@ public class RecuperarPassController extends ActionSupport implements
 	public void setModel(Usuario model) {
 		this.model = model;
 	}
-
-
 
 	public UsuarioNegocio getUsuarioNegocio() {
 		return usuarioNegocio;
@@ -145,5 +163,20 @@ public class RecuperarPassController extends ActionSupport implements
 		this.listUsuarios = listUsuarios;
 	}
 
-	
+	public Long getCd() {
+		return cd;
+	}
+
+	public void setCd(Long cd) {
+		this.cd = cd;
+	}
+
+	public String getConfirmPass() {
+		return confirmPass;
+	}
+
+	public void setConfirmPass(String confirmPass) {
+		this.confirmPass = confirmPass;
+	}
+
 }

@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.myl.modelo.Usuario;
 
@@ -23,14 +25,16 @@ public class UsuarioDao {
 	private SessionFactory sessionFactory;
 
 	public List<Usuario> findAll() {
-		return sessionFactory.getCurrentSession().createCriteria(Usuario.class).list();
-//		return getHibernateTemplate().loadAll(Usuario.class);
+		return sessionFactory.getCurrentSession().createCriteria(Usuario.class)
+				.list();
+		// return getHibernateTemplate().loadAll(Usuario.class);
 	}
 
 	public Usuario findById(Integer id) {
 		sessionFactory.getCurrentSession().clear();
-		return (Usuario) sessionFactory.getCurrentSession().get(Usuario.class, id);
-//		return getHibernateTemplate().get(Usuario.class, id);
+		return (Usuario) sessionFactory.getCurrentSession().get(Usuario.class,
+				id);
+		// return getHibernateTemplate().get(Usuario.class, id);
 	}
 
 	public Usuario save(Usuario entity) {
@@ -39,14 +43,20 @@ public class UsuarioDao {
 		}
 		sessionFactory.getCurrentSession().saveOrUpdate(entity);
 		return entity;
-	}	
+	}
+
+	@Transactional(propagation = Propagation.MANDATORY)
+	public Usuario update(Usuario entity) {
+		sessionFactory.getCurrentSession().update(entity);
+		return entity;
+	}
 
 	@SuppressWarnings("unchecked")
 	public List<Usuario> findByExample(Usuario example) {
 		return (List<Usuario>) sessionFactory.getCurrentSession()
 				.createCriteria(example.getClass())
 				.add(Example.create(example)).list();
-//		return getHibernateTemplate().findByExample(usuario);
+		// return getHibernateTemplate().findByExample(usuario);
 	}
 
 	public List<Usuario> findByName(String s) {
@@ -55,7 +65,7 @@ public class UsuarioDao {
 				.addEntity(Usuario.class).setParameter("s", s);
 		return query.list();
 	}
-	
+
 	public List<Usuario> findFirstX(Integer i) {
 		Query query = sessionFactory.getCurrentSession()
 				.createSQLQuery("select * from usuario order by dl_won desc")
@@ -70,7 +80,5 @@ public class UsuarioDao {
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
-	
 
 }
