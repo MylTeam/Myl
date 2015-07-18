@@ -2,6 +2,7 @@ package com.myl.controller;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Properties;
 import java.util.Random;
 
 import javax.inject.Named;
@@ -110,9 +111,12 @@ public class RegistroController extends ActionSupport implements
 
 		model = usuarioNegocio.save(model);
 
+		Properties prop =IssueMail.getProperties("mail.properties");
+		String host=prop.getProperty("app.host");
+		
 		String msg = "Hola "
 				+ model.getLogin()
-				+ "<p>Por favor confirma tu e-mail ingresando a la siguiente liga:</p><p><a href='http://50.62.23.86:8080/myl/registro/"
+				+ "<p>Por favor confirma tu e-mail ingresando a la siguiente liga:</p><p><a href='"+host+"/registro/"
 				+ model.getIdUsuario() + "?cd=" + model.getCodigo()
 				+ "'>Confirmar</a></p><p>MyL Team</p>";
 		// mailSender.sendMailConfirm(model.getEmail(), "MyL: Confirmar E-mail",

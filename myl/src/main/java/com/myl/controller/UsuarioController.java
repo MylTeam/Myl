@@ -2,6 +2,7 @@ package com.myl.controller;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Properties;
 import java.util.Random;
 
 import javax.inject.Named;
@@ -61,20 +62,20 @@ public class UsuarioController extends ActionSupport implements
 
 	private UsuarioNegocio usuarioNegocio;
 	private DeckNegocio deckNegocio;
-	private CartaNegocio cartaNegocio;	
+	private CartaNegocio cartaNegocio;
 	private DueloNegocio dueloNegocio;
 
 	private GenericBs genericBs;
-	
+
 	private List<Deck> lista;
 	private List<Pais> listPaises;
 	private List<Duelo> duelosGanados;
 	private List<Duelo> duelosPerdidos;
-	
+
 	private Integer confirm;
 
 	private IssueMail mailSender;
-	
+
 	@SkipValidation
 	public HttpHeaders index() {
 
@@ -89,11 +90,15 @@ public class UsuarioController extends ActionSupport implements
 		if (usuario.getEmail() == null || usuario.getIdPais() == null) {
 			addActionMessage("Favor de actualizar tus datos");
 		}
-		if(!usuario.getVerificado() && usuario.getDiasRestantes()>=8){
-			addActionMessage("Por favor verifica tu correo electrónico ingresando a la opción 'Modificar Perfil', si no lo verificas en "+ (usuario.getDiasRestantes()-7) +" días, tu cuenta será bloqueda y no podrás jugar");
+		if (!usuario.getVerificado() && usuario.getDiasRestantes() >= 8) {
+			addActionMessage("Por favor verifica tu correo electrónico ingresando a la opción 'Modificar Perfil', si no lo verificas en "
+					+ (usuario.getDiasRestantes() - 7)
+					+ " días, tu cuenta será bloqueda y no podrás jugar");
 		}
-		if(!usuario.getVerificado() && usuario.getDiasRestantes()<8){
-			addActionMessage("Por favor verifica tu correo electrónico ingresando a la opción 'Modificar Perfil, si no lo verificas en "+ usuario.getDiasRestantes() +" días, tu cuenta será eliminada");
+		if (!usuario.getVerificado() && usuario.getDiasRestantes() < 8) {
+			addActionMessage("Por favor verifica tu correo electrónico ingresando a la opción 'Modificar Perfil, si no lo verificas en "
+					+ usuario.getDiasRestantes()
+					+ " días, tu cuenta será eliminada");
 		}
 
 		return new DefaultHttpHeaders("index").disableCaching();
@@ -102,67 +107,75 @@ public class UsuarioController extends ActionSupport implements
 	@SkipValidation
 	public String edit() {
 		String result = "edit";
-		
+
 		usuario = (Usuario) ActionContext.getContext().getSession()
 				.get(NombreObjetosSesion.USUARIO);
 		if (!usuario.getIdUsuario().equals(idSel)) {
 			result = "denied";
-		}else{			
-			listPaises=genericBs.findAll(Pais.class);
+		} else {
+			listPaises = genericBs.findAll(Pais.class);
 		}
 
 		return result;
 	}
 
-	public void validateUpdate() {		
-		
-		if(!model.getEmail().equals("")){
+	public void validateUpdate() {
+
+		if (!model.getEmail().equals("")) {
 			Usuario aux = new Usuario();
 			aux.setEmail(model.getEmail());
 			List<Usuario> usuariosAux = usuarioNegocio.findByExample(aux);
 
-		
 			if (!usuariosAux.isEmpty()) {
-				if (!usuariosAux.get(0).getIdUsuario().equals(model.getIdUsuario())) {
+				if (!usuariosAux.get(0).getIdUsuario()
+						.equals(model.getIdUsuario())) {
 					addActionError("El correo electrónico ingresado ya está registrado");
 				}
 			}
 		}
 
 		if (hasFieldErrors() || hasActionErrors()) {
-			listPaises=genericBs.findAll(Pais.class);
+			listPaises = genericBs.findAll(Pais.class);
 			System.out.println("despues de obtener lista de paises");
 		}
 	}
 
-	@Validations(
-			intRangeFields = { @IntRangeFieldValidator(fieldName = "model.idPais", type = ValidatorType.SIMPLE, message = "Selecciona tu pais", min = "1") },
-			requiredStrings = { @RequiredStringValidator(fieldName = "model.email", type = ValidatorType.FIELD, key = "Introduce tu correo electrónico") }, 			 
-			emails = { @EmailValidator(fieldName = "model.email", type = ValidatorType.FIELD, message = "Correo electrónico no válido")
-			})
+	@Validations(intRangeFields = { @IntRangeFieldValidator(fieldName = "model.idPais", type = ValidatorType.SIMPLE, message = "Selecciona tu pais", min = "1") }, requiredStrings = { @RequiredStringValidator(fieldName = "model.email", type = ValidatorType.FIELD, key = "Introduce tu correo electrónico") }, emails = { @EmailValidator(fieldName = "model.email", type = ValidatorType.FIELD, message = "Correo electrónico no válido") })
 	public String update() {
-		if(confirm!=null){
-			if(model.getCodigo()==0){
+		if (confirm != null) {
+			if (model.getCodigo() == 0) {
 				Random random = new Random();
-				model.setCodigo(random.nextLong() * 99999 + 1);				
-			}			
-				String msg="Hola "+model.getLogin()+"<p>Por favor confirma tu e-mail ingresando a la siguiente liga:</p><p><a href='http://50.62.23.86:8080/myl/registro/"+model.getIdUsuario()+"?cd="+model.getCodigo()+"'>Confirmar</a></p><p>MyL Team</p>";				
-				
-//				mailSender.sendMailConfirm(model.getEmail(), "MyL: Confirmar E-mail", msg);
-				if(mailSender.sendMailConfirmTest(model.getEmail(), "MyL: Confirmar E-mail", msg)){
-					addActionMessage("Se ha enviado un e-mail a "+model.getEmail()+" para realizar la verificación de identidad. Si no lo ves revisa tu bandeja de SPAM.");
-				}else{
-					addActionError("Por el momento no se te puede enviar el correo de verificación por favor inténtalo mas tarde desde tu perfil.");
-				}
-							
+				model.setCodigo(random.nextLong() * 99999 + 1);
+			}
+
+			Properties prop = IssueMail.getProperties("mail.properties");
+			String host = prop.getProperty("app.host");
+
+			String msg = "Hola "
+					+ model.getLogin()
+					+ "<p>Por favor confirma tu e-mail ingresando a la siguiente liga:</p><p><a href='"
+					+ host + "/registro/" + model.getIdUsuario() + "?cd="
+					+ model.getCodigo() + "'>Confirmar</a></p><p>MyL Team</p>";
+
+			// mailSender.sendMailConfirm(model.getEmail(),
+			// "MyL: Confirmar E-mail", msg);
+			if (mailSender.sendMailConfirmTest(model.getEmail(),
+					"MyL: Confirmar E-mail", msg)) {
+				addActionMessage("Se ha enviado un e-mail a "
+						+ model.getEmail()
+						+ " para realizar la verificación de identidad. Si no lo ves revisa tu bandeja de SPAM.");
+			} else {
+				addActionError("Por el momento no se te puede enviar el correo de verificación por favor inténtalo mas tarde desde tu perfil.");
+			}
+
 		}
-				
+
 		model = usuarioNegocio.save(model);
-		ActionContext.getContext().getSession().put(NombreObjetosSesion.USUARIO, model);
+		ActionContext.getContext().getSession()
+				.put(NombreObjetosSesion.USUARIO, model);
 		addActionMessage("Se han actualizado correctamente tus datos");
 		return "success";
 	}
-	
 
 	@SkipValidation
 	public String deleteConfirm() {
@@ -180,7 +193,7 @@ public class UsuarioController extends ActionSupport implements
 	}
 
 	public String show() {
-		String result="show";
+		String result = "show";
 		usuario = (Usuario) ActionContext.getContext().getSession()
 				.get(NombreObjetosSesion.USUARIO);
 		if (!usuario.getIdUsuario().equals(idSel)) {

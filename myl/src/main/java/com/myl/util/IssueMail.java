@@ -224,7 +224,7 @@ public class IssueMail {
 		return property;
 	}
 
-	public Properties getProperties(String propertiesFile) {
+	public static Properties getProperties(String propertiesFile) {
 		Properties prop = new Properties();
 		try {
 			InputStream input = Thread.currentThread().getContextClassLoader()

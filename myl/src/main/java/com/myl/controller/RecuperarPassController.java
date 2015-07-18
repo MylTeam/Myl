@@ -1,6 +1,7 @@
 package com.myl.controller;
 
 import java.util.List;
+import java.util.Properties;
 
 import javax.inject.Named;
 
@@ -87,9 +88,12 @@ public class RecuperarPassController extends ActionSupport implements
 	}
 
 	public void enviarCorreoPass(Integer id, Long codigo, String email) {
+		Properties prop =IssueMail.getProperties("mail.properties");
+		String host=prop.getProperty("app.host");
+		
 		String msg = "Hola "
 				+ "<p>De acuerdo a la solicitud para recuperar tu contraseña es necesario que ingreses a la siguiente liga:</p>"
-				+ "<p><a href='http://50.62.23.86:8080/myl/recuperar-pass/"
+				+ "<p><a href='"+host+"/recuperar-pass/"
 				+ id + "/edit?cd=" + codigo + "'>Confirmar</a></p>"
 				+ "<p>MyL Team</p>";
 		if (mailSender.sendMailTo(email, "Myl - recuperar contraseña",
